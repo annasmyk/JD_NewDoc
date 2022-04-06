@@ -1,0 +1,11 @@
+# Generating Calendar regressors and other input variables
+
+## Motivation
+
+## Underlying theory
+
+## Available Tools 
+
+### GUI
+
+### Rjd3modelling package
