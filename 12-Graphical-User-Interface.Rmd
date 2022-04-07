@@ -1,0 +1,10 @@
+# Graphical User Interface 
+
+## Structure and assets
+
+## Main functions
+
+### Seasonal adjsutement 
+
+### Benchmarking
+

@@ -1,0 +1,13 @@
+# Quick start with...:
+
+
+## Seasonal Adjustement 
+
+## Seasonal Adjustement of High-Frequency Data
+
+## Use of JD+ algorithms in R
+
+## Use of JD+ graphical interface
+
+
+

@@ -1,0 +1,15 @@
+# Seasonal Adjustment 
+
+## Motivation
+
+## Unobserved Components 
+
+## Seasonality tests
+
+## Calendar correction
+
+## Outliers and intervention variables 
+
+## Pre-adjustment algortithms 
+
+## Decompostion algorithms 
