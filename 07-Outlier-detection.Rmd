@@ -1,0 +1,13 @@
+# Outlier detection
+
+## Motivation
+
+
+## With Reg Arima models 
+
+### Part of preadjustment
+
+### specific TERROR tool
+
+## With structural models 
+
