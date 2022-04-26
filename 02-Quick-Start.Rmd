@@ -1,9 +1,9 @@
-# Quick start with...:
+# Quick start with...
 
 
-## Seasonal Adjustement 
+## Seasonal Adjustment 
 
-## Seasonal Adjustement of High-Frequency Data
+## Seasonal Adjustment of High-Frequency Data
 
 ## Use of JD+ algorithms in R
 

@@ -10,6 +10,6 @@
 
 ## Outliers and intervention variables 
 
-## Pre-adjustment algortithms 
+## Pre-adjustment
 
-## Decompostion algorithms
+## Decomposition

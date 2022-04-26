@@ -2,14 +2,20 @@
 
 ## Structure of this book
 
-### Functions (what can be done)
+### Functions
+what can be done
 
-### Tools to access the functions (how)
+### Tools to access the functions 
+how it can be done
 
-### Underlying Statistical Methods (why)
+### Underlying Statistical Methods
+why (roughly) is it done this way 
 
 ## Audience
 
+
+## How Jdemetra+ came to be
+history of the project 
   
 
 

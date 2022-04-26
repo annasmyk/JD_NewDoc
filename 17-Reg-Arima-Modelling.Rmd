@@ -1,4 +1,4 @@
-# Reg-Arima modelling
+# Reg-Arima models
 
 
 

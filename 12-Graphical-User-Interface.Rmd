@@ -4,7 +4,7 @@
 
 ## Main functions
 
-### Seasonal adjsutement 
+### Seasonal adjustment 
 
 ### Benchmarking
 

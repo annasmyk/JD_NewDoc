@@ -1,6 +1,8 @@
 # R packages 
 
-## Available Algorithms and main functions 
+## Available functions 
 
+### Seasonal Adjustment
 
+## Interaction with GUI
 

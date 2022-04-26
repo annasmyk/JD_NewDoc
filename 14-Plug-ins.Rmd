@@ -1,7 +1,7 @@
 # Plug-ins for JDemetra+
 
 
-## List of covered features 
+## Main functions
 
 
 
