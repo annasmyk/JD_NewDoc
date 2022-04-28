@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 20 State Space Framework | JDemetra+ online documentation</title>
+  <title>Chapter 4 Seasonal Adjustment | JDemetra+ online documentation</title>
   <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 20 State Space Framework | JDemetra+ online documentation" />
+  <meta property="og:title" content="Chapter 4 Seasonal Adjustment | JDemetra+ online documentation" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 20 State Space Framework | JDemetra+ online documentation" />
+  <meta name="twitter:title" content="Chapter 4 Seasonal Adjustment | JDemetra+ online documentation" />
   
   <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="arima-model-based-decomposition.html"/>
-
+<link rel="prev" href="main-functions-overview.html"/>
+<link rel="next" href="high-frequency-data-seasonal-adjustment.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -199,17 +199,38 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="state-space-framework" class="section level1 hasAnchor" number="20">
-<h1><span class="header-section-number">Chapter 20</span> State Space Framework<a href="state-space-framework.html#state-space-framework" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="seasonal-adjustment-2" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Seasonal Adjustment<a href="seasonal-adjustment-2.html#seasonal-adjustment-2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="motivation" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Motivation<a href="seasonal-adjustment-2.html#motivation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="unobserved-components" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Unobserved Components<a href="seasonal-adjustment-2.html#unobserved-components" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="seasonality-tests" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Seasonality tests<a href="seasonal-adjustment-2.html#seasonality-tests" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="calendar-correction" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Calendar correction<a href="seasonal-adjustment-2.html#calendar-correction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="outliers-and-intervention-variables" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> Outliers and intervention variables<a href="seasonal-adjustment-2.html#outliers-and-intervention-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="pre-adjustment" class="section level2 hasAnchor" number="4.6">
+<h2><span class="header-section-number">4.6</span> Pre-adjustment<a href="seasonal-adjustment-2.html#pre-adjustment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="decomposition" class="section level2 hasAnchor" number="4.7">
+<h2><span class="header-section-number">4.7</span> Decomposition<a href="seasonal-adjustment-2.html#decomposition" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="arima-model-based-decomposition.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="main-functions-overview.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="high-frequency-data-seasonal-adjustment.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -240,7 +261,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/20-SSF.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/04-Seasonal-Adjustment.Rmd",
 "text": "Edit"
 },
 "history": {
