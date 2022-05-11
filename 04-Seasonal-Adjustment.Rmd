@@ -6,6 +6,664 @@
 
 ## Seasonality tests
 
+### Overview
+
+### F-test on seasonal dummies
+
+The F-test on seasonal dummies checks for the presence of deterministic
+seasonality. The model used here uses seasonal dummies (mean effect and
+11 seasonal dummies for monthly data, mean effect and 3 for quarterly
+data) to describe the (possibly transformed) time series behaviour. The
+test statistic checks if the seasonal dummies are jointly statistically
+not significant. When this hypothesis is rejected, it is assumed that
+the deterministic seasonality is present and the test results are
+displayed in green.
+
+This test refers to Model-Based $\chi^{2}\ $and F-tests for Fixed
+Seasonal Effects proposed by LYTRAS, D.P., FELDPAUSCH, R.M., and BELL,
+W.R. (2007) that is based on the estimates of the regression dummy
+variables and the corresponding t-statistics of the RegARIMA model, in
+which the ARIMA part of the model has a form (0,1,1)(0,0,0). The
+consequences of a misspecification of a model are discussed in LYTRAS,
+D.P., FELDPAUSCH, R.M., and BELL, W.R. (2007).
+
+For a monthly time series the RegARIMA model structure is as follows:
+
+$$\left( 1 - B \right)\left( y_{t} - \beta_{1}M_{1,t} - \ldots - \beta_{11}M_{11,t} - \gamma X_{t} \right) = \mu + (1 - B)a_{t}
+$$,   \[1\] <!--- \[7.155\]     -->
+
+where:
+
+$$
+M_{j,t} =
+\begin{cases}
+1 & \text{ in month } j = 1, \ldots, 11 \\
+- 1 & \text{ in December}\\
+0 & \text{ otherwise}
+\end{cases} \text{ - dummy variables;}
+$$ 
+
+$y_{t}$ -- the original time series;
+
+$B$ -- a backshift operator;
+
+$X_{t}$ -- other regression variables used in the model (e.g. outliers,
+calendar effects, user-defined regression variables, intervention
+variables);
+
+$\mu$ -- a mean effect;
+
+$a_{t}$ -- a white-noise variable with mean zero and a constant
+variance.
+
+In the case of a quarterly series the estimated model has a form:
+
+$$\left( 1 - B \right)\left( y_{t} - \beta_{1}M_{1,t} - \ldots - \beta_{3}M_{3,t} - \gamma X_{t} \right) = \mu + (1 - B)a_{t}$$,  \[2\] <!--- \[7.156\]     -->
+
+where:
+ 
+$$
+M_{j,t} =
+\begin{cases}
+1 & \text{ in quarter} j = 1, \ldots, 3 \\
+- 1 & \text{ in the fourth quarter}\\
+0 & \text{ otherwise}
+\end{cases} \text{ - dummy variables;}
+$$  
+
+One can use the individual t-statistics to assess whether seasonality
+for a given month is significant, or a chi-squared test statistic if the
+null hypothesis is that the parameters are collectively all zero. The
+chi-squared test statistic is
+${\widehat{\chi}}^{2} = {\widehat{\beta}}^{'}{\lbrack Var(\widehat{\beta})}^{\ })^{- 1}\rbrack{\widehat{\beta}}^{\ }$
+in this case compared to critical values from a
+$\chi^{2}\left( \text{df} \right)$-distribution, with degrees of freedom
+$df = 11\ $(monthly series) or $df = 3$ (quarterly series). Since the
+${Var(\widehat{\beta})}^{\ }$ computed using the estimated variance of
+$\alpha_{t}$ may be very different from the actual variance in small
+samples, this test is corrected using the proposed
+$\text{F}$ statistic:
+
+  
+  $$
+  F = \frac{ {\widehat{\chi}}^{2}}{s - 1} \times \frac{n - d - k}{n - d}
+  $$*,*    \[3\] <!--- \[7.157\]     -->
+
+where $n$ is the sample size, $d$ is the degree of differencing, s is
+time series frequency (12 for a monthly series, 4 for a quarterly
+series) and $k$ is the total number of regressors in the RegARIMA model
+(including the seasonal dummies $\text{M}_{j,t}$ and the intercept).
+
+This statistic follows a $$F_{s - 1,n - d - k}$$ distribution under the
+null hypothesis.
+
+
+### QS Test on autocorrelation at seasonal lags
+
+The QS test is a variant of the [Ljung-Box](../theory/Tests_LB.html) test computed on seasonal lags, where we only consider positive auto-correlations
+
+More exactly,
+
+$$ QS=n \left(n+2\right)\sum_{i=1}^k\frac{\left[ \max  \left(0, \hat\gamma_{i \cdot l}\right)\right]^2}{n-i \cdot l}$$
+
+where $$k=2$$, so only the first and second seasonal lags are considered. Thus, the test would checks the correlation between the 
+actual observation and the observations lagged by one and two years. Note that $$l=12$$ when dealing with monthly observations, 
+so we consider the autocovariances $$\hat\gamma_{12}$$ and $$\hat\gamma_{24}$$ alone. In turn, $$k=4$$ in the case of quarterly data. 
+
+Under H0, which states that the data are independently distributed, the statistics follows a $$\chi \left(k\right)$$ distribution. However,
+the elimination of negative correlations makes it a bad approximation.  The p-values would be given 
+by $P(\chi^{2}\left( k \right) > Q)$ for $k = 2$. As ${P(\chi}^{2}(2)) > 0.05 = 5.99146$ and
+${P(\chi}^{2}(2)) > 0.01 = 9.21034$, $QS > 5.99146$ and $QS > 9.21034$
+would suggest rejecting the null hypothesis at $95\%$ and $99\%$
+significance levels, respecively.
+
+#####  Modification
+
+Maravall (2012) proposes approximate the correct distribution (p-values) of the QS statistic using simulation techniques. Using 1000K replications of sample size 240,
+the correct critical values would be 3.83  and 7.09 with confidence levels of $95\%$ and $99\%$, respectively (lower than the 5.99146 and 9.21034 shown above). For 
+each of the simulated series,
+he obtains the distribution by assuming $QS=0$ when $$\hat\gamma_{12}$$, so in practice this test will detect seasonality only when 
+any of these conditions hold:
+- Statistically significant positive autocorrelation at lag 12
+- Nonnegative sample autocorrelation at lag 12 and statistically significant positive autocorrelation at lag 24
+
+####  Implementation
+
+##### In the graphical user interface (GUI)
+
+The test can be applied directly to any series by selecting the 
+option *Statistical Methods >> Seasonal Adjustment >> Tools >> Seasonality Tests*. This is
+an example of how results are displayed for the case of a monthly series:
+
+
+![qs](All_images/qs.png)
+ 
+The test can be applied to the input series before any seasonal adjustment method has been applied. It can also be applied to the seasonally
+adjusted series or to the irreguar component.
+
+##### Via R package: RJD3toolkit (blank)
+
+##### Java Library
+
+This test is implemented in the class `ec.satoolkit.diagnostics.QsTest`
+
+	
+#####  References
+
+- LJUNG G. M. and G. E. P. BOX (1978). "On a Measure of a Lack of Fit in Time Series Models". Biometrika 65 (2): 297–303. doi:10.1093/biomet/65.2.297
+- MARAVALL, A. (2011). ”Seasonality Tests and Automatic Model Identification in Tramo-Seats”. Manuscript
+- MARAVALL, A. (2012). "Update of Seasonality Tests and Automatic Model Identification in TRAMO-SEATS". Bank of Spain  (November 2012) 
+
+### QS Test for seasonality (BIS : solve this)
+
+<!-- The QS test is a variant of the [Ljung-Box](../wn/ljungbox.md) test computed on seasonal lags, where we only consider positive auto-correlations -->
+
+More exactly,
+
+$$ qs=n \left(n+2\right)\sum_{i=1}^k\frac{\left[ \max  \left(0, \hat\gamma_{i \cdot l}\right)\right]^2}{n-i \cdot l}$$
+
+The current implementation still considers that the statistics is distributed as a 
+$$\chi \left(k\right)$$
+even if it is obvioulsly incorrect.
+
+### Kurskall-Wallis
+
+The Kruskal-Wallis test is a non-parametric test used for testing whether samples originate from the same distribution. 
+The parametric equivalent of the Kruskal-Wallis test is the one-way analysis of variance (ANOVA). 
+When rejecting the null hypothesis of the Kruskal-Wallis test, then at least one sample stochastically dominates at least one other sample. 
+The test does not identify where this stochastic dominance occurs or for how many pairs of groups stochastic dominance obtains. 
+The null hypothesis states that all months (or quarters, respectively) have the same mean. 
+Under this hypothesis the test statistic follows a $$ \chi^2 $$ distribution. 
+When this hypothesis is rejected, it is assumed that time series values differ significantly between periods and the test results are displayed in green
+
+The test is typically applied to  $$ k  $$ groups of data $$ \left\{x_{i}\right\}_{j} $$. Each group $$ j=1,…,k $$ is composed of $$ n_j $$ observations, 
+which are indexed by $$ i=1,…,n_j $$. Each month (or quarter) groups all the observations available for a certain number of years. 
+
+As opposed to the notation used in the [Friedman test](../theory/Tests_Friedman.html), number of observations here is not necessarily equal for each group.
+The ranking of each data point, represented by variable $$ r_{ij} $$., is now defined different than in Friedman test, 
+since it considers all observables $$ N=n_1+ \dots + n_g $$, thereby ignoring group membership. 
+
+The test statistic is given by
+
+$$
+Q=\frac{SS_t}{SS_e}
+$$
+
+where $$ SS_t=(N-1)\sum_{j=1}^{g}n_i(\bar{r}_{.j}-\bar{r})^2 $$ and $$ SS_e=\sum_{j=1}^{g}\sum_{i=1}^{n_j}(r_{ij}-\bar{r})^2 $$ 
+- 	 $$ n_j $$ is the number of observations in group  $$ j  $$
+- 	 $$ \bar{r}_{.j} $$  is the average of the absolute ranks of the data in group  $$ j  $$
+- 	 The average rank is $$ \bar{r} =\frac{1}{2}(N+1) $$
+
+Under the null hypothesis that all groups are generated from the same distribution, the test statistic Q is approximated by a chi-squared distribution. 
+Thus, the p-value is given by  $$ P( \chi^2_{g-1}>Q) $$. This approximation can be misleading if some of the groups are very small (i.e. less than five elements). If the statistic is not significant, then there is no evidence of stochastic dominance between the samples. 
+However, if the test is significant then at least one sample [stochastically
+dominates](http://en.wikipedia.org/wiki/Stochastic_dominance) another sample.   
+
+####  Use
+
+The test can be applied directly to any series by selecting the 
+option *Statistical Methods >> Seasonal Adjustment >> Tools >> Seasonality Tests*. This is
+an example of how results are displayed for the case of a monthly series:
+
+![kwResults](All_images/kw.png)
+ 
+The test can be applied to the input series before any seasonal adjustment method has been applied. It can also be applied to the seasonally adjusted series or to the irreguar component.
+
+#### Implementation
+
+This test is implemented in the class `ec.satoolkit.diagnostics.KruskallWallisTest`
+
+
+####  References
+
+-	Kruskal; Wallis (1952). "Use of ranks in one-criterion variance analysis". Journal of the American Statistical Association 47 (260): 583–621. doi:10.1080/01621459.1952.10483441.
+
+### Friedman test (stable seasonality test)
+
+The Friedman test is a non-parametric method for testing that samples are drawn from the same population or from populations with equal medians. 
+The significance of the month (or quarter) effect is tested. The Friedman test requires no distributional assumptions. It uses the rankings of the observations. 
+If the null hypothesis of no stable seasonality is rejected at the 0.10% significance level then the series is considered to be seasonal 
+and the test’s outcome is displayed in green.
+
+The test statistic is constructed as follows. Consider first the matrix of data $$ \left\{x_{ij}\right\}_{n \times k} $$ with $$ n $$ rows (the blocks, 
+i.e. number of years in the sample), $$ k $$ columns (the treatments, i.e. either 12 months or 4 quarters, depending on the frequency of the data).  
+The data matrix needs to be replaced by a new matrix $$ \left\{r_{ij}\right\}_{n \times k} $$, where the entry $$ r_{ij} $$ is the rank of  $$ x_{ij} $$ 
+within block $$ i $$ .
+
+The test statistic is given by
+
+$$
+Q=\frac{SS_t}{SS_e}
+$$
+
+where $$ SS_t=n \sum_{j=1}^{k}(\bar{r}_{.j}-\bar{r})^2 $$ and $$ SS_e=\frac{1}{n(k-1)} \sum_{i=1}^{n}\sum_{j=1}^{k}(r_{ij}-\bar{r})^2 $$ 
+It represents the variance of the average ranking across treatments j  relative to the total.  
+
+Under the hypothesis of no seasonality, all months can be equally treated. For the sake of completeness:
+- $$ \bar{r}_{.j} $$ is the average ranks of each treatment (month) j within each block (year)
+- The average rank is given by $$ \bar{r}= \frac{1}{nk}\sum_{i=1}^{n}\sum_{j=1}^{k}(r_{ij})$$
+
+For large $$ n $$ or $$ k $$ , i.e. n > 15 or k > 4, the probability distribution of $$ Q $$ can be approximated by that of 
+a chi-squared distribution. Thus, the p-value is given by $$ P( \chi^2_{k-1}>Q) $$ . 
+
+
+####  Use
+
+The test can be applied directly to any series by selecting the 
+option *Statistical Methods >> Seasonal Adjustment >> Tools >> Seasonality Tests*. This is
+an example of how results are displayed for the case of a monthly series:
+
+ 
+![friedman](All_images/friedman.png)
+
+If the null hypothesis of no stable seasonality is rejected at the 1% significance level, then the series is
+considered to be seasonal and the outcome of the test is displayed in green. 
+
+The test can be applied to the input series before any seasonal adjustment method has been 
+applied. It can also be applied to the seasonally adjusted series or to the irreguar component. In the case of
+X-13ARIMA-SEATS, the test is applied to the preliminary estimate 
+of the unmodified Seasonal-Irregular component[^82] (time series shown
+in Table B3). In this estimate, the number of observations is lower than
+in the final estimate of the unmodified Seasonal-Irregular component.
+Thus, the number of degrees of freedom in the stable
+seasonality test is lower than the number of degrees of freedom in the
+test for the [presence of seasonality assuming stability](../theory/Tests_presence_stability.html). For
+example, X-13ARIMA-SEATS uses a centred moving average of order 12 to
+calculate the preliminary estimation of trend. Consequently, the first
+six and last six points in the series are not computed at this stage of
+calculation. The preliminary estimation of the trend is then used for
+the calculation of the preliminary estimation of the unmodified Seasonal-Irregular.
+
+[^82]: The unmodified Seasonal-Irregular component corresponds to the
+    Seasonal-Irregular factors with the extreme values.
+	
+
+####  Related tests
+
+- 	When using this kind of design for a binary response, one instead uses the Cochran's Q test.
+- 	Kendall's W is a normalization of the Friedman statistic between 0 and 1.
+- 	The Wilcoxon signed-rank test is a nonparametric test of non-independent data from only two groups.
+
+
+#### Implementation
+
+This test is implemented in the class `ec.satoolkit.diagnostics.FriedmanTest`
+
+
+
+####  References
+
+- Friedman, Milton (December 1937). "The use of ranks to avoid the assumption of normality implicit in the analysis of variance". Journal of the American Statistical Association (American Statistical Association) 32 (200): 675–701. doi:10.2307/2279372. JSTOR 2279372. 
+
+- Friedman, Milton (March 1939). "A correction: The use of ranks to avoid the assumption of normality implicit in the analysis of variance". Journal of the American Statistical Association (American Statistical Association) 34 (205): 109. doi:10.2307/2279169. JSTOR 2279169. 
+
+- Friedman, Milton (March 1940). "A comparison of alternative tests of significance for the problem of m rankings". The Annals of Mathematical Statistics 11 (1): 86–92. doi:10.1214/aoms/1177731944. JSTOR 2235971.
+
+### Stable seasonality test (missing)
+
+### Moving seasonality test
+
+The evolutive seasonality test is based on a two-way analysis of
+variance model. The model uses the values from complete years only.
+Depending on the decomposition type for the Seasonal -- Irregular
+component it uses \[1\] (in the case of a multiplicative model) or
+\[2\] (in the case of an additive model):  
+
+  $$
+  \left|\text{SI}_{\text{ij}} - 1 \right| = X_{\text{ij}} = b_{i} + m_{j} + e_{\text{ij}}
+  $$,   \[1\] <!---  \[7.148\]     -->
+  
+  $$
+  \left| \text{SI}_{\text{ij}} \right| = X_{\text{ij}} = b_{i} + m_{j} + e_{\text{ij}}
+  $$,       \[2\] <!---  \[7.149\]     -->
+
+where:
+
+$m_{j}$ -- the monthly or quarterly effect for $j$-th period,
+$j = (1,\ldots,k)$, where $k = 12$ for a monthly series and $k = 4$ for
+a quarterly series;
+
+$b_{j}$ -- the annual effect $i$, $(i = 1,\ldots,N)$ where $N$ is the
+number of complete years;
+
+$e_{\text{ij}}$ -- the residual effect.
+
+The test is based on the following decomposition:
+
+  $$S^{2} = S_{A}^{2} + S_{B}^{2} + S_{R}^{2},$$   \[3\] <!---  \[7.150\]     -->
+
+
+where:
+
+$$
+S^{2} = \sum_{j = 1}^{k}{\sum_{i = 1}^{N}\left( {\overline{X}}_{\text{ij}} - {\overline{X}}_{\bullet \bullet} \right)^{2}}\ 
+$$ --the total sum of squares;
+
+$$
+S_{A}^{2} = N\sum_{j = 1}^{k}\left( {\overline{X}}_{\bullet j} - {\overline{X}}_{\bullet \bullet} \right)^{2}
+$$ -- the inter-month (inter-quarter, respectively) sum of squares, which
+mainly measures the magnitude of the seasonality; 
+
+$$
+S_{B}^{2} = k\sum_{i = 1}^{N}\left( {\overline{X}}_{i \bullet} - {\overline{X}}_{\bullet \bullet} \right)^{2}
+$$ -- the inter-year sum of squares, which mainly measures the year-to-year
+movement of seasonality; 
+
+$$
+S_{R}^{2} = \sum_{i = 1}^{N}{\sum_{j = 1}^{k}\left( {\overline{X}}_{\text{ij}} - {\overline{X}}_{i \bullet} - {\overline{X}}_{\bullet j} - {\overline{X}}_{\bullet \bullet} \right)^{2}}
+$$ -- the residual sum of squares.
+ 
+ 
+The null hypothesis $H_{0}\ $is that $b_{1} = b_{2} = ... = b_{N}$ which
+means that there is no change in seasonality over the years. This
+hypothesis is verified by the following test statistic:
+
+
+   $$
+   F_{M} = \frac{\frac{S_{B}^{2}}{(n - 1)}}{\frac{S_{R}^{2}}{(n - 1)(k - 1)}}
+   $$,   \[4\] <!---   \[7.151\]     -->
+
+
+which follows an $F$-distribution with $k - 1$ and $n - k$ degrees of
+freedom.
+ 
+### Identifiable seasonality
+ 
+This test combines the values of the $F$-statistic of the parametric
+test for stable seasonality and the values of the moving seasonality
+test, which was described above.
+
+The test statistic is:
+
+  
+  $$
+  T = \left( \frac{\frac{7}{F_{S}} + \frac{3F_{M}}{F_{S}}}{2} \right)^{\frac{1}{2}}
+  $$,   \[1\] <!---\[7.152\]     -->
+
+where $F_{S}$ is a stable seasonality test statistic and $F_{M}$ is
+moving seasonality test statistic. The test checks if the stable
+seasonality is not dominated by moving seasonality. In such a case the
+seasonality is regarded as identifiable. This test statistic is used in
+the combined seasonality tests (see section [Combined seasonality test](../theory/Tests_combined.html). The detailed description of the test is available in LOTHIAN, J., and MORRY, M. (1978).
+
+### Combined seasonality test
+
+This test combines the Kruskal-Wallis test along with test for the
+presence of seasonality assuming stability ($F_{S}$), and evaluative
+seasonality test for detecting the presence of identifiable seasonality
+($F_{M}$). Those three tests are calculated using the final unmodified
+SI component. The main purpose of the combined seasonality test is to
+check whether the seasonality of the series is identifiable. For
+example, the identification of the seasonal pattern is problematic if
+the process is dominated by highly moving seasonality[^83]. The testing
+procedure is shown in the figure below.
+
+
+![Text](All_images/UG_A_image18.png)
+
+
+**Combined seasonality test, source: LADIRAY, D., QUENNEVILLE, B. (2001)**
+
+[^83]: DAGUM, E.B. (1987).
+
+### Spectral analysis
+
+In order to decide whether a series has a seasonal component that is
+predictable (stable) enough, these tests use visual criteria and formal
+tests for the periodogram. The periodogram is calculated using complete
+years, so that the set of Fourier frequencies contains exactly all
+seasonal frequencies[^85].
+
+The tests rely on two basic principles:
+
+-   The peaks associated with seasonal frequencies should be larger than
+    > the median spectrum for all frequencies and;
+
+-   The peaks should exceed the spectrum of the two adjacent values by
+    > more than a critical value.
+
+> JDemetra+ performs this test on the original series. If these two
+> requirements are met, the test results are displayed in green. The
+> statistical significance of each of the seasonal peaks (i.e.
+> frequencies
+> $\frac{\pi}{6},\ \frac{\pi}{3},\ \frac{\pi}{2},\ \frac{2\pi}{3}\text{ and } \frac{5\pi}{6}\ $corresponding
+> to 1, 2, 3, 4 and 5 cycles per year) is also displayed. The seasonal
+> and trading days frequencies depends on the frequency of time series.
+> They are shown in the table below. The symbol $d$ denotes a default
+> frequency and is described below the table.
+
+**The seasonal and trading day frequencies by time series
+frequency**
+
+
+  |**Number of months per full period**  | **Seasonal frequency**                                                               | **Trading day frequency (radians)** |
+  |--------------------------------------| -------------------------------------------------------------------------------------| ------------------------------------|
+  |12                                    | $\frac{\pi}{6},\frac{\pi}{3},\ \frac{\pi}{2},\frac{2\pi}{3},\ \frac{5\pi}{6},\ \pi$  | $d$, 2.714|
+  |6                                     | $\frac{\pi}{3},\frac{2\pi}{3}$, $\pi$                                                | $$d$$
+  |4                                     | $\frac{\pi}{2}$, $\pi$                                                               | $d$, 1.292, 1.850, 2.128|
+  |3                                     | $$\pi$$                                                                              | $$d$$|
+  |2                                     | $$\pi$$                                                                              | $$d$$|
+
+The calendar (trading day or working day) effects, related to the
+variation in the number of different days of the week per period, can
+induce periodic patterns in the data that can be similar to those
+resulting from pure seasonal effects. From the theoretical point of
+view, trading day variability is mainly due to the fact that the average
+number of days in the months or quarters is not equal to a multiple of
+$7$ (the average number of days of a month in the year of $365.25\ $days
+is equal to $\frac{365.25}{12} = 30.4375$ days). This effect occurs
+$\frac{365.25}{12} \times \frac{1}{7} = 4.3482$ times per month: one
+time for each one of the four complete weeks of each month, and a
+residual of $0.3482$ cycles per month, i.e.
+$0.3482 \times 2\pi = 2.1878\ radians$. This turns out to be a
+fundamental frequency for the effects associated with monthly data. In
+JDemetra+ the fundamental frequency corresponding to $0.3482$ cycles per
+month is used in place of the closest frequency$\ \frac{\text{πk}}{60}$.
+Thus, the quantity $\frac{\pi \times 42}{60}$ is replaced
+by $$\omega_{42} = 0.3482 \times 2\pi = 2.1878$$. The frequencies
+neighbouring $\omega_{42}$, i.e. $$\omega_{41}$$ and $$\omega_{43}$$ are set
+to, respectively, $$2.1865 - \frac{1}{60}$$ and $$2.1865 + \frac{1}{60}$$.
+
+The default frequencies ($d)\ $for calendar effect are: 2.188 (monthly
+series) and 0.280 (quarterly series). They are computed as:
+
+ $\omega_{\text{ce}} = \frac{2\pi}{7}\left( n - 7 \times \left\lbrack \frac{n}{7} \right\rbrack \right)$,   \[1\] <!---\[7.158\]      -->
+where:
+ 
+$n = \frac{365.25}{s}$, $s = 4$ for quarterly series and $s = 12$ for
+monthly series.
+
+Other frequencies that correspond to trading day frequencies are: 2.714
+(monthly series) and 1.292, 1.850, 2.128 (quarterly series).
+
+In particular, the calendar frequency in monthly data (marked in red on the figure below) is very close to the seasonal frequency corresponding to 4
+cycles per year $\text{ω}_{40} = \frac{2}{3}\pi = 2.0944$.
+
+
+
+
+![Text](All_images/UG_A_image19.png)
+
+
+**Periodogram with seasonal (grey) and calendar (red)
+frequencies highlighted**
+
+This implies that it may be hard to disentangle both effects using the
+frequency domain techniques.
+
+
+[^85]: For definition of the periodogram and Fourier frequencies see the [Periodogram](../theory/spectral_periodogram.html) section.
+
+
+####  Periodogram
+
+The periodogram $$ I(\omega_j)$$  of $$ \mathbf{X} \in \mathbb{C}^n $$ is defined as the squared of the Fourier transform
+
+$$
+I(\omega_{j})=a_{j}^{2}=n^{-1}\left| \sum_{t=1}^{n}\mathbf{X_t} e^{-it\omega_j} \right|^{2},
+$$
+
+where the Fourier frequencies  $$ \omega_{j} $$  are given by multiples of the fundamental frequency $$ \frac{2\pi}{n} $$:
+
+$$
+\omega_{j}= \frac{2\pi j}{n}, -\pi < \omega_{j} \leq \pi 
+$$
+
+An orthonormal basis in  $$ \mathbb{R}^n $$:
+
+$$ 
+\left\{ e_0, ~~~~~~c_1, s_1, ~~~~~\ldots~~~~~\ , ~~~~c_{[(n-1)/2]}, s_{[(n-1)/2]}~~~~,~~~~~~ e_{n/2}  \right\},
+$$ 
+where $$ e_{n/2} $$ is excluded if $$ n $$ is odd,  
+can be used to project the data and obtain the spectral decomposition
+
+Thus, the periodogram is given by the projection coefficients and represents the contribution of the jth 
+harmonic to the total sum of squares, as illustrated by Brockwell and Davis (1991):
+
+| Source   | Degrees of freedom  |  $$~~~~$$ Sum of squares decomposition |
+|---|:---:|---:|
+| Frequency $$ \omega_{0} $$  | 1  | $$ a_{0}^{2}= n^{-1}(\sum_{t=1}^{n}x_t )^2 =I(0)$$ |
+| Frequency $$ \omega_{1} $$    |  2 | $$ 2 r^{2}_{1} = 2 \left\| a_{1} \right\|^{2} = 2 I(\omega_{1}) $$  |
+| $$ \vdots $$  |   $$ \vdots $$   |  $$ \vdots $$  |
+| Frequency $$ \omega_{k} $$  | 2  | $$ 2 r^{2}_{k} = 2 \left\| a_{k} \right\|^{2} = 2 I(\omega_{k}) $$    |
+| $$ \vdots $$  |  $$ \vdots $$    |   $$ \vdots $$  |
+| Frequency $$ \omega_{n/2}=\pi $$    | 1  | $$ a_{n/2}^{2} = I(\pi) $$  |
+| (excluded if $$ n $$ is odd)   |   |   |
+|  $$ ========= $$ | $$ ====== $$ | $$ ============ $$   |
+|  Total |  n |    $$ \sum_{t=1}^{n}\mathbf{X^2_t} $$|
+
+$$~~~~$$
+
+In JDemetra+, the periodogram of $$ \mathbf{X} \in \mathbb{R}^n $$ is computed for the standardized time series. 
+
+####  Defining a F-test
+
+Brockwell and Davis (1991, section 10.2) exploit the fact that the periodogram can be expressed as 
+the projection on the orthonormal basis defined above to derive a  test.  Thus, under the null hypothesis:
+
+- $$ 2I(\omega_{k})= \| P_{\bar{sp}_{\left\{ c_{k},s_{k} \right\}}} \mathbf{X} \|^{2}  \sim \sigma^{2} \chi^{2}(2) $$, for Fourier frequencies
+$$ 0 < \omega_{k}=2\pi k/n < \pi $$
+- $$ I(\pi)= \| P_{\bar{sp}_{\left\{ e_{n/2} \right\}}} \mathbf{X} \|^{2}  \sim \sigma^{2} \chi^{2}(1) $$, for $$ \pi $$
+
+Because  $$ I(\omega_{k}) $$  is independent from the projection error sum of squares, we can define our F-test statistic as follows:
+
+- $$ \frac{ 2I(\omega_{k})}{\|\mathbf{X}-P_{\bar{sp}_{\left\{ e_0,c_{k},s_{k} \right\}}} \mathbf{X}\|^2} \frac{n-3}{2} \sim F(2,n-3) $$, for Fourier frequencies
+$$ 0 < \omega_{k}=2\pi k/n < \pi $$
+- $$ \frac{ I(\pi)}{\|\mathbf{X}-P_{\bar{sp}_{\left\{ e_0,e_{n/2} \right\}}} \mathbf{X}\|^2} \frac{n-2}{1} \sim F(1,n-2)$$, for  $$ \pi $$
+
+where
+- $$ \|\mathbf{X}-P_{\bar{sp}_{\left\{ e_0,c_{k},s_{k} \right\}}} \mathbf{X}\|^2  = \sum_{i=1}^{n}\mathbf{X^2_i}-I(0)-2I(\omega_{k}) \sim \sigma^{2} \chi^{2}(n-3)$$  for Fourier frequencies
+$$ 0 < \omega_{k}=2\pi k/n < \pi $$
+- $$ \|\mathbf{X}-P_{\bar{sp}_{\left\{ e_0,e_{n/2} \right\}}} \mathbf{X}\|^2 = \sum_{i=1}^{n}\mathbf{X^2_i}-I(0)-I(\pi) \sim \sigma^{2} \chi^{2}(n-2)  $$     for $$ \pi $$
+
+Thus, we reject the null if our F-test statistic computed at a given seasonal frequency (different from $$ \pi $$) is larger than $$ F_{1-α}(2,n-3)$$. 
+If we consider $$ \pi  $$, our test statistic follows a $$ F_{1-α}(1,n-2)$$ distribution. 
+
+####  Seasonality test
+
+The implementation of JDemetra+ considers simultaneously the whole set of seasonal frequencies (1, 2, 3, 4, 5 and 6 cycles per year). Thus, the resulting test-statistic is:
+
+$$
+ \frac{ 2I(\pi/6)+ 2I(\pi/3)+ 2I(2\pi/3)+ 2I(5\pi/6)+ \delta I(\pi)}{\left\|\mathbf{X}-P_{\bar{sp}_{\left\{ e_0,c_{1},s_{1},c_{2},s_{2},c_{3},s_{3},c_{4},s_{4},c_{5},s_{5}, \delta e_{n/2} \right\}}} \mathbf{X} \right\|^2} \frac{n-12}{11} \sim F(11-\delta,n-12+\delta) 
+$$
+where  $$ \delta=1 $$  if $$ n $$ is even and 0 otherwise.
+
+In small samples, the test performs better  when the periodogram is evaluated as the exact seasonal frequencies.  JDemetra+  modifies the sample size 
+to ensure the seasonal frequencies belong to the set of Fourier frequencies.   This strategy provides a very simple and effective way to eliminate the leakage problem.
+
+Example of how results are displayed:
+
+![periodtest](All_images/periodogram.png)
+
+
+####  References
+
+Brockwell, P.J., and R.A. Davis (1991). Times Series: Theory and Methods. Springer Series in Statistics.
+
+
+####  Tukey Spectrum definition
+
+The Tukey spectrum belongs to the class of lag-window estimators. A lag window estimator of the spectral density 
+$$
+f(\omega)=\frac{1}{2\pi}\sum_{k<-\infty}^{\infty}\gamma(k)e^{i k \omega}
+$$
+is defined as follows:
+$$
+\hat{f}_{L}(\omega)=\frac{1}{2\pi}\sum_{\left| h \right| \leq r } w(h/r)\hat{\gamma}(h)e^{i h \omega}
+$$
+
+where $$\hat{\gamma}(.) $$ is the sample autocovariance function, $$w(.)$$ is the lag window, and $$r$$ is the
+truncation lag. $$\left| w(x)\right| $$ is always less than or equal to one, $$w(0)=1$$ and $$w(x)=0$$ for $$\left| x \right| > 1$$. The 
+simple idea behind this formula is to down-weight the autocovariance function for high lags where $$\hat{\gamma}(h)$$  is more unreliable. This estimator 
+requires choosing $$r$$ as a function of the sample size such that $$r/n \rightarrow 0 $$ and  $$r\rightarrow \infty $$ when $$ n \rightarrow \infty $$ . 
+These conditions guarantee that the estimator converges to the true density.    
+
+JDemetra+ implements the so-called Blackman-Tukey (or Tukey-Hanning) estimator, which is given 
+by $$w(h/r)=0.5(1+cos(\pi h/r))$$ if $$\left| h/r \right| \leq 1$$ and $$0$$ otherwise. 
+
+The choice of large truncation lags $$r$$  decreases the bias, of course, but it also increases the variance of the spectral estimate and decreases the bandwidth. 
+
+JDemetra+ allows the user to modify all the parameters of this estimator, including the window function.
+
+####  Graphical Test
+
+The current JDemetra+ implementation of the seasonality test is based on a $$F(d_{1},d_{2})$$ approximation that has been originally proposed by Maravall (2012) for 
+TRAMO-SEATS.  This test is has been designed for a Blackman-Tukey window based on a particular choices of the truncation lag $$r$$ and sample size.  Following 
+this approach, we determine visually significant peaks for a frequency $$\omega_{j}$$ when
+ 
+$$ 
+\frac{2 f_{x}(\omega_{j})}{\left[ f_{x}(\omega_{j+1})+ f_{x}(\omega_{j-1}) \right]} \ge CV(\omega_{j}) 
+$$
+
+where $$ CV(\omega_{j})$$ is the critical value of a $$F(d_{1},d_{2})$$  distribution, where the degrees of freedom are determined using simulations. For 
+$$\omega_{j}= \pi$$, we have a significant peak when $$\frac{f_{x}(\omega_{[n/2]})}{\left[ f_{x}(\omega_{[(n-1)/2]})\right]} \ge CV(\omega_{j}) $$
+
+Two significant levels for this test are considered: $$\alpha=0.05$$ (code “t”) and $$\alpha=0.01$$ (code “T”). 
+
+As opposed to the [AR spectrum]({{ site.baseurl }}/pages/theory/Tests_ARspectrum.html), which is computed on the basis of the 
+last $$120$$ data points, we will use here all available 
+observations. Those critical values have been calculated given the recommended truncation lag $$r=79$$  for a sample size within the interval $$n \in [80,119]$$ 
+and  $$r=112$$ for $$n \in [120,300]$$ . The $$F$$ approximation is less accurate for sample sizes larger than $$300$$.  For quarterly data,  $$r=44 $$, but there 
+are no recommendations regarding the required sample size
+
+
+####  Use
+
+The test can be applied directly to any series by selecting the 
+option *Statistical Methods >> Seasonal Adjustment >> Tools >> Seasonality Tests*. This is
+an example of how results are displayed for the case of a monthly series:
+
+ 
+![tktest](All_images/spectrum.png)
+
+JDemetra+ considers critical values for  $$ \alpha=1\%$$  (code “T”) and $$ \alpha=5\%$$  (code “t”) at each one of the seasonal
+frequencies represented in the table below, e.g. frequencies $\frac{\pi}{6},\ \frac{\pi}{3},\ \frac{\pi}{2},\ \frac{2\pi}{3}\text{ and } \frac{5\pi}{6}\ $ corresponding 
+to 1, 2, 3, 4, 5 and 6 cycles per year in this example, since we are dealing with monthly 
+data. The codes “a” and “A” correpond to the so-called
+[AR spectrum]({{ site.baseurl }}/pages/theory/Tests_ARspectrum.html), so ignore them for the moment.
+
+**The seasonal and trading day frequencies by time series
+frequency**
+
+|**Number of months per full period**  | **Seasonal frequency**| **Trading day frequency (radians)**|
+  |--------------------------------------| -------------------------------------------------------------------------------------| ------------------------------------|
+  |12                                    | $\frac{\pi}{6},\frac{\pi}{3},\ \frac{\pi}{2},\frac{2\pi}{3},\ \frac{5\pi}{6},\ \pi$  | $d$, 2.714|
+  |6                                     | $\frac{\pi}{3},\frac{2\pi}{3}$, $\pi$                                                | $$d$$
+  |4                                     | $\frac{\pi}{2}$, $\pi$                                                               | $d$, 1.292, 1.850, 2.128|
+  |3                                     | $$\pi$$                                                                              | $$d$$|
+  |2                                     | $$\pi$$                                                                              | $$d$$|
+
+Currently, only seasonal frequencies are tested, but the program allows you to manually plot the Tukey spectrum and focus your attention on both seasonal
+and trading day frequencies.  
+
+
+
+####  References
+
+- Tukey, J. (1949). The sampling theory of power spectrum estimates., Proceedings Symposium on Applications of Autocorrelation Analysis to Physical Problems, NAVEXOS-P-735, Office of Naval Research, Washington, 47-69
+
+
+
 ## Calendar correction
 
 ## Outliers and intervention variables 
@@ -13,3 +671,1707 @@
 ## Pre-adjustment
 
 ## Decomposition
+
+### X-11 moving average based decomposition
+
+
+A complete documentation of the X-11 method is available in LADIRAY, D.,
+and QUENNEVILLE, B. (2001). The X-11 program is the result of a long
+tradition of non-parametric smoothing based on moving averages, which
+are weighted averages of a moving span of a time series (see hereafter).
+Moving averages have two important drawbacks:
+
+-   They are not resistant and might be deeply impacted by outliers;
+
+-   The smoothing of the ends of the series cannot be done except with asymmetric moving averages which introduce phase-shifts and delays in the detection of turning points.
+
+These drawbacks adversely affect the X-11 output and stimulate the
+development of this method. To overcome these flaws first the series are
+modelled with a RegARIMA model that calculates forecasts and estimates
+the regression effects. Therefore, the seasonal adjustment process is
+divided into two parts.
+
+-   In a first step, the RegARIMA model is used to clean the series from
+    > non-linearities, mainly outliers and calendar effects. A global
+    > ARIMA model is adjusted to the series in order to compute the
+    > forecasts.
+
+-   In a second step, an enhanced version of the X-11 algorithm is used
+    > to compute the trend, the seasonal component and the irregular
+    > component.
+
+
+![Text](All_images/UG_A_image13.png)
+
+
+
+**The flow diagram for seasonal adjustment with X-13ARIMA-SEATS using the X-11 algorithm.**
+
+#### Moving averages
+
+The moving average of coefficient $\theta_{i}$ is
+defined as:
+
+  
+  $$M\left( X_{t} \right) = \sum_{k = - p}^{+ f}\theta_{k}X_{t + k}$$   \[1\]<!---\[7.61\]-->
+ 
+
+The value at time $t$ of the series is therefore replaced by a weighted
+average of $p$ \"past\" values of the series, the current value, and $f$
+\"future\" values of the series. The quantity $p + f + 1\ $is called the
+moving average order. When $p$ is equal to $f$, that is, when
+the number of points in the past is the same as the number of points in
+the future, the moving average is said to be centred. If, in addition,
+$\theta_{- k} = \theta_{k}$ for any $k$, the moving average $M$
+is said to be symmetric. One of the simplest moving averages is the
+symmetric moving average of order $P = 2p + 1$ where all the weights are
+equal to$\ \frac{1}{P}$.
+
+This moving average formula works well for all time series observations,
+except for the first $p$ values and last $f$ values. Generally, with a
+moving average of order $p + f + 1\ $calculated for instant
+$t$nwith points $p$ in the past and points $f$ in the
+future, it will be impossible to smooth out the first $p$ values and the
+last $f$ values of the series because of lack of input to the moving
+average formula.
+
+In the X-11 method, symmetric moving averages play an important role as
+they do not introduce any phase-shift in the smoothed series. But, to
+avoid losing information at the series ends, they are either
+supplemented by *ad hoc* asymmetric moving averages or applied on the
+series extended by forecasts.
+
+For the estimation of the seasonal component, X-13ARIMA-SEATS uses
+$P \times Q$ composite moving averages, obtained by composing a simple
+moving average of order $P$, which coefficients are all equal to
+$\frac{1}{P}$, and a simple moving average of order $Q$, which
+coefficients are all equal to $\frac{1}{Q}$.
+
+The composite moving averages are widely used by the X-11 method. For an
+initial estimation of trend X-11 method uses a $2 \times 4$ moving
+average in case of a quarterly time series while for a monthly time
+series a $2 \times 12\ $moving average is applied. The $2 \times 4$
+moving average is an average of order 5 with coefficients
+$$\frac{1}{8}\left\{1, 2, 2, 2, 1\right\}$$. It eliminates frequency
+$\frac{\pi}{2}$ corresponding to period 4 and therefore it is suitable
+for seasonal adjustment of the quarterly series with a constant
+seasonality. The $2 \times 12$ moving average, with coefficients
+$$\frac{1}{24}\left\{1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1\right\} $$that
+retains linear trends, eliminates order-$12$ constant seasonality and
+minimises the variance of the irregular component. The $2 \times 4$ and
+$2 \times 12$ moving averages are also used in the X-11 method to
+normalise the seasonal factors. The composite moving averages are also
+used to extract the seasonal component. These, which are used in the
+purely automatic run of the X-11 method (without any intervention from
+the user) are $3 \times 3$, $3 \times 5$ and $3 \times 9$.
+
+In the estimation of the trend also Henderson moving averages are used.
+These filters have been chosen for their smoothing properties. The
+coefficients of a Henderson moving average of order $2p + 1$ may be
+calculated using the formula:
+
+
+  $\theta_{i} = \frac{315\left\lbrack \left( n - 1 \right)^{2} - i^{2} \right\rbrack\left\lbrack n^{2} - i^{2} \right\rbrack\left\lbrack \left( n + 1 \right)^{2} - i^{2} \right\rbrack\left\lbrack {3n}^{2} - 16 - 11i^{2} \right\rbrack}{8n\left( n^{2} - 1 \right)\left( {4n}^{2} - 1 \right)\left( {4n}^{2} - 9 \right)\left( 4n^{2} - 25 \right)}$,   \[2\]<!---\[7.62\]-->
+
+
+where: $n = p + 2$$n = p + 2$.
+
+#### The basic algorithm of the X-11 method
+
+The X-11 method is based on an iterative principle of estimation of the
+different components using appropriate moving averages at each step of
+the algorithm. The successive results are saved in tables. The list of
+the X-11 tables displayed in JDemetra+ is included at the end of this
+section.
+
+The basic algorithm of the X-11 method will be presented for a monthly
+time series $X_{t}$ that is assumed to be decomposable into trend,
+seasonality and irregular component according to an additive model
+$X_{t} = TC_{t} + S_{t} + I_{t}$.
+
+A simple seasonal adjustment algorithm can be thought of in eight steps.
+The steps presented below are designed for the monthly time series. In
+the algorithm that is run for the quarterly time series the $2 \times 4$
+moving average instead of the $2 \times 12$ moving average is used.
+
+***Step 1: Estimation of Trend by*** $\mathbf{2 \times 12}$ ***moving
+    average:***
+
+  $TC_{t}^{(1)} = M_{2 \times 12}(X_{t})$   \[3\]<!---\[7.63\]-->
+  
+
+***Step 2: Estimation of the Seasonal-Irregular component:***
+
+  
+  $\left( S_{t} + I_{t} \right)^{(1)} = X_{t} - \text{TC}_{t}^{(1)}$   \[4\]<!---\[7.64\]-->
+
+
+***Step 3: Estimation of the Seasonal component by*** $\mathbf{3 \times 3}$
+    ***moving average over each month:***
+
+  
+  $S_{t}^{(1)} - M_{3 \times 3}\left\lbrack \left( S_{t} + I_{t} \right)^{(1)} \right\rbrack$   \[5\]<!---\[7.65\]-->
+ 
+
+The moving average used here is a $3 \times 3$ moving average over
+$5$ terms, with coefficients
+$$\frac{1}{9} \left\{1, 2, 3, 2, 1 \right\}$$. The seasonal component
+is then centred using a $2 \times 12$ moving average.
+
+
+  $$
+   \widetilde{S}_{t}^{(1)} = S_{t}^{(1)} - M_{2 \times 12}\left( S_{t}^{(1)} \right)
+  $$   \[6\]<!---\[7.66\]-->
+
+
+***Step 4: Estimation of the seasonally adjusted series:***
+
+
+  $$
+  SA_{t}^{\left( 1 \right)} = \left( \text{TC}_{t} + I_{t} \right)^{(1)} = X_{t} - {\widetilde{S}}_{t}^{(1)}
+  $$   \[7\]<!---\[7.67\]-->
+
+
+This first estimation of the seasonally adjusted series must, by
+construction, contain less seasonality. The X-11 method again executes
+the algorithm presented above, changing the moving averages to take this
+property into account.
+
+***Step 5: Estimation of Trend by 13-term Henderson moving average:***
+
+  
+  $$
+  TC_{t}^{(2)} = H_{13}\left( \text{SA}_{t}^{\left( 1 \right)} \right)
+  $$   \[8\]<!---\[7.68\]-->
+  
+
+Henderson moving averages, while they do not have special properties in
+terms of eliminating seasonality (limited or none at this stage), have a
+very good smoothing power and retain a local polynomial trend of degree
+$2$ and preserve a local polynomial trend of degree $3$.
+
+***Step 6: Estimation of the Seasonal-Irregular component:***
+
+ 
+  $$
+  \left( S_{t} + I_{t} \right)^{(2)} = X_{t} - \text{TC}_{t}^{(2)}
+  $$   \[9\]<!---\[7.69\]-->
+  
+
+***Step 7: Estimation of the Seasonal component by*** $\mathbf{3 \times 5}$
+    ***moving average over each month:***
+
+  $$S_{t}^{(2)} - M_{3 \times 3}\left\lbrack \left( S_{t} + I_{t} \right)^{(2)} \right\rbrack$$   \[10\]<!---\[7.70\]-->
+
+
+The moving average used here is a $3 \times 5$ moving average over $7$
+terms, of coefficients
+$$\frac{1}{15} \left\{ 1,\ 2,\ 3,\ 3,\ 3,\ 2,\ 1 \right\}$$ and retains
+linear trends. The coefficients are then normalised such that their sum
+over the whole $12$-month period is approximately cancelled out:
+
+  
+  $${ \widetilde{S}}_{t}^{(2)} = S_{t}^{(2)} - M_{2 \times 12}\left( S_{t}^{(2)} \right)$$   \[11\]<!---\[7.71\]-->
+ 
+
+***Step 8: Estimation of the seasonally adjusted series:***
+
+
+  $$SA_{t}^{\left( 2 \right)} = \left(TC_{t} + I_{t} \right)^{(2)} = X_{t} - {\widetilde{S}}_{t}^{(2)}$$   \[12\]<!---\[7.72\]-->
+ 
+
+The whole difficulty lies, then, in the choice of the moving averages
+used for the estimation of the trend in steps $1$ and $5$ on the one
+hand, and for the estimation of the seasonal component in steps $3$ and
+$5$. The course of the algorithm in the form that is implemented in
+JDemetra+ is presented in the figure below. The adjustment for trading day
+effects, which is present in the original X-11 program, is omitted here,
+as since calendar correction is performed by the RegARIMA model,
+JDemetra+ does not perform further adjustment for these effects in the
+decomposition step.
+
+
+**A workflow diagram for the X-11 algorithm based upon training material from the Deutsche Bundesbank**
+
+##### **The iterative principle of X-11**
+
+To evaluate the different components of a series, while taking into
+account the possible presence of extreme observations, X-11 will proceed
+iteratively: estimation of components, search for disruptive effects in
+the irregular component, estimation of components over a corrected
+series, search for disruptive effects in the irregular component, and so
+on.
+
+The Census X-11 program presents four processing stages (A, B, C, and
+D), plus 3 stages, E, F, and G, that propose statistics and charts and
+are not part of the decomposition per se. In stages B, C and D the basic
+algorithm is used as is indicated in the figure below.
+
+
+**A workflow diagram for the X-11 algorithm implemented in
+JDemetra+. Source: Based upon training material from the Deutsche
+Bundesbank**
+
+-   **Part A: Pre-adjustments**
+
+This part, which is not obligatory, corresponds in X-13ARIMA-SEATS to
+the first cleaning of the series done using the RegARIMA facilities:
+detection and estimation of outliers and calendar effects (trading day
+and Easter), forecasts and backcasts[^61] of the series. Based on these
+results, the program calculates prior adjustment factors that are
+applied to the raw series. The series thus corrected, Table B1 of the
+printouts, then proceeds to part B.
+
+-   **Part B: First automatic correction of the series**
+
+This stage consists of a first estimation and down-weighting of the
+extreme observations and, if requested, a first estimation of the
+calendar effects. This stage is performed by applying the basic
+algorithm detailed earlier. These operations lead to Table B20,
+adjustment values for extreme observations, used to correct the
+unadjusted series and result in the series from Table C1.
+
+-   **Part C: Second automatic correction of the series**
+
+Applying the basic algorithm once again, this part leads to a more
+precise estimation of replacement values of the extreme observations
+(Table C20). The series, finally \"cleaned up\", is shown in Table D1 of
+the printouts.
+
+-   **Part D: Seasonal adjustment**
+
+This part, at which our basic algorithm is applied for the last time, is
+that of the seasonal adjustment, as it leads to final estimates:
+
+-   of the seasonal component (Table D10);
+
+-   of the seasonally adjusted series (Table D11);
+
+-   of the trend component (Table D12);
+
+-   of the irregular component (Table D13).
+
+<!-- -->
+
+-   **Part E: Components modified for large extreme values**
+
+Parts E includes:
+
+-   Components modified for large extreme values;
+
+-   Comparison the annual totals of the raw time series and seasonally adjusted time series;
+
+-   Changes in the final seasonally adjusted series;
+
+-   Changes in the final trend;
+
+-   Robust estimation of the final seasonally adjusted series.
+
+The results from part E are used in part F to calculate the quality measures.
+
+-   **Part F: Seasonal adjustment quality measures**
+
+Part F contains statistics for judging the quality of the seasonal
+adjustment. JDemetra+ presents selected output for part F, i.e.:
+
+-   M and Q statistics;
+
+-   Tables.
+
+<!-- -->
+
+-   **Part G: Graphics**
+
+Part G presents spectra estimated for:
+
+-   Raw time series adjusted a priori (Table B1);
+
+-   Seasonally adjusted time series modified for large extreme values
+    (Table E2);
+
+-   Final irregular component adjusted for large extreme values (Table
+    E3).
+
+Originally, graphics were displayed in character mode. In JDemetra+,
+these graphics are replaced favourably by the usual graphics software.
+
+**The Henderson moving average and the trend estimation**
+
+In iteration B (Table B7), iteration C (Table C7) and iteration D (Table
+D7 and Table D12) the trend component is extracted from an estimate of
+the seasonally adjusted series using Henderson moving averages. The
+length of the Henderson filter is chosen automatically by
+X-13ARIMA-SEATS in a two-step procedure.
+
+It is possible to specify the length of the Henderson moving average to
+be used. X-13ARIMA-SEATS provides an automatic choice between a 9-term,
+a 13-term or a 23-term moving average. The automatic choice of the order
+of the moving average is based on the value of an indicator called
+$\frac{\overline{I}}{\overline{C}}\ $ratio which compares the magnitude
+of period-on-period movements in the irregular component with those in
+the trend. The larger the ratio, the higher the order of the moving
+average selected. Moreover, X-13ARIMA-SEATS allows the user to choose
+manually any odd‑numbered Henderson moving average. The procedure used
+in each part is very similar; the only differences are the number of
+options available and the treatment of the observations in the both ends
+of the series. The procedure below is applied for a monthly time series.
+
+In order to calculate $\frac{\overline{I}}{\overline{C}}\ $ ratio a
+first decomposition of the SA series (seasonally adjusted) is computed
+using a 13-term Henderson moving average.
+
+For both the trend ($C$) and irregular ($I$) components, the average of
+the absolute values for monthly growth rates (multiplicative model) or
+for monthly growth (additive model) are computed. They are denoted as
+$\overline{C}\ $and $\overline{I}$, receptively, where
+$\overline{C} = \frac{1}{n - 1}\sum_{t = 2}^{n}\left| C_{t} - C_{t - 1} \right|$
+and
+$\overline{I} = \frac{1}{n - 1}\sum_{t = 2}^{n}\left| I_{t} - I_{t - 1} \right|$.
+
+Then the value of $\frac{\overline{I}}{\overline{C}}\ $ ratio is checked
+and in iteration B:
+
+-   If the ratio is smaller than 1, a 9-term Henderson moving average is selected;
+
+-   Otherwise, a 13-term Henderson moving average is selected.
+
+Then the trend is computed by applying the selected Henderson filter to
+the seasonally adjusted series from Table B6. The observations at the
+beginning and at the end of the time series that cannot be computed by
+means of symmetric Henderson filters are estimated by ad hoc asymmetric
+moving averages.
+
+In iterations C and D:
+
+-   If the ratio is smaller than 1, a 9-term Henderson moving average is selected;
+
+-   If the ratio is greater than 3.5, a 23-term Henderson moving average is selected.
+
+-   Otherwise, a 13-term Henderson moving average is selected.
+
+The trend is computed by applying selected Henderson filter to the
+seasonally adjusted series from Table C6, Table D7 or Table D12,
+accordingly. At the both ends of the series, where a central Henderson
+filter cannot be applied, the asymmetric ends weights for the 7 term
+Henderson filter are used.
+
+##### **Choosing the composite moving averages when estimating the seasonal component**
+
+In iteration D, Table D10 shows an estimate of the seasonal factors
+implemented on the basis of the modified SI (Seasonal -- Irregular)
+factors estimated in Tables D4 and D9bis. This component will have to be
+smoothed to estimate the seasonal component; depending on the importance
+of the irregular in the SI component, we will have to use moving
+averages of varying length as in the estimate of the Trend/Cycle where
+the $\frac{\overline{I}}{\overline{C}}\ $ ratio was used to select the
+length of the Henderson moving average. The estimation includes several
+steps.
+
+***Step 1: Estimating the irregular and seasonal components***
+
+An estimate of the seasonal component is obtained by smoothing, month by
+month and therefore column by column, Table D9bis using a simple 7-term
+moving average, i.e. of coefficients
+$$\frac{1}{7} \left\{1,\ 1,\ 1,\ 1,\ 1,\ 1,\ 1\right\}$$. In order not to
+lose three points at the beginning and end of each column, all columns
+are completed as follows. Let us assume that the column that corresponds
+to the month is composed of $N$ values
+$$
+\left\{ x_{1},\ x_{2},\ x_{3},\ \ldots x_{N - 1},\ x_{N} \right\}.
+$$ 
+It
+will be transformed into a series
+$$\left\{ {x_{- 2},x_{- 1}{,x}_{0},x}_{1},\ x_{2},\ x_{3},\ \ldots x_{N - 1},\ x_{N},x_{N + 1},\ x_{N + 1},\ x_{N + 2},\ x_{N + 3} \right\}\$$ with $$x_{- 2} = x_{- 1} = x_{0} = \frac{x_{1} + x_{2} + x_{3}}{3}$$ and $$x_{N + 1} = x_{N + 2} = x_{N + 3} = \frac{x_{N} + x_{N - 1} + x_{N - 2}}{3}$$.
+We then have the required estimates: $S = M_{7}(D9bis)$ and
+$I = D9bis - S$.
+
+***Step 2: Calculating the Moving Seasonality Ratios***
+
+For each $i^{\text{th}}$ month the mean annual changes for each
+component is obtained by calculating
+$${\overline{S}}_{i} = \frac{1}{N_{i} - 1}\sum_{t = 2}^{N_{i}}\left| S_{i,t} - S_{i,t - 1} \right|$$
+and
+$${\overline{I}}_{i} = \frac{1}{N_{i} - 1}\sum_{t = 2}^{N_{i}}\left| I_{i,t} - I_{i,t - 1} \right|$$,
+where $N_{i}$ refers to the number of months $\text{i}$in the data,
+and the moving seasonality ratio of month $i$:
+$$MSR_{i} = \frac{\ {\overline{I}}_{i}}{ {\overline{S}}_{i}}$$.
+These ratios are presented in *Details* of the *Quality Measures* node
+under the *Decomposition (X11)* section. These ratios are used to
+compare the year-on-year changes in the irregular component with those
+in the seasonal component. The idea is to obtain, for each month, an
+indicator capable of selecting the appropriate moving average for the
+removal of any noise and providing a good estimate of the seasonal
+factor. The higher the ratio, the more erratic the series, and the
+greater the order of the moving average should be used. As for the rest,
+by default the program selects the same moving average for each month,
+but the user can select different moving averages for each month.
+
+***Step 3: Calculating the overall Moving Seasonality Ratio***
+
+The overall Moving Seasonality Ratio is calculated as follows:
+
+
+  $$\text{MSR}_{i} = \frac{\sum_{i}^{}{N_{i}\ }\ {\overline{I}}_{i}}{\sum_{i}^{}N_{i}{\overline{S}}_{i}}$$   \[13\]<!---\[7.73\]-->
+
+
+***Step 4: Selecting a moving average and estimating the seasonal
+component***
+
+Depending on the value of the ratio, the program automatically selects a
+moving average that is applied, column by column (i.e. month by month)
+to the Seasonal/Irregular component in Table D8 modified, for extreme
+values, using values in Table D9.
+
+The default selection procedure of a moving average is based on the
+Moving Seasonality Ratio in the following way:
+
+-   If this ratio occurs within zone A (MSR \< 2.5), a $3 \times 3$ moving average is used; if it occurs within zone C (3.5 \< MSR \< 5.5), a $3 \times 5$ moving average is selected; if it occurs within zone E (MSR \> 6.5), a $3 \times 9$ moving average is used;
+
+-   If the MSR occurs within zone B or D, one year of observations is removed from the end of the series, and the MSR is recalculated.
+    > If the ratio again occurs within zones B or D, we start over
+    > again, removing a maximum of five years of observations. If this
+    > does not work, i.e. if we are again within zones B or D, a
+    > $3 \times 5$ moving average is selected.
+
+The chosen symmetric moving average corresponds, as the case may be 5
+($3 \times 3$), 7 $(3 \times 5)\ $or 11 ($3 \times 9$$3 \times 9)$
+terms, and therefore does not provide an estimate for the values of
+seasonal factors in the first 2 (or 3 or 5) and the last 2 (or 3 or 5)
+years. These are then calculated using associated asymmetric moving
+averages.
+
+
+
+**Moving average selection procedure, source: DAGUM, E. B.(1999)**
+
+##### **Identification and replacement of extreme values**
+
+X-13ARIMA-SEATS detects and removes outliers in the RegARIMA part.
+However, if there is a seasonal heteroscedasticity in a time series i.e.
+the variance of the irregular component is different in different
+calendar months. Examples for this effect could be the weather and
+snow-dependent output of the construction sector in Germany during
+winter, or changes in Christmas allowances in Germany and resulting from
+this a transformation in retail trade turnover before Christmas. The
+ARIMA model is not on its own able to cope with this characteristic. The
+practical consequence is given by the detection of additional extreme
+values by X-11. This may not be appropriate if the seasonal
+heteroscedasticity is produced by political interventions or other
+influences. The ARIMA models assume a constant variance and are
+therefore not by themselves able to cope with this problem. Choosing
+longer (in the case of diverging weather conditions in the winter time
+for the construction sector) or shorter filters (in the case of a
+changing pattern of retail trade turnover in the Christmas time) may be
+reasonable in such cases. It may even be sensible to take into account
+the possibility of period-specific (e.g. month-specific) standard
+deviations, which can be done by changing the default settings of the
+**calendarsigma** parameter (see [Specifications-X13](../reference-manual/sa-spec-X13.html) section). The value of the
+**calendarsigma** parameter will have an impact on the method of
+calculation of the moving standard deviation in the procedure for
+extreme values detection presented below.
+
+***Step 1: Estimating the seasonal component***
+
+The seasonal component is estimated by smoothing the SI component
+separately for each period using a $3 \times 3$ moving average, i.e.:
+
+  
+  $$
+  \frac{1}{9} \times \begin{Bmatrix}   
+  1,0,0,0,0,0,0,0,0,0,0,0, \\           
+  2,0,0,0,0,0,0,0,0,0,0,0, \\           
+  3,0,0,0,0,0,0,0,0,0,0,0, \\           
+  2,0,0,0,0,0,0,0,0,0,0,0, \\           
+  1,0,0,0,0,0,0,0,0,0,0,0, \\           
+  \end{Bmatrix}
+  $$ \[14\]<!---\[7.74\]-->                      
+
+
+***Step 2: Normalizing the seasonal factors***
+
+The preliminary seasonal factors are normalized in such a way that for
+one year their average is equal to zero (additive model) or to unity
+(multiplicative model).
+
+***Step 3: Estimating the irregular component***
+
+The initial normalized seasonal factors are removed from the
+Seasonal-Irregular component to provide an estimate of the irregular
+component.
+
+***Step 4: Calculating a moving standard deviation***
+
+By default, a moving standard deviation of the irregular component is
+calculated at five-year intervals. Each standard deviation is associated
+with the central year used to calculate it. The values in the central
+year, which in the absolute terms deviate from average by more than the
+**Usigma** parameter
+are marked as extreme values and assigned a zero weight. After excluding
+the extreme values the moving standard deviation is calculated once
+again.
+
+***Step 5: Detecting extreme values and weighting the irregular***
+
+The default settings for assigning a weight to each value of irregular
+component are:
+
+-   Values which are more than **Usigma** (2.5, by default) standard
+    deviations away (in the absolute terms) from the 0 (additive) or 1
+    (multiplicative) are assigned a zero weight;
+
+-   Values which are less than 1.5 standard deviations away (in the
+    absolute terms) from the 0 (additive) or 1 (multiplicative) are
+    assigned a full weight (equal to one);
+
+-   Values which lie between 1.5 and 2.5 standard deviations away (in the absolute terms) from the 0 (additive) or 1 (multiplicative) are assigned a weight that varies linearly between 0 and 1 depending on their position.
+
+The default boundaries for the detection of the extreme values can be
+changed with **LSigma** and **USigma** parameters 
+
+***Step 6: Adjusting extreme values of the seasonal-irregular
+component***
+
+Values of the SI component are considered extreme when a weight less
+than 1 is assigned to their irregular. Those values are replaced by a
+weighted average of five values:
+
+-   The value itself with its weight;
+
+-   The two preceding values, for the same period, having a full weight(if available);
+
+-   The next two values, for the same period, having full a weight (if available).
+
+When the four full-weight values are not available, then a simple
+average of all the values available for the given period is taken.
+
+This general algorithm is used with some modification in parts B and C
+for detection and replacement of extreme values.
+
+##### **X-11 tables**
+
+The list of tables produced by JDemetra+ is presented below. It is not
+identical to the output produced by the original X-11 program.
+
+**Part A -- Preliminary Estimation of Outliers and Calendar Effects.**
+
+This part includes prior modifications to the original data made in the
+RegARIMA part:
+
+-   Table A1 -- Original series;
+
+-   Table A1a -- Forecast of Original Series;
+
+-   Table A2 -- Leap year effect;
+
+-   Table A6 -- Trading Day effect (1 or 6 variables);
+
+-   Table A7 -- The Easter effect;
+
+-   Table A8 -- Total Outlier Effect;
+
+-   Table A8i -- Additive outlier effect;
+
+-   Table A8t -- Level shift effect;
+
+-   Table A8s -- Transitory effect;
+
+-   Table A9 -- Effect of user-defined regression variables assigned to the seasonally adjusted series or for which the component has not been defined;
+
+-   Table 9sa -- Effect of user-defined regression variables assigned to the seasonally adjusted series;
+
+-   Table9u -- Effect of user-defined regression variables for which the component has not been defined.
+
+**Part B -- Preliminary Estimation of the Time Series Components:**
+
+-   Table B1 -- Original series after adjustment by the RegARIMA model;
+
+-   Table B2 -- Unmodified Trend (preliminary estimation using composite moving average);
+
+-   Table B3 -- Unmodified Seasonal -- Irregular Component (preliminary estimation);
+
+-   Table B4 -- Replacement Values for Extreme SI Values;
+
+-   Table B5 -- Seasonal Component;
+
+-   Table B6 -- Seasonally Adjusted Series;
+
+-   Table B7 -- Trend (estimation using Henderson moving average);
+
+-   Table B8 -- Unmodified Seasonal -- Irregular Component;
+
+-   Table B9 -- Replacement Values for Extreme SI Values;
+
+-   Table B10 -- Seasonal Component;
+
+-   Table B11 -- Seasonally Adjusted Series;
+
+-   Table B13 -- Irregular Component;
+
+-   Table B17 -- Preliminary Weights for the Irregular;
+
+-   Table B20 -- Adjustment Values for Extreme Irregulars.
+
+**Part C -- Final Estimation of Extreme Values and Calendar Effects:**
+
+-   Table C1 -- Modified Raw Series;
+
+-   Table C2 -- Trend (preliminary estimation using composite moving average);
+
+-   Table C4 -- Modified Seasonal -- Irregular Component;
+
+-   Table C5 -- Seasonal Component;
+
+-   Table C6 -- Seasonally Adjusted Series;
+
+-   Table C7 -- Trend (estimation using Henderson moving average);
+
+-   Table C9 -- Seasonal -- Irregular Component;
+
+-   Table C10 -- Seasonal Component;
+
+-   Table C11 -- Seasonally Adjusted Series;
+
+-   Table C13 -- Irregular Component;
+
+-   Table C20 -- Adjustment Values for Extreme Irregulars.
+
+**Part D -- Final Estimation of the Different Components:**
+
+-   Table D1 -- Modified Raw Series;
+
+-   Table D2 -- Trend (preliminary estimation using composite moving average);
+
+-   Table D4 -- Modified Seasonal -- Irregular Component;
+
+-   Table D5 -- Seasonal Component;
+
+-   Table D6 -- Seasonally Adjusted Series;
+
+-   Table D7 -- Trend (estimation using Henderson moving average);
+
+-   Table D8 -- Unmodified Seasonal -- Irregular Component;
+
+-   Table D9 -- Replacement Values for Extreme SI Values;
+
+-   Table D10 -- Final Seasonal Factors;
+
+-   Table D10A -- Forecast of Final Seasonal Factors;
+
+-   Table D11 -- Final Seasonally Adjusted Series;
+
+-   Table D11A -- Forecast of Final Seasonally Adjusted Series;
+
+-   Table D12 -- Final Trend (estimation using Henderson moving average);
+
+-   Table D12A -- Forecast of Final Trend Component;
+
+<!-- -->
+
+-   Table D13 -- Final Irregular Component;
+
+-   Table D16 -- Seasonal and Calendar Effects;
+
+-   Table D16A -- Forecast of Seasonal and Calendar Component;
+
+-   Table D18 -- Combined Calendar Effects Factors.
+
+**Part E -- Components Modified for Large Extreme Values:**
+
+-   Table E1 -- Raw Series Modified for Large Extreme Values;
+
+-   Table E2 -- SA Series Modified for Large Extreme Values;
+
+-   Table E3 -- Final Irregular Component Adjusted for Large Extreme Values;
+
+-   Table E11 -- Robust Estimation of the Final SA Series.
+
+**Part F -- Quality indicators:**
+
+-   Table F2A -- Changes, in the absolute values, of the principal components;
+
+-   Table F2B -- Relative contribution of components to changes in the raw series;
+
+-   Table F2C -- Averages and standard deviations of changes as a function of the time lag;
+
+-   Table F2D -- Average duration of run;
+
+-   Table F2E -- I/C ratio for periods span;
+
+-   Table F2F -- Relative contribution of components to the variance of the stationary part of the original series;
+
+-   Table F2G -- Autocorrelogram of the irregular component.
+
+
+#### Filter length choice
+
+A seasonal filter is a weighted average of a moving span of fixed length
+within a time series that can be used to remove a fixed seasonal pattern.
+X-13ARIMA-SEATS uses several of these filters, according to the needs of
+the different stages of the program. As only X-13ARIMA-SEATS allows the
+user to manually select seasonal filters, this case study can be
+applied only to the X-13ARIMA-SEATS specifications.
+
+The automatic seasonal adjustment procedure uses the default
+options to select the most appropriate moving average. However there are
+occasions when the user will need to specify a different seasonal moving	
+average to that identified by the program. For example, if the SI values
+do not closely follow the seasonal component, it may be appropriate to
+use a shorter moving average. Also the presence of sudden breaks in
+the seasonal pattern -- e.g. due to changes in the methodology -- can
+negatively impact on the automatic selection of the most appropriate
+seasonal filter. In such cases the usage of short seasonal filters in
+the selected months or quarters can be considered. Usually, a shorter
+seasonal filter $(3 \times 1)$ allows seasonality to change very rapidly
+over time. However, a very short seasonal filter should not normally be
+used, as it might often lead to large revisions as new data becomes
+available. If a short filter is to be used it will usually be limited to one
+month/quarter with a known reason for wanting to capture
+a rapidly changing seasonality.
+
+In the standard situation one seasonal filter is applied to all
+individual months/quarters. The estimation of seasonal movements is
+therefore based on the sample windows of equal lengths for each
+individual month/quarter (i.e. for each month/quarter the seasonal
+filter length or the number of years representing the major part of the
+seasonal filter weights is identical). This approach relies on the
+assumption that the number of past periods in which the conditions
+causing seasonal behaviour are sufficiently homogenous is the same in
+all months/quarters. However, this assumption does not always hold.
+Seasonal causes may change in one month, while staying the same in
+others[^1]. For instance, seasonal heteroskedasticity might require
+different filter lengths in different months or quarters.
+
+Another interesting example is industrial production in Germany. It can
+be influenced by school holidays, since many employees have
+school-age children, which interrupt their working pattern during these
+school holidays. Consequently, businesses may temporarily suspend or lower
+production during these periods. Since school holidays do not occur at the same time
+throughout Germany and their timing varies from year to year in the
+individual federal states, the effect is not completely captured by
+seasonal adjustment. And since school holidays are treated as usual
+working days, these effects are not captured by calendar adjustment
+either. The majority of school holidays in Germany can take place either
+in July or in August. This yields higher variances in the irregular
+component for these months compared to the rest of the year. Therefore,
+in this case a longer seasonal filter is used for these months to account for
+this.
+
+Another example might be given by German retail trade. Due to changes in
+the consumers' behaviour around Christmas -- possibly more gifts of money
+-- the seasonal peak in December has become steadily less pronounced. To
+account for this moving seasonality, shorter seasonal filters in
+December than during the rest of the year need to be applied.
+
+JDemetra+ offers the options to assign a different seasonal filter
+length to each period (month or quarter). The program offers these
+options in the *single spec* mode as well as in the *multispec* mode,
+albeit they are available only in the *Specifications* window, after a
+document is created.
+
+
+
+
+### Model based decomposition
+
+
+SEATS is a program for estimating unobserved components in a time
+series. It follows the ARIMA-model-based (AMB) method, developed from
+the work of CLEVELAND, W.P., and TIAO, G.C. (1976), BURMAN, J.P. (1980),
+HILLMER, S.C., and TIAO, G.C. (1982), BELL, W.R., and HILLMER, S.C.
+(1984) and MARAVALL, A., and PIERCE, D.A. (1987).
+
+In JDemetra+ the input for  the model based signal extraction procedure
+is always provided by TRAMO and includes the original series $y_{t}$,
+the linearized series $x_{t}$ (i.e. the original series $y_{t}\ $with
+the deterministic effects removed), the ARIMA model for the stochastic
+(linearized) time series $x_{t}$ and the deterministic effects (calendar
+effects, outliers and other regression variable effects)[^31]. SEATS
+decomposes the linearized series (and the ARIMA model) into trend,
+seasonal, transitory and irregular components, provides forecasts for
+these components, together with the associated standard errors, and
+finally assign the deterministic effects to each component yielding the
+*final* components[^32]. The Minimum Mean Square Error (MMSE)
+estimators of the components are computed with a Wiener-Kolmogorov
+filter applied to the finite series extended with forecasts and 
+backcasts[^33].
+
+One of the fundamental assumptions made by SEATS is that the linearized
+time series $x_{t}$ follows the ARIMA model
+
+  $$\phi(B)\delta\left( B \right)x_{t} = \theta(B)a_{t}$$   \[1\] <!---\[7.25\]-->
+  
+where:
+
+$B$ -- the backshift operator $(Bx_{t} = x_{t - 1})$;
+
+$\delta\left( B \right)$ -- a non-stationary autoregressive (AR)
+polynomial in $B$ (unit roots); 
+
+$\theta\left( B \right)$ -- an invertible moving average (MA) polynomial
+in $B$ and in $B^{S}$, which can be expressed in the multiplicative form
+
+$\left( 1 + \vartheta_{1}B + \ldots{+ \ \vartheta}{q}B^{q} \right)\left( \ 1 + \Theta{1}B^{s} + \ldots{+ \ \Theta}_{Q}B^{\text{sQ}} \right)$ ;
+
+$\phi(B)$ -- a stationary autoregressive (AR) polynomial in $B$ and in
+$B^{S}\ $containing regular and seasonal unit roots, with *s*
+representing the number of observations per year;
+
+$a_{t}$ -- a white-noise variable with the variance$\ V(a)$.
+
+It should be noted that the stochastic time series can be predicted
+using its past observations and making an error. The variable $a_{t}$,
+which is assumed to be white noise, is the fundamental *innovation* to
+the series at time *t*, that is the part that cannot be predicted based
+on the past history of the series.
+
+Denoting
+$\varphi\left( B \right) = \phi\left( B \right)\delta\left( B \right),\ $
+\[1\] <!---\[7.25\]--> can be written in a more concise form as
+
+  $$\varphi\left( B \right)x_{t} = \theta(B)a_{t}$$,   \[2\] <!---\[7.26\]-->
+
+where $\varphi\left( B \right)$ contains both the stationary and the
+nonstationary roots.
+
+#### Derivation of the models for the components
+
+Let us consider the additive decomposition model
+
+  $$x_{t} = \sum_{i = 1}^{k}x_{\text{it}}$$,   \[3\] <!---\[7.27\]-->
+ 
+where *i* refers to the orthogonal components: trend, seasonal,
+transitory or irregular. Apart from the irregular component, supposed to
+be a white noise, it is assumed that each component follows the ARIMA
+model which can be represented, using the notation of \[2\] <!---\[7.26\]-->, as:
+
+  $$\varphi_{i}\left( B \right)\ x_{\text{it}} = \theta_{i}(B)a_{\text{it}}$$,   \[4\] <!---\[7.28\]-->
+
+where
+$\varphi_{i}\left( B \right) = \phi_{i}\left( B \right)\delta_{i}\left( B \right),\ \ x_{\text{it}}$
+is the *i*-*th* unobserved component, $\varphi_{i}\left( B \right)$ and
+$\theta_{i}\left( B \right)$ are finite polynomials of order $p_{i}$ and
+$q_{i}$, respectively, and $a_{\text{it}},$ the disturbance associated
+with such component, is a white noise process with zero mean and
+constant variance $V(a_{i})$ and $a_{\text{it}}$ and
+$a_{\text{jt}}\ $are not correlated for $i \neq j\ $and for any $t$..
+These disturbances are functions of the innovations in the series and
+are called \"pseudo-innovations\" in the literature concerning the AMB
+decomposition as they refer to the components that are never observed
+[^34]. In the JDemetra+ documentation the term \"innovations\" is used to
+refer to the \"pseudo-innovations\".
+
+The following assumptions hold for \[4\] <!---\[7.28\]-->. For each $\text{i}$ the
+polynomials $\phi_{i}\left( B \right)$, $\delta_{i}\left( B \right)$ and
+$\theta_{i}(B)$ are prime and of finite order. The roots of
+$\delta_{i}\left( B \right)$ lies on the unit circle; those of
+$\phi_{i}\left( B \right)$ lie outside, while all the roots of
+$\theta_{i}\left( B \right)\ $are on or outside the unit circle. This
+means that nonstationary and noninvertible components are allowed. Since
+different roots of the AR polynomial induce peaks in the spectrum[^35]
+of the series at different frequencies, and given that different
+components are associated with the spectral peaks for different
+frequencies, it is assumed that for $i \neq j$ the
+polynomials$\ \phi_{i}\left( B \right)$ and $\phi_{j}\left( B \right)$
+do not share any common root (they are coprime). Finally, it is assumed
+that the polynomials $\theta_{i}\left( B \right),\ i = 1,\ldots,k$ are
+prime share no unit root in common, guaranteeing the invertibility of
+the overall series. In fact, since the unit root of
+$\theta_{i}\left( B \right)$ induce a spectral zero, when the
+polynomials $\theta_{i}\left( B \right),\ i = 1,\ldots,k$ share no unit
+root in common, there is no frequency for which all component spectra
+become zero[^36].
+
+Since aggregation of ARIMA models yields ARIMA models, the series
+$x_{t}\ $will also follow an ARIMA model, as in \[2\] <!---\[7.26\]-->, and
+consequently the following identity can be derived:
+
+
+$$\frac{\theta(B)}{\varphi(B)}a_{t} = \sum_{i = 1}^{k}{\frac{\theta_{i}(B)}{\varphi_{i}(B)}a_{\text{it}}}$$.   \[5\] <!---\[7.29\]-->
+
+
+In the ARIMA model based approach implemented in SEATS, the ARIMA model
+identified and estimated for the observed series $x_{t}$ is
+decomposed to derive the models for the components. In particular, the
+AR polynomials for the components, $\varphi_{i}\left( B \right),$ are
+easily derived through the factorization of the AR polynomial
+$\varphi\left( B \right)$:
+
+  $$\varphi\left( B \right) = \prod_{i = 1}^{k}{\varphi_{i}\left( B \right)}$$,   \[6\] <!---\[7.30\]-->
+
+while the MA polynomials for the components, together with the
+innovation variances $V(a_{i})$, cannot simply be obtained through the
+relationship:
+
+  $$\theta(B)a_{t} = \sum_{i = 1}^{k}{\varphi_{\text{ni}}\left( B \right)}\theta_{i}(B)a_{\text{it}}$$,   \[7\] <!---\[7.31\]-->
+
+
+where $\varphi_{\text{ni}}\left( B \right)$ is the product of all
+$\varphi_{j}\left( B \right),\ j = 1,\ldots,k$, except from
+$\varphi_{i}\left( B \right)$. Further assumptions are therefore needed
+to cope with the underidentification problem: i) $p_{i} \geq q_{i}$ and
+ii) the canonical decomposition, i.e. the decomposition that allocate
+all additive white noise to the irregular component (yielding
+noninvertible components except the irregular).
+
+To understand how SEATS factorizes the AR polynomials, first a concept
+of a root will be explored[^37].
+
+The equation \[2\] <!---\[7.26\]--> can be expressed as:
+
+$$\psi^{- 1}(B)x_{t} = a_{t}(1 + \varphi_{1}B + \ldots\varphi_{p}B^{p})x_{t} =(1 + \theta_{1}B + \ldots\theta_{q}B^{q})a_{t}$$,   \[8\] <!---\[7.32\]--> 
+
+
+Let us now consider \[2\] <!---\[7.26\]--> in the inverted form:
+
+  $$\theta\left( B \right)y_{t} = \varphi(B)a_{t}$$,   \[9\] <!---\[7.33\]--> 
+
+If both sides of \[8\] <!---\[7.32\]-->  are multiplied by $x_{t - k}$ with $k > q$,
+and expectations are taken, the right hand side of the equation vanishes
+and the left hand side becomes:
+
+$$\varphi(B)\gamma_{k} = \gamma_{k} + \varphi_{1}\gamma_{k - 1} + \ldots\varphi_{p}\gamma_{k - p} = 0 $$,   \[10\] <!---\[7.34\]-->
+
+where $B$ operates on the subindex $k$.
+
+The autocorrelation function $\gamma_{k}$ is a solution of \[10\] <!---\[7.34\]--> with
+the characteristic equation:
+
+  $$z^{p} + \varphi_{1}z^{p - 1} + \ldots\varphi_{p - 1}z + \varphi_{p} = 0$$.   \[11\] <!---\[7.35\]-->
+
+If $z_{1}$,...,$\ z_{p}$ are the roots of \[11\] <!---\[7.35\]-->, the solutions of
+\[10\] <!---\[7.34\]--> can be expressed as:
+
+  $\gamma_{k} = \sum_{i = 1}^{p}z_{i}^{k}$,   \[12\] <!---\[7.36\]-->
+
+and will converge to zero as $k \rightarrow \infty$ when
+$\left| r_{i} \right| < 1,\ i = 1,\ldots,p$. From \[10\] <!---\[7.34\]--> and \[12\] <!---\[7.36\]-->
+it can be noticed that $z_{1} = B_{i}^{- 1}$, meaning that
+$z_{1}$,...,$\ z_{p}$ are the inverses of the roots $B_{1},\ldots,B_{p}$
+of the polynomial $\varphi(B)$. The convergence of $\gamma_{k}$ implies
+that the roots of the $\varphi(B)$ are larger than 1 in modulus (lie
+outside the unit circle). Therefore, from the equation
+
+  $$
+  {\varphi(B)}^{- 1} = \frac{1}{(1 - z_{1})\ldots(1 - z_{1})}
+  $$   \[13\] <!---\[7.37\]-->
+  
+it can be derived that ${\varphi(B)}^{- 1}$ is convergent and all its
+inverse roots are less than 1 in modulus.
+
+Equation \[11\] <!---\[7.35\]--> has real and complex roots (solutions). Complex number
+$x = a + bi$, with $a$ and $\text{b}$ both real numbers, can be
+represented as $x = r\left( cos(\omega) + i\ sin(\omega \right))$, where
+$i$ is the imaginary unit${\ (i}^{2} = - 1)$, $r$ is the modulus of $x$,
+that is $\ r = \left| x \right| = \sqrt{a^{2} + b^{2}}$ and $\omega$ is
+the argument (frequency). When roots are complex, they are always in
+pairs of complex conjugates. The representation of the complex number
+$x = a + bi$ has a geometric interpretation in the complex plane
+established by the real axis and the orthogonal imaginary axis.
+
+
+![Text](All_images/UG_A_image3.png)
+
+
+**Geometric representation of a complex number and of its conjugate**
+
+Representing the roots of the characteristic equation \[11\] <!---\[7.35\]--> in the
+complex plane enhances understanding how they are allocated to the
+components. When the modulus $r$ of the roots in $\text{z}$ are greater
+than 1 (i.e. modulus of the roots in $\varphi(B)\  < 1$), the solution
+of the characteristic equation has a systematic explosive process, which
+means that the impact of the given impulse on the time series is more
+and more pronounced in time. This behaviour is not in line with the
+developments that can be identified in actual economic series.
+Therefore, the models estimated by TRAMO-SEATS (and X-13ARIMA-SEATS)
+have never inverse roots in $B$ with modulus greater than 1.
+
+The characteristic equations associated with the regular and the
+seasonal differences have roots in $\varphi(B)$ with modulus $r = 1$.
+They are called non-stationary roots and can be represented on the unit
+circle. Let us consider the seasonal differencing operator applied to a
+quarterly time series $(1 - B^{4})$. Its characteristic equation is
+${(z}^{4} - 1) = 0$ with solutions given by$\ z = \sqrt[4]{1}$, i.e.
+$z_{1,2} = \pm 1$ and $z_{3,4} = \pm i1$. The first two solutions are
+real and the last two are complex conjugates. They are represented by
+the black points on the unit circle on the figure below.
+
+
+![Text](All_images/UG_A_image4.png)
+
+
+**Unit roots on the unit circle**
+
+For the seasonal differencing operator $(1 - B^{12})$ applied to the
+monthly time series the characteristic equation ${\ (z}^{12} - 1) = 0$
+has twelve non-stationary solutions given by$\ z = \sqrt[12]{1}:$ two
+real and ten complex conjugates, represented by the white circles in
+unit roots figure above.
+
+The complex conjugates roots generate the periodic movements of the
+type:
+
+
+  $$z_{t} = A^{t}\cos\left( \omega t + W \right).$$   \[14\] <!---\[7.38\]-->
+
+
+where:
+
+$A$ -- amplitude;
+
+$\omega$ -- angular frequency (in radians);
+
+$W$ -- phase (angle at $t = 0)$.
+
+The frequency $f$, i.e. the number of cycles per unit time, is
+$\frac{\omega}{2\pi}$. If it is multiplied by *s*, the number of
+observations per year, the number of cycles completed in one year is
+derived. The period of function \[14\] <!---\[7.38\]-->, denoted by $\tau$, is the
+number of units of time (months/quarters) it takes for a full circle to
+be completed.
+
+For quarterly series the seasonal movements are produced by complex
+conjugates roots with angular frequencies at $\frac{\pi}{2}$ (one cycle
+per year) and $\pi$ (two cycles per year). The corresponding number of
+cycles per year and the length of the movements are presented in the table below.
+
+**Seasonal frequencies for a quarterly time series**
+
+ {: .table .table-style}
+| **Angular frequency ($\omega$)**      | **Frequency (cycles per unit time) ($f$)**  | **Cycles per year**   | **Length of the movement measured in quarters ($\tau$)** |
+|-----------------|-----------------|-----------------|-----------------|
+| $\frac{\pi}{2}$       | 0.25            | 1           | 4               |
+| $\pi$         | 0.5             | 2           | 2               |
+
+For monthly time series the seasonal movements are produced by complex
+conjugates roots at the angular frequencies:
+$\ \frac{\pi}{6},\frac{\pi}{3},\ \frac{\pi}{2},\ \frac{2\pi}{3},\ \frac{5\pi}{6}\ $and
+$\pi$. The corresponding number of cycles per year and the length of the
+movements are presented in the table below: Seasonal frequencies for a monthly
+time series.
+
+**Seasonal frequencies for a monthly time series**
+
+{: .table .table-style}
+| **Angular frequency ($\omega$)**    | **Frequency (cycles per unit time) ($f$)**    | **Cycles per year**    | **Length of the movement measured in months ($\tau$)**    |
+|-----------------|-----------------|-----------------|-----------------|
+| $\frac{\pi}{6}$       | 0.083           | 1           | 12              |
+| $\frac{\pi}{3}$       | 0.167           | 2           | 6               |
+| $\frac{\pi}{2}$       | 0.250           | 3           | 4               |
+| $\frac{2\pi}{3}$      | 0.333           | 4           | 3               |
+| $\frac{5\pi}{6}$      | 0.417           | 5           | 2.4             |
+| $$\pi$$         | 0.500           | 6           | 2               |
+
+In JDemetra+ SEATS assigns the roots of the AR full polynomial to the
+components according to their associated modulus and frequency,
+i.e.:[^38]
+
+-   Roots of $\left( 1 - B \right)^{d}$ are assigned to trend component.
+
+-   Roots of
+    $\ \left( 1 - B^{s} \right)^{d_{s}} = {((1 - B)(1 + B + \ldots + B^{s - 1}))}^{d_{s}}\ $are
+    assigned to the trend component (root
+    of${\ \left( 1 - B \right)}^{d_{s}}$) and to the seasonal component
+    (roots of${\ (1 + B + \ldots + B^{s - 1})}^{d_{s}}$).
+
+-   When the modulus of the inverse of a real positive root of
+    $\varphi(B)$ is greater than $k$ or equal to $k$, where $k$ is the
+    threshold value controlled by the *Trend boundary* parameter(in the
+    original SEATS it is controlled by *rmod*)[^39], then the root is
+    assigned to the trend component. Otherwise it is assigned to the
+    transitory component.
+
+-   Real negative inverse roots of
+    $\text{ ϕ}_{p}\left( B \right)\ $associated with the seasonal
+    two-period cycle are assigned to the seasonal component if their
+    modulus is greater than *k*, where $k$ is the threshold value
+    controlled by the *Seasonal boundary* and the *Seas. boundary
+    (unique)* parameters. Otherwise they are assigned to the transitory
+    component.
+
+-   Complex roots, for which the argument (angular frequency) is close
+    enough to the seasonal frequency are assigned to the seasonal
+    component. Closeness is controlled by the *Seasonal tolerance* and
+    *Seasonal tolerance (unique)* parameters (in the original SEATS it
+    is controlled by *epsphi*). Otherwise they are assigned to the
+    transitory component.
+
+-   If $d_{s}\ $(seasonal differencing order) is present$\ $and
+    $\text{Bphi} < 0$ ($\text{Bphi}$ is the estimate of the seasonal
+    autoregressive parameter), the real positive inverse root is
+    assigned to the trend component and the other ($s - 1$) inverse
+    roots are assigned to the seasonal component. When $d_{s} = 0$, the
+    root is assigned to the seasonal when $\text{Bphi} < - 0.2$ and/or
+    the overall test for seasonality indicates presence of seasonality.
+    Otherwise it goes to the transitory component. Also, when
+    $\text{Bphi} > 0$, roots are assigned to the transitory component.
+
+For further details about JDemetra+ parameters see section [TramoSeats](../reference-manual/sa-spec-tramo.html).
+
+It should be highlighted that when$\ Q > P$, where $Q$ and $P$ denote
+the orders of the polynomials $\varphi\left( B \right)$ and $\theta(B)$,
+the SEATS decomposition yields a pure MA $(Q - P)$ component (hence
+transitory). In this case the transitory component will appear even when
+there is no AR factor allocated to it.
+
+Once these rules are applied, the factorization of the AR polynomial
+presented by \[2\] <!---\[7.26\]--> yields to the identification of the AR polynomials
+for the components which contain, respectively, the AR roots associated
+with the trend component, the seasonal component and the transitory
+component.[^40]
+
+Then with the partial fraction expansion the spectrum of the final
+components are obtained.
+
+For example, the Airline model for a monthly time series:
+
+  $$(1 - B)(1 - B^{12})x_{t} = (1 + \theta_{1}B)(1 + \Theta_{1}B^{12})\ a_{t}$$,   \[15\] <!---\[7.39\]-->
+ 
+is decomposed by SEATS into the model for the trend component:
+
+  $$(1 - B)(1 - B)c_{t} = (1 + \theta_{c,1}B + \theta_{c,2}B^{2})a_{c,t}$$,   \[16\] <!---\[7.40\]-->
+  
+and the model for the seasonal component:
+
+  $$\left( 1 + B + \ldots + B^{11} \right)s_{t} = \left( 1 + \theta_{s,1}B + \ldots + {\theta_{s,11}B}^{11} \right)a_{s,t},$$   \[17\] <!---\[7.41\]-->
+
+As a result, the Airline model is decomposed as follows:
+
+$$\frac{(1 + \theta_{1}B)(1 + \Theta_{1}B^{12})}{(1 - B)(1 - B)}a_{t} = \frac{\left( 1 + \theta_{s,1}B + \ldots + {\theta_{s,11}B}^{11} \right)}{\left( 1 + B + \ldots + B^{11} \right)}a_{s,t} + \frac{(1 + \theta_{c,1}B + \theta_{c,2}B^{2})}{(1 - B)(1 - B)}a_{c,t} + u_{t}$$.   \[18\] <!---\[7.42\]-->
+
+The transitory component is not present in this case and the irregular
+component is the white noise.
+
+The partial fractions decomposition is performed in a frequency domain.
+In essence, it consists in portioning of the pseudo-spectrum[^41]
+of $x_{t}$ into additive spectra of the components. When the AMB
+decomposition of the ARIMA model results in the non-negative spectra for
+all components, the decomposition is called admissible[^42]. In such
+case an infinite number of admissible decompositions exists, i.e.
+decompositions that yield the non-negative spectra of all components.
+Therefore, the MA polynomials and the innovation variances cannot be yet
+identified from the model of $x_{t}$. As sketched above, to
+solve this underidentification problem and identify a unique
+decomposition, it is assumed that for each component the order of the MA
+polynomial is no greater than the order of the AR polynomial and the
+canonical solution of S.C. Hillmer and G.C. Tiao is applied[^43], i.e.
+all additive white noise is added to the irregular component As a
+consequence all components derived from the canonical decomposition,
+except from the irregular, have a spectral minimum of zero and are thus
+noninvertible[^34]. Given the stochastic features of the series, it can
+be shown by that the canonical decomposition produces as stable as
+possible trend and seasonal components since it maximizes the variance
+of the irregular and minimizes the variance of the other
+components[^43]. However, there is a price to be paid as canonical
+components can produce larger revisions in the preliminary estimators of
+the component[^46] than any other admissible decomposition.
+
+The figure below represents the pseudo-spectrum for the canonical trend and an
+admissible trend.
+
+
+![Text](All_images/UG_A_image5.png)
+
+
+**A comparison of canonical trend and admissible trend**
+
+A pseudo-spectrum is denoted by$\ g_{i}(\omega)$, where $\omega$
+represents the angular frequency. The pseudo-spectrum of $x_{\text{it}}$
+is defined as the Fourier transform of ACGF of$\ x_{t}$ which is
+expressed as:
+
+$$\frac{\psi_{i}\left( B \right)\psi_{i}\left( F \right)}{\delta_{i}\left( B \right)\delta_{i}\left( F \right)}V(a_{i})$$,     \[19\] <!---\[7.43\]-->
+
+
+where:
+
+$\psi_{i}\left( F \right) = \frac{\theta_{i}\left( F \right)}{\phi_{i}\left( F \right)}$
+
+$\psi_{i}\left( B \right) = \frac{\theta_{i}\left( B \right)}{\phi_{i}\left( B \right)}$
+
+$B$ is the backward operator, 
+
+$F$ is the forward operator.
+
+A pseudo-spectrum for a monthly time series $x_{t}\ $is presented in
+the figure below: The pseudo-spectrum for a monthly series. The frequency
+$\omega = 0$ is associated with the trend, frequencies in the range
+\[$0 + \epsilon_{1},\ \frac{\pi}{6} - \epsilon_{2}$\] with
+$\left[0 + \epsilon_{1},\ \frac{\pi}{6} - \epsilon_{2}\right]$ 
+$\epsilon_{1},\ \epsilon_{2} > 0$ and
+$\epsilon_{1} < \ \frac{\pi}{6} - \epsilon_{2}\ $ are usually associated
+with the business-cycle and correspond to a period longer than a year
+and bounded[^47]. The frequencies in the range \[$\frac{\pi}{6},\ \pi$\]
+are associated with the short term movements, whose cycle is completed
+in less than a year. If a series contains an important periodic
+component, its spectrum reveals a peak around the corresponding
+frequency and in the ARIMA model it is captured by an AR root. In the
+example below spectral peaks occur at the frequency $\omega = 0$ and at
+the seasonal frequencies ( $\frac{\pi}{6}$,
+$\frac{2\pi}{6},\ \frac{3\pi}{6},\ \frac{4\pi}{6},\frac{5\pi}{6},\pi$).
+[^48]
+
+
+![Text](All_images/UG_A_image6.png)
+
+
+**The pseudo-spectrum for a monthly series**
+
+In the decomposition procedure, the pseudo-spectrum of the time series
+$x_{t}$ is divided into the spectra of its components (in the
+example figure below, four components were obtained).
+
+
+![Text](All_images/UG_A_image7.png)
+
+
+**The pseudo-spectra for the components**
+
+#### Estimation of the components with the Wiener-Kolmogorow filter {#estimation-of-the-components-with-the-wiener-kolmogorow-filter}
+
+The various components are estimated using Wiener-Kolmogorow (WK)
+filters. JDemetra+ includes three options to estimate the WK filter,
+namely *Burman*, *KalmanSmoother* and *MCElroyMatrix*[^49]. Here the
+first of abovementioned options, proposed by BURMAN, J.P. (1980) will be
+explained.
+
+The estimation procedure and the properties of the WK filter are easier
+to explain with a two-component model. Let the seasonally adjusted
+series ($s_{t}$) be the signal of interest and the seasonal component
+($n_{t}$) be the remainder, \"the noise\". The series is given by the
+model \[2\] <!---\[7.26\]--> and from \[4\] <!---\[7.28\]--> the models for theoretical components
+are:
+
+$$\varphi_{s}(B)s_{t} = \theta_{s}(B)a_{\text{st}}$$     \[20\] <!---\[7.44\]-->
+
+and 
+
+  $$\varphi_{n}(B)n_{t} = \theta_{n}(B)a_{\text{nt}}$$.   \[21\] <!---\[7.45\]-->
+
+From \[6\] <!---\[7.30\]--> and \[7\] <!---\[7.31\]--> it is clear that
+$\varphi\left( B \right) = \varphi_{s}(B)\varphi_{n}(B)$ and 
+$\theta\left( B \right)a_{t} = \theta_{s}(B)a_{\text{st}}+\theta_{n}(B)a_{\text{nt}}$. 
+
+As the time series components are never observed, their estimators have
+to be used. Let us note $X_{T}$ an infinite realization of the
+time series $x_{t}$. SEATS computes the Minimum Mean Square Error (MMSE)
+estimator of $s_{t}$, e.g. the estimator $$\widehat{s}_{t}$$ that
+minimizes $$E\lbrack\left({s_{t}-{\widehat{s}}_{t})}^{2}|X_{T} \right)\rbrack$$. 
+Under the normality assumption $${\widehat{s}}_{t|T}$$ is also equal to
+the conditional expectation $$E\left(s_{t}|X_{T}\right)$$, so it
+can be presented as a linear function of the elements
+in $$X_{T}$$.[^50] WHITTLE (1963) shows that the MMSE estimator of
+$${\widehat{s}}_{t}$$ is:
+
+  $${\widehat{s}}_{t} = k_{s}\frac{\psi_{s}(B)\psi_{s}(F)}{\psi(B)\psi(F)}x_{t}$$,   \[22\] <!---\[7.46\]-->
+  
+where $$\psi(B)= \frac{\theta(B)}{\phi(B)}$$,
+
+$$F = B^{- 1}$$ and $$k_{s}=\frac{V(a_{s})}{V(a)}$$,
+
+$$V(a_{s})$$ is the variance of $$a_{st}$$ and $$V(a)$$ is
+the variance of $$a_{t}$$.
+
+Expressing the $$\psi\left(B\right)$$ polynomials as functions of the AR
+and MA polynomials, after cancelation of roots, the estimator
+of $$s_{t}$$ can be expressed as:
+
+  $${\widehat{s}}_{t} = k_{s}\frac{\theta_{s}\left(B\right)\theta_{s}\left(F\right)\varphi_{n}\left(B \right)\delta_{n}\left(B\right)\varphi_{n}\left(F\right)\delta_{n}\left(F\right)}{\theta\left(B\right)\theta\left(F \right)}x_{t}$$,   \[23\] <!---\[7.47\]-->
+
+
+where:
+
+  $$\nu_{s}\left( B,F \right) = k_{s}\frac{\theta_{s}\left( B \right)\theta_{s}\left( F \right)\varphi_{n}\left( B \right)\delta_{n}\left( B \right)\varphi_{n}\left( F \right)\delta_{n}\left( F \right)}{\theta\left( B \right)\theta\left( F \right)}$$   \[24\] <!---\[7.48\]-->
+
+is a WK filter.
+
+Equation \[24\] <!---\[7.48\]--> shows that the WK filter is two-sided (uses
+observations both from the past and from the future), centered (the
+number of points in the past is the same as in the future) and symmetric
+(for any $k$ the weight applied to $x_{t - k}$ and $x_{t + k}$ is the
+same), which allows the phase effect to be avoided. Due to invertibility
+of $\theta\left( B \right)$ (and $\theta\left( F \right)$) the filter is
+convergent in the past and in the future.
+
+The estimator can be presented as
+
+  $${\widehat{s}}_{t} = \nu_{i}\left(B,F\right)x_{t}$$,   \[25\] <!---\[7.49\]-->
+  
+where
+
+$$\nu_{i}\left(B,F\right)=\nu_{0}+ \sum_{j = 1}^{\infty}\nu_{ij}(B^{j}+F^{j})$$
+
+is the WK filter.
+
+The example of the WK filters obtained for the pseudo-spectra of the
+series illustrated above is shown on the figure below: WK filters for components.
+
+
+![Text](All_images/UG_A_image8.png)
+
+
+**WK filters for components**
+
+The WK filter from \[24\] <!---\[7.48\]--> can also be expressed as a ratio of two
+pseudo-autocovariance generating functions (p-ACGF). The p-ACGF function
+summarizes the sequence of absolutely summable autocovariances of a
+stationary process $x_{t}$ (see section  section [Spectral Analysis](..\theory\spectral.html)).
+
+The ACGF function of an ARIMA process is expressed as:
+
+  $$acgf(B) = \frac{\theta\left( B \right)\theta\left( F \right)}{\phi\left( B \right)\delta\left( B \right)\phi\left( F \right)\delta\left( F \right)}V(a)$$   \[26\] <!---\[7.50\]-->
+
+And, the WK filter can be rewritten as:
+
+  $$\nu_{s}\left( B,F \right) = \frac{\gamma_{s}(B,F)}{\gamma(B,F)}$$,   \[27\] <!---\[7.51\]-->
+
+where:
+
+$$\gamma_{s}\left( B,F \right) = \frac{\theta_{s}\left( B \right)\theta_{s}\left( F \right)}{\phi_{s}\left( B \right)\delta_{s}\left( B \right)\phi_{s}\left( F \right)\delta_{s}\left( F \right)}V(a_{s})$$
+is the p-ACGF of $$s_{t}$$;
+
+$\gamma\left( B,F \right) = \frac{\theta\left( B \right)\theta\left( F \right)}{\phi\left( B \right)\delta\left( B \right)\phi\left( F \right)\delta\left( F \right)}V(a)$
+is the p-ACGF of $x_{t}$.
+
+From \[24\] <!---\[7.48\]--> it can be seen that the WK filter depends on both the
+component and the series models. Consequently, the estimator of the
+component and the WK filter reflect the characteristic of data and by
+construction, the WK filter adapts itself to the series under
+consideration. Therefore, the ARIMA model is of particular importance
+for the SEATS method. Its misspecification results in an incorrect
+decomposition.
+
+This adaptability, if the model has been correctly determined, avoids
+the dangers of under and overestimation with an ad-hoc filtering. For
+example, for the series with a highly stochastic seasonal component the
+filter adapts to the width of the seasonal peaks and the seasonally
+adjusted series does not display any spurious seasonality[^51]. Examples
+of WK filters for stochastic and stable seasonal components are
+presented on the figure below.
+
+
+![Text](All_images/UG_A_image9.png)
+
+
+**WK filters for stable and stochastic seasonal components**
+
+The derivation of the components requires an infinite realization of
+$x_{t}$ in the direction of the past and of the future. However, the
+convergence of the WK filter guarantees that, in practice, it could be
+approximated by a truncated (finite) filter and, in most applications,
+for large $$k$$ the estimator for the central periods of the
+series can be safely seen as generated by the WK filter[^52]:
+
+  $${\widehat{s}}_{t}=\nu_{k}x_{t-k} + \ldots + \nu_{0}x_{t} + \ldots + \nu_{k}x_{t+k}$$.   \[28\] <!---\[7.52\]-->
+
+When $T > 2L + 1$, where $T$ is the last observed period, and $L$ is an
+a priori number that typically expands between 3 and 5 years, the
+estimator expressed by \[23\] <!---\[7.47\]--> can be assumed as the final (historical)
+estimator for the central observations of the series[^53]. In practice,
+the Wiener-Kolmogorov filter is applied to $x_{t}$ extended with
+forecasts and backcasts from the ARIMA model. The final or historical
+estimator of $${\widehat{s}}_{t}$$, is obtained with a doubly infinite
+filter, and therefore contains an error $$e_{st}$$ called final
+estimation error, which is equal $$e_{st}=s_{t}-{\widehat{s}}_{t}$$.
+
+In the frequency domain, the Wiener-Kolmogorov filter$\ \nu(B,F)$ that
+provides the final estimator of $s_{t}\ $is expressed as the ratio of
+the $s_{t}\ $and $x_{t}$ pseudo-spectra:
+
+  $$\widetilde{\nu}\left( \omega \right) = \frac{g_{s}(\omega)}{g_{x}(\omega)}$$.   \[29\] <!---\[7.53\]-->
+
+The function $\widetilde{\nu}\left( \omega \right)\ $is also referred as
+the gain of the filter.[^34] GÓMEZ, V., and MARAVALL, A. (2001a) show
+that when for some frequency the signal (the seasonally adjusted series)
+dominates the noise (seasonal fluctuations) the gain
+$\widetilde{\nu}\left( \omega \right)$ approaches 1. On the contrary,
+when for some frequency the noise dominates the gain
+$\widetilde{\nu}\left( \omega \right)\ $approaches 0.
+
+The spectrum of the estimator of the seasonal component is expressed as:
+
+  $$g_{\widehat{s}}\left( \omega \right) = \left\lbrack \frac{g_{s}(\omega)}{g_{x}(\omega)} \right\rbrack^{2}g_{x}(\omega)$$,   \[30\] <!---\[7.54\]-->
+
+where$\ \left\lbrack \widetilde{\nu}\left( \omega \right) \right\rbrack^{2} = \left\lbrack \frac{g_{s}(\omega)}{g_{x}(\omega)} \right\rbrack^{2} = \left\lbrack \frac{g_{s}(\omega)}{g_{s}(\omega) + g_{n}(\omega)} \right\rbrack^{2} = \left\lbrack \frac{1}{1 + \frac{1}{r(\omega)}} \right\rbrack^{2}$
+is the squared gain of the filter and
+$r\left( \omega \right) = \frac{g_{s}(\omega)}{g_{n}(\omega)}$
+represents the signal-to-noise ratio.
+
+For each $\omega$, the MMSE estimation gives the signal-to-noise ratio.
+If this ratio is high, then the contribution of that frequency to the
+estimation of the signal will be also high. Assume that the trend is a
+signal that needs to be extracted from a seasonal time series. Then
+$R\left( 0 \right) = 1\ $and the frequency $\omega = 0$ will only be
+used for trend estimations. For seasonal frequencies
+$R\left( \omega \right) = 0,$ so that these frequencies are ignored in
+computing the trend resulting in spectral zeros in
+$g_{\widehat{s}}\left( \omega \right)$. For this reason, unlike the
+spectrum of the component, the component spectrum contains dips as it
+can be seen on the figure below: Component spectrum and estimator
+spectrum for trend.
+
+
+![Text](All_images/UG_A_image10.png)
+
+
+**Component spectrum and estimator spectrum for trend**
+
+From the equation \[29\] <!---\[7.53\]--> it is clear that the squared gain of the
+filter determines how the variance of the series contributes to the
+variance of the seasonal component for the different frequencies. When
+$\widetilde{\nu}\left( \omega \right) = 1$, the full variation of
+$x_{t}$ for that frequency is passed to $${\widehat{s}}_{t}$$, while if
+$$\widetilde{\nu}\left(\omega\right) = 0 $$ the variation of $x_{t}$ for
+that frequency is fully ignored in the computation of
+$${\widehat{s}}_{t}$$. These two cases are well illustrated by the figure below
+that shows the square gain of the WK filter for two series already
+analysed in the figure above (Figure: WK filters for stable and stochastic seasonal components).
+
+
+![Text](All_images/UG_A_image11.png)
+
+
+
+**The squared gain of the WK filter for stable and stochastic seasonal components.**
+
+Since $r\left( \omega \right) \geq 0$, then
+$\widetilde{\nu}\left( \omega \right) \leq 1$ and from \[29\] <!---\[7.53\]--> it can
+be derived that
+$g_{\widehat{s}}\left( \omega \right) = \widetilde{\nu}\left( \omega \right)g_{s}(\omega)$.
+As a result, the estimator will always underestimate the component, i.e.
+it will be always more stable that the component.[^55]
+
+Since
+$g_{\widehat{n}}\left( \omega \right) < g_{n}\left( \omega \right)$
+and$\ g_{\widehat{s}}\left( \omega \right) < g_{s}\left( \omega \right)$
+the expression:
+$g_{x}\left( \omega \right) - \left\lbrack g_{\widehat{n}}\left( \omega \right) + g_{\widehat{s}}\left( \omega \right) \right\rbrack \geq 0$
+is the cross-spectrum. As it is positive, the MMSE yields correlated
+estimators. This effect emerges since variance of estimator is smaller
+than the variance of component. Nevertheless, if at least one
+non-stationary component exists, cross-correlations estimated by
+TRAMO-SEATS will tend to zero as cross-covariances between estimators of
+the components are finite. In practice, the inconvenience caused by this
+property will likely be of little relevance.
+
+**Preliminary estimators for the components**
+
+GÓMEZ, V., and MARAVALL, A. (2001a) point out that *the properties of
+the estimators have been derived for the final (or historical)
+estimators. For a finite (long enough) realization, they can be assumed
+to characterize the estimators for the central observations of the
+series, but for periods close to the beginning of the end the filter
+cannot be completed and some preliminary estimator has to be used*.
+Indeed, the historical estimator shown in \[28\] <!---\[7.52\]--> is obtained for the
+central periods of the series. However, when $t$ approaches $T$ (last
+observation), the WK filter requires observations, which are not
+available yet. For this reason a preliminary estimator needs to be used.
+
+To introduce preliminary estimators let us consider a semi-finite
+realization $\lbrack x_{- \infty}$,...$\ x_{T}$\], where $T$ is the last
+observed period. The preliminary estimator of $$x_{\text{it}}$$ obtained
+at $T$ $$(T - t = k \geq 0)$$ can be expressed as
+
+$$
+{\widehat{x}}_{it|t + k}=\nu_{i}\left(B,F\right)x_{t|T}^{e}
+$$,   \[31\] <!---\[7.55\]--> 
+  
+where $$\nu_{i}\left(B,F \right)$$ is the WK filter and $$x_{t|T}^{e}$$ is
+the extended series, such that $x_{t|T}^{e} = x_{t}$ for $t \leq T$ and
+$$x_{t|T}^{e}={\widehat{x}}_{t|T}$$ for $$t>T$$, where
+$${\widehat{x}}_{t|T}$$ denotes the forecast of $x_{t}$ obtained at period
+$T$. 
+
+The future $k$ values necessary to apply the filter are not yet
+available and are replaced by their optimal forecasts from the ARIMA
+model on $$x_{t}$$. When $$k=0$$ the preliminary estimator becomes
+the concurrent estimator. As the forecasts are linear functions of
+present and past observations of $$x_{t}$$, the preliminary
+estimator $${\widehat{x}}_{it}$$ will be a truncated asymmetric
+filter applied to $$x_{t}$$ that generates a phase effect[^56].
+
+When a new observation $$x_{T + 1}$$ becomes available the forecast
+$${\widehat{x}}_{T + 1|T}$$ is replaced by the observation and the
+forecast $${\widehat{x}}_{iT + j|T}$$, $$j > 1$$ are updated to
+$$x_{T + j|T + 1}$$ resulting in the revision error[^51]. The total error
+in the preliminary estimator $$d_{it|t + k}$$ is expressed as a sum of the
+final estimation error ($$e_{it}$$) and the revision error
+($$r_{it|t + k}$$), i.e.: 
+
+$$
+d_{it|t + k} = x_{it}-{\widehat{x}}_{it|t + k} = \left(x_{it} - {\widehat{x}}_{it}\right) + \left(          {\widehat{x}}_{it} - {\widehat{x}}_{it|t + k} \right) = e_{it} + r_{it|t + k}
+$$,  \[32\] <!---\[7.56\]-->
+ 
+where:
+
+$$x_{it}-i^{th}$$ component;
+
+$${\widehat{x}}_{it|t + k}$$- the estimator of $$x_{it}$$ when the
+last observation is $$x_{t + k}$$.
+
+Therefore the preliminary estimator is subject not only to the final
+error but also to a revision error, which are orthogonal to each
+other[^58]. The revision error decreases as $$k$$ increases, until
+it can be assumed equal to 0 for large enough $$k$$.
+
+It's worth remembering that SEATS estimates the unobservable components
+of the time series so the \"true\" components are never observed.
+Therefore, MARAVALL, A. (2009) stresses that *the error in the
+historical estimator is more of academic rather than practical interest.
+In practice, interest centres on revisions. (...) the revision standard
+deviation will be an indicator of how far we can expect to be from the
+optimal estimator that will be eventually attained, and the speed of
+convergence of* ${\theta\left( B \right)\ }^{- 1}$ *will dictate the
+speed of convergence of the preliminary estimator to the historical
+one.* The analysis of an error is therefore useful for making decision
+concerning the revision policy, including the policy for revisions and
+horizon of revisions.
+
+#### PsiE-weights
+
+The estimator of the component is calculated as
+$${\widehat{x}}_{it} = \nu_{s}\left(B,F\right)x_{t}$$. By replacing
+$$x_{it}=\frac{\theta(B)}{\gamma(B)\delta(B)}a_{t}$$, the
+component estimator can be expressed as[^59]:
+
+  $$
+  {\widehat{x}}_{it} = \xi_{s}\left(B,F\right)a_{t}
+  $$,   \[33\] <!---\[7.57\]-->
+
+where
+$\xi_{s}\left( B,F \right) = \ldots + \xi_{j}B^{j} + \ldots + \xi_{1}B + \xi_{0} + \xi_{- 1}F\ldots\xi_{- j}F^{j} + \ldots$.
+
+This representation shows the estimator as a filter applied to the
+innovation $$a_{t}$$, rather than on the
+series $$x_{t}$$[^60]. Hence, the filter from \[32\] <!---\[7.56\]--> can be
+divided into two components: the first one, i.e.
+$$\ldots + \xi_{j}B^{j}+ \ldots+ \xi_{1}B + \xi_{0}$$, applies to
+prior and concurrent innovations, the second one, i.e.
+$$\xi_{- 1}F + \ldots + \xi_{- j}F^{j}$$ applies to future (i.e.
+posterior to $$t$$) innovations. Consequently, $$\xi_{j}$$
+determines the contribution of $$a_{t - j}$$ to $${\widehat{s}}_{t}$$ while
+$$\xi_{- j}$$ determines the contribution of $$a_{t + j}$$ to
+$${\widehat{s}}_{t}$$. Finally, the estimator of the component can be
+expressed as: 
+
+  $$
+  {\widehat{x}}_{it} =\xi_{i}(B)^{-}a_{t} + \xi_{i}(F)^{+}a_{t + 1}
+  $$,   \[34\] <!---\[7.58\]-->
+
+where:
+
+$\xi_{i}{(B)}^{-}a_{t}$ is an effect of starting conditions, present and
+past innovations in series;
+
+$\xi_{i}{(F)}^{+}a_{t + 1}$ is an effect of future innovations.
+
+For the two cases already presented in figure *WK filters for stable and stochastic seasonal components* and figure *The squared gain of the WK filter for stable and stochastic seasonal components* above, the psi-weights are shown in the figure below.
+
+
+![Text](All_images/UG_A_image12.png)
+
+It can be shown that $${\xi}_{- 1},\ldots,\xi_{- j}$$ are convergent and
+$$\xi_{j},\ldots, {\xi}_{1},\xi_{0}$$ are divergent. From \[33\] <!---\[7.57\]-->, the
+concurrent estimator is equal to 
+$$
+{\widehat{x}}_{it|t} = E_{t}x_{it}=E_{t}{\widehat{x}}_{it} = {\xi}_{i}(B)^{-}a_{t}
+$$, \[35\] <!---\[7.59\]-->
+
+so that the revision 
+$$
+r_{it} = {\widehat{x}}_{it} - {\widehat{x}}_{it|t} = \xi_{i}(F)^{+}a_{t + 1}
+$$   \[36\] <!---\[7.60\]-->
+
+ 
+is a zero-mean stationary MA process. As a result, historical and
+preliminary estimators are cointegrated. From expression \[25\] <!---\[7.49\]--> the
+relative size of the full revision and the speed of convergence can be
+obtained.
+
+[^31]: In the original software SEATS can be used either with TRAMO,
+    operating on the input received from the latter, or alone, fitting
+    an ARIMA model to the series.
+
+[^32]: GÓMEZ, V., and MARAVALL, A. (1998).
+
+[^33]: GÓMEZ, V., and MARAVALL, A. (1997).
+
+[^34]: GÓMEZ, V., and MARAVALL, A. (2001a).
+
+[^35]: For description of the spectrum see section [Spectral Analysis](..\theory\spectral.html).
+
+[^36]: MARAVALL, A. (1995).
+
+[^37]: Description based on KAISER, R., and MARAVALL, A. (2000) and
+    MARAVALL, A. (2008c).
+
+[^38]: For details see MARAVALL, A., CAPORELLO, G., PÉREZ, D., and
+    LÓPEZ, R. (2014).
+
+[^39]: In JDemetra+ this argument is called *Trend boundary*.
+
+[^40]: The AR roots close to or at the trading day frequency generates a
+    stochastic trading day component. A stochastic trading day component
+    is always modelled as a stationary ARMA(2,2), where the AR part
+    contains the roots close to the TD frequency, and the MA(2) is
+    obtained from the model decomposition (MARAVALL, A., and PÉREZ, D.
+    (2011)). This component, estimated by SEATS, is not implemented by
+    the current version of JDemetra+.
+
+[^41]: The term pseudo-spectrum is used for a non-stationary time
+    series, while the term spectrum is used for a stationary time
+    series.
+
+[^42]: If the ARIMA model estimated in TRAMO does not accept an
+    admissible decomposition, SEATS replaces it with a decomposable
+    approximation. The modified model is therefore used to decompose the
+    series. There are also other rare situations when the ARIMA model
+    chosen by TRAMO is changed by SEATS. It happens when, for example,
+    the ARIMA models generate unstable seasonality or produce a
+    senseless decomposition. Such examples are discussed by MARAVALL, A.
+    (2009).
+
+[^43]: HILLMER, S.C., and TIAO, G.C. (1982).
+
+[^44]: GÓMEZ, V., and MARAVALL, A. (2001a).
+
+[^45]: HILLMER, S.C., and TIAO, G.C. (1982).
+
+[^46]: MARAVALL, A. (1986).
+
+[^47]: Ibid.
+
+[^48]: KAISER, R., and MARAVALL, A. (2000).
+
+[^49]: The choice of the estimation method is controlled by the *Method*
+    parameter, explained in the [SEATS specification](../reference-manual/sa-spec-tramo.html) section.
+
+[^50]: MARAVALL, A. (2008c).
+
+[^51]: MARAVALL, A. (1995).
+
+[^52]: MARAVALL, A., and PLANAS, C. (1999).
+
+[^53]: MARAVALL, A. (1998).
+
+[^54]: GÓMEZ, V., and MARAVALL, A. (2001a).
+
+[^55]: Ibid.
+
+[^56]: KAISER, R., and MARAVALL, A. (2000).
+
+[^57]: MARAVALL, A. (1995).
+
+[^58]: MARAVALL, A. (2009).
+
+[^59]: The section is based on KAISER, R., and MARAVALL, A. (2000).
+
+[^60]: See section PsiE-weights. For further details see MARAVALL, A. (2008).
+
+
+
+
+
+
+
+
+
