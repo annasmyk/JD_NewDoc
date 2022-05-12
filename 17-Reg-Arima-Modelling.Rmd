@@ -1,6 +1,289 @@
 # Reg-Arima models
 
 
+## Tests on residuals 
+
+### Autocorrelation 
+
+#### The Durbin-Watson statistic is defined by[^81]:
+
+ $$
+ d = \frac{\sum_{t = 2}^{N}\left( {\widehat{a}}_{t} - {\widehat{a}}_{t - 1} \right)^{2}}{\sum_{t = 1}^{N}{\widehat{a}}_{t}^{2}}
+ $$ 
+
+where:
+
+${\widehat{a}}_{t}$ : residual from the model.
+
+Since
+$$\sum_{t = 2}^{N}\left( {\widehat{a}}_{t} - {\widehat{a}}_{t - 1} \right)^{2} \cong \ $$2$$\sum_{t = 1}^{N}{\widehat{a}}_{t}^{2} - 2\sum_{t = 2}^{N}{ {\widehat{a}}_{t}{\widehat{a}}_{t - 1}}$$,
+then the approximation $d \cong 2(1 - r_{z,1})$, where
+$$r_{z,1} = \frac{\sum_{t = 1}^{N}{ {\widehat{a}}_{t}{\widehat{a}}_{t - 1}}}{\sum_{t = 1}^{N}{\widehat{a}}_{t}^{2}}$$
+is the autocorrelation coefficient of the residuals at lag 1, is true.
+
+The Durbin-Watson statistics is between 0 and 4. When the model provides
+an adequate description of the data, then $r_{z,1}$ should be close to 0
+and therefore the Durbin-Watson statistics is close to 2. When the
+Durbin--Watson statistic is substantially less than 2, there is evidence
+of positive serial correlation, while when   it is substantially greater
+than 2 it indicates that the successive error terms are, on average,
+much different in value from one another, i.e., negatively correlated.
+
+More formally, to test for   a positive autocorrelation   at
+significance   level $\alpha$, the Durbin-Watson statistics is compared to
+the lower ($d_{L,\alpha}\ )\ $and upper ($d_{U,\alpha})$ critical
+values:
+
+-   If   $d < d_{L,\alpha}$ there is statistical evidence that the error terms are positively autocorrelated.
+
+-   If   $d > d_{U,\alpha}$ there is   no   statistical evidence that the error terms are positively autocorrelated.
+
+-   If      $d_{L,\alpha}$   $< d < d_{U,\alpha}$ the test is inconclusive.
+
+Positive serial correlation is serial correlation in which a positive
+error for one observation increases the chances of a positive error for
+another observation.
+
+To test for   negative autocorrelation   at significance$\ \alpha$, the test
+statistic $(4 - d)$   is compared to the lower ($d_{L,\alpha}\ )\ $and
+upper ($d_{U,\alpha})$ critical values:
+
+-   If $\left( 4 - d \right) < d_{L,\alpha}$ there is statistical evidence that the error terms are negatively autocorrelated.
+
+-   If $\left( 4 - d \right) > d_{U,\alpha}$ there is   no   statistical evidence that the error terms are negatively autocorrelated.
+
+-   If $d_{U,\alpha} < \left( 4 - d \right) < d_{U,\alpha}$ the test is inconclusive.
+    
+    
+[^81]: CHATFIELD, C. (2004).
+
+#### Ljung-Box test
+
+(described twice: merge)
+
+The Ljung-Box Q-statistics are given by:
+
+  $$
+  \text{LB}\left( k \right) = n \times (n + 2) \times \sum_{k = 1}^{K}\frac{\rho_{a,k}^{2}}{n - k}
+  $$,   \[1\] <!---\[7.144\]      --> 
+
+where:
+
+$$\rho_{a,k}^{2}$$ is the autocorrelation coefficient at lag $k$ of the
+residuals $${\widehat{a}}_{t}$$.
+
+$n$ is the number of terms in differenced series;
+
+$$K$$ is the maximum lag being considered, set in JDemetra+ to $24$
+(monthly series) or $8$ (quarterly series).
+
+If the residuals are random (which is the case for residuals from a well
+specified model), they will be distributed as $\chi_{(K - m)}^{2}$,
+where $m$ is the number of parameters in the model which has been fitted
+to the data.
+
+The Ljung-Box and Box-Pierce tests sometimes fail to reject a poorly
+fitting model. Therefore, care should be taken not to accept a model on
+a basis of their results. For the description of autocorrelation concept
+see section [Autocorrelation function and partial autocorrelation function](../theory/ACF_and_PACF.html).
+
+
+
+
+The Ljung-Box test checks the "overall" randomnes of a time series using a given number of [autocorrelations](../../descriptive.md).   
+It tests wether any of a group of autocorrelations of a time series are significantly different from 0.
+
+##### Algorithm
+
+We consider the autocorrelations $\hat\gamma_l, \cdots, \hat\gamma_{l\cdot k}$. Typically, $l=1$ when testing the independence of the series or $l=freq$ when testing seasonality.
+
+The value of the test is defined by
+
+$$ lb=n \left(n+2\right)\sum_{i=1}^k\frac{\hat\gamma_{i \cdot l}^2}{n-i \cdot l}$$
+
+It is asymptotically distributed as a $\chi \left(k\right)$
+
+
+##### Impementation in GUI 
+
+##### Impementation in R
+
+##### Java Library
+
+
+This test is implemented in the class `demetra.stats.tests.LjungBoxTest`
+
+```java
+    int N=100;
+    DataBlock sample=DataBlock.make(N);
+    Random rnd=new Random();
+    LjungBoxTest lb=new LjungBoxTest(sample);
+    StatisticalTest test = lb
+             .lag(3)
+             .autoCorrelationsCount(10)
+             .build();
+```
+#### Box-Pierce Test
+
+(described twice: merge)
+
+The Box-Pierce Q-statistics are given by:
+
+  $$\text{BP}\left( k \right) = n\sum_{k = 1}^{K}\rho_{a,k}^{2}
+  $$,   \[1\] <!---\[7.145\]      -->
+ 
+
+where:
+
+$\rho_{a,k}^{2}$ is the autocorrelation coefficient at lag $k$ of the
+residuals ${\widehat{a}}_{t}$.
+
+$n$ is the number of terms in differenced series;
+
+$K$ is the maximum lag being considered, set in JDemetra+ to $24$
+(monthly series) or $8$ (quarterly series).
+
+If the residuals are random (which is the case for residuals from a well
+specified model), they will be distributed as $\chi_{(K - m)}^{2}$
+degrees of freedom, where $m$ is the number of parameters in the model
+which has been fitted to the data.
+
+The Ljung-Box and Box-Pierce tests sometimes fail to reject a poorly
+fitting model. Therefore, care should be taken not to accept a model on
+a basis of their results. For the description of autocorrelation concept
+see section [Autocorrelation function and partial autocorrelation function](../theory/ACF_and_PACF.html).
+
+Explain difference with Ljung-Box test
+
+The Box-Pierce test checks the "overall" randomnes of a time series using a given number of [autocorrelations](../../descriptive.md).   
+It tests wether any of a group of autocorrelations of a time series are significantly different from 0.
+
+##### Statistic
+
+We consider the autocorrelations $\hat\gamma_l, \cdots, \hat\gamma_{l\cdot k}$. Typically, $l=1$ when testing the independence of the series or $l=freq$ when testing seasonality.
+
+The value of the test is defined by
+
+$$ bp=n \sum_{i=1}^k\hat\gamma_{i \cdot l}^2$$
+
+It is asymptotically distributed as a $\chi \left(k\right)$
+
+##### Impementation in GUI 
+
+##### Impementation in R
+
+##### Java Library
+
+
+This test is implemented in the class `demetra.stats.tests.BoxPierceTest`
+
+```java
+    int N=100;
+    DataBlock sample=DataBlock.make(N);
+    Random rnd=new Random();
+    sample.set(rnd::nextDouble);
+    BoxPierceTest bp=new BoxPierceTest(sample);
+    StatisticalTest test = bp
+              .lag(3)
+              .autoCorrelationsCount(10)
+              .build();
+```
+
+
+### Normality 
+#### Doornik-Hansen test
+
+The Doornik-Hansen test for multivariate normality (DOORNIK, J.A., and
+HANSEN, H. (2008)) is based on the skewness and kurtosis of multivariate
+data that is transformed to ensure independence. It is more powerful
+than the Shapiro-Wilk test for most tested multivariate
+distributions[^80].
+
+The skewness and kurtosis are defined, respectively, as:
+$$s = \frac{m_{3}}{\sqrt{m_{2}}^{3}}$$ and
+$k = \frac{m_{4}}{m_{2}^{2}},\ $where:
+$m_{i} = \frac{1}{n}\sum_{i = 1}^{n}{(x_{i}}{- \overline{x})}^{i}$
+$\overline{x} = \frac{1}{n}\sum_{i = 1}^{n}x_{i}$ and $n$ is a number of
+(non-missing) residuals.
+
+The Doornik-Hansen test statistic derives from SHENTON, L.R., and
+BOWMAN, K.O. (1977) and uses transformed versions of skewness and
+kurtosis.
+
+The transformation for the skewness $s$ into$\text{z}_{1}$ is as in
+D\'AGOSTINO, R.B. (1970):
+
+  $$
+  \beta = \frac{3(n^{2} + 27n - 70)(n + 1)(n + 3)}{(n - 2)(n + 5)(n + 7)(n + 9)}
+  $$ 
+  
+  $$
+  \omega^{2} = - 1 + \sqrt{2(\beta - 1)}
+  $$ 
+  
+  $$
+  \delta = \frac{1}{\sqrt{\log{(\omega}^{2})}}
+  $$                    
+  
+  $$
+  y = s\sqrt{\frac{(\omega^{2} - 1)(n + 1)(n + 3)}{12(n - 2)}}
+  $$                   
+  
+  $$
+  z_{1} = \delta log(y + \sqrt{y^{2} - 1})
+  $$                                    
+
+The kurtosis $k$ is transformed from a gamma distribution to $\chi^{2}$,
+which is then transformed into standard normal $z_{2}$ using the
+Wilson-Hilferty cubed root transformation:
+
+  $$
+  \delta = (n - 3)(n + 1)(n^{2} + 15n - 4)
+  $$                                               
+  
+  $$
+  a = \frac{(n - 2)(n + 5)(n + 7)(n^{2} + 27n - 70)}{6\delta}
+  $$                                
+  
+  $$
+  c = \frac{(n - 7)(n + 5)(n + 7)(n^{2} + 2n - 5)}{6\delta}
+  $$                                   
+  
+  $$
+  l= \frac{(n + 5)(n + 7)({n^{3} + 37n}^{2} + 11n - 313)}{12\delta}
+  $$                     
+  
+  $$
+  \alpha = a + c \times s^{2}
+  $$                                           
+  
+  $$
+  \chi = 2l(k - 1 - s^{2})
+  $$                                                                    
+  
+  $$
+  z_{2} = \sqrt{9\alpha}\left( \frac{1}{9\alpha} - 1 + \sqrt[3]{\frac{\chi}{2\alpha}} \right)
+  $$  
+
+Finally, the Doornik-Hansen test statistic is defined as the sum of
+squared transformations of the skewness and kurtosis. Approximately, the
+test statistic follows a $\chi^{2}$distribution, i.e.:
+
+
+  $$
+  DH = z_{1}^{2} + z_{2}^{2}\sim\chi^{2}(2)
+  $$   
+  
+  [^80]: The description of the test derives from DOORNIK, J.A., and
+    HANSEN, H. (2008).
+
+
+
+
+#### D'agostino ?
+
+#### Jarque-Bera
+
 
 
 
