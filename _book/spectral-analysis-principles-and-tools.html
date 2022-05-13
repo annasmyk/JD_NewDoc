@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 11 Nowcasting | JDemetra+ online documentation</title>
+  <title>Chapter 17 Spectral Analysis Principles and Tools | JDemetra+ online documentation</title>
   <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 11 Nowcasting | JDemetra+ online documentation" />
+  <meta property="og:title" content="Chapter 17 Spectral Analysis Principles and Tools | JDemetra+ online documentation" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 11 Nowcasting | JDemetra+ online documentation" />
+  <meta name="twitter:title" content="Chapter 17 Spectral Analysis Principles and Tools | JDemetra+ online documentation" />
   
   <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="trend-cycle-estimation-1.html"/>
-<link rel="next" href="graphical-user-interface.html"/>
+<link rel="prev" href="tool-selection-issues.html"/>
+<link rel="next" href="reg-arima-models.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -315,17 +315,66 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="nowcasting" class="section level1 hasAnchor" number="11">
-<h1><span class="header-section-number">Chapter 11</span> Nowcasting<a href="nowcasting.html#nowcasting" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="spectral-analysis-principles-and-tools" class="section level1 hasAnchor" number="17">
+<h1><span class="header-section-number">Chapter 17</span> Spectral Analysis Principles and Tools<a href="spectral-analysis-principles-and-tools.html#spectral-analysis-principles-and-tools" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>add : R code, rjd3toolkit references</p>
+<div id="overview-2" class="section level2 hasAnchor" number="17.1">
+<h2><span class="header-section-number">17.1</span> overview<a href="spectral-analysis-principles-and-tools.html#overview-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This scenario is designed for advanced users interested in an in-depth analysis of
+time series in the frequency domain using three spectral graphs. Those
+graphs can also be used as a complementary analysis for a better
+understanding of the results obtained with some of the tests described
+above.</p>
+<p>Economic time series are usually presented in a time domain (X-axis).
+However, for analytical purposes it is convenient to convert the
+series to a frequency domain due to the fact that any stationary time
+series can be expressed as a combination of cosine (or sine) functions.
+These functions are characterized with different periods (amount of time
+to complete a full cycle) and amplitudes (maximum/minimum value during
+the cycle).</p>
+<p>The tool used for the analysis of a time series in a frequency domain is
+called a spectrum. The peaks in the spectrum indicate the presence of
+cyclical movements with periodicity between two months and one year. A seasonal
+series should have peaks at the seasonal
+frequencies. Calendar adjusted data are not expected to have peak at with a
+calendar frequency.</p>
+<p>The periodicity of the phenomenon at frequency <em>f</em> is <span class="math inline">\(\frac{2\pi}{f}\)</span>. It
+means that for a monthly time series the seasonal frequencies
+<span class="math inline">\(\frac{\pi}{6},\ \frac{\pi}{3},\ \frac{\pi}{2},\ \frac{2\pi}{3},\ \frac{5\pi}{6}\ \)</span>
+and <span class="math inline">\(\pi\)</span> correspond to 1, 2, 3, 4, 5 and 6 cycles per year. For
+example, the frequency <span class="math inline">\(\frac{\pi}{3}\)</span> corresponds to a periodicity of 6
+months (2 cycles per year are completed). For the quarterly series there
+are two seasonal frequencies: <span class="math inline">\(\frac{\pi}{2}\)</span> (one cycle per year) and
+<span class="math inline">\(\pi\)</span> (two cycles per year). A peak at the zero frequency always
+corresponds to the trend component of the series. Seasonal frequencies
+are marked as grey vertical lines, while violet vertical lines represent the
+trading-days frequencies. The trading day frequency is 0.348 and derives
+from the fact that a daily component which repeats every seven days goes
+through 4.348 cycles in a month of average length 30.4375 days. It is
+therefore seen to advance 0.348 cycles per month when the data are
+obtained at twelve equally spaced times in 365.25 days (the average
+length of a year).</p>
+<p>The interpretation of the spectral graph is rather straightforward. When
+the values of a spectral graph for low frequencies (i.e. one year and
+more) are large in relation to its other values it means that the
+long-term movements dominate in the series. When the values of a
+spectral graph for high frequencies (i.e. below one year) are large in
+relation to its other values it means that the series are rather
+trendless and contains a lot of noise. When the values of a spectral
+graph are distributed randomly around a constant without any visible
+peaks, then it is highly probable that the series is a random process.
+The presence of seasonality in a time series is manifested in a spectral
+graph by the peaks on the seasonal frequencies.</p>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="trend-cycle-estimation-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="graphical-user-interface.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="tool-selection-issues.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="reg-arima-models.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -356,7 +405,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/11_Nowcasting.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/17-Meth-Spectral_Analysis.Rmd",
 "text": "Edit"
 },
 "history": {

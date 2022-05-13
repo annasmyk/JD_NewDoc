@@ -1,0 +1,578 @@
+# Reg-Arima models
+ 
+
+## Overview
+
+## Autocorrelation function
+
+The correlation is a measure of the strength and the direction of a
+linear relationship between two variables. For time series the
+correlation can refer to the relation between its observations, e.g.
+between the current observation and the observation lagged by a given
+number of units. In this case all observations come from one variable,
+so similarity between a given time series and a $k$-lagged version of
+itself over successive time intervals is called an autocorrelation.
+
+The autocorrelation coefficient at lag $k$ is defined as:
+
+$$\rho\left( k \right) = \frac{\sum_{t = k + 1}^{n}\left( x_{t} - \overline{x} \right)}{\sum_{t = 1}^{n}\left( x_{t} - \overline{x} \right)^{2}}
+$$,   \[1\] <!--- \[7.159\]--> 
+
+where:
+
+$x_{t}$ -- time series;
+
+$n$ -- total number of observations;
+
+$\overline{x}$ -- mean of the time series.
+
+The set of autocorrelation coefficients $(k)$ arranged as a function of
+$k$ is the autocorrelation function (ACF). The graphical or numerical
+representation of the ACF is called an autocorrelogram.
+
+![Text](All_images/UG_A_image20.png)
+
+
+**Autocorrelation function**
+
+The autocorrelation function is a valuable tool for investigating
+properties of an empirical time series.[^91] The assessment of the order
+of an AR process simply from the sample ACF is not straightforward.
+While for a first-order process the theoretical ACF decreases
+exponentially and the sample function is expected to have the similar
+shape, for the higher-order processes the ACF maybe a mixture of damper
+exponential or sinusoidal functions, which makes the order of the AR
+process difficult to identify.[^92] JDemetra+ displays the values of
+autocorrelation function for the residuals from the ARIMA model (see
+section [Residuals](..\reference-manual/residuals.html)). The ACF graph (figure above), presents autocorrelation
+coefficients and the confidence intervals. If the autocorrelation
+coefficient is in the confidence interval, it is regarded as not
+statistically significant. Therefore, the user should focus on the
+values where the value of the ACF is outside the confidence interval. In 
+JDemetra+ the confidence interval is indicated by two grey, horizontal,
+dotted lines.
+
+
+**Partial autocorrelation function**
+
+The partial autocorrelation is a tool for the identification and
+estimation of the ARIMA model. It is defined as the amount of
+correlation between two variables that is not explained by their mutual
+correlations with a given set of other variables.
+
+Partial autocorrelation at lag $k$ is defined as the autocorrelation
+between $x_{t}$ and $x_{t - k}$ that is not accounted for by lags 1
+through to $k$-1, which means that correlations with all the elements up
+to lag $k$ are removed. Following this definition, a partial
+autocorrelation for lag 1 is equivalent to an autocorrelation.
+
+The partial autocorrelation function (PACF) is the set of partial
+autocorrelation coefficients $(k)$ arranged as a function
+of $k$. This function can be used to detect the presence of an
+autoregressive process in time series and identify the order of this
+process. Theoretically, the number of significant lags determines the 
+order of the autoregressive process.
+
+
+![Text](All_images/UG_A_image21.png)
+
+
+**Partial autocorrelation function**
+
+
+The PACF graph above, which
+is available from the *Tools*$\  \rightarrow \ $*Differencing* menu
+presents partial autocorrelation coefficients and the confidence
+intervals (two grey, horizontal, dotted lines). If the partial autocorrelation coefficient is in the
+confidence interval, it is regarded as statistically insignificant.
+Therefore, the user should focus on the values, for which the absolute value
+of the PACF is outside the confidence interval. 
+
+[^91]: MAKRIDAKIS, S., WHEELWRIGHT, S.C., and HYNDMAN, R.J. (1998).
+
+[^92]: CHATFIELD, C. (2004). 
+
+## Estimation Of Arma models
+
+The computation of [exact likelihood](../../stats/likelihood/ll.md) requires the evaluation of two main quantities: the determinant of the covariance matrix
+ and the sum of the squared residuals.
+The different algorithms for the computation of the likelihood of ARMA models provides efficient solutions for those two problems.
+The quantity
+$$ y' \Omega^-1 y $$ 
+is computed by defining a linear transformation of the observations such that
+$$ y' \Omega^-1 y = \left(y' T' \right) \left(T y \right) $$ 
+An obvious solution will be the use of the inverse of the Cholesky factor of the covariance matrix. However, any transformation
+$$ T\sim m \times n $$
+such that
+$$ \Omega^-1 =  T' T $$
+might be considered. Note that m can be larger than n (which means that the transformed observations will not be independent).
+
+
+
+JD+ provides several routines for estimating the exact likelihood of ARMA models
+
+| Algorithm | Use |
+| --------- | --- | 
+| Kalman filter  | Default |
+| [Ansley](./ansley.md)  | Large regression models |
+| [X12](./x12.md)  | Legacy |
+| Ljung-Box  | Deprecated |
+
+## Maximum likelihood estimation
+### Likelihood of a multivariate normal distribution 
+
+
+The pdf of a multivariate normal distribution is:
+
+$$p\left( y \right) = \left( 2 \pi \right)^{-\frac{n}{2}} \vert \Sigma \vert ^{-\frac{1}{2}}e^{ {-\frac{1}{2}y' \Sigma ^{-1} y} } $$
+
+If we set
+
+$$ y' \Sigma ^{-1} y=u'u \:\: or \:\:  L^{-1}y = u $$ 
+
+the log-likelihood is:
+
+$$ l \left( \theta | y \right) =- \frac{1}{2} \left(n \log{2 \pi}+ \log{|\Sigma |} +u'u\right) $$
+
+In most cases, we will use a covariance matrix with a (unknown) scaling factor:
+
+$$ \Sigma = \sigma^2 \Omega $$
+
+If we set
+
+$$ L^{-1}y = e , \quad LL' = \Omega$$ 
+
+the log-likelihood can then be written:
+
+$$ l \left(\theta, \sigma | y \right ) = - \frac{1}{2} \left(n \log{2 \pi}+ n \log {\sigma^2} + \log{|\Omega |} + \frac{1}{\sigma ^2} e'e \right) $$
+
+The scaling factor can be concentrated out of the likelihood. Its estimator is
+
+$$ \hat{\sigma} ^2 = \frac{e' e}{n} $$
+
+so that :
+
+$$ l_c \left( \theta | y \right ) = - \frac{1}{2} \left(n \log{2 \pi} + n\log{\frac{e'e}{n}} + \log{|\Omega |} + n \right) $$
+
+or
+
+$$ l_c \left( \theta | y \right ) = - \frac{n}{2} \left(\log{2 \pi}+ 1 - \log {n} + \log{e'e} + \log{|\Omega |^\frac{1}{n}}\right) $$
+
+Maximizing $ l_c $ is equivalent to minimizing the deviance 
+
+$$ d \left( y | \theta\right ) = e'e |\Omega |^\frac{1}{n} = v'v, \quad where \quad v = \sqrt{ |\Omega |^\frac{1}{n} }\: e$$ 
+
+This last formulation will be used in optimization procedures based on sums of squares (Levenberg-Marquardt and similar algorithms).
+
+### Linear model with gaussian noises
+
+The likelihood is often computed on a linear model
+$$ y=X\beta + \mu \quad \mu \sim N\left(0, \sigma^2\Omega\right) $$
+
+The log-likelihood is then
+$$ l \left(\theta,\beta , \sigma | y \right ) = - \frac{1}{2} \left(n \log{2 \pi}+ n \log {\sigma^2} + \log{|\Omega |} + \frac{1}{\sigma ^2} \left(y-X\beta \right)'\Omega^{-1}\left(y-X\beta \right) \right) $$
+
+The maximum likelihood estimator of $\beta$ is
+
+$$ \hat{\beta} = \left( X'\Omega^{-1}X\right)^{-1}X'\Omega^{-1}y $$
+
+which is normally distributed with variance
+$$ \sigma^2 \left( X'\Omega^{-1}X\right)^{-1} $$
+
+The formulae of the likelihood are still valid, using
+$$ e=L^{-1} \left(y-X\hat\beta \right) $$
+
+### Implementation
+
+Those representations of the concentrated likelihood are defined in the interfaces ___demetra.likelihood.ILikelihood___ and ___demetra.likelihood.IConcentratedLikelihood___
+
+#### Correspondance between the elements of the likelihood (see formulae) and the methods of the classes
+
+* $n$ : dim()
+* $e'e$ : ssq()
+* $e$ : e()
+* $\log \|\Omega\|$ : logDeterminant()
+* $v$ : v()
+* $\|\Omega\|^{\frac{1}{n}}$ : factor() 
+
+### Missing values 
+
+Missing values are not taken into account in the likelihood. More especially, when they are estimated by means of additive outliers, all the different elements of the likelihood (dimension,  determinantal term, coefficients…) should be adjusted to remove their effect.
+
+### Perfect collinearity in X
+
+In the case of perfect collinearity in the linear model, the dimensions of the coefficients and of the related matrices are not modified. However, information related to the redundant variables is set to 0.
+
+### References
+
+_Gomez V. and Maravall A._ (1994): "Estimation, Prediction, and Interpolation for Nonstationary Series With the Kalman Filter", Journal of the American Statistical Association, vol. 89, n° 426, 611-624.
+
+
+### X-13 implementation
+
+Estimation of the exact likelihood of an ARMA model
+
+We suppose that 
+$$ y_t, \quad 1 \le t \le n $$
+follows an ARMA model.
+
+The X12 implementation computes the exact likelihood in two main steps
+
+#### Overview
+
+We consider the transformation
+
+$$ z_t = \begin{pmatrix} z_{1t} \\ z_{2t} \end{pmatrix} = \begin{cases} y_t, & 1 \le t \le p \\ \Phi\left(B\right) y_t, & p \lt t \le n\end{cases}$$
+
+It is obvious that 
+$$ p\left(y_t\right) = p\left(z_t\right) $$
+
+We will estimate
+$$ p\left(z_t\right) = p\left(z_{2t}\right)  p\left(z_{1t}\right | z_{2t} )$$
+
+#### Step 1: likelihood of a pure moving average process
+
+$$z_{2t}$$
+is a pure moving average process. Its exact likelihood is estimated as follows (see [1] for details).
+We list below the different steps of the algorithm.
+
+* Compute the conditional least squares residuals by the recursion:
+$$ a_{0t} = \begin{cases} 0,& -q \lt t \leq 0 \\ z_t-\theta_1 a_{0t-1}- \cdots --\theta_q a_{0t-q},&  0 \lt t \leq n  \end{cases} $$
+
+* Compute the Pi-Weights of the model. They defines the (n+q x q) matrix
+
+$$ G = \begin{pmatrix} 1 & 0 & \cdots & 0 \\ \pi_1 & 1 & \cdots & 0 \\ \pi_2 & \pi_1 & \cdots & \vdots\\ \vdots & \vdots & \vdots & \vdots \\ \pi_{n+q-1} & \pi_{n+q-2} & \cdots & \pi_{n} \end{pmatrix} $$
+
+* Compute by recursion
+$$ G'a \quad and \quad G'G $$ 
+
+* Compute by Cholesky decomposition
+$$ G'G \hat z_* = G'a \quad and \quad |G'G| $$ 
+
+* Obtain by recursion the exact likelihood residuals
+$$ \Theta\left(B\right)\begin{pmatrix}\hat a_* \\ \hat a_t \end{pmatrix}  = \begin{pmatrix}z_* \\ z_t \end{pmatrix} $$
+
+The processing defines the linear transformation 
+$$ T z_t = \begin{pmatrix}\hat a_* \\ \hat a_t \end{pmatrix} $$ and the searched determinant.
+
+#### Step 2: conditional distribution of the initial observations
+
+$$ p\left(z_{1t}\right | z_{2t} ) $$
+is easily obtained by considering the join distribution of 
+$$ \left( z_{1t}, z_{2t} \right) \sim N \left( 0, \begin{pmatrix} \Sigma_{11} && \Sigma{12} \\ \Sigma_{21} && \Sigma{22} \end{pmatrix}\right) \ $$
+
+It is distributed as 
+$$ N\left( \Sigma_{12} \Sigma_{22}^{-1}v, \Sigma_{11}-\Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21} \right)$$
+
+$$= N\left( \Sigma_{12} T'Tv, \Sigma_{11}-\Sigma_{12} T'T\Sigma_{21} \right)$$
+
+$$  = N\left( U'Tv, \Sigma_{11}-U'U \right)$$
+
+where
+* v is obtained by applying the auto-regressive polynomial on the observations
+* T is the linear transformation defined in step 1
+* 
+$$ U = T \Sigma_{21} $$ 
+
+##### References 
+
+[1] ___Otto M. C., Bell W.R., Burman J.P.___ (1987), "An Iterative GLS Approach to Maximum Likelihood Estimation of Regression Models with Arima Errors", Bureau of The Census, SRD Research Report CENSUS/SRD/RR_87/34.
+
+## Handling of missing observations in (Reg)ARIMA models
+
+### Skipping approach
+
+### Additive outlier approach
+
+### References
+
+__GOMEZ V. , MARAVALL A.  AND  PEÑA D.__ (1999): "_Missing observations in ARIMA models: Skipping approach versus additive outlier approach_", Journal of econometrics 88, 341-363.
+
+
+## Tests on residuals 
+
+### Autocorrelation 
+
+#### The Durbin-Watson statistic is defined by[^81]:
+
+ $$
+ d = \frac{\sum_{t = 2}^{N}\left( {\widehat{a}}_{t} - {\widehat{a}}_{t - 1} \right)^{2}}{\sum_{t = 1}^{N}{\widehat{a}}_{t}^{2}}
+ $$ 
+
+where:
+
+${\widehat{a}}_{t}$ : residual from the model.
+
+Since
+$$\sum_{t = 2}^{N}\left( {\widehat{a}}_{t} - {\widehat{a}}_{t - 1} \right)^{2} \cong \ $$2$$\sum_{t = 1}^{N}{\widehat{a}}_{t}^{2} - 2\sum_{t = 2}^{N}{ {\widehat{a}}_{t}{\widehat{a}}_{t - 1}}$$,
+then the approximation $d \cong 2(1 - r_{z,1})$, where
+$$r_{z,1} = \frac{\sum_{t = 1}^{N}{ {\widehat{a}}_{t}{\widehat{a}}_{t - 1}}}{\sum_{t = 1}^{N}{\widehat{a}}_{t}^{2}}$$
+is the autocorrelation coefficient of the residuals at lag 1, is true.
+
+The Durbin-Watson statistics is between 0 and 4. When the model provides
+an adequate description of the data, then $r_{z,1}$ should be close to 0
+and therefore the Durbin-Watson statistics is close to 2. When the
+Durbin--Watson statistic is substantially less than 2, there is evidence
+of positive serial correlation, while when   it is substantially greater
+than 2 it indicates that the successive error terms are, on average,
+much different in value from one another, i.e., negatively correlated.
+
+More formally, to test for   a positive autocorrelation   at
+significance   level $\alpha$, the Durbin-Watson statistics is compared to
+the lower ($d_{L,\alpha}\ )\ $and upper ($d_{U,\alpha})$ critical
+values:
+
+-   If   $d < d_{L,\alpha}$ there is statistical evidence that the error terms are positively autocorrelated.
+
+-   If   $d > d_{U,\alpha}$ there is   no   statistical evidence that the error terms are positively autocorrelated.
+
+-   If      $d_{L,\alpha}$   $< d < d_{U,\alpha}$ the test is inconclusive.
+
+Positive serial correlation is serial correlation in which a positive
+error for one observation increases the chances of a positive error for
+another observation.
+
+To test for   negative autocorrelation   at significance$\ \alpha$, the test
+statistic $(4 - d)$   is compared to the lower ($d_{L,\alpha}\ )\ $and
+upper ($d_{U,\alpha})$ critical values:
+
+-   If $\left( 4 - d \right) < d_{L,\alpha}$ there is statistical evidence that the error terms are negatively autocorrelated.
+
+-   If $\left( 4 - d \right) > d_{U,\alpha}$ there is   no   statistical evidence that the error terms are negatively autocorrelated.
+
+-   If $d_{U,\alpha} < \left( 4 - d \right) < d_{U,\alpha}$ the test is inconclusive.
+    
+    
+[^81]: CHATFIELD, C. (2004).
+
+#### Ljung-Box test
+
+(described twice: merge)
+
+The Ljung-Box Q-statistics are given by:
+
+  $$
+  \text{LB}\left( k \right) = n \times (n + 2) \times \sum_{k = 1}^{K}\frac{\rho_{a,k}^{2}}{n - k}
+  $$,   \[1\] <!---\[7.144\]      --> 
+
+where:
+
+$$\rho_{a,k}^{2}$$ is the autocorrelation coefficient at lag $k$ of the
+residuals $${\widehat{a}}_{t}$$.
+
+$n$ is the number of terms in differenced series;
+
+$$K$$ is the maximum lag being considered, set in JDemetra+ to $24$
+(monthly series) or $8$ (quarterly series).
+
+If the residuals are random (which is the case for residuals from a well
+specified model), they will be distributed as $\chi_{(K - m)}^{2}$,
+where $m$ is the number of parameters in the model which has been fitted
+to the data.
+
+The Ljung-Box and Box-Pierce tests sometimes fail to reject a poorly
+fitting model. Therefore, care should be taken not to accept a model on
+a basis of their results. For the description of autocorrelation concept
+see section [Autocorrelation function and partial autocorrelation function](../theory/ACF_and_PACF.html).
+
+
+
+
+The Ljung-Box test checks the "overall" randomnes of a time series using a given number of [autocorrelations](../../descriptive.md).   
+It tests wether any of a group of autocorrelations of a time series are significantly different from 0.
+
+##### Algorithm
+
+We consider the autocorrelations $\hat\gamma_l, \cdots, \hat\gamma_{l\cdot k}$. Typically, $l=1$ when testing the independence of the series or $l=freq$ when testing seasonality.
+
+The value of the test is defined by
+
+$$ lb=n \left(n+2\right)\sum_{i=1}^k\frac{\hat\gamma_{i \cdot l}^2}{n-i \cdot l}$$
+
+It is asymptotically distributed as a $\chi \left(k\right)$
+
+
+##### Impementation in GUI 
+
+##### Impementation in R
+
+##### Java Library
+
+
+This test is implemented in the class `demetra.stats.tests.LjungBoxTest`
+
+```java
+    int N=100;
+    DataBlock sample=DataBlock.make(N);
+    Random rnd=new Random();
+    LjungBoxTest lb=new LjungBoxTest(sample);
+    StatisticalTest test = lb
+             .lag(3)
+             .autoCorrelationsCount(10)
+             .build();
+```
+#### Box-Pierce Test
+
+(described twice: merge)
+
+The Box-Pierce Q-statistics are given by:
+
+  $$\text{BP}\left( k \right) = n\sum_{k = 1}^{K}\rho_{a,k}^{2}
+  $$,   \[1\] <!---\[7.145\]      -->
+ 
+
+where:
+
+$\rho_{a,k}^{2}$ is the autocorrelation coefficient at lag $k$ of the
+residuals ${\widehat{a}}_{t}$.
+
+$n$ is the number of terms in differenced series;
+
+$K$ is the maximum lag being considered, set in JDemetra+ to $24$
+(monthly series) or $8$ (quarterly series).
+
+If the residuals are random (which is the case for residuals from a well
+specified model), they will be distributed as $\chi_{(K - m)}^{2}$
+degrees of freedom, where $m$ is the number of parameters in the model
+which has been fitted to the data.
+
+The Ljung-Box and Box-Pierce tests sometimes fail to reject a poorly
+fitting model. Therefore, care should be taken not to accept a model on
+a basis of their results. For the description of autocorrelation concept
+see section [Autocorrelation function and partial autocorrelation function](../theory/ACF_and_PACF.html).
+
+Explain difference with Ljung-Box test
+
+The Box-Pierce test checks the "overall" randomnes of a time series using a given number of [autocorrelations](../../descriptive.md).   
+It tests wether any of a group of autocorrelations of a time series are significantly different from 0.
+
+##### Statistic
+
+We consider the autocorrelations $\hat\gamma_l, \cdots, \hat\gamma_{l\cdot k}$. Typically, $l=1$ when testing the independence of the series or $l=freq$ when testing seasonality.
+
+The value of the test is defined by
+
+$$ bp=n \sum_{i=1}^k\hat\gamma_{i \cdot l}^2$$
+
+It is asymptotically distributed as a $\chi \left(k\right)$
+
+##### Impementation in GUI 
+
+##### Impementation in R
+
+##### Java Library
+
+
+This test is implemented in the class `demetra.stats.tests.BoxPierceTest`
+
+```java
+    int N=100;
+    DataBlock sample=DataBlock.make(N);
+    Random rnd=new Random();
+    sample.set(rnd::nextDouble);
+    BoxPierceTest bp=new BoxPierceTest(sample);
+    StatisticalTest test = bp
+              .lag(3)
+              .autoCorrelationsCount(10)
+              .build();
+```
+
+
+### Normality 
+#### Doornik-Hansen test
+
+The Doornik-Hansen test for multivariate normality (DOORNIK, J.A., and
+HANSEN, H. (2008)) is based on the skewness and kurtosis of multivariate
+data that is transformed to ensure independence. It is more powerful
+than the Shapiro-Wilk test for most tested multivariate
+distributions[^80].
+
+The skewness and kurtosis are defined, respectively, as:
+$$s = \frac{m_{3}}{\sqrt{m_{2}}^{3}}$$ and
+$k = \frac{m_{4}}{m_{2}^{2}},\ $where:
+$m_{i} = \frac{1}{n}\sum_{i = 1}^{n}{(x_{i}}{- \overline{x})}^{i}$
+$\overline{x} = \frac{1}{n}\sum_{i = 1}^{n}x_{i}$ and $n$ is a number of
+(non-missing) residuals.
+
+The Doornik-Hansen test statistic derives from SHENTON, L.R., and
+BOWMAN, K.O. (1977) and uses transformed versions of skewness and
+kurtosis.
+
+The transformation for the skewness $s$ into$\text{z}_{1}$ is as in
+D\'AGOSTINO, R.B. (1970):
+
+  $$
+  \beta = \frac{3(n^{2} + 27n - 70)(n + 1)(n + 3)}{(n - 2)(n + 5)(n + 7)(n + 9)}
+  $$ 
+  
+  $$
+  \omega^{2} = - 1 + \sqrt{2(\beta - 1)}
+  $$ 
+  
+  $$
+  \delta = \frac{1}{\sqrt{\log{(\omega}^{2})}}
+  $$                    
+  
+  $$
+  y = s\sqrt{\frac{(\omega^{2} - 1)(n + 1)(n + 3)}{12(n - 2)}}
+  $$                   
+  
+  $$
+  z_{1} = \delta log(y + \sqrt{y^{2} - 1})
+  $$                                    
+
+The kurtosis $k$ is transformed from a gamma distribution to $\chi^{2}$,
+which is then transformed into standard normal $z_{2}$ using the
+Wilson-Hilferty cubed root transformation:
+
+  $$
+  \delta = (n - 3)(n + 1)(n^{2} + 15n - 4)
+  $$                                               
+  
+  $$
+  a = \frac{(n - 2)(n + 5)(n + 7)(n^{2} + 27n - 70)}{6\delta}
+  $$                                
+  
+  $$
+  c = \frac{(n - 7)(n + 5)(n + 7)(n^{2} + 2n - 5)}{6\delta}
+  $$                                   
+  
+  $$
+  l= \frac{(n + 5)(n + 7)({n^{3} + 37n}^{2} + 11n - 313)}{12\delta}
+  $$                     
+  
+  $$
+  \alpha = a + c \times s^{2}
+  $$                                           
+  
+  $$
+  \chi = 2l(k - 1 - s^{2})
+  $$                                                                    
+  
+  $$
+  z_{2} = \sqrt{9\alpha}\left( \frac{1}{9\alpha} - 1 + \sqrt[3]{\frac{\chi}{2\alpha}} \right)
+  $$  
+
+Finally, the Doornik-Hansen test statistic is defined as the sum of
+squared transformations of the skewness and kurtosis. Approximately, the
+test statistic follows a $\chi^{2}$distribution, i.e.:
+
+
+  $$
+  DH = z_{1}^{2} + z_{2}^{2}\sim\chi^{2}(2)
+  $$   
+  
+  [^80]: The description of the test derives from DOORNIK, J.A., and
+    HANSEN, H. (2008).
+
+
+
+
+#### D'agostino ?
+
+#### Jarque-Bera
+
+
+
+
+

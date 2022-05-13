@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3 Main functions overview | JDemetra+ online documentation</title>
   <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
-  <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 Main functions overview | JDemetra+ online documentation" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Anna Smyk" />
 
 
-<meta name="date" content="2022-04-28" />
+<meta name="date" content="2022-05-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="quick-start-with.html"/>
-<link rel="next" href="seasonal-adjustment-2.html"/>
+<link rel="next" href="seasonal-adjustment-1.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -54,6 +54,70 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -72,113 +136,165 @@
 <li><a href="./">JDemetra+ online documentation</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="jdemetra-software.html"><a href="jdemetra-software.html"><i class="fa fa-check"></i><b>1</b> JDemetra+ Software<span></span></a>
+<li class="chapter" data-level="1" data-path="jdemetra-software.html"><a href="jdemetra-software.html"><i class="fa fa-check"></i><b>1</b> JDemetra+ Software</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="jdemetra-software.html"><a href="jdemetra-software.html#structure-of-this-book"><i class="fa fa-check"></i><b>1.1</b> Structure of this book<span></span></a>
+<li class="chapter" data-level="1.1" data-path="jdemetra-software.html"><a href="jdemetra-software.html#structure-of-this-book"><i class="fa fa-check"></i><b>1.1</b> Structure of this book</a>
 <ul>
-<li class="chapter" data-level="1.1.1" data-path="jdemetra-software.html"><a href="jdemetra-software.html#functions"><i class="fa fa-check"></i><b>1.1.1</b> Functions<span></span></a></li>
-<li class="chapter" data-level="1.1.2" data-path="jdemetra-software.html"><a href="jdemetra-software.html#tools-to-access-the-functions"><i class="fa fa-check"></i><b>1.1.2</b> Tools to access the functions<span></span></a></li>
-<li class="chapter" data-level="1.1.3" data-path="jdemetra-software.html"><a href="jdemetra-software.html#underlying-statistical-methods"><i class="fa fa-check"></i><b>1.1.3</b> Underlying Statistical Methods<span></span></a></li>
+<li class="chapter" data-level="1.1.1" data-path="jdemetra-software.html"><a href="jdemetra-software.html#functions"><i class="fa fa-check"></i><b>1.1.1</b> Functions</a></li>
+<li class="chapter" data-level="1.1.2" data-path="jdemetra-software.html"><a href="jdemetra-software.html#tools-to-access-the-functions"><i class="fa fa-check"></i><b>1.1.2</b> Tools to access the functions</a></li>
+<li class="chapter" data-level="1.1.3" data-path="jdemetra-software.html"><a href="jdemetra-software.html#underlying-statistical-methods"><i class="fa fa-check"></i><b>1.1.3</b> Underlying Statistical Methods</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="jdemetra-software.html"><a href="jdemetra-software.html#audience"><i class="fa fa-check"></i><b>1.2</b> Audience<span></span></a></li>
-<li class="chapter" data-level="1.3" data-path="jdemetra-software.html"><a href="jdemetra-software.html#how-jdemetra-came-to-be"><i class="fa fa-check"></i><b>1.3</b> How Jdemetra+ came to be<span></span></a></li>
+<li class="chapter" data-level="1.2" data-path="jdemetra-software.html"><a href="jdemetra-software.html#audience"><i class="fa fa-check"></i><b>1.2</b> Audience</a></li>
+<li class="chapter" data-level="1.3" data-path="jdemetra-software.html"><a href="jdemetra-software.html#how-jdemetra-came-to-be"><i class="fa fa-check"></i><b>1.3</b> How Jdemetra+ came to be</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="quick-start-with.html"><a href="quick-start-with.html"><i class="fa fa-check"></i><b>2</b> Quick start with…<span></span></a>
+<li class="chapter" data-level="2" data-path="quick-start-with.html"><a href="quick-start-with.html"><i class="fa fa-check"></i><b>2</b> Quick start with…</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="quick-start-with.html"><a href="quick-start-with.html#seasonal-adjustment"><i class="fa fa-check"></i><b>2.1</b> Seasonal Adjustment<span></span></a></li>
-<li class="chapter" data-level="2.2" data-path="quick-start-with.html"><a href="quick-start-with.html#seasonal-adjustment-of-high-frequency-data"><i class="fa fa-check"></i><b>2.2</b> Seasonal Adjustment of High-Frequency Data<span></span></a></li>
-<li class="chapter" data-level="2.3" data-path="quick-start-with.html"><a href="quick-start-with.html#use-of-jd-algorithms-in-r"><i class="fa fa-check"></i><b>2.3</b> Use of JD+ algorithms in R<span></span></a></li>
-<li class="chapter" data-level="2.4" data-path="quick-start-with.html"><a href="quick-start-with.html#use-of-jd-graphical-interface"><i class="fa fa-check"></i><b>2.4</b> Use of JD+ graphical interface<span></span></a></li>
+<li class="chapter" data-level="2.1" data-path="quick-start-with.html"><a href="quick-start-with.html#seasonal-adjustment"><i class="fa fa-check"></i><b>2.1</b> Seasonal Adjustment</a></li>
+<li class="chapter" data-level="2.2" data-path="quick-start-with.html"><a href="quick-start-with.html#seasonal-adjustment-of-high-frequency-data"><i class="fa fa-check"></i><b>2.2</b> Seasonal Adjustment of High-Frequency Data</a></li>
+<li class="chapter" data-level="2.3" data-path="quick-start-with.html"><a href="quick-start-with.html#use-of-jd-algorithms-in-r"><i class="fa fa-check"></i><b>2.3</b> Use of JD+ algorithms in R</a></li>
+<li class="chapter" data-level="2.4" data-path="quick-start-with.html"><a href="quick-start-with.html#use-of-jd-graphical-interface"><i class="fa fa-check"></i><b>2.4</b> Use of JD+ graphical interface</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="main-functions-overview.html"><a href="main-functions-overview.html"><i class="fa fa-check"></i><b>3</b> Main functions overview<span></span></a>
+<li class="chapter" data-level="3" data-path="main-functions-overview.html"><a href="main-functions-overview.html"><i class="fa fa-check"></i><b>3</b> Main functions overview</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="main-functions-overview.html"><a href="main-functions-overview.html#seasonal-adjustment-1"><i class="fa fa-check"></i><b>3.1</b> Seasonal adjustment<span></span></a></li>
-<li class="chapter" data-level="3.2" data-path="main-functions-overview.html"><a href="main-functions-overview.html#trend-cycle-estimation"><i class="fa fa-check"></i><b>3.2</b> Trend-cycle estimation<span></span></a></li>
+<li class="chapter" data-level="3.1" data-path="main-functions-overview.html"><a href="main-functions-overview.html#seasonal-adjustment-algorithms"><i class="fa fa-check"></i><b>3.1</b> Seasonal adjustment algorithms</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="main-functions-overview.html"><a href="main-functions-overview.html#x-13"><i class="fa fa-check"></i><b>3.1.1</b> X-13</a></li>
+<li class="chapter" data-level="3.1.2" data-path="main-functions-overview.html"><a href="main-functions-overview.html#tramo-seats"><i class="fa fa-check"></i><b>3.1.2</b> Tramo-Seats</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="seasonal-adjustment-2.html"><a href="seasonal-adjustment-2.html"><i class="fa fa-check"></i><b>4</b> Seasonal Adjustment<span></span></a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="seasonal-adjustment-2.html"><a href="seasonal-adjustment-2.html#motivation"><i class="fa fa-check"></i><b>4.1</b> Motivation<span></span></a></li>
-<li class="chapter" data-level="4.2" data-path="seasonal-adjustment-2.html"><a href="seasonal-adjustment-2.html#unobserved-components"><i class="fa fa-check"></i><b>4.2</b> Unobserved Components<span></span></a></li>
-<li class="chapter" data-level="4.3" data-path="seasonal-adjustment-2.html"><a href="seasonal-adjustment-2.html#seasonality-tests"><i class="fa fa-check"></i><b>4.3</b> Seasonality tests<span></span></a></li>
-<li class="chapter" data-level="4.4" data-path="seasonal-adjustment-2.html"><a href="seasonal-adjustment-2.html#calendar-correction"><i class="fa fa-check"></i><b>4.4</b> Calendar correction<span></span></a></li>
-<li class="chapter" data-level="4.5" data-path="seasonal-adjustment-2.html"><a href="seasonal-adjustment-2.html#outliers-and-intervention-variables"><i class="fa fa-check"></i><b>4.5</b> Outliers and intervention variables<span></span></a></li>
-<li class="chapter" data-level="4.6" data-path="seasonal-adjustment-2.html"><a href="seasonal-adjustment-2.html#pre-adjustment"><i class="fa fa-check"></i><b>4.6</b> Pre-adjustment<span></span></a></li>
-<li class="chapter" data-level="4.7" data-path="seasonal-adjustment-2.html"><a href="seasonal-adjustment-2.html#decomposition"><i class="fa fa-check"></i><b>4.7</b> Decomposition<span></span></a></li>
+<li class="chapter" data-level="3.2" data-path="main-functions-overview.html"><a href="main-functions-overview.html#trend-cycle-estimation"><i class="fa fa-check"></i><b>3.2</b> Trend-cycle estimation</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="high-frequency-data-seasonal-adjustment.html"><a href="high-frequency-data-seasonal-adjustment.html"><i class="fa fa-check"></i><b>5</b> High Frequency data (seasonal adjustment)<span></span></a>
+<li class="chapter" data-level="4" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html"><i class="fa fa-check"></i><b>4</b> Seasonal Adjustment</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="high-frequency-data-seasonal-adjustment.html"><a href="high-frequency-data-seasonal-adjustment.html#motivation-1"><i class="fa fa-check"></i><b>5.1</b> Motivation<span></span></a></li>
-<li class="chapter" data-level="5.2" data-path="high-frequency-data-seasonal-adjustment.html"><a href="high-frequency-data-seasonal-adjustment.html#unobserved-components-1"><i class="fa fa-check"></i><b>5.2</b> Unobserved Components<span></span></a></li>
-<li class="chapter" data-level="5.3" data-path="high-frequency-data-seasonal-adjustment.html"><a href="high-frequency-data-seasonal-adjustment.html#seasonality-tests-1"><i class="fa fa-check"></i><b>5.3</b> Seasonality tests<span></span></a></li>
-<li class="chapter" data-level="5.4" data-path="high-frequency-data-seasonal-adjustment.html"><a href="high-frequency-data-seasonal-adjustment.html#calendar-correction-1"><i class="fa fa-check"></i><b>5.4</b> Calendar correction<span></span></a></li>
-<li class="chapter" data-level="5.5" data-path="high-frequency-data-seasonal-adjustment.html"><a href="high-frequency-data-seasonal-adjustment.html#outliers-and-intervention-variables-1"><i class="fa fa-check"></i><b>5.5</b> Outliers and intervention variables<span></span></a></li>
-<li class="chapter" data-level="5.6" data-path="high-frequency-data-seasonal-adjustment.html"><a href="high-frequency-data-seasonal-adjustment.html#pre-adjustment-1"><i class="fa fa-check"></i><b>5.6</b> Pre-adjustment<span></span></a></li>
-<li class="chapter" data-level="5.7" data-path="high-frequency-data-seasonal-adjustment.html"><a href="high-frequency-data-seasonal-adjustment.html#decomposition-1"><i class="fa fa-check"></i><b>5.7</b> Decomposition<span></span></a></li>
+<li class="chapter" data-level="4.1" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#motivation"><i class="fa fa-check"></i><b>4.1</b> Motivation</a></li>
+<li class="chapter" data-level="4.2" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#unobserved-components"><i class="fa fa-check"></i><b>4.2</b> Unobserved Components</a></li>
+<li class="chapter" data-level="4.3" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#seasonality-tests"><i class="fa fa-check"></i><b>4.3</b> Seasonality tests</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#overview-1"><i class="fa fa-check"></i><b>4.3.1</b> Overview</a></li>
+<li class="chapter" data-level="4.3.2" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#f-test-on-seasonal-dummies"><i class="fa fa-check"></i><b>4.3.2</b> F-test on seasonal dummies</a></li>
+<li class="chapter" data-level="4.3.3" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#qs-test-on-autocorrelation-at-seasonal-lags"><i class="fa fa-check"></i><b>4.3.3</b> QS Test on autocorrelation at seasonal lags</a></li>
+<li class="chapter" data-level="4.3.4" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#qs-test-for-seasonality-bis-solve-this"><i class="fa fa-check"></i><b>4.3.4</b> QS Test for seasonality (BIS : solve this)</a></li>
+<li class="chapter" data-level="4.3.5" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#kurskall-wallis"><i class="fa fa-check"></i><b>4.3.5</b> Kurskall-Wallis</a></li>
+<li class="chapter" data-level="4.3.6" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#friedman-test-stable-seasonality-test"><i class="fa fa-check"></i><b>4.3.6</b> Friedman test (stable seasonality test)</a></li>
+<li class="chapter" data-level="4.3.7" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#stable-seasonality-test-missing"><i class="fa fa-check"></i><b>4.3.7</b> Stable seasonality test (missing)</a></li>
+<li class="chapter" data-level="4.3.8" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#moving-seasonality-test"><i class="fa fa-check"></i><b>4.3.8</b> Moving seasonality test</a></li>
+<li class="chapter" data-level="4.3.9" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#identifiable-seasonality"><i class="fa fa-check"></i><b>4.3.9</b> Identifiable seasonality</a></li>
+<li class="chapter" data-level="4.3.10" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#combined-seasonality-test"><i class="fa fa-check"></i><b>4.3.10</b> Combined seasonality test</a></li>
+<li class="chapter" data-level="4.3.11" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#spectral-analysis"><i class="fa fa-check"></i><b>4.3.11</b> Spectral analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="generating-calendar-regressors-and-other-input-variables.html"><a href="generating-calendar-regressors-and-other-input-variables.html"><i class="fa fa-check"></i><b>6</b> Generating Calendar regressors and other input variables<span></span></a>
+<li class="chapter" data-level="4.4" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#calendar-correction"><i class="fa fa-check"></i><b>4.4</b> Calendar correction</a></li>
+<li class="chapter" data-level="4.5" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#outliers-and-intervention-variables"><i class="fa fa-check"></i><b>4.5</b> Outliers and intervention variables</a></li>
+<li class="chapter" data-level="4.6" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#pre-adjustment"><i class="fa fa-check"></i><b>4.6</b> Pre-adjustment</a></li>
+<li class="chapter" data-level="4.7" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#decomposition"><i class="fa fa-check"></i><b>4.7</b> Decomposition</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="generating-calendar-regressors-and-other-input-variables.html"><a href="generating-calendar-regressors-and-other-input-variables.html#motivation-2"><i class="fa fa-check"></i><b>6.1</b> Motivation<span></span></a></li>
-<li class="chapter" data-level="6.2" data-path="generating-calendar-regressors-and-other-input-variables.html"><a href="generating-calendar-regressors-and-other-input-variables.html#underlying-theory"><i class="fa fa-check"></i><b>6.2</b> Underlying theory<span></span></a></li>
-<li class="chapter" data-level="6.3" data-path="generating-calendar-regressors-and-other-input-variables.html"><a href="generating-calendar-regressors-and-other-input-variables.html#available-tools"><i class="fa fa-check"></i><b>6.3</b> Available Tools<span></span></a>
-<ul>
-<li class="chapter" data-level="6.3.1" data-path="generating-calendar-regressors-and-other-input-variables.html"><a href="generating-calendar-regressors-and-other-input-variables.html#gui"><i class="fa fa-check"></i><b>6.3.1</b> GUI<span></span></a></li>
-<li class="chapter" data-level="6.3.2" data-path="generating-calendar-regressors-and-other-input-variables.html"><a href="generating-calendar-regressors-and-other-input-variables.html#rjd3modelling-package"><i class="fa fa-check"></i><b>6.3.2</b> Rjd3modelling package<span></span></a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="outlier-detection.html"><a href="outlier-detection.html"><i class="fa fa-check"></i><b>7</b> Outlier detection<span></span></a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="outlier-detection.html"><a href="outlier-detection.html#motivation-3"><i class="fa fa-check"></i><b>7.1</b> Motivation<span></span></a></li>
-<li class="chapter" data-level="7.2" data-path="outlier-detection.html"><a href="outlier-detection.html#with-reg-arima-models"><i class="fa fa-check"></i><b>7.2</b> With Reg Arima models<span></span></a>
-<ul>
-<li class="chapter" data-level="7.2.1" data-path="outlier-detection.html"><a href="outlier-detection.html#part-of-preadjustment"><i class="fa fa-check"></i><b>7.2.1</b> Part of preadjustment<span></span></a></li>
-<li class="chapter" data-level="7.2.2" data-path="outlier-detection.html"><a href="outlier-detection.html#specific-terror-tool"><i class="fa fa-check"></i><b>7.2.2</b> specific TERROR tool<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="7.3" data-path="outlier-detection.html"><a href="outlier-detection.html#with-structural-models"><i class="fa fa-check"></i><b>7.3</b> With structural models<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="modelling-time-series.html"><a href="modelling-time-series.html"><i class="fa fa-check"></i><b>8</b> Modelling Time Series<span></span></a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="modelling-time-series.html"><a href="modelling-time-series.html#motivation-4"><i class="fa fa-check"></i><b>8.1</b> Motivation<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="benchmarking-and-temporal-disagreggation.html"><a href="benchmarking-and-temporal-disagreggation.html"><i class="fa fa-check"></i><b>9</b> Benchmarking and temporal disagreggation<span></span></a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="benchmarking-and-temporal-disagreggation.html"><a href="benchmarking-and-temporal-disagreggation.html#motivation-5"><i class="fa fa-check"></i><b>9.1</b> Motivation<span></span></a></li>
-<li class="chapter" data-level="9.2" data-path="benchmarking-and-temporal-disagreggation.html"><a href="benchmarking-and-temporal-disagreggation.html#underlying-theory-1"><i class="fa fa-check"></i><b>9.2</b> Underlying Theory<span></span></a></li>
-<li class="chapter" data-level="9.3" data-path="benchmarking-and-temporal-disagreggation.html"><a href="benchmarking-and-temporal-disagreggation.html#tools"><i class="fa fa-check"></i><b>9.3</b> Tools<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="trend-cycle-estimation-1.html"><a href="trend-cycle-estimation-1.html"><i class="fa fa-check"></i><b>10</b> Trend-cycle estimation<span></span></a>
-<ul>
-<li class="chapter" data-level="10.1" data-path="trend-cycle-estimation-1.html"><a href="trend-cycle-estimation-1.html#motivation-6"><i class="fa fa-check"></i><b>10.1</b> Motivation<span></span></a></li>
-<li class="chapter" data-level="10.2" data-path="trend-cycle-estimation-1.html"><a href="trend-cycle-estimation-1.html#underlying-theory-2"><i class="fa fa-check"></i><b>10.2</b> Underlying Theory<span></span></a></li>
-<li class="chapter" data-level="10.3" data-path="trend-cycle-estimation-1.html"><a href="trend-cycle-estimation-1.html#tools-1"><i class="fa fa-check"></i><b>10.3</b> Tools<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="nowcasting.html"><a href="nowcasting.html"><i class="fa fa-check"></i><b>11</b> Nowcasting<span></span></a></li>
-<li class="chapter" data-level="12" data-path="graphical-user-interface.html"><a href="graphical-user-interface.html"><i class="fa fa-check"></i><b>12</b> Graphical User Interface<span></span></a>
-<ul>
-<li class="chapter" data-level="12.1" data-path="graphical-user-interface.html"><a href="graphical-user-interface.html#structure-and-assets"><i class="fa fa-check"></i><b>12.1</b> Structure and assets<span></span></a></li>
-<li class="chapter" data-level="12.2" data-path="graphical-user-interface.html"><a href="graphical-user-interface.html#main-functions"><i class="fa fa-check"></i><b>12.2</b> Main functions<span></span></a>
-<ul>
-<li class="chapter" data-level="12.2.1" data-path="graphical-user-interface.html"><a href="graphical-user-interface.html#seasonal-adjustment-3"><i class="fa fa-check"></i><b>12.2.1</b> Seasonal adjustment<span></span></a></li>
-<li class="chapter" data-level="12.2.2" data-path="graphical-user-interface.html"><a href="graphical-user-interface.html#benchmarking"><i class="fa fa-check"></i><b>12.2.2</b> Benchmarking<span></span></a></li>
+<li class="chapter" data-level="4.7.1" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#x-11-moving-average-based-decomposition"><i class="fa fa-check"></i><b>4.7.1</b> X-11 moving average based decomposition</a></li>
+<li class="chapter" data-level="4.7.2" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#model-based-decomposition"><i class="fa fa-check"></i><b>4.7.2</b> Model based decomposition</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="r-packages.html"><a href="r-packages.html"><i class="fa fa-check"></i><b>13</b> R packages<span></span></a>
+<li class="chapter" data-level="5" data-path="high-frequency-data-seasonal-adjustment.html"><a href="high-frequency-data-seasonal-adjustment.html"><i class="fa fa-check"></i><b>5</b> High Frequency data (seasonal adjustment)</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="r-packages.html"><a href="r-packages.html#available-functions"><i class="fa fa-check"></i><b>13.1</b> Available functions<span></span></a>
+<li class="chapter" data-level="5.1" data-path="high-frequency-data-seasonal-adjustment.html"><a href="high-frequency-data-seasonal-adjustment.html#motivation-1"><i class="fa fa-check"></i><b>5.1</b> Motivation</a></li>
+<li class="chapter" data-level="5.2" data-path="high-frequency-data-seasonal-adjustment.html"><a href="high-frequency-data-seasonal-adjustment.html#unobserved-components-1"><i class="fa fa-check"></i><b>5.2</b> Unobserved Components</a></li>
+<li class="chapter" data-level="5.3" data-path="high-frequency-data-seasonal-adjustment.html"><a href="high-frequency-data-seasonal-adjustment.html#seasonality-tests-1"><i class="fa fa-check"></i><b>5.3</b> Seasonality tests</a></li>
+<li class="chapter" data-level="5.4" data-path="high-frequency-data-seasonal-adjustment.html"><a href="high-frequency-data-seasonal-adjustment.html#calendar-correction-1"><i class="fa fa-check"></i><b>5.4</b> Calendar correction</a></li>
+<li class="chapter" data-level="5.5" data-path="high-frequency-data-seasonal-adjustment.html"><a href="high-frequency-data-seasonal-adjustment.html#outliers-and-intervention-variables-1"><i class="fa fa-check"></i><b>5.5</b> Outliers and intervention variables</a></li>
+<li class="chapter" data-level="5.6" data-path="high-frequency-data-seasonal-adjustment.html"><a href="high-frequency-data-seasonal-adjustment.html#pre-adjustment-1"><i class="fa fa-check"></i><b>5.6</b> Pre-adjustment</a></li>
+<li class="chapter" data-level="5.7" data-path="high-frequency-data-seasonal-adjustment.html"><a href="high-frequency-data-seasonal-adjustment.html#decomposition-1"><i class="fa fa-check"></i><b>5.7</b> Decomposition</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="generating-calendar-regressors-and-other-input-variables.html"><a href="generating-calendar-regressors-and-other-input-variables.html"><i class="fa fa-check"></i><b>6</b> Generating Calendar regressors and other input variables</a>
 <ul>
-<li class="chapter" data-level="13.1.1" data-path="r-packages.html"><a href="r-packages.html#seasonal-adjustment-4"><i class="fa fa-check"></i><b>13.1.1</b> Seasonal Adjustment<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="13.2" data-path="r-packages.html"><a href="r-packages.html#interaction-with-gui"><i class="fa fa-check"></i><b>13.2</b> Interaction with GUI<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="14" data-path="plug-ins-for-jdemetra.html"><a href="plug-ins-for-jdemetra.html"><i class="fa fa-check"></i><b>14</b> Plug-ins for JDemetra+<span></span></a>
+<li class="chapter" data-level="6.1" data-path="generating-calendar-regressors-and-other-input-variables.html"><a href="generating-calendar-regressors-and-other-input-variables.html#motivation-2"><i class="fa fa-check"></i><b>6.1</b> Motivation</a></li>
+<li class="chapter" data-level="6.2" data-path="generating-calendar-regressors-and-other-input-variables.html"><a href="generating-calendar-regressors-and-other-input-variables.html#underlying-theory"><i class="fa fa-check"></i><b>6.2</b> Underlying theory</a></li>
+<li class="chapter" data-level="6.3" data-path="generating-calendar-regressors-and-other-input-variables.html"><a href="generating-calendar-regressors-and-other-input-variables.html#available-tools"><i class="fa fa-check"></i><b>6.3</b> Available Tools</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="plug-ins-for-jdemetra.html"><a href="plug-ins-for-jdemetra.html#main-functions-1"><i class="fa fa-check"></i><b>14.1</b> Main functions<span></span></a></li>
+<li class="chapter" data-level="6.3.1" data-path="generating-calendar-regressors-and-other-input-variables.html"><a href="generating-calendar-regressors-and-other-input-variables.html#gui"><i class="fa fa-check"></i><b>6.3.1</b> GUI</a></li>
+<li class="chapter" data-level="6.3.2" data-path="generating-calendar-regressors-and-other-input-variables.html"><a href="generating-calendar-regressors-and-other-input-variables.html#rjd3modelling-package"><i class="fa fa-check"></i><b>6.3.2</b> Rjd3modelling package</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="production.html"><a href="production.html"><i class="fa fa-check"></i><b>15</b> Production<span></span></a></li>
-<li class="chapter" data-level="16" data-path="tool-selection-issues.html"><a href="tool-selection-issues.html"><i class="fa fa-check"></i><b>16</b> Tool selection issues<span></span></a></li>
-<li class="chapter" data-level="17" data-path="reg-arima-models.html"><a href="reg-arima-models.html"><i class="fa fa-check"></i><b>17</b> Reg-Arima models<span></span></a></li>
-<li class="chapter" data-level="18" data-path="moving-average-based-decomposition.html"><a href="moving-average-based-decomposition.html"><i class="fa fa-check"></i><b>18</b> Moving average based decomposition<span></span></a></li>
-<li class="chapter" data-level="19" data-path="arima-model-based-decomposition.html"><a href="arima-model-based-decomposition.html"><i class="fa fa-check"></i><b>19</b> Arima Model based decomposition<span></span></a></li>
-<li class="chapter" data-level="20" data-path="state-space-framework.html"><a href="state-space-framework.html"><i class="fa fa-check"></i><b>20</b> State Space Framework<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="outlier-detection.html"><a href="outlier-detection.html"><i class="fa fa-check"></i><b>7</b> Outlier detection</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="outlier-detection.html"><a href="outlier-detection.html#motivation-3"><i class="fa fa-check"></i><b>7.1</b> Motivation</a></li>
+<li class="chapter" data-level="7.2" data-path="outlier-detection.html"><a href="outlier-detection.html#with-reg-arima-models"><i class="fa fa-check"></i><b>7.2</b> With Reg Arima models</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="outlier-detection.html"><a href="outlier-detection.html#part-of-preadjustment"><i class="fa fa-check"></i><b>7.2.1</b> Part of preadjustment</a></li>
+<li class="chapter" data-level="7.2.2" data-path="outlier-detection.html"><a href="outlier-detection.html#specific-terror-tool"><i class="fa fa-check"></i><b>7.2.2</b> specific TERROR tool</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="outlier-detection.html"><a href="outlier-detection.html#with-structural-models"><i class="fa fa-check"></i><b>7.3</b> With structural models</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="modelling-time-series.html"><a href="modelling-time-series.html"><i class="fa fa-check"></i><b>8</b> Modelling Time Series</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="modelling-time-series.html"><a href="modelling-time-series.html#motivation-4"><i class="fa fa-check"></i><b>8.1</b> Motivation</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="benchmarking-and-temporal-disagreggation.html"><a href="benchmarking-and-temporal-disagreggation.html"><i class="fa fa-check"></i><b>9</b> Benchmarking and temporal disagreggation</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="benchmarking-and-temporal-disagreggation.html"><a href="benchmarking-and-temporal-disagreggation.html#benchmarking-overview"><i class="fa fa-check"></i><b>9.1</b> Benchmarking overview</a></li>
+<li class="chapter" data-level="9.2" data-path="benchmarking-and-temporal-disagreggation.html"><a href="benchmarking-and-temporal-disagreggation.html#underlying-theory-1"><i class="fa fa-check"></i><b>9.2</b> Underlying Theory</a></li>
+<li class="chapter" data-level="9.3" data-path="benchmarking-and-temporal-disagreggation.html"><a href="benchmarking-and-temporal-disagreggation.html#tools"><i class="fa fa-check"></i><b>9.3</b> Tools</a></li>
+<li class="chapter" data-level="9.4" data-path="benchmarking-and-temporal-disagreggation.html"><a href="benchmarking-and-temporal-disagreggation.html#references-6"><i class="fa fa-check"></i><b>9.4</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="trend-cycle-estimation-1.html"><a href="trend-cycle-estimation-1.html"><i class="fa fa-check"></i><b>10</b> Trend-cycle estimation</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="trend-cycle-estimation-1.html"><a href="trend-cycle-estimation-1.html#motivation-5"><i class="fa fa-check"></i><b>10.1</b> Motivation</a></li>
+<li class="chapter" data-level="10.2" data-path="trend-cycle-estimation-1.html"><a href="trend-cycle-estimation-1.html#underlying-theory-2"><i class="fa fa-check"></i><b>10.2</b> Underlying Theory</a></li>
+<li class="chapter" data-level="10.3" data-path="trend-cycle-estimation-1.html"><a href="trend-cycle-estimation-1.html#tools-1"><i class="fa fa-check"></i><b>10.3</b> Tools</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="nowcasting.html"><a href="nowcasting.html"><i class="fa fa-check"></i><b>11</b> Nowcasting</a></li>
+<li class="chapter" data-level="12" data-path="graphical-user-interface.html"><a href="graphical-user-interface.html"><i class="fa fa-check"></i><b>12</b> Graphical User Interface</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="graphical-user-interface.html"><a href="graphical-user-interface.html#structure-and-assets"><i class="fa fa-check"></i><b>12.1</b> Structure and assets</a></li>
+<li class="chapter" data-level="12.2" data-path="graphical-user-interface.html"><a href="graphical-user-interface.html#main-functions"><i class="fa fa-check"></i><b>12.2</b> Main functions</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="graphical-user-interface.html"><a href="graphical-user-interface.html#seasonal-adjustment-2"><i class="fa fa-check"></i><b>12.2.1</b> Seasonal adjustment</a></li>
+<li class="chapter" data-level="12.2.2" data-path="graphical-user-interface.html"><a href="graphical-user-interface.html#benchmarking"><i class="fa fa-check"></i><b>12.2.2</b> Benchmarking</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="r-packages.html"><a href="r-packages.html"><i class="fa fa-check"></i><b>13</b> R packages</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="r-packages.html"><a href="r-packages.html#available-functions"><i class="fa fa-check"></i><b>13.1</b> Available functions</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="r-packages.html"><a href="r-packages.html#seasonal-adjustment-3"><i class="fa fa-check"></i><b>13.1.1</b> Seasonal Adjustment</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="r-packages.html"><a href="r-packages.html#interaction-with-gui"><i class="fa fa-check"></i><b>13.2</b> Interaction with GUI</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="plug-ins-for-jdemetra.html"><a href="plug-ins-for-jdemetra.html"><i class="fa fa-check"></i><b>14</b> Plug-ins for JDemetra+</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="plug-ins-for-jdemetra.html"><a href="plug-ins-for-jdemetra.html#main-functions-1"><i class="fa fa-check"></i><b>14.1</b> Main functions</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="production.html"><a href="production.html"><i class="fa fa-check"></i><b>15</b> Production</a></li>
+<li class="chapter" data-level="16" data-path="tool-selection-issues.html"><a href="tool-selection-issues.html"><i class="fa fa-check"></i><b>16</b> Tool selection issues</a></li>
+<li class="chapter" data-level="17" data-path="spectral-analysis-principles-and-tools.html"><a href="spectral-analysis-principles-and-tools.html"><i class="fa fa-check"></i><b>17</b> Spectral Analysis Principles and Tools</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="spectral-analysis-principles-and-tools.html"><a href="spectral-analysis-principles-and-tools.html#overview-2"><i class="fa fa-check"></i><b>17.1</b> overview</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="reg-arima-models.html"><a href="reg-arima-models.html"><i class="fa fa-check"></i><b>18</b> Reg-Arima models</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="reg-arima-models.html"><a href="reg-arima-models.html#overview-3"><i class="fa fa-check"></i><b>18.1</b> Overview</a></li>
+<li class="chapter" data-level="18.2" data-path="reg-arima-models.html"><a href="reg-arima-models.html#autocorrelation-function"><i class="fa fa-check"></i><b>18.2</b> Autocorrelation function</a></li>
+<li class="chapter" data-level="18.3" data-path="reg-arima-models.html"><a href="reg-arima-models.html#estimation-of-arma-models"><i class="fa fa-check"></i><b>18.3</b> Estimation Of Arma models</a></li>
+<li class="chapter" data-level="18.4" data-path="reg-arima-models.html"><a href="reg-arima-models.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>18.4</b> Maximum likelihood estimation</a>
+<ul>
+<li class="chapter" data-level="18.4.1" data-path="reg-arima-models.html"><a href="reg-arima-models.html#likelihood-of-a-multivariate-normal-distribution"><i class="fa fa-check"></i><b>18.4.1</b> Likelihood of a multivariate normal distribution</a></li>
+<li class="chapter" data-level="18.4.2" data-path="reg-arima-models.html"><a href="reg-arima-models.html#linear-model-with-gaussian-noises"><i class="fa fa-check"></i><b>18.4.2</b> Linear model with gaussian noises</a></li>
+<li class="chapter" data-level="18.4.3" data-path="reg-arima-models.html"><a href="reg-arima-models.html#implementation-3"><i class="fa fa-check"></i><b>18.4.3</b> Implementation</a></li>
+<li class="chapter" data-level="18.4.4" data-path="reg-arima-models.html"><a href="reg-arima-models.html#missing-values"><i class="fa fa-check"></i><b>18.4.4</b> Missing values</a></li>
+<li class="chapter" data-level="18.4.5" data-path="reg-arima-models.html"><a href="reg-arima-models.html#perfect-collinearity-in-x"><i class="fa fa-check"></i><b>18.4.5</b> Perfect collinearity in X</a></li>
+<li class="chapter" data-level="18.4.6" data-path="reg-arima-models.html"><a href="reg-arima-models.html#references-7"><i class="fa fa-check"></i><b>18.4.6</b> References</a></li>
+<li class="chapter" data-level="18.4.7" data-path="reg-arima-models.html"><a href="reg-arima-models.html#x-13-implementation"><i class="fa fa-check"></i><b>18.4.7</b> X-13 implementation</a></li>
+</ul></li>
+<li class="chapter" data-level="18.5" data-path="reg-arima-models.html"><a href="reg-arima-models.html#handling-of-missing-observations-in-regarima-models"><i class="fa fa-check"></i><b>18.5</b> Handling of missing observations in (Reg)ARIMA models</a>
+<ul>
+<li class="chapter" data-level="18.5.1" data-path="reg-arima-models.html"><a href="reg-arima-models.html#skipping-approach"><i class="fa fa-check"></i><b>18.5.1</b> Skipping approach</a></li>
+<li class="chapter" data-level="18.5.2" data-path="reg-arima-models.html"><a href="reg-arima-models.html#additive-outlier-approach"><i class="fa fa-check"></i><b>18.5.2</b> Additive outlier approach</a></li>
+<li class="chapter" data-level="18.5.3" data-path="reg-arima-models.html"><a href="reg-arima-models.html#references-9"><i class="fa fa-check"></i><b>18.5.3</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="18.6" data-path="reg-arima-models.html"><a href="reg-arima-models.html#tests-on-residuals"><i class="fa fa-check"></i><b>18.6</b> Tests on residuals</a>
+<ul>
+<li class="chapter" data-level="18.6.1" data-path="reg-arima-models.html"><a href="reg-arima-models.html#autocorrelation"><i class="fa fa-check"></i><b>18.6.1</b> Autocorrelation</a></li>
+<li class="chapter" data-level="18.6.2" data-path="reg-arima-models.html"><a href="reg-arima-models.html#normality"><i class="fa fa-check"></i><b>18.6.2</b> Normality</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="moving-average-based-decomposition.html"><a href="moving-average-based-decomposition.html"><i class="fa fa-check"></i><b>19</b> Moving average based decomposition</a></li>
+<li class="chapter" data-level="20" data-path="arima-model-based-decomposition.html"><a href="arima-model-based-decomposition.html"><i class="fa fa-check"></i><b>20</b> Arima Model based decomposition</a></li>
+<li class="chapter" data-level="21" data-path="state-space-framework.html"><a href="state-space-framework.html"><i class="fa fa-check"></i><b>21</b> State Space Framework</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -201,8 +317,88 @@
             <section class="normal" id="section-">
 <div id="main-functions-overview" class="section level1 hasAnchor" number="3">
 <h1><span class="header-section-number">Chapter 3</span> Main functions overview<a href="main-functions-overview.html#main-functions-overview" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="seasonal-adjustment-1" class="section level2 hasAnchor" number="3.1">
-<h2><span class="header-section-number">3.1</span> Seasonal adjustment<a href="main-functions-overview.html#seasonal-adjustment-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="seasonal-adjustment-algorithms" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Seasonal adjustment algorithms<a href="main-functions-overview.html#seasonal-adjustment-algorithms" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="x-13" class="section level3 hasAnchor" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> X-13<a href="main-functions-overview.html#x-13" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Estimation of the exact likelihood of an ARMA model</p>
+<p>We suppose that
+<span class="math display">\[ y_t, \quad 1 \le t \le n \]</span>
+follows an ARMA model.</p>
+<p>The X12 implementation computes the exact likelihood in two main steps</p>
+<div id="overview" class="section level4 hasAnchor" number="3.1.1.1">
+<h4><span class="header-section-number">3.1.1.1</span> Overview<a href="main-functions-overview.html#overview" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>We consider the transformation</p>
+<p><span class="math display">\[ z_t = \begin{pmatrix} z_{1t} \\ z_{2t} \end{pmatrix} = \begin{cases} y_t, &amp; 1 \le t \le p \\ \Phi\left(B\right) y_t, &amp; p \lt t \le n\end{cases}\]</span></p>
+<p>It is obvious that
+<span class="math display">\[ p\left(y_t\right) = p\left(z_t\right) \]</span></p>
+<p>We will estimate
+<span class="math display">\[ p\left(z_t\right) = p\left(z_{2t}\right)  p\left(z_{1t}\right | z_{2t} )\]</span></p>
+</div>
+<div id="step-1-likelihood-of-a-pure-moving-average-process" class="section level4 hasAnchor" number="3.1.1.2">
+<h4><span class="header-section-number">3.1.1.2</span> Step 1: likelihood of a pure moving average process<a href="main-functions-overview.html#step-1-likelihood-of-a-pure-moving-average-process" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><span class="math display">\[z_{2t}\]</span>
+is a pure moving average process. Its exact likelihood is estimated as follows (see [1] for details).
+We list below the different steps of the algorithm.</p>
+<ul>
+<li><p>Compute the conditional least squares residuals by the recursion:
+<span class="math display">\[ a_{0t} = \begin{cases} 0,&amp; -q \lt t \leq 0 \\ z_t-\theta_1 a_{0t-1}- \cdots --\theta_q a_{0t-q},&amp;  0 \lt t \leq n  \end{cases} \]</span></p></li>
+<li><p>Compute the Pi-Weights of the model. They defines the (n+q x q) matrix</p></li>
+</ul>
+<p><span class="math display">\[ G = \begin{pmatrix} 1 &amp; 0 &amp; \cdots &amp; 0 \\ \pi_1 &amp; 1 &amp; \cdots &amp; 0 \\ \pi_2 &amp; \pi_1 &amp; \cdots &amp; \vdots\\ \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\ \pi_{n+q-1} &amp; \pi_{n+q-2} &amp; \cdots &amp; \pi_{n} \end{pmatrix} \]</span></p>
+<ul>
+<li><p>Compute by recursion
+<span class="math display">\[ G&#39;a \quad and \quad G&#39;G \]</span></p></li>
+<li><p>Compute by Cholesky decomposition
+<span class="math display">\[ G&#39;G \hat z_* = G&#39;a \quad and \quad |G&#39;G| \]</span></p></li>
+<li><p>Obtain by recursion the exact likelihood residuals
+<span class="math display">\[ \Theta\left(B\right)\begin{pmatrix}\hat a_* \\ \hat a_t \end{pmatrix}  = \begin{pmatrix}z_* \\ z_t \end{pmatrix} \]</span></p></li>
+</ul>
+<p>The processing defines the linear transformation
+<span class="math display">\[ T z_t = \begin{pmatrix}\hat a_* \\ \hat a_t \end{pmatrix} \]</span> and the searched determinant.</p>
+</div>
+<div id="step-2-conditional-distribution-of-the-initial-observations" class="section level4 hasAnchor" number="3.1.1.3">
+<h4><span class="header-section-number">3.1.1.3</span> Step 2: conditional distribution of the initial observations<a href="main-functions-overview.html#step-2-conditional-distribution-of-the-initial-observations" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><span class="math display">\[ p\left(z_{1t}\right | z_{2t} ) \]</span>
+is easily obtained by considering the join distribution of
+<span class="math display">\[ \left( z_{1t}, z_{2t} \right) \sim N \left( 0, \begin{pmatrix} \Sigma_{11} &amp;&amp; \Sigma{12} \\ \Sigma_{21} &amp;&amp; \Sigma{22} \end{pmatrix}\right) \ \]</span></p>
+<p>It is distributed as
+<span class="math display">\[ N\left( \Sigma_{12} \Sigma_{22}^{-1}v, \Sigma_{11}-\Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21} \right)\]</span></p>
+<p><span class="math display">\[= N\left( \Sigma_{12} T&#39;Tv, \Sigma_{11}-\Sigma_{12} T&#39;T\Sigma_{21} \right)\]</span></p>
+<p><span class="math display">\[  = N\left( U&#39;Tv, \Sigma_{11}-U&#39;U \right)\]</span></p>
+<p>where
+* v is obtained by applying the auto-regressive polynomial on the observations
+* T is the linear transformation defined in step 1
+*
+<span class="math display">\[ U = T \Sigma_{21} \]</span></p>
+<div id="references" class="section level5 hasAnchor" number="3.1.1.3.1">
+<h5><span class="header-section-number">3.1.1.3.1</span> References<a href="main-functions-overview.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>[1] <strong><em>Otto M. C., Bell W.R., Burman J.P.</em></strong> (1987), “An Iterative GLS Approach to Maximum Likelihood Estimation of Regression Models with Arima Errors”, Bureau of The Census, SRD Research Report CENSUS/SRD/RR_87/34.</p>
+</div>
+</div>
+</div>
+<div id="tramo-seats" class="section level3 hasAnchor" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> Tramo-Seats<a href="main-functions-overview.html#tramo-seats" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>links : to praadj, decomp, tools, methods</p>
+<p>TRAMO-SEATS is a model-based seasonal adjustment method developed by
+Victor Gómez (Ministerio de Hacienda), and Agustin Maravall (Banco de
+España). It consists of two linked programs: TRAMO and SEATS. TRAMO
+(Time Series Regression with ARIMA Noise, Missing Observations, and
+Outliers) performs estimation, forecasting, and interpolation of
+regression models with missing observations and ARIMA errors, in the
+presence of possibly several types of outlier. SEATS (Signal
+Extraction in ARIMA Time Series) performs an ARIMA-based decomposition
+of an observed time series into unobserved components. Information about
+the TRAMO-SEATS method available in this section derives directly from
+papers by Victor Gómez and Agustin Maravall; the most important ones
+are: GÓMEZ, V., and MARAVALL, A. (1996), GÓMEZ, V., and MARAVALL, A.
+(2001a, b) and MARAVALL, A. (2009). More information about the
+TRAMO-SEATS method, TRAMO-SEATS software (DOS version and TSW+ – Tramo
+Seats Windows software and several interfaces) and its documentation as
+well as papers on methodology and application of the programs, can be
+found in the dedicated section of the
+<a href="https://www.bde.es/bde/en/secciones/servicios/Profesionales/Programas_estadi/Programas_estad_d9fa7f3710fd821.html" target="_blank">Banco de España website</a>.</p>
+</div>
 </div>
 <div id="trend-cycle-estimation" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> Trend-cycle estimation<a href="main-functions-overview.html#trend-cycle-estimation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -215,7 +411,7 @@
         </div>
       </div>
 <a href="quick-start-with.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="seasonal-adjustment-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="seasonal-adjustment-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -269,6 +465,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
