@@ -1,0 +1,34 @@
+---
+title: "Template for chapters"
+output: html_document
+date: '2022-05-13'
+---
+
+
+## Key words 
+
+* (edit) before a part to heavily edit
+* (error)
+* add
+
+## Flow of (old) info 
+split between 
+* algos : 
+* tools 
++GUI
++Packages
+* methods (general bricks)
+
+
+
+## Algorithms 
+This will be the template for each algo 
+1. parameters
++ common infos (in the algo part) 
++ specific infos declined by tools GUI and R (links) : link to tool part
+
+2. output 
++ diagnostics common info (in the algo part)
++ diagnostics infos declined by tools GUI and R 
++ series common 
++ series specific : link to tool part

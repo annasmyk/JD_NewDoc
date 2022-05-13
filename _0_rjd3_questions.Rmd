@@ -1,0 +1,17 @@
+---
+title: "_0_Rjd3_questions"
+output: html_document
+date: '2022-05-13'
+---
+
+here the goal is to collect questions for JP (30/06) 
+while wrinting doc 
+
+explo rjd3 suite
+* what 
+
+addtionnal functions (cf carto excel à maj)
+* direct indirect 
+* cutting long time series (linking + ?)
+* sliding spans 
+* revision

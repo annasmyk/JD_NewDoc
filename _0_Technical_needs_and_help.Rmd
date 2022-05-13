@@ -1,0 +1,19 @@
+---
+title: "Technical needs and help"
+output: html_document
+date: '2022-05-13'
+---
+
+## questions (alain ?)
+*
+* when they say to launch code : where to write it ? index ? indep script ?
+* knit one file, without building the book
+* miktek story and pdf book desactivation
+* preview chapter 
+
+## how to 
+* nice table
+
+## infos 
+* utilitR code explo (yc direct git via mac)
+
