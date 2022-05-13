@@ -32,3 +32,8 @@ This will be the template for each algo
 + diagnostics infos declined by tools GUI and R 
 + series common 
 + series specific : link to tool part
+
+### Tools
+
+### Methods
+key : focus on building blocs
