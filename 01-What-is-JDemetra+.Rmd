@@ -2,7 +2,7 @@
 
 ## Structure of this book
 
-### Functions
+### Available algorithms
 what can be done
 
 ### Tools to access the functions 
