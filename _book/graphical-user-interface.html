@@ -54,6 +54,70 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -128,15 +192,21 @@
 <li class="chapter" data-level="4.5" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#outliers-and-intervention-variables"><i class="fa fa-check"></i><b>4.5</b> Outliers and intervention variables</a></li>
 <li class="chapter" data-level="4.6" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#pre-adjustment"><i class="fa fa-check"></i><b>4.6</b> Pre-adjustment</a>
 <ul>
-<li class="chapter" data-level="4.6.1" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#transformation-choices"><i class="fa fa-check"></i><b>4.6.1</b> Transformation choices</a></li>
+<li class="chapter" data-level="4.6.1" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#overview-1"><i class="fa fa-check"></i><b>4.6.1</b> Overview</a></li>
+<li class="chapter" data-level="4.6.2" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#transformation-choices"><i class="fa fa-check"></i><b>4.6.2</b> Transformation choices</a></li>
+<li class="chapter" data-level="4.6.3" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#reg-arima-linarization"><i class="fa fa-check"></i><b>4.6.3</b> Reg-Arima linarization</a></li>
 </ul></li>
 <li class="chapter" data-level="4.7" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#decomposition"><i class="fa fa-check"></i><b>4.7</b> Decomposition</a>
 <ul>
 <li class="chapter" data-level="4.7.1" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#x-11-moving-average-based-decomposition"><i class="fa fa-check"></i><b>4.7.1</b> X-11 moving average based decomposition</a></li>
 <li class="chapter" data-level="4.7.2" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#model-based-decomposition"><i class="fa fa-check"></i><b>4.7.2</b> Model based decomposition</a></li>
 <li class="chapter" data-level="4.7.3" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#quality-assesment-of-the-seasonal-adjustement-process"><i class="fa fa-check"></i><b>4.7.3</b> Quality assesment of the seasonal adjustement process</a></li>
-<li class="chapter" data-level="4.7.4" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#revision-policies"><i class="fa fa-check"></i><b>4.7.4</b> Revision policies</a></li>
-<li class="chapter" data-level="4.7.5" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#practical-steps"><i class="fa fa-check"></i><b>4.7.5</b> Practical steps</a></li>
+<li class="chapter" data-level="4.7.4" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#non-significant-irregular-1"><i class="fa fa-check"></i><b>4.7.4</b> Non significant irregular</a></li>
+<li class="chapter" data-level="4.7.5" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#qs-test"><i class="fa fa-check"></i><b>4.7.5</b> QS test</a></li>
+<li class="chapter" data-level="4.7.6" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#f-test-1"><i class="fa fa-check"></i><b>4.7.6</b> F test</a></li>
+<li class="chapter" data-level="4.7.7" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#sliding-spans"><i class="fa fa-check"></i><b>4.7.7</b> Sliding spans</a></li>
+<li class="chapter" data-level="4.7.8" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#revision-policies"><i class="fa fa-check"></i><b>4.7.8</b> Revision policies</a></li>
+<li class="chapter" data-level="4.7.9" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#practical-steps"><i class="fa fa-check"></i><b>4.7.9</b> Practical steps</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="high-frequency-data-seasonal-adjustment.html"><a href="high-frequency-data-seasonal-adjustment.html"><i class="fa fa-check"></i><b>5</b> High Frequency data (seasonal adjustment)</a>
@@ -214,9 +284,13 @@
 <li class="chapter" data-level="16" data-path="tool-selection-issues.html"><a href="tool-selection-issues.html"><i class="fa fa-check"></i><b>16</b> Tool selection issues</a></li>
 <li class="chapter" data-level="17" data-path="spectral-analysis-principles-and-tools.html"><a href="spectral-analysis-principles-and-tools.html"><i class="fa fa-check"></i><b>17</b> Spectral Analysis Principles and Tools</a>
 <ul>
-<li class="chapter" data-level="17.1" data-path="spectral-analysis-principles-and-tools.html"><a href="spectral-analysis-principles-and-tools.html#overview-1"><i class="fa fa-check"></i><b>17.1</b> Overview</a></li>
-<li class="chapter" data-level="17.2" data-path="spectral-analysis-principles-and-tools.html"><a href="spectral-analysis-principles-and-tools.html#periodogram"><i class="fa fa-check"></i><b>17.2</b> Periodogram</a></li>
-<li class="chapter" data-level="17.3" data-path="spectral-analysis-principles-and-tools.html"><a href="spectral-analysis-principles-and-tools.html#ar-spectrum-definition"><i class="fa fa-check"></i><b>17.3</b> AR Spectrum definition</a></li>
+<li class="chapter" data-level="17.1" data-path="spectral-analysis-principles-and-tools.html"><a href="spectral-analysis-principles-and-tools.html#overview-2"><i class="fa fa-check"></i><b>17.1</b> Overview</a></li>
+<li class="chapter" data-level="17.2" data-path="spectral-analysis-principles-and-tools.html"><a href="spectral-analysis-principles-and-tools.html#periodogram"><i class="fa fa-check"></i><b>17.2</b> Periodogram</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="spectral-analysis-principles-and-tools.html"><a href="spectral-analysis-principles-and-tools.html#step-1"><i class="fa fa-check"></i><b>17.2.1</b> Step 1</a></li>
+<li class="chapter" data-level="17.2.2" data-path="spectral-analysis-principles-and-tools.html"><a href="spectral-analysis-principles-and-tools.html#step-2"><i class="fa fa-check"></i><b>17.2.2</b> Step 2</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="spectral-analysis-principles-and-tools.html"><a href="spectral-analysis-principles-and-tools.html#autoregressive-spectrum-estimation"><i class="fa fa-check"></i><b>17.3</b> Autoregressive spectrum estimation</a></li>
 <li class="chapter" data-level="17.4" data-path="spectral-analysis-principles-and-tools.html"><a href="spectral-analysis-principles-and-tools.html#tukey-spectrum-definition"><i class="fa fa-check"></i><b>17.4</b> Tukey Spectrum definition</a>
 <ul>
 <li class="chapter" data-level="17.4.1" data-path="spectral-analysis-principles-and-tools.html"><a href="spectral-analysis-principles-and-tools.html#theoretical-spectrum-of-the-arima-model-1"><i class="fa fa-check"></i><b>17.4.1</b> Theoretical spectrum of the ARIMA model</a></li>
@@ -224,29 +298,30 @@
 </ul></li>
 <li class="chapter" data-level="18" data-path="reg-arima-models.html"><a href="reg-arima-models.html"><i class="fa fa-check"></i><b>18</b> Reg-Arima models</a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="reg-arima-models.html"><a href="reg-arima-models.html#overview-2"><i class="fa fa-check"></i><b>18.1</b> Overview</a></li>
-<li class="chapter" data-level="18.2" data-path="reg-arima-models.html"><a href="reg-arima-models.html#autocorrelation-function"><i class="fa fa-check"></i><b>18.2</b> Autocorrelation function</a></li>
-<li class="chapter" data-level="18.3" data-path="reg-arima-models.html"><a href="reg-arima-models.html#estimation-of-arma-models"><i class="fa fa-check"></i><b>18.3</b> Estimation Of Arma models</a></li>
-<li class="chapter" data-level="18.4" data-path="reg-arima-models.html"><a href="reg-arima-models.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>18.4</b> Maximum likelihood estimation</a>
+<li class="chapter" data-level="18.1" data-path="reg-arima-models.html"><a href="reg-arima-models.html#overview-3"><i class="fa fa-check"></i><b>18.1</b> Overview</a></li>
+<li class="chapter" data-level="18.2" data-path="reg-arima-models.html"><a href="reg-arima-models.html#regarima-model"><i class="fa fa-check"></i><b>18.2</b> RegARIMA model</a></li>
+<li class="chapter" data-level="18.3" data-path="reg-arima-models.html"><a href="reg-arima-models.html#autocorrelation-function"><i class="fa fa-check"></i><b>18.3</b> Autocorrelation function</a></li>
+<li class="chapter" data-level="18.4" data-path="reg-arima-models.html"><a href="reg-arima-models.html#estimation-of-arma-models"><i class="fa fa-check"></i><b>18.4</b> Estimation Of Arma models</a></li>
+<li class="chapter" data-level="18.5" data-path="reg-arima-models.html"><a href="reg-arima-models.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>18.5</b> Maximum likelihood estimation</a>
 <ul>
-<li class="chapter" data-level="18.4.1" data-path="reg-arima-models.html"><a href="reg-arima-models.html#likelihood-of-a-multivariate-normal-distribution"><i class="fa fa-check"></i><b>18.4.1</b> Likelihood of a multivariate normal distribution</a></li>
-<li class="chapter" data-level="18.4.2" data-path="reg-arima-models.html"><a href="reg-arima-models.html#linear-model-with-gaussian-noises"><i class="fa fa-check"></i><b>18.4.2</b> Linear model with gaussian noises</a></li>
-<li class="chapter" data-level="18.4.3" data-path="reg-arima-models.html"><a href="reg-arima-models.html#implementation-3"><i class="fa fa-check"></i><b>18.4.3</b> Implementation</a></li>
-<li class="chapter" data-level="18.4.4" data-path="reg-arima-models.html"><a href="reg-arima-models.html#missing-values"><i class="fa fa-check"></i><b>18.4.4</b> Missing values</a></li>
-<li class="chapter" data-level="18.4.5" data-path="reg-arima-models.html"><a href="reg-arima-models.html#perfect-collinearity-in-x"><i class="fa fa-check"></i><b>18.4.5</b> Perfect collinearity in X</a></li>
-<li class="chapter" data-level="18.4.6" data-path="reg-arima-models.html"><a href="reg-arima-models.html#references-6"><i class="fa fa-check"></i><b>18.4.6</b> References</a></li>
-<li class="chapter" data-level="18.4.7" data-path="reg-arima-models.html"><a href="reg-arima-models.html#x-13-implementation"><i class="fa fa-check"></i><b>18.4.7</b> X-13 implementation</a></li>
+<li class="chapter" data-level="18.5.1" data-path="reg-arima-models.html"><a href="reg-arima-models.html#likelihood-of-a-multivariate-normal-distribution"><i class="fa fa-check"></i><b>18.5.1</b> Likelihood of a multivariate normal distribution</a></li>
+<li class="chapter" data-level="18.5.2" data-path="reg-arima-models.html"><a href="reg-arima-models.html#linear-model-with-gaussian-noises"><i class="fa fa-check"></i><b>18.5.2</b> Linear model with gaussian noises</a></li>
+<li class="chapter" data-level="18.5.3" data-path="reg-arima-models.html"><a href="reg-arima-models.html#implementation-3"><i class="fa fa-check"></i><b>18.5.3</b> Implementation</a></li>
+<li class="chapter" data-level="18.5.4" data-path="reg-arima-models.html"><a href="reg-arima-models.html#missing-values"><i class="fa fa-check"></i><b>18.5.4</b> Missing values</a></li>
+<li class="chapter" data-level="18.5.5" data-path="reg-arima-models.html"><a href="reg-arima-models.html#perfect-collinearity-in-x"><i class="fa fa-check"></i><b>18.5.5</b> Perfect collinearity in X</a></li>
+<li class="chapter" data-level="18.5.6" data-path="reg-arima-models.html"><a href="reg-arima-models.html#references-6"><i class="fa fa-check"></i><b>18.5.6</b> References</a></li>
+<li class="chapter" data-level="18.5.7" data-path="reg-arima-models.html"><a href="reg-arima-models.html#x-13-implementation"><i class="fa fa-check"></i><b>18.5.7</b> X-13 implementation</a></li>
 </ul></li>
-<li class="chapter" data-level="18.5" data-path="reg-arima-models.html"><a href="reg-arima-models.html#handling-of-missing-observations-in-regarima-models"><i class="fa fa-check"></i><b>18.5</b> Handling of missing observations in (Reg)ARIMA models</a>
+<li class="chapter" data-level="18.6" data-path="reg-arima-models.html"><a href="reg-arima-models.html#handling-of-missing-observations-in-regarima-models"><i class="fa fa-check"></i><b>18.6</b> Handling of missing observations in (Reg)ARIMA models</a>
 <ul>
-<li class="chapter" data-level="18.5.1" data-path="reg-arima-models.html"><a href="reg-arima-models.html#skipping-approach"><i class="fa fa-check"></i><b>18.5.1</b> Skipping approach</a></li>
-<li class="chapter" data-level="18.5.2" data-path="reg-arima-models.html"><a href="reg-arima-models.html#additive-outlier-approach"><i class="fa fa-check"></i><b>18.5.2</b> Additive outlier approach</a></li>
-<li class="chapter" data-level="18.5.3" data-path="reg-arima-models.html"><a href="reg-arima-models.html#references-8"><i class="fa fa-check"></i><b>18.5.3</b> References</a></li>
+<li class="chapter" data-level="18.6.1" data-path="reg-arima-models.html"><a href="reg-arima-models.html#skipping-approach"><i class="fa fa-check"></i><b>18.6.1</b> Skipping approach</a></li>
+<li class="chapter" data-level="18.6.2" data-path="reg-arima-models.html"><a href="reg-arima-models.html#additive-outlier-approach"><i class="fa fa-check"></i><b>18.6.2</b> Additive outlier approach</a></li>
+<li class="chapter" data-level="18.6.3" data-path="reg-arima-models.html"><a href="reg-arima-models.html#references-8"><i class="fa fa-check"></i><b>18.6.3</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="18.6" data-path="reg-arima-models.html"><a href="reg-arima-models.html#tests-on-residuals"><i class="fa fa-check"></i><b>18.6</b> Tests on residuals</a>
+<li class="chapter" data-level="18.7" data-path="reg-arima-models.html"><a href="reg-arima-models.html#tests-on-residuals"><i class="fa fa-check"></i><b>18.7</b> Tests on residuals</a>
 <ul>
-<li class="chapter" data-level="18.6.1" data-path="reg-arima-models.html"><a href="reg-arima-models.html#autocorrelation"><i class="fa fa-check"></i><b>18.6.1</b> Autocorrelation</a></li>
-<li class="chapter" data-level="18.6.2" data-path="reg-arima-models.html"><a href="reg-arima-models.html#normality"><i class="fa fa-check"></i><b>18.6.2</b> Normality</a></li>
+<li class="chapter" data-level="18.7.1" data-path="reg-arima-models.html"><a href="reg-arima-models.html#autocorrelation"><i class="fa fa-check"></i><b>18.7.1</b> Autocorrelation</a></li>
+<li class="chapter" data-level="18.7.2" data-path="reg-arima-models.html"><a href="reg-arima-models.html#normality"><i class="fa fa-check"></i><b>18.7.2</b> Normality</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="19" data-path="moving-average-based-decomposition.html"><a href="moving-average-based-decomposition.html"><i class="fa fa-check"></i><b>19</b> Moving average based decomposition</a></li>
@@ -279,6 +354,9 @@
 </div>
 <div id="main-functions" class="section level2 hasAnchor" number="12.2">
 <h2><span class="header-section-number">12.2</span> Main functions<a href="graphical-user-interface.html#main-functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>solve the double “documents” in SA and in modelling
+describe difference doc vs ws (non output in doc ?)
+see if the same in version 3</p>
 <div id="seasonality-tests-2" class="section level3 hasAnchor" number="12.2.1">
 <h3><span class="header-section-number">12.2.1</span> Seasonality tests<a href="graphical-user-interface.html#seasonality-tests-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>without adjusting</p>
@@ -288,10 +366,242 @@
 <p>The test can be applied directly to any series by selecting the
 option <em>Statistical Methods &gt;&gt; Seasonal Adjustment &gt;&gt; Tools &gt;&gt; Seasonality Tests</em>. This is
 an example of how results are displayed for the case of a monthly series:</p>
+<p><img src="All_images/spectrum.png" alt="artest" />
+### Reg arima linearization</p>
+<p>mixed old page
+* in chap 4 on SA : infos on algos
+* here cut out infos on gui only</p>
+<p>The <em>Model</em> node includes basic information about the outcome of the
+model identification procedure and checking the goodness of fit. The
+summary information about the final model is available directly from the
+main <em>Model</em> node. The content of this panel depends on the <a href="../reference-manual/modelling-specifications.html">settings</a> applied to the modelling procedure.</p>
 <div class="figure">
-<img src="All_images/spectrum.png" alt="" />
-<p class="caption">artest</p>
+<img src="All_images/image22_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
 </div>
+<p><strong>The <em>Model</em> node in the navigation tree</strong></p>
+<p>The first part contains fundamental information about the model.</p>
+<div class="figure">
+<img src="All_images/image23_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The <em>Summary</em> section of the <em>Model</em> node</strong></p>
+<p><em>Estimation span</em> informs about the first and the last observation used
+for modelling. The notation of the estimation span varies according to
+the frequencies (for example, the span <span class="math display">\[2-1993 : 10-2006\]</span> represents a
+monthly time series and the span <span class="math display">\[II-1994 : I-2011\]</span> represents a
+quarterly time series). The message <em>Series has been log-transformed</em> is
+only displayed if a logarithmic transformation has been applied.</p>
+<p>In the case of <a href="../reference-manual/modelling-specifications.html">the pre-defined specifications</a>: TR0, TR1, TR3, RG0, RG1
+and RG3 no trading day effect is estimated. For TR2, RG2c, TR4 and RG4c
+pre-defined specifications, working day effects and the leap year effect
+are pre-tested and estimated if present. If the working day effect is
+significant, the pre-processing part includes the message <em>Working days
+effect (1 regressor)</em>. The message <em>Working days effect (2 regressors)</em>
+means that the leap year effect has also been estimated. For TR5 and
+RG5c the trading day effect and the leap year effect are pre-tested. If
+the trading day effect has been detected, either of the messages
+<em>Trading days effect (6 regressors)</em> or <em>Trading days effect (7
+regressors)</em> are displayed, depending whether the leap year effect has
+been detected or not. If the Easter effect is statistically significant,
+<em>Easter effect detected</em> is displayed.</p>
+<p>In this section the total number of detected outliers is displayed. The
+additional information on detected outliers, i.e. type, location and
+coefficients’ values, can be found in the <em>Arima model</em> subsection of
+the <em>Model</em> node.</p>
+<p>The <em>Final model</em> section informs about the outcome of the estimation
+process. <em>Number of effective observations</em> is the number of
+observations used to estimate the model, i.e. the number of observations
+of the transformed series (regularly and/or seasonally differenced)
+reduced by the <em>Number of estimated parameters</em>, which is the sum of
+regular and seasonal parameters for both autoregressive and moving
+average processes, mean effect, trading/working day effect, outliers,
+regressors and one.</p>
+<p><em>Likelihood</em> is a maximized value of a Likelihood<a href="#fn56" class="footnote-ref" id="fnref56"><sup>56</sup></a> function after
+the iterations processed in Exact Maximum Likelihood Estimation, which
+is a method used to estimate the model. This value is used by the model
+selection criteria: <em>AIC</em>, <em>AICC</em>, <em>BIC (corrected by length)</em> and
+<em>Hannan-Quinn</em><a href="#fn57" class="footnote-ref" id="fnref57"><sup>57</sup></a>. <em>Standard error of the regression (ML estimate)</em> is
+the standard error of the regression from Maximum Likelihood
+Estimation<a href="#fn58" class="footnote-ref" id="fnref58"><sup>58</sup></a>.</p>
+<p>The <em>scores at the solution</em> section presents the gradient of the
+loglikelihood. The different items of the scores are related to the
+different parameters of the ARIMA model. The output indicates to which
+extent the optimization procedure reached the maximum. At the maximum of
+the likelihood, it should be 0. However, it is never exactly the case,
+due to numerical approximations. Usually, the scores can be improved by
+using a higher precision (smaller tolerance). This precision is
+controlled by the <strong>Tolerance</strong> parameter in the <strong>Estimate</strong> section of
+the <em>Specifications</em> window (see how to use this parameter <a href="../reference-manual/modelling-spec-tramo.html#estimate">for Tramo</a> and <a href="../reference-manual/modelling-spec-arima.html#estimate">for
+Arima</a>).</p>
+<p>An example of the output is presented in the chart below.</p>
+<div class="figure">
+<img src="All_images/image24_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The content of the <em>Final model</em> section</strong></p>
+<p>Next, the estimated values of model parameters (<em>Coefficients</em>),
+t-statistics (<em>T-Stat</em>) and corresponding p-values (<em>P<span class="math display">\[\|T\|\&gt;t\]</span></em>) are
+displayed. JDemetra+ uses the following notation:</p>
+<ul>
+<li><p><em>Phi(p)</em> – the \(p^{}\) term in the non-seasonal
+autoregressive polynomial;</p></li>
+<li><p><em>Theta(q)</em> – the <span class="math inline">\(q^{\text{th}}\)</span> term in the non-seasonal moving
+average polynomial;</p></li>
+<li><p><em>BPhi(P)</em> – the <span class="math inline">\(P^{\text{th}}\)</span> term in the seasonal
+autoregressive polynomial;</p></li>
+<li><p><em>BTheta(Q)</em> – the <span class="math inline">\(Q^{\text{th}}\)</span> term in the seasonal moving
+average polynomial.</p></li>
+</ul>
+<p>In the example below, the ARIMA model (0,1,1)(0,1,1) was chosen, which
+means that one regular and one seasonal moving average parameter were
+identified and estimated. The p-values indicate that <em>BTheta(1)</em>
+parameter is significant in contrast to the <em>Theta(1)</em>, which is not
+significant <a href="#fn59" class="footnote-ref" id="fnref59"><sup>59</sup></a>.</p>
+<div class="figure">
+<img src="All_images/image25_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The estimation’s results of the ARIMA model</strong></p>
+<p>For the <a href="../reference-manual/modelling-spec-tramo.html#tramo-specification--options-for-manual-identification-of-the-arima-model">fixed ARIMA parameters</a>, JDemetra+ shows
+only the values of the parameters. Figure below presents the output from
+the manually chosen ARIMA model (2,0,0)(0,1,1) with a fixed parameter
+<em>BTheta(1).</em> For the fixed parameter the <em>T-Stat</em> and <em>(P|T|&gt;t)</em> are
+not displayed as no estimation is done for this parameter.</p>
+<div class="figure">
+<img src="All_images/image26_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The results of the estimation of the ARIMA model with a fixed coefficient</strong></p>
+<p>If the ARIMA model contains a constant term (detected automatically or
+introduced by the user), the estimated value and related statistics are
+reported.</p>
+<div class="figure">
+<img src="All_images/image27_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The results of the estimation of a mean effect</strong></p>
+<p>JDemetra+ presents estimated values of the coefficients of one or six
+regressors depending on the type of a calendar effect specification. For
+a working days effect one regressor is estimated.</p>
+<div class="figure">
+<img src="All_images/image28_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The results of the estimation of a working day effect</strong></p>
+<p>When a trading days effect is estimated the <em>Joint F-test</em> value is
+reported under the table that presents estimated values. When the result
+of <em>Joint F-test</em> indicates that the trading day variables are jointly
+not significant the test result is displayed in red.</p>
+<div class="figure">
+<img src="All_images/image29_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The results of the estimation of a trading day effect: the case of jointly not significant variables</strong></p>
+<p>In the example below the RSA5c specification has been used and a trading
+day effect has been detected. In spite of the fact that some trading day
+regressors are not significant at the 5% significance level, the outcome
+of the joint F-test indicates that the trading day regressors are
+jointly significant (the F-test statistic is lower than 5%).</p>
+<div class="figure">
+<img src="All_images/image30_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The results of the estimation of a trading day effect: the case of jointly significant variables</strong></p>
+<p>If a leap year regressor has been used in the model specification, the
+value of the estimated leap year coefficient is also reported with the
+corresponding t-statistics and p-value. As the p-value presented on the
+picture below is greater than 0.05, it indicates that the leap year
+effect is not significant.</p>
+<div class="figure">
+<img src="All_images/image31_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The results of the estimation of a leap year effect</strong></p>
+<p>When the option <a href="../reference-manual/modelling-spec-tramo.html#regression"><em>UserDefined</em></a> is used,
+JDemetra+ displays the <em>User-defined calendar variables</em> section with
+variables and corresponding estimation results (the values of the
+parameters, corresponding t-statistics and p-values). The outcome of the
+joint F-test is displayed when more than one user-defined calendar
+variable is used.</p>
+<div class="figure">
+<img src="All_images/image32_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The results of the estimation of user-defined calendar variables</strong></p>
+<p>When the Easter effect is estimated, the following table is displayed in
+the output. In the case presented below Easter has a negative,
+significant effect on the time series.</p>
+<div class="figure">
+<img src="All_images/image33_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The results of the estimation of the Easter effect</strong></p>
+<p>JDemetra+ also presents the results of an outlier detection procedure.
+The table includes the type of outlier, its date, the value of the
+coefficient and corresponding t-statistics and p-values.</p>
+<div class="figure">
+<img src="All_images/image34_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The results of the outlier identification procedure</strong></p>
+<p>In all pre-defined specifications, except for TR0 and RG0, only additive
+outliers, temporary changes and level shifts are considered in the
+automatic outlier identification procedure. When seasonal outliers are
+also enabled, they appear in the same table as other outliers.</p>
+<div class="figure">
+<img src="All_images/image35_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The results of the outlier identification procedure that enables seasonal outliers</strong></p>
+<p>Results for <a href="../reference-manual/modelling-spec-tramo.html#regression">pre-specified outliers</a> are
+displayed in a separate table.</p>
+<div class="figure">
+<img src="All_images/image36_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The results of the estimation of the pre-specified outliers</strong></p>
+<p>Regression variables, like ramps and intervention variables, are not
+identified automatically. They need to be defined by the user. The
+results of an estimation of ramps that are pre-defined types of
+regression variables are displayed in a separate table. All information
+concerning ramps, including spans, estimated coefficients and related
+statistics, is shown in a separate table.</p>
+<div class="figure">
+<img src="All_images/image37_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The results of the estimation of the ramp effect</strong></p>
+<p>All other intervention variables with corresponding statistics are shown
+under the <em>Intervention variable(s)</em> table.</p>
+<div class="figure">
+<img src="All_images/image38_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The results of the estimation of the intervention variable</strong></p>
+<p>User-defined variables are marked as <em>Vars-1.x_1, Vars-1.x_2</em>, …,
+<em>Vars-1.x_n</em> and displayed in the separate tables.</p>
+<div class="figure">
+<img src="All_images/image39_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The results of the estimation of the user-defined variables</strong></p>
+<p>JDemetra+ also reports a list of missing observations, if any. JDemetra+
+applies the AO approach to the estimation of the missing
+observations<a href="#fn60" class="footnote-ref" id="fnref60"><sup>60</sup></a>.</p>
+<div class="figure">
+<img src="All_images/image40_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The results of the estimation of the missing observations</strong></p>
+<p>Detailed results are divided into several sections and are investigated
+in the following sections:
+- <a href="../reference-manual/forecasts.html">Forecasts</a>
+- <a href="../reference-manual/regressors.html">Regressors</a>
+- <a href="../reference-manual/arima.html">ARIMA</a>
+- <a href="../reference-manual/pre-adjustment-series.html">Pre-adjustment series</a>
+- <a href="../reference-manual/residuals.html">Residuals</a>
+- <a href="../reference-manual/likelihood.html">Likelihood</a></p>
 </div>
 </div>
 <div id="seasonal-adjustment-2" class="section level3 hasAnchor" number="12.2.2">
@@ -323,6 +633,24 @@ time series data to the another application.</p>
 
 </div>
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="56">
+<li id="fn56"><p>The likelihood function is the joint probability (density)
+function of observable random variables. It is viewed as the
+function of the parameters given the realized random variables.
+Therefore, this function measures the probability of observing the
+particular set of dependent variable values that occur in the
+sample.<a href="graphical-user-interface.html#fnref56" class="footnote-back">↩︎</a></p></li>
+<li id="fn57"><p>HAMILTON, J.D. (1994).<a href="graphical-user-interface.html#fnref57" class="footnote-back">↩︎</a></p></li>
+<li id="fn58"><p>Maximum Likelihood Estimation is a statistical method for
+estimating the coefficients of a model. This method determines the
+parameters that maximize the probability (likelihood) of the sample
+data.<a href="graphical-user-interface.html#fnref58" class="footnote-back">↩︎</a></p></li>
+<li id="fn59"><p>CHATFIELD, C. (2004).<a href="graphical-user-interface.html#fnref59" class="footnote-back">↩︎</a></p></li>
+<li id="fn60"><p>BROCKWELL, P.J., and DAVIS, R.A. (2002).<a href="graphical-user-interface.html#fnref60" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
             </section>
 
@@ -384,6 +712,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

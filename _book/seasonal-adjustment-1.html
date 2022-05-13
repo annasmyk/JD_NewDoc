@@ -54,6 +54,70 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -105,7 +169,7 @@
 <li class="chapter" data-level="4" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html"><i class="fa fa-check"></i><b>4</b> Seasonal Adjustment</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#motivation"><i class="fa fa-check"></i><b>4.1</b> Motivation</a></li>
-<li class="chapter" data-level="4.2" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#unobserved-components"><i class="fa fa-check"></i><b>4.2</b> Unobserved Components</a></li>
+<li class="chapter" data-level="4.2" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#unobserved-components-uc"><i class="fa fa-check"></i><b>4.2</b> Unobserved Components (UC)</a></li>
 <li class="chapter" data-level="4.3" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#seasonality-tests"><i class="fa fa-check"></i><b>4.3</b> Seasonality tests</a>
 <ul>
 <li class="chapter" data-level="4.3.1" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#overview"><i class="fa fa-check"></i><b>4.3.1</b> Overview</a></li>
@@ -126,17 +190,29 @@
 <li class="chapter" data-level="4.4.1" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#tests-for-residual-trading-days"><i class="fa fa-check"></i><b>4.4.1</b> Tests for residual trading days</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#outliers-and-intervention-variables"><i class="fa fa-check"></i><b>4.5</b> Outliers and intervention variables</a></li>
-<li class="chapter" data-level="4.6" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#pre-adjustment"><i class="fa fa-check"></i><b>4.6</b> Pre-adjustment</a></li>
+<li class="chapter" data-level="4.6" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#pre-adjustment"><i class="fa fa-check"></i><b>4.6</b> Pre-adjustment</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#overview-1"><i class="fa fa-check"></i><b>4.6.1</b> Overview</a></li>
+<li class="chapter" data-level="4.6.2" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#transformation-choices"><i class="fa fa-check"></i><b>4.6.2</b> Transformation choices</a></li>
+<li class="chapter" data-level="4.6.3" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#reg-arima-linarization"><i class="fa fa-check"></i><b>4.6.3</b> Reg-Arima linarization</a></li>
+</ul></li>
 <li class="chapter" data-level="4.7" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#decomposition"><i class="fa fa-check"></i><b>4.7</b> Decomposition</a>
 <ul>
 <li class="chapter" data-level="4.7.1" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#x-11-moving-average-based-decomposition"><i class="fa fa-check"></i><b>4.7.1</b> X-11 moving average based decomposition</a></li>
 <li class="chapter" data-level="4.7.2" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#model-based-decomposition"><i class="fa fa-check"></i><b>4.7.2</b> Model based decomposition</a></li>
+<li class="chapter" data-level="4.7.3" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#quality-assesment-of-the-seasonal-adjustement-process"><i class="fa fa-check"></i><b>4.7.3</b> Quality assesment of the seasonal adjustement process</a></li>
+<li class="chapter" data-level="4.7.4" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#non-significant-irregular-1"><i class="fa fa-check"></i><b>4.7.4</b> Non significant irregular</a></li>
+<li class="chapter" data-level="4.7.5" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#qs-test"><i class="fa fa-check"></i><b>4.7.5</b> QS test</a></li>
+<li class="chapter" data-level="4.7.6" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#f-test-1"><i class="fa fa-check"></i><b>4.7.6</b> F test</a></li>
+<li class="chapter" data-level="4.7.7" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#sliding-spans"><i class="fa fa-check"></i><b>4.7.7</b> Sliding spans</a></li>
+<li class="chapter" data-level="4.7.8" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#revision-policies"><i class="fa fa-check"></i><b>4.7.8</b> Revision policies</a></li>
+<li class="chapter" data-level="4.7.9" data-path="seasonal-adjustment-1.html"><a href="seasonal-adjustment-1.html#practical-steps"><i class="fa fa-check"></i><b>4.7.9</b> Practical steps</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="high-frequency-data-seasonal-adjustment.html"><a href="high-frequency-data-seasonal-adjustment.html"><i class="fa fa-check"></i><b>5</b> High Frequency data (seasonal adjustment)</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="high-frequency-data-seasonal-adjustment.html"><a href="high-frequency-data-seasonal-adjustment.html#motivation-1"><i class="fa fa-check"></i><b>5.1</b> Motivation</a></li>
-<li class="chapter" data-level="5.2" data-path="high-frequency-data-seasonal-adjustment.html"><a href="high-frequency-data-seasonal-adjustment.html#unobserved-components-1"><i class="fa fa-check"></i><b>5.2</b> Unobserved Components</a></li>
+<li class="chapter" data-level="5.2" data-path="high-frequency-data-seasonal-adjustment.html"><a href="high-frequency-data-seasonal-adjustment.html#unobserved-components"><i class="fa fa-check"></i><b>5.2</b> Unobserved Components</a></li>
 <li class="chapter" data-level="5.3" data-path="high-frequency-data-seasonal-adjustment.html"><a href="high-frequency-data-seasonal-adjustment.html#seasonality-tests-1"><i class="fa fa-check"></i><b>5.3</b> Seasonality tests</a></li>
 <li class="chapter" data-level="5.4" data-path="high-frequency-data-seasonal-adjustment.html"><a href="high-frequency-data-seasonal-adjustment.html#calendar-correction-1"><i class="fa fa-check"></i><b>5.4</b> Calendar correction</a></li>
 <li class="chapter" data-level="5.5" data-path="high-frequency-data-seasonal-adjustment.html"><a href="high-frequency-data-seasonal-adjustment.html#outliers-and-intervention-variables-1"><i class="fa fa-check"></i><b>5.5</b> Outliers and intervention variables</a></li>
@@ -188,7 +264,8 @@
 <ul>
 <li class="chapter" data-level="12.2.1" data-path="graphical-user-interface.html"><a href="graphical-user-interface.html#seasonality-tests-2"><i class="fa fa-check"></i><b>12.2.1</b> Seasonality tests</a></li>
 <li class="chapter" data-level="12.2.2" data-path="graphical-user-interface.html"><a href="graphical-user-interface.html#seasonal-adjustment-2"><i class="fa fa-check"></i><b>12.2.2</b> Seasonal adjustment</a></li>
-<li class="chapter" data-level="12.2.3" data-path="graphical-user-interface.html"><a href="graphical-user-interface.html#benchmarking"><i class="fa fa-check"></i><b>12.2.3</b> Benchmarking</a></li>
+<li class="chapter" data-level="12.2.3" data-path="graphical-user-interface.html"><a href="graphical-user-interface.html#theoretical-spectrum-of-the-arima-model"><i class="fa fa-check"></i><b>12.2.3</b> Theoretical spectrum of the Arima model</a></li>
+<li class="chapter" data-level="12.2.4" data-path="graphical-user-interface.html"><a href="graphical-user-interface.html#benchmarking"><i class="fa fa-check"></i><b>12.2.4</b> Benchmarking</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="r-packages.html"><a href="r-packages.html"><i class="fa fa-check"></i><b>13</b> R packages</a>
@@ -207,36 +284,44 @@
 <li class="chapter" data-level="16" data-path="tool-selection-issues.html"><a href="tool-selection-issues.html"><i class="fa fa-check"></i><b>16</b> Tool selection issues</a></li>
 <li class="chapter" data-level="17" data-path="spectral-analysis-principles-and-tools.html"><a href="spectral-analysis-principles-and-tools.html"><i class="fa fa-check"></i><b>17</b> Spectral Analysis Principles and Tools</a>
 <ul>
-<li class="chapter" data-level="17.1" data-path="spectral-analysis-principles-and-tools.html"><a href="spectral-analysis-principles-and-tools.html#overview-1"><i class="fa fa-check"></i><b>17.1</b> Overview</a></li>
-<li class="chapter" data-level="17.2" data-path="spectral-analysis-principles-and-tools.html"><a href="spectral-analysis-principles-and-tools.html#periodogram"><i class="fa fa-check"></i><b>17.2</b> Periodogram</a></li>
-<li class="chapter" data-level="17.3" data-path="spectral-analysis-principles-and-tools.html"><a href="spectral-analysis-principles-and-tools.html#ar-spectrum-definition"><i class="fa fa-check"></i><b>17.3</b> AR Spectrum definition</a></li>
-<li class="chapter" data-level="17.4" data-path="spectral-analysis-principles-and-tools.html"><a href="spectral-analysis-principles-and-tools.html#tukey-spectrum-definition"><i class="fa fa-check"></i><b>17.4</b> Tukey Spectrum definition</a></li>
+<li class="chapter" data-level="17.1" data-path="spectral-analysis-principles-and-tools.html"><a href="spectral-analysis-principles-and-tools.html#overview-2"><i class="fa fa-check"></i><b>17.1</b> Overview</a></li>
+<li class="chapter" data-level="17.2" data-path="spectral-analysis-principles-and-tools.html"><a href="spectral-analysis-principles-and-tools.html#periodogram"><i class="fa fa-check"></i><b>17.2</b> Periodogram</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="spectral-analysis-principles-and-tools.html"><a href="spectral-analysis-principles-and-tools.html#step-1"><i class="fa fa-check"></i><b>17.2.1</b> Step 1</a></li>
+<li class="chapter" data-level="17.2.2" data-path="spectral-analysis-principles-and-tools.html"><a href="spectral-analysis-principles-and-tools.html#step-2"><i class="fa fa-check"></i><b>17.2.2</b> Step 2</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="spectral-analysis-principles-and-tools.html"><a href="spectral-analysis-principles-and-tools.html#autoregressive-spectrum-estimation"><i class="fa fa-check"></i><b>17.3</b> Autoregressive spectrum estimation</a></li>
+<li class="chapter" data-level="17.4" data-path="spectral-analysis-principles-and-tools.html"><a href="spectral-analysis-principles-and-tools.html#tukey-spectrum-definition"><i class="fa fa-check"></i><b>17.4</b> Tukey Spectrum definition</a>
+<ul>
+<li class="chapter" data-level="17.4.1" data-path="spectral-analysis-principles-and-tools.html"><a href="spectral-analysis-principles-and-tools.html#theoretical-spectrum-of-the-arima-model-1"><i class="fa fa-check"></i><b>17.4.1</b> Theoretical spectrum of the ARIMA model</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="reg-arima-models.html"><a href="reg-arima-models.html"><i class="fa fa-check"></i><b>18</b> Reg-Arima models</a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="reg-arima-models.html"><a href="reg-arima-models.html#overview-2"><i class="fa fa-check"></i><b>18.1</b> Overview</a></li>
-<li class="chapter" data-level="18.2" data-path="reg-arima-models.html"><a href="reg-arima-models.html#autocorrelation-function"><i class="fa fa-check"></i><b>18.2</b> Autocorrelation function</a></li>
-<li class="chapter" data-level="18.3" data-path="reg-arima-models.html"><a href="reg-arima-models.html#estimation-of-arma-models"><i class="fa fa-check"></i><b>18.3</b> Estimation Of Arma models</a></li>
-<li class="chapter" data-level="18.4" data-path="reg-arima-models.html"><a href="reg-arima-models.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>18.4</b> Maximum likelihood estimation</a>
+<li class="chapter" data-level="18.1" data-path="reg-arima-models.html"><a href="reg-arima-models.html#overview-3"><i class="fa fa-check"></i><b>18.1</b> Overview</a></li>
+<li class="chapter" data-level="18.2" data-path="reg-arima-models.html"><a href="reg-arima-models.html#regarima-model"><i class="fa fa-check"></i><b>18.2</b> RegARIMA model</a></li>
+<li class="chapter" data-level="18.3" data-path="reg-arima-models.html"><a href="reg-arima-models.html#autocorrelation-function"><i class="fa fa-check"></i><b>18.3</b> Autocorrelation function</a></li>
+<li class="chapter" data-level="18.4" data-path="reg-arima-models.html"><a href="reg-arima-models.html#estimation-of-arma-models"><i class="fa fa-check"></i><b>18.4</b> Estimation Of Arma models</a></li>
+<li class="chapter" data-level="18.5" data-path="reg-arima-models.html"><a href="reg-arima-models.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>18.5</b> Maximum likelihood estimation</a>
 <ul>
-<li class="chapter" data-level="18.4.1" data-path="reg-arima-models.html"><a href="reg-arima-models.html#likelihood-of-a-multivariate-normal-distribution"><i class="fa fa-check"></i><b>18.4.1</b> Likelihood of a multivariate normal distribution</a></li>
-<li class="chapter" data-level="18.4.2" data-path="reg-arima-models.html"><a href="reg-arima-models.html#linear-model-with-gaussian-noises"><i class="fa fa-check"></i><b>18.4.2</b> Linear model with gaussian noises</a></li>
-<li class="chapter" data-level="18.4.3" data-path="reg-arima-models.html"><a href="reg-arima-models.html#implementation-3"><i class="fa fa-check"></i><b>18.4.3</b> Implementation</a></li>
-<li class="chapter" data-level="18.4.4" data-path="reg-arima-models.html"><a href="reg-arima-models.html#missing-values"><i class="fa fa-check"></i><b>18.4.4</b> Missing values</a></li>
-<li class="chapter" data-level="18.4.5" data-path="reg-arima-models.html"><a href="reg-arima-models.html#perfect-collinearity-in-x"><i class="fa fa-check"></i><b>18.4.5</b> Perfect collinearity in X</a></li>
-<li class="chapter" data-level="18.4.6" data-path="reg-arima-models.html"><a href="reg-arima-models.html#references-6"><i class="fa fa-check"></i><b>18.4.6</b> References</a></li>
-<li class="chapter" data-level="18.4.7" data-path="reg-arima-models.html"><a href="reg-arima-models.html#x-13-implementation"><i class="fa fa-check"></i><b>18.4.7</b> X-13 implementation</a></li>
+<li class="chapter" data-level="18.5.1" data-path="reg-arima-models.html"><a href="reg-arima-models.html#likelihood-of-a-multivariate-normal-distribution"><i class="fa fa-check"></i><b>18.5.1</b> Likelihood of a multivariate normal distribution</a></li>
+<li class="chapter" data-level="18.5.2" data-path="reg-arima-models.html"><a href="reg-arima-models.html#linear-model-with-gaussian-noises"><i class="fa fa-check"></i><b>18.5.2</b> Linear model with gaussian noises</a></li>
+<li class="chapter" data-level="18.5.3" data-path="reg-arima-models.html"><a href="reg-arima-models.html#implementation-3"><i class="fa fa-check"></i><b>18.5.3</b> Implementation</a></li>
+<li class="chapter" data-level="18.5.4" data-path="reg-arima-models.html"><a href="reg-arima-models.html#missing-values"><i class="fa fa-check"></i><b>18.5.4</b> Missing values</a></li>
+<li class="chapter" data-level="18.5.5" data-path="reg-arima-models.html"><a href="reg-arima-models.html#perfect-collinearity-in-x"><i class="fa fa-check"></i><b>18.5.5</b> Perfect collinearity in X</a></li>
+<li class="chapter" data-level="18.5.6" data-path="reg-arima-models.html"><a href="reg-arima-models.html#references-6"><i class="fa fa-check"></i><b>18.5.6</b> References</a></li>
+<li class="chapter" data-level="18.5.7" data-path="reg-arima-models.html"><a href="reg-arima-models.html#x-13-implementation"><i class="fa fa-check"></i><b>18.5.7</b> X-13 implementation</a></li>
 </ul></li>
-<li class="chapter" data-level="18.5" data-path="reg-arima-models.html"><a href="reg-arima-models.html#handling-of-missing-observations-in-regarima-models"><i class="fa fa-check"></i><b>18.5</b> Handling of missing observations in (Reg)ARIMA models</a>
+<li class="chapter" data-level="18.6" data-path="reg-arima-models.html"><a href="reg-arima-models.html#handling-of-missing-observations-in-regarima-models"><i class="fa fa-check"></i><b>18.6</b> Handling of missing observations in (Reg)ARIMA models</a>
 <ul>
-<li class="chapter" data-level="18.5.1" data-path="reg-arima-models.html"><a href="reg-arima-models.html#skipping-approach"><i class="fa fa-check"></i><b>18.5.1</b> Skipping approach</a></li>
-<li class="chapter" data-level="18.5.2" data-path="reg-arima-models.html"><a href="reg-arima-models.html#additive-outlier-approach"><i class="fa fa-check"></i><b>18.5.2</b> Additive outlier approach</a></li>
-<li class="chapter" data-level="18.5.3" data-path="reg-arima-models.html"><a href="reg-arima-models.html#references-8"><i class="fa fa-check"></i><b>18.5.3</b> References</a></li>
+<li class="chapter" data-level="18.6.1" data-path="reg-arima-models.html"><a href="reg-arima-models.html#skipping-approach"><i class="fa fa-check"></i><b>18.6.1</b> Skipping approach</a></li>
+<li class="chapter" data-level="18.6.2" data-path="reg-arima-models.html"><a href="reg-arima-models.html#additive-outlier-approach"><i class="fa fa-check"></i><b>18.6.2</b> Additive outlier approach</a></li>
+<li class="chapter" data-level="18.6.3" data-path="reg-arima-models.html"><a href="reg-arima-models.html#references-8"><i class="fa fa-check"></i><b>18.6.3</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="18.6" data-path="reg-arima-models.html"><a href="reg-arima-models.html#tests-on-residuals"><i class="fa fa-check"></i><b>18.6</b> Tests on residuals</a>
+<li class="chapter" data-level="18.7" data-path="reg-arima-models.html"><a href="reg-arima-models.html#tests-on-residuals"><i class="fa fa-check"></i><b>18.7</b> Tests on residuals</a>
 <ul>
-<li class="chapter" data-level="18.6.1" data-path="reg-arima-models.html"><a href="reg-arima-models.html#autocorrelation"><i class="fa fa-check"></i><b>18.6.1</b> Autocorrelation</a></li>
-<li class="chapter" data-level="18.6.2" data-path="reg-arima-models.html"><a href="reg-arima-models.html#normality"><i class="fa fa-check"></i><b>18.6.2</b> Normality</a></li>
+<li class="chapter" data-level="18.7.1" data-path="reg-arima-models.html"><a href="reg-arima-models.html#autocorrelation"><i class="fa fa-check"></i><b>18.7.1</b> Autocorrelation</a></li>
+<li class="chapter" data-level="18.7.2" data-path="reg-arima-models.html"><a href="reg-arima-models.html#normality"><i class="fa fa-check"></i><b>18.7.2</b> Normality</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="19" data-path="moving-average-based-decomposition.html"><a href="moving-average-based-decomposition.html"><i class="fa fa-check"></i><b>19</b> Moving average based decomposition</a></li>
@@ -280,8 +365,8 @@ different structure and content. Therefore, the results for both methods are dis
 However, in contrast to the original programs, in JDemetra+ some quality indicators have been implemented
 for both methods, allowing for an easier compaison of the results.</p>
 </div>
-<div id="unobserved-components" class="section level2 hasAnchor" number="4.2">
-<h2><span class="header-section-number">4.2</span> Unobserved Components<a href="seasonal-adjustment-1.html#unobserved-components" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="unobserved-components-uc" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Unobserved Components (UC)<a href="seasonal-adjustment-1.html#unobserved-components-uc" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The main components, each representing the impact
 of certain types of phenomena on the time series (<span class="math inline">\(X_{t}\)</span>), are:</p>
 <ul>
@@ -1206,9 +1291,405 @@ We consider that <span class="math inline">\(irr_t\)</span> is significant if <s
 </div>
 <div id="outliers-and-intervention-variables" class="section level2 hasAnchor" number="4.5">
 <h2><span class="header-section-number">4.5</span> Outliers and intervention variables<a href="seasonal-adjustment-1.html#outliers-and-intervention-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>here just definition and purpose
+use in the regression in the reg-arima regression part</p>
+<p>Outliers[^2] are abnormal values of a time series. In general, they
+cannot be properly explained by the ARIMA model and its underlying
+normality assumption. They tend to be associated with irregular
+special events that produce a distortion in the series. The presence of
+such values disturbs the modelling of time series with methods like
+X-13ARIMA-SEATS and TRAMO-SEATS because of the linear procedures (e.g.
+moving averages and regression analysis) implemented by them. The
+presence of outliers has an adverse effect on the quality of seasonal
+adjustment because outliers can lead to model misspecification,
+biased parameter estimation, poor forecasts and inappropriate
+decomposition of a series. Therefore, it is vital to identify and
+include them in the modelling step of seasonal adjustment. The aim is to
+remove the effect of outliers from a time series before its
+decomposition into its components. Both X-13ARIMA-SEATS and TRAMO-SEATS
+include automatic procedure for the treatment of outliers (detection and
+correction). However, a priori information about an event that may have
+caused the abnormal observations (the date of its occurrence and type of an
+effect) can be included in the model by the user. This case study
+explains how to do it.</p>
+<p>In the automatic outlier detection and correction procedures, three
+outlier types are considered by default:</p>
+<ul>
+<li><p>additive outlier (AO) – an abnormal value in an isolated point of
+the series;</p></li>
+<li><p>transitory change (TC) – a series of outliers with a temporarily
+decreasing effect on the level of the series;</p></li>
+<li><p>level shift (LS) – series of innovation outliers with a
+constant long-term effect on the level of the series, where for an
+innovation outlier is meant an anomalous value in the innovation
+series.</p></li>
+</ul>
+<p>Seasonal outliers, which are defined as an abrupt increase or decrease
+of the seasonal component for a specific month or quarter and are of
+permanent nature can be automatically detected once the user has chosen the
+appropriate option. The relevant instructions are given in this case
+study.</p>
+<p>The user may also introduce into the model a ramp effect, which is
+described as a smooth, linear transition between two time points unlike
+the abrupt change associated with level shifts. This case study explains
+how to add ramp effects into a specification.</p>
+<p>The formulas that describe outliers are given <a href="../theory/SA_lin.html">here</a>.</p>
+<ol style="list-style-type: decimal">
+<li><p>The picture below presents the number of registered
+unemployed persons in Poland. It is clear that in the beginning of
+1999 a sudden, permanent shift in the trend level took place as a
+result of the poor state of the economy. At the end of 2008 a
+single peak can be observed, which can be interpreted as a reaction
+by entrepreneurs to the beginning of the economic crisis.</p>
+<div class="figure">
+<img src="All_images/UG_SA_image13.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>Registered unemployed persons in Poland</strong></p></li>
+</ol>
+<p>(feed from estp ? + info on SO from …)</p>
 </div>
 <div id="pre-adjustment" class="section level2 hasAnchor" number="4.6">
 <h2><span class="header-section-number">4.6</span> Pre-adjustment<a href="seasonal-adjustment-1.html#pre-adjustment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="overview-1" class="section level3 hasAnchor" number="4.6.1">
+<h3><span class="header-section-number">4.6.1</span> Overview<a href="seasonal-adjustment-1.html#overview-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>(edit)
+#### Modeliing part to adapt<br />
+The algorithms implemented in JDemetra+ enable a modelling of the original time series with the RegARIMA model,
+including estimation of the regression effects such as outliers and calendar effects. These procedures can be
+used just for modelling and forecasting of the original time series but also as a pre-treatment before performing a seasonal adjustement of the series. Hence, this pre-treatement will allow for a more reliable estimation of the time series components performed by the seasonal adjustment procedures.</p>
+<p>This section is divided into two parts:
+* <a href="../reference-manual/modelling-specifications.html">Specifications</a>, which presents parameters of the modelling procedure.
+* <a href="../reference-manual/output-modelling.html">Output</a>, which details a typical output produced by the modelling procedure.</p>
+<p>The specifications and output of the modelling procedure are displayed in the <a href="../reference-manual/workspace.html"><em>Workspace</em> window</a>.</p>
+<div class="figure">
+<img src="All_images/A_Ref_d1.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The <em>Workspace</em> window with the nodes for the modelling procedure marked</strong></p>
+</div>
+<div id="transformation-choices" class="section level3 hasAnchor" number="4.6.2">
+<h3><span class="header-section-number">4.6.2</span> Transformation choices<a href="seasonal-adjustment-1.html#transformation-choices" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The log transformation of the original data is an option that is often
+applied to achieve a stationary autocovariance function. The decision
+concerning logging (or not) of a time series has a great impact on
+seasonal adjustment outcomes<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>. JDemetra+ offers two options: logging
+(which means that the multiplicative decomposition is used) or no
+transformation (the additive decomposition is used). The selection of
+the transformation type can be done automatically, on the basis of the
+outcome of a log-level test.</p>
+<p>The test used by TRAMO-SEATS is based on the maximum likelihood
+estimation of the parameter <span class="math inline">\(\lambda\)</span> in the Box-Cox transformations
+(which is a power transformations such that the transformed values of
+time series $$are a monotonic function of the observations,
+i.e.:</p>
+<p><span class="math display">\[y_{i}^{\alpha} = \left\{ \frac{\left( y_{i}^{\alpha} - 1 \right)}{\begin{matrix}
+\lambda \\
+\log{y_{i}^{\alpha},\lambda = 0\ } \\
+\end{matrix}} \right.\ ,\ \lambda \neq 0\]</span></p>
+<p>The automatic procedure first fits two Airline models (i.e. ARIMA
+(0,1,1)(0,1,1)) on the time series: one in logs (<span class="math inline">\(\lambda = 0\)</span>), the other
+without logs (<span class="math inline">\(\lambda = 1\)</span>). The test compares the sum of squares of
+the model without logs with the sum of squares multiplied by the square
+of the geometric mean from the model in logs. Logs are taken in case the
+last function is the maximum<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>. The parameter <em>fct</em> controls the bias
+in the log/level pre-test (the function is active when <strong>Function</strong> is
+set to <em>Auto</em>); <em>fct</em> &gt; 1 favours levels, <em>fct</em> &lt; 1 favours logs. <a href="../reference-manual/modelling-spec-tramo.html#transformation">This test is used for modelling with the TRAMO model</a>.</p>
+<div class="figure">
+<img src="All_images/UG_SA_image37.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The <em>Transformation</em> options for the TRAMO-SEATS method</strong></p>
+<p>The test used by X-13ARIMA-SEATS is based on the AICC information
+criteria<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a>. To choose the transformation type, X-13ARIMA-SEATS fits the
+RegARIMA model to the untransformed and the transformed series. X-13ARIMA-SEATS will choose
+the log transformation except when<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a>:</p>
+<p><span class="math display">\[\text{AICC}_{\log} - \text{AICC}_{\text{no\ log}} &lt; \Delta_{\text{AICC}}\]</span></p>
+<p>where:</p>
+<p><span class="math inline">\(\text{AICC}_{\text{no\ log}}\)</span> is the value of AICC from fitting the
+RegARIMA model to the untransformed series;</p>
+<p><span class="math inline">\(\text{AICC}_{\log}\)</span> is the value of AICC from fitting the RegARIMA
+model to the transformed series;</p>
+<p><span class="math inline">\(\Delta_{\text{AICC}}\)</span> is the threshold value; <span class="math inline">\(\Delta_{\text{AICC}}\)</span>&gt;
+0 favours levels and <span class="math inline">\(\Delta_{\text{AICC}}\)</span> &lt; 0 favours logs.</p>
+<p>The RegARIMA model used in the test is the one specified in the ARIMA
+part of the specification. If model is specified then the (0,1,1)(0,1,1)
+model is used. <a href="../reference-manual/modelling-spec-arima.html#transformation">This test is used for modelling with the RegARIMA
+model</a>.</p>
+<div class="figure">
+<img src="All_images/UG_SA_image38.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The <em>Transformation</em> options for the X-13ARIMA-SEATS method</strong></p>
+<p>According to the
+<a href="https://ec.europa.eu/eurostat/documents/3859598/6830795/KS-GQ-15-001-EN-N.pdf/d8f1e5f5-251b-4a69-93e3-079031b74bd3">ESS Guidelines on Seasonal Adjustment (2015)</a>,
+the automatic procedures should be applied for the transformation choice,
+however in case of the most problematic series the manual selection is
+recommended. The manual selection of the transformation is usually made
+in the specifications used for a regular data production.</p>
+<ol style="list-style-type: decimal">
+<li><p>To determine the transformation choice first <a href="../reference-manual/sa-specifications.html#pre-defined-specifications">create and open a new
+specification</a>.</p></li>
+<li><p>For <em>tramo</em> and <em>tramoseats</em> specifications from the
+<em>Transformation</em> section choose the <em>function</em> option and input the
+<em>fct</em> parameter’s value. Click <em>OK</em> to confirm your choice.</p>
+<div class="figure">
+<img src="All_images/UG_SA_image39.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>Transformation’s option for the <em>tramoseats</em> specification</strong></p></li>
+<li><p>For the <em>regarima</em> and <em>x13</em> specifications from the
+<em>Transformation</em> section choose the <em>function</em> option and <em>Aic
+difference</em> parameter’s value. Click <em>OK</em> to confirm your choice.</p>
+<div class="figure">
+<img src="All_images/UG_SA_image40.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>Transformation’s option for <em>X13</em> specification</strong></p>
+<p>It is also possible to change the transformation’s options in the currently used specification (see <a href="../case-studies/detailedsa-spec.html"><em>Defining and modifying a specification</em></a> scenario, step 4).</p></li>
+</ol>
+</div>
+<div id="reg-arima-linarization" class="section level3 hasAnchor" number="4.6.3">
+<h3><span class="header-section-number">4.6.3</span> Reg-Arima linarization<a href="seasonal-adjustment-1.html#reg-arima-linarization" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Old page mixing
+* general info, parameters
+* gui display
+* pasted in GUI chapter
+* here
++ trim the gui part
++ add link to R (rjdemetra, go version 3 first but reference help pages)</p>
+<p>The <em>Model</em> node includes basic information about the outcome of the
+model identification procedure and checking the goodness of fit. The
+summary information about the final model is available directly from the
+main <em>Model</em> node. The content of this panel depends on the <a href="../reference-manual/modelling-specifications.html">settings</a> applied to the modelling procedure.</p>
+<div class="figure">
+<img src="All_images/image22_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The <em>Model</em> node in the navigation tree</strong></p>
+<p>The first part contains fundamental information about the model.</p>
+<div class="figure">
+<img src="All_images/image23_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The <em>Summary</em> section of the <em>Model</em> node</strong></p>
+<p><em>Estimation span</em> informs about the first and the last observation used
+for modelling. The notation of the estimation span varies according to
+the frequencies (for example, the span <span class="math display">\[2-1993 : 10-2006\]</span> represents a
+monthly time series and the span <span class="math display">\[II-1994 : I-2011\]</span> represents a
+quarterly time series). The message <em>Series has been log-transformed</em> is
+only displayed if a logarithmic transformation has been applied.</p>
+<p>In the case of <a href="../reference-manual/modelling-specifications.html">the pre-defined specifications</a>: TR0, TR1, TR3, RG0, RG1
+and RG3 no trading day effect is estimated. For TR2, RG2c, TR4 and RG4c
+pre-defined specifications, working day effects and the leap year effect
+are pre-tested and estimated if present. If the working day effect is
+significant, the pre-processing part includes the message <em>Working days
+effect (1 regressor)</em>. The message <em>Working days effect (2 regressors)</em>
+means that the leap year effect has also been estimated. For TR5 and
+RG5c the trading day effect and the leap year effect are pre-tested. If
+the trading day effect has been detected, either of the messages
+<em>Trading days effect (6 regressors)</em> or <em>Trading days effect (7
+regressors)</em> are displayed, depending whether the leap year effect has
+been detected or not. If the Easter effect is statistically significant,
+<em>Easter effect detected</em> is displayed.</p>
+<p>In this section the total number of detected outliers is displayed. The
+additional information on detected outliers, i.e. type, location and
+coefficients’ values, can be found in the <em>Arima model</em> subsection of
+the <em>Model</em> node.</p>
+<p>The <em>Final model</em> section informs about the outcome of the estimation
+process. <em>Number of effective observations</em> is the number of
+observations used to estimate the model, i.e. the number of observations
+of the transformed series (regularly and/or seasonally differenced)
+reduced by the <em>Number of estimated parameters</em>, which is the sum of
+regular and seasonal parameters for both autoregressive and moving
+average processes, mean effect, trading/working day effect, outliers,
+regressors and one.</p>
+<p><em>Likelihood</em> is a maximized value of a Likelihood<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a> function after
+the iterations processed in Exact Maximum Likelihood Estimation, which
+is a method used to estimate the model. This value is used by the model
+selection criteria: <em>AIC</em>, <em>AICC</em>, <em>BIC (corrected by length)</em> and
+<em>Hannan-Quinn</em><a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>. <em>Standard error of the regression (ML estimate)</em> is
+the standard error of the regression from Maximum Likelihood
+Estimation<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a>.</p>
+<p>The <em>scores at the solution</em> section presents the gradient of the
+loglikelihood. The different items of the scores are related to the
+different parameters of the ARIMA model. The output indicates to which
+extent the optimization procedure reached the maximum. At the maximum of
+the likelihood, it should be 0. However, it is never exactly the case,
+due to numerical approximations. Usually, the scores can be improved by
+using a higher precision (smaller tolerance). This precision is
+controlled by the <strong>Tolerance</strong> parameter in the <strong>Estimate</strong> section of
+the <em>Specifications</em> window (see how to use this parameter <a href="../reference-manual/modelling-spec-tramo.html#estimate">for Tramo</a> and <a href="../reference-manual/modelling-spec-arima.html#estimate">for
+Arima</a>).</p>
+<p>An example of the output is presented in the chart below.</p>
+<div class="figure">
+<img src="All_images/image24_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The content of the <em>Final model</em> section</strong></p>
+<p>Next, the estimated values of model parameters (<em>Coefficients</em>),
+t-statistics (<em>T-Stat</em>) and corresponding p-values (<em>P<span class="math display">\[\|T\|\&gt;t\]</span></em>) are
+displayed. JDemetra+ uses the following notation:</p>
+<ul>
+<li><p><em>Phi(p)</em> – the \(p^{}\) term in the non-seasonal
+autoregressive polynomial;</p></li>
+<li><p><em>Theta(q)</em> – the <span class="math inline">\(q^{\text{th}}\)</span> term in the non-seasonal moving
+average polynomial;</p></li>
+<li><p><em>BPhi(P)</em> – the <span class="math inline">\(P^{\text{th}}\)</span> term in the seasonal
+autoregressive polynomial;</p></li>
+<li><p><em>BTheta(Q)</em> – the <span class="math inline">\(Q^{\text{th}}\)</span> term in the seasonal moving
+average polynomial.</p></li>
+</ul>
+<p>In the example below, the ARIMA model (0,1,1)(0,1,1) was chosen, which
+means that one regular and one seasonal moving average parameter were
+identified and estimated. The p-values indicate that <em>BTheta(1)</em>
+parameter is significant in contrast to the <em>Theta(1)</em>, which is not
+significant <a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a>.</p>
+<div class="figure">
+<img src="All_images/image25_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The estimation’s results of the ARIMA model</strong></p>
+<p>For the <a href="../reference-manual/modelling-spec-tramo.html#tramo-specification--options-for-manual-identification-of-the-arima-model">fixed ARIMA parameters</a>, JDemetra+ shows
+only the values of the parameters. Figure below presents the output from
+the manually chosen ARIMA model (2,0,0)(0,1,1) with a fixed parameter
+<em>BTheta(1).</em> For the fixed parameter the <em>T-Stat</em> and <em>(P|T|&gt;t)</em> are
+not displayed as no estimation is done for this parameter.</p>
+<div class="figure">
+<img src="All_images/image26_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The results of the estimation of the ARIMA model with a fixed coefficient</strong></p>
+<p>If the ARIMA model contains a constant term (detected automatically or
+introduced by the user), the estimated value and related statistics are
+reported.</p>
+<div class="figure">
+<img src="All_images/image27_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The results of the estimation of a mean effect</strong></p>
+<p>JDemetra+ presents estimated values of the coefficients of one or six
+regressors depending on the type of a calendar effect specification. For
+a working days effect one regressor is estimated.</p>
+<div class="figure">
+<img src="All_images/image28_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The results of the estimation of a working day effect</strong></p>
+<p>When a trading days effect is estimated the <em>Joint F-test</em> value is
+reported under the table that presents estimated values. When the result
+of <em>Joint F-test</em> indicates that the trading day variables are jointly
+not significant the test result is displayed in red.</p>
+<div class="figure">
+<img src="All_images/image29_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The results of the estimation of a trading day effect: the case of jointly not significant variables</strong></p>
+<p>In the example below the RSA5c specification has been used and a trading
+day effect has been detected. In spite of the fact that some trading day
+regressors are not significant at the 5% significance level, the outcome
+of the joint F-test indicates that the trading day regressors are
+jointly significant (the F-test statistic is lower than 5%).</p>
+<div class="figure">
+<img src="All_images/image30_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The results of the estimation of a trading day effect: the case of jointly significant variables</strong></p>
+<p>If a leap year regressor has been used in the model specification, the
+value of the estimated leap year coefficient is also reported with the
+corresponding t-statistics and p-value. As the p-value presented on the
+picture below is greater than 0.05, it indicates that the leap year
+effect is not significant.</p>
+<div class="figure">
+<img src="All_images/image31_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The results of the estimation of a leap year effect</strong></p>
+<p>When the option <a href="../reference-manual/modelling-spec-tramo.html#regression"><em>UserDefined</em></a> is used,
+JDemetra+ displays the <em>User-defined calendar variables</em> section with
+variables and corresponding estimation results (the values of the
+parameters, corresponding t-statistics and p-values). The outcome of the
+joint F-test is displayed when more than one user-defined calendar
+variable is used.</p>
+<div class="figure">
+<img src="All_images/image32_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The results of the estimation of user-defined calendar variables</strong></p>
+<p>When the Easter effect is estimated, the following table is displayed in
+the output. In the case presented below Easter has a negative,
+significant effect on the time series.</p>
+<div class="figure">
+<img src="All_images/image33_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The results of the estimation of the Easter effect</strong></p>
+<p>JDemetra+ also presents the results of an outlier detection procedure.
+The table includes the type of outlier, its date, the value of the
+coefficient and corresponding t-statistics and p-values.</p>
+<div class="figure">
+<img src="All_images/image34_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The results of the outlier identification procedure</strong></p>
+<p>In all pre-defined specifications, except for TR0 and RG0, only additive
+outliers, temporary changes and level shifts are considered in the
+automatic outlier identification procedure. When seasonal outliers are
+also enabled, they appear in the same table as other outliers.</p>
+<div class="figure">
+<img src="All_images/image35_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The results of the outlier identification procedure that enables seasonal outliers</strong></p>
+<p>Results for <a href="../reference-manual/modelling-spec-tramo.html#regression">pre-specified outliers</a> are
+displayed in a separate table.</p>
+<div class="figure">
+<img src="All_images/image36_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The results of the estimation of the pre-specified outliers</strong></p>
+<p>Regression variables, like ramps and intervention variables, are not
+identified automatically. They need to be defined by the user. The
+results of an estimation of ramps that are pre-defined types of
+regression variables are displayed in a separate table. All information
+concerning ramps, including spans, estimated coefficients and related
+statistics, is shown in a separate table.</p>
+<div class="figure">
+<img src="All_images/image37_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The results of the estimation of the ramp effect</strong></p>
+<p>All other intervention variables with corresponding statistics are shown
+under the <em>Intervention variable(s)</em> table.</p>
+<div class="figure">
+<img src="All_images/image38_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The results of the estimation of the intervention variable</strong></p>
+<p>User-defined variables are marked as <em>Vars-1.x_1, Vars-1.x_2</em>, …,
+<em>Vars-1.x_n</em> and displayed in the separate tables.</p>
+<div class="figure">
+<img src="All_images/image39_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The results of the estimation of the user-defined variables</strong></p>
+<p>JDemetra+ also reports a list of missing observations, if any. JDemetra+
+applies the AO approach to the estimation of the missing
+observations<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a>.</p>
+<div class="figure">
+<img src="All_images/image40_RMSB.jpg" alt="" />
+<p class="caption">Text</p>
+</div>
+<p><strong>The results of the estimation of the missing observations</strong></p>
+<p>Detailed results are divided into several sections and are investigated
+in the following sections:
+- <a href="../reference-manual/forecasts.html">Forecasts</a>
+- <a href="../reference-manual/regressors.html">Regressors</a>
+- <a href="../reference-manual/arima.html">ARIMA</a>
+- <a href="../reference-manual/pre-adjustment-series.html">Pre-adjustment series</a>
+- <a href="../reference-manual/residuals.html">Residuals</a>
+- <a href="../reference-manual/likelihood.html">Likelihood</a></p>
+</div>
 </div>
 <div id="decomposition" class="section level2 hasAnchor" number="4.7">
 <h2><span class="header-section-number">4.7</span> Decomposition<a href="seasonal-adjustment-1.html#decomposition" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -1793,7 +2274,7 @@ assumption that the number of past periods in which the conditions
 causing seasonal behaviour are sufficiently homogenous is the same in
 all months/quarters. However, this assumption does not always hold.
 Seasonal causes may change in one month, while staying the same in
-others<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>. For instance, seasonal heteroskedasticity might require
+others<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a>. For instance, seasonal heteroskedasticity might require
 different filter lengths in different months or quarters.</p>
 <p>Another interesting example is industrial production in Germany. It can
 be influenced by school holidays, since many employees have
@@ -1833,15 +2314,15 @@ is always provided by TRAMO and includes the original series <span class="math i
 the linearized series <span class="math inline">\(x_{t}\)</span> (i.e. the original series <span class="math inline">\(y_{t}\ \)</span>with
 the deterministic effects removed), the ARIMA model for the stochastic
 (linearized) time series <span class="math inline">\(x_{t}\)</span> and the deterministic effects (calendar
-effects, outliers and other regression variable effects)<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>. SEATS
+effects, outliers and other regression variable effects)<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a>. SEATS
 decomposes the linearized series (and the ARIMA model) into trend,
 seasonal, transitory and irregular components, provides forecasts for
 these components, together with the associated standard errors, and
 finally assign the deterministic effects to each component yielding the
-<em>final</em> components<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a>. The Minimum Mean Square Error (MMSE)
+<em>final</em> components<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a>. The Minimum Mean Square Error (MMSE)
 estimators of the components are computed with a Wiener-Kolmogorov
 filter applied to the finite series extended with forecasts and
-backcasts<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a>.</p>
+backcasts<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a>.</p>
 <p>One of the fundamental assumptions made by SEATS is that the linearized
 time series <span class="math inline">\(x_{t}\)</span> follows the ARIMA model</p>
 <p><span class="math display">\[\phi(B)\delta\left( B \right)x_{t} = \theta(B)a_{t}\]</span> <span class="math display">\[1\]</span> <!---\[7.25\]--></p>
@@ -1887,7 +2368,7 @@ constant variance <span class="math inline">\(V(a_{i})\)</span> and <span class=
 These disturbances are functions of the innovations in the series and
 are called "pseudo-innovations" in the literature concerning the AMB
 decomposition as they refer to the components that are never observed
-<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a>. In the JDemetra+ documentation the term "innovations" is used to
+<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a>. In the JDemetra+ documentation the term "innovations" is used to
 refer to the "pseudo-innovations".</p>
 <p>The following assumptions hold for <span class="math display">\[4\]</span> <!---\[7.28\]-->. For each <span class="math inline">\(\text{i}\)</span> the
 polynomials <span class="math inline">\(\phi_{i}\left( B \right)\)</span>, <span class="math inline">\(\delta_{i}\left( B \right)\)</span> and
@@ -1896,7 +2377,7 @@ polynomials <span class="math inline">\(\phi_{i}\left( B \right)\)</span>, <span
 <span class="math inline">\(\phi_{i}\left( B \right)\)</span> lie outside, while all the roots of
 <span class="math inline">\(\theta_{i}\left( B \right)\ \)</span>are on or outside the unit circle. This
 means that nonstationary and noninvertible components are allowed. Since
-different roots of the AR polynomial induce peaks in the spectrum<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>
+different roots of the AR polynomial induce peaks in the spectrum<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a>
 of the series at different frequencies, and given that different
 components are associated with the spectral peaks for different
 frequencies, it is assumed that for <span class="math inline">\(i \neq j\)</span> the
@@ -1908,7 +2389,7 @@ the overall series. In fact, since the unit root of
 <span class="math inline">\(\theta_{i}\left( B \right)\)</span> induce a spectral zero, when the
 polynomials <span class="math inline">\(\theta_{i}\left( B \right),\ i = 1,\ldots,k\)</span> share no unit
 root in common, there is no frequency for which all component spectra
-become zero<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a>.</p>
+become zero<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a>.</p>
 <p>Since aggregation of ARIMA models yields ARIMA models, the series
 <span class="math inline">\(x_{t}\ \)</span>will also follow an ARIMA model, as in <span class="math display">\[2\]</span> <!---\[7.26\]-->, and
 consequently the following identity can be derived:</p>
@@ -1932,7 +2413,7 @@ ii) the canonical decomposition, i.e. the decomposition that allocate
 all additive white noise to the irregular component (yielding
 noninvertible components except the irregular).</p>
 <p>To understand how SEATS factorizes the AR polynomials, first a concept
-of a root will be explored<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a>.</p>
+of a root will be explored<a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a>.</p>
 <p>The equation <span class="math display">\[2\]</span> <!---\[7.26\]--> can be expressed as:</p>
 <p><span class="math display">\[\psi^{- 1}(B)x_{t} = a_{t}(1 + \varphi_{1}B + \ldots\varphi_{p}B^{p})x_{t} =(1 + \theta_{1}B + \ldots\theta_{q}B^{q})a_{t}\]</span>, <span class="math display">\[8\]</span> <!---\[7.32\]--></p>
 <p>Let us now consider <span class="math display">\[2\]</span> <!---\[7.26\]--> in the inverted form:</p>
@@ -2044,7 +2525,7 @@ time series.</p>
 | <span class="math display">\[\pi\]</span> | 0.500 | 6 | 2 |</p>
 <p>In JDemetra+ SEATS assigns the roots of the AR full polynomial to the
 components according to their associated modulus and frequency,
-i.e.:<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a></p>
+i.e.:<a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a></p>
 <ul>
 <li><p>Roots of <span class="math inline">\(\left( 1 - B \right)^{d}\)</span> are assigned to trend component.</p></li>
 <li><p>Roots of
@@ -2055,7 +2536,7 @@ of<span class="math inline">\({\ \left( 1 - B \right)}^{d_{s}}\)</span>) and to 
 <li><p>When the modulus of the inverse of a real positive root of
 <span class="math inline">\(\varphi(B)\)</span> is greater than <span class="math inline">\(k\)</span> or equal to <span class="math inline">\(k\)</span>, where <span class="math inline">\(k\)</span> is the
 threshold value controlled by the <em>Trend boundary</em> parameter(in the
-original SEATS it is controlled by <em>rmod</em>)<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a>, then the root is
+original SEATS it is controlled by <em>rmod</em>)<a href="#fn25" class="footnote-ref" id="fnref25"><sup>25</sup></a>, then the root is
 assigned to the trend component. Otherwise it is assigned to the
 transitory component.</p></li>
 <li><p>Real negative inverse roots of
@@ -2091,7 +2572,7 @@ there is no AR factor allocated to it.</p>
 presented by <span class="math display">\[2\]</span> <!---\[7.26\]--> yields to the identification of the AR polynomials
 for the components which contain, respectively, the AR roots associated
 with the trend component, the seasonal component and the transitory
-component.<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a></p>
+component.<a href="#fn26" class="footnote-ref" id="fnref26"><sup>26</sup></a></p>
 <p>Then with the partial fraction expansion the spectrum of the final
 components are obtained.</p>
 <p>For example, the Airline model for a monthly time series:</p>
@@ -2105,10 +2586,10 @@ components are obtained.</p>
 <p>The transitory component is not present in this case and the irregular
 component is the white noise.</p>
 <p>The partial fractions decomposition is performed in a frequency domain.
-In essence, it consists in portioning of the pseudo-spectrum<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a>
+In essence, it consists in portioning of the pseudo-spectrum<a href="#fn27" class="footnote-ref" id="fnref27"><sup>27</sup></a>
 of <span class="math inline">\(x_{t}\)</span> into additive spectra of the components. When the AMB
 decomposition of the ARIMA model results in the non-negative spectra for
-all components, the decomposition is called admissible<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a>. In such
+all components, the decomposition is called admissible<a href="#fn28" class="footnote-ref" id="fnref28"><sup>28</sup></a>. In such
 case an infinite number of admissible decompositions exists, i.e.
 decompositions that yield the non-negative spectra of all components.
 Therefore, the MA polynomials and the innovation variances cannot be yet
@@ -2116,17 +2597,17 @@ identified from the model of <span class="math inline">\(x_{t}\)</span>. As sket
 solve this underidentification problem and identify a unique
 decomposition, it is assumed that for each component the order of the MA
 polynomial is no greater than the order of the AR polynomial and the
-canonical solution of S.C. Hillmer and G.C. Tiao is applied<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a>, i.e.
+canonical solution of S.C. Hillmer and G.C. Tiao is applied<a href="#fn29" class="footnote-ref" id="fnref29"><sup>29</sup></a>, i.e.
 all additive white noise is added to the irregular component As a
 consequence all components derived from the canonical decomposition,
 except from the irregular, have a spectral minimum of zero and are thus
-noninvertible<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a>. Given the stochastic features of the series, it can
+noninvertible<a href="#fn30" class="footnote-ref" id="fnref30"><sup>30</sup></a>. Given the stochastic features of the series, it can
 be shown by that the canonical decomposition produces as stable as
 possible trend and seasonal components since it maximizes the variance
 of the irregular and minimizes the variance of the other
-components<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a>. However, there is a price to be paid as canonical
+components<a href="#fn31" class="footnote-ref" id="fnref31"><sup>31</sup></a>. However, there is a price to be paid as canonical
 components can produce larger revisions in the preliminary estimators of
-the component<a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a> than any other admissible decomposition.</p>
+the component<a href="#fn32" class="footnote-ref" id="fnref32"><sup>32</sup></a> than any other admissible decomposition.</p>
 <p>The figure below represents the pseudo-spectrum for the canonical trend and an
 admissible trend.</p>
 <div class="figure">
@@ -2152,7 +2633,7 @@ the figure below: The pseudo-spectrum for a monthly series. The frequency
 <span class="math inline">\(\epsilon_{1},\ \epsilon_{2} &gt; 0\)</span> and
 <span class="math inline">\(\epsilon_{1} &lt; \ \frac{\pi}{6} - \epsilon_{2}\ \)</span> are usually associated
 with the business-cycle and correspond to a period longer than a year
-and bounded<a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a>. The frequencies in the range <span class="math display">\[$\frac{\pi}{6},\ \pi$\]</span>
+and bounded<a href="#fn33" class="footnote-ref" id="fnref33"><sup>33</sup></a>. The frequencies in the range <span class="math display">\[$\frac{\pi}{6},\ \pi$\]</span>
 are associated with the short term movements, whose cycle is completed
 in less than a year. If a series contains an important periodic
 component, its spectrum reveals a peak around the corresponding
@@ -2160,7 +2641,7 @@ frequency and in the ARIMA model it is captured by an AR root. In the
 example below spectral peaks occur at the frequency <span class="math inline">\(\omega = 0\)</span> and at
 the seasonal frequencies ( <span class="math inline">\(\frac{\pi}{6}\)</span>,
 <span class="math inline">\(\frac{2\pi}{6},\ \frac{3\pi}{6},\ \frac{4\pi}{6},\frac{5\pi}{6},\pi\)</span>).
-<a href="#fn25" class="footnote-ref" id="fnref25"><sup>25</sup></a></p>
+<a href="#fn34" class="footnote-ref" id="fnref34"><sup>34</sup></a></p>
 <div class="figure">
 <img src="All_images/UG_A_image6.png" alt="" />
 <p class="caption">Text</p>
@@ -2179,7 +2660,7 @@ example figure below, four components were obtained).</p>
 <h4><span class="header-section-number">4.7.2.2</span> Estimation of the components with the Wiener-Kolmogorow filter<a href="seasonal-adjustment-1.html#estimation-of-the-components-with-the-wiener-kolmogorow-filter" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The various components are estimated using Wiener-Kolmogorow (WK)
 filters. JDemetra+ includes three options to estimate the WK filter,
-namely <em>Burman</em>, <em>KalmanSmoother</em> and <em>MCElroyMatrix</em><a href="#fn26" class="footnote-ref" id="fnref26"><sup>26</sup></a>. Here the
+namely <em>Burman</em>, <em>KalmanSmoother</em> and <em>MCElroyMatrix</em><a href="#fn35" class="footnote-ref" id="fnref35"><sup>35</sup></a>. Here the
 first of abovementioned options, proposed by BURMAN, J.P. (1980) will be
 explained.</p>
 <p>The estimation procedure and the properties of the WK filter are easier
@@ -2202,7 +2683,7 @@ minimizes <span class="math display">\[E\lbrack\left({s_{t}-{\widehat{s}}_{t})}^
 Under the normality assumption <span class="math display">\[{\widehat{s}}_{t|T}\]</span> is also equal to
 the conditional expectation <span class="math display">\[E\left(s_{t}|X_{T}\right)\]</span>, so it
 can be presented as a linear function of the elements
-in <span class="math display">\[X_{T}\]</span>.<a href="#fn27" class="footnote-ref" id="fnref27"><sup>27</sup></a> WHITTLE (1963) shows that the MMSE estimator of
+in <span class="math display">\[X_{T}\]</span>.<a href="#fn36" class="footnote-ref" id="fnref36"><sup>36</sup></a> WHITTLE (1963) shows that the MMSE estimator of
 <span class="math display">\[{\widehat{s}}_{t}\]</span> is:</p>
 <p><span class="math display">\[{\widehat{s}}_{t} = k_{s}\frac{\psi_{s}(B)\psi_{s}(F)}{\psi(B)\psi(F)}x_{t}\]</span>, <span class="math display">\[22\]</span> <!---\[7.46\]--></p>
 <p>where <span class="math display">\[\psi(B)= \frac{\theta(B)}{\phi(B)}\]</span>,</p>
@@ -2259,7 +2740,7 @@ decomposition.</p>
 the dangers of under and overestimation with an ad-hoc filtering. For
 example, for the series with a highly stochastic seasonal component the
 filter adapts to the width of the seasonal peaks and the seasonally
-adjusted series does not display any spurious seasonality<a href="#fn28" class="footnote-ref" id="fnref28"><sup>28</sup></a>. Examples
+adjusted series does not display any spurious seasonality<a href="#fn37" class="footnote-ref" id="fnref37"><sup>37</sup></a>. Examples
 of WK filters for stochastic and stable seasonal components are
 presented on the figure below.</p>
 <div class="figure">
@@ -2272,12 +2753,12 @@ presented on the figure below.</p>
 convergence of the WK filter guarantees that, in practice, it could be
 approximated by a truncated (finite) filter and, in most applications,
 for large <span class="math display">\[k\]</span> the estimator for the central periods of the
-series can be safely seen as generated by the WK filter<a href="#fn29" class="footnote-ref" id="fnref29"><sup>29</sup></a>:</p>
+series can be safely seen as generated by the WK filter<a href="#fn38" class="footnote-ref" id="fnref38"><sup>38</sup></a>:</p>
 <p><span class="math display">\[{\widehat{s}}_{t}=\nu_{k}x_{t-k} + \ldots + \nu_{0}x_{t} + \ldots + \nu_{k}x_{t+k}\]</span>. <span class="math display">\[28\]</span> <!---\[7.52\]--></p>
 <p>When <span class="math inline">\(T &gt; 2L + 1\)</span>, where <span class="math inline">\(T\)</span> is the last observed period, and <span class="math inline">\(L\)</span> is an
 a priori number that typically expands between 3 and 5 years, the
 estimator expressed by <span class="math display">\[23\]</span> <!---\[7.47\]--> can be assumed as the final (historical)
-estimator for the central observations of the series<a href="#fn30" class="footnote-ref" id="fnref30"><sup>30</sup></a>. In practice,
+estimator for the central observations of the series<a href="#fn39" class="footnote-ref" id="fnref39"><sup>39</sup></a>. In practice,
 the Wiener-Kolmogorov filter is applied to <span class="math inline">\(x_{t}\)</span> extended with
 forecasts and backcasts from the ARIMA model. The final or historical
 estimator of <span class="math display">\[{\widehat{s}}_{t}\]</span>, is obtained with a doubly infinite
@@ -2288,7 +2769,7 @@ provides the final estimator of <span class="math inline">\(s_{t}\ \)</span>is e
 the <span class="math inline">\(s_{t}\ \)</span>and <span class="math inline">\(x_{t}\)</span> pseudo-spectra:</p>
 <p><span class="math display">\[\widetilde{\nu}\left( \omega \right) = \frac{g_{s}(\omega)}{g_{x}(\omega)}\]</span>. <span class="math display">\[29\]</span> <!---\[7.53\]--></p>
 <p>The function <span class="math inline">\(\widetilde{\nu}\left( \omega \right)\ \)</span>is also referred as
-the gain of the filter.<a href="#fn31" class="footnote-ref" id="fnref31"><sup>31</sup></a> GÓMEZ, V., and MARAVALL, A. (2001a) show
+the gain of the filter.<a href="#fn40" class="footnote-ref" id="fnref40"><sup>40</sup></a> GÓMEZ, V., and MARAVALL, A. (2001a) show
 that when for some frequency the signal (the seasonally adjusted series)
 dominates the noise (seasonal fluctuations) the gain
 <span class="math inline">\(\widetilde{\nu}\left( \omega \right)\)</span> approaches 1. On the contrary,
@@ -2337,7 +2818,7 @@ analysed in the figure above (Figure: WK filters for stable and stochastic seaso
 be derived that
 <span class="math inline">\(g_{\widehat{s}}\left( \omega \right) = \widetilde{\nu}\left( \omega \right)g_{s}(\omega)\)</span>.
 As a result, the estimator will always underestimate the component, i.e.
-it will be always more stable that the component.<a href="#fn32" class="footnote-ref" id="fnref32"><sup>32</sup></a></p>
+it will be always more stable that the component.<a href="#fn41" class="footnote-ref" id="fnref41"><sup>41</sup></a></p>
 <p>Since
 <span class="math inline">\(g_{\widehat{n}}\left( \omega \right) &lt; g_{n}\left( \omega \right)\)</span>
 and<span class="math inline">\(\ g_{\widehat{s}}\left( \omega \right) &lt; g_{s}\left( \omega \right)\)</span>
@@ -2379,11 +2860,11 @@ model on <span class="math display">\[x_{t}\]</span>. When <span class="math dis
 the concurrent estimator. As the forecasts are linear functions of
 present and past observations of <span class="math display">\[x_{t}\]</span>, the preliminary
 estimator <span class="math display">\[{\widehat{x}}_{it}\]</span> will be a truncated asymmetric
-filter applied to <span class="math display">\[x_{t}\]</span> that generates a phase effect<a href="#fn33" class="footnote-ref" id="fnref33"><sup>33</sup></a>.</p>
+filter applied to <span class="math display">\[x_{t}\]</span> that generates a phase effect<a href="#fn42" class="footnote-ref" id="fnref42"><sup>42</sup></a>.</p>
 <p>When a new observation <span class="math display">\[x_{T + 1}\]</span> becomes available the forecast
 <span class="math display">\[{\widehat{x}}_{T + 1|T}\]</span> is replaced by the observation and the
 forecast <span class="math display">\[{\widehat{x}}_{iT + j|T}\]</span>, <span class="math display">\[j &gt; 1\]</span> are updated to
-<span class="math display">\[x_{T + j|T + 1}\]</span> resulting in the revision error<a href="#fn34" class="footnote-ref" id="fnref34"><sup>34</sup></a>. The total error
+<span class="math display">\[x_{T + j|T + 1}\]</span> resulting in the revision error<a href="#fn43" class="footnote-ref" id="fnref43"><sup>43</sup></a>. The total error
 in the preliminary estimator <span class="math display">\[d_{it|t + k}\]</span> is expressed as a sum of the
 final estimation error (<span class="math display">\[e_{it}\]</span>) and the revision error
 (<span class="math display">\[r_{it|t + k}\]</span>), i.e.:</p>
@@ -2396,7 +2877,7 @@ d_{it|t + k} = x_{it}-{\widehat{x}}_{it|t + k} = \left(x_{it} - {\widehat{x}}_{i
 last observation is <span class="math display">\[x_{t + k}\]</span>.</p>
 <p>Therefore the preliminary estimator is subject not only to the final
 error but also to a revision error, which are orthogonal to each
-other<a href="#fn35" class="footnote-ref" id="fnref35"><sup>35</sup></a>. The revision error decreases as <span class="math display">\[k\]</span> increases, until
+other<a href="#fn44" class="footnote-ref" id="fnref44"><sup>44</sup></a>. The revision error decreases as <span class="math display">\[k\]</span> increases, until
 it can be assumed equal to 0 for large enough <span class="math display">\[k\]</span>.</p>
 <p>It’s worth remembering that SEATS estimates the unobservable components
 of the time series so the "true" components are never observed.
@@ -2416,7 +2897,7 @@ horizon of revisions.</p>
 <p>The estimator of the component is calculated as
 <span class="math display">\[{\widehat{x}}_{it} = \nu_{s}\left(B,F\right)x_{t}\]</span>. By replacing
 <span class="math display">\[x_{it}=\frac{\theta(B)}{\gamma(B)\delta(B)}a_{t}\]</span>, the
-component estimator can be expressed as<a href="#fn36" class="footnote-ref" id="fnref36"><sup>36</sup></a>:</p>
+component estimator can be expressed as<a href="#fn45" class="footnote-ref" id="fnref45"><sup>45</sup></a>:</p>
 <p><span class="math display">\[
   {\widehat{x}}_{it} = \xi_{s}\left(B,F\right)a_{t}
   \]</span>, <span class="math display">\[33\]</span> <!---\[7.57\]--></p>
@@ -2424,7 +2905,7 @@ component estimator can be expressed as<a href="#fn36" class="footnote-ref" id="
 <span class="math inline">\(\xi_{s}\left( B,F \right) = \ldots + \xi_{j}B^{j} + \ldots + \xi_{1}B + \xi_{0} + \xi_{- 1}F\ldots\xi_{- j}F^{j} + \ldots\)</span>.</p>
 <p>This representation shows the estimator as a filter applied to the
 innovation <span class="math display">\[a_{t}\]</span>, rather than on the
-series <span class="math display">\[x_{t}\]</span><a href="#fn37" class="footnote-ref" id="fnref37"><sup>37</sup></a>. Hence, the filter from <span class="math display">\[32\]</span> <!---\[7.56\]--> can be
+series <span class="math display">\[x_{t}\]</span><a href="#fn46" class="footnote-ref" id="fnref46"><sup>46</sup></a>. Hence, the filter from <span class="math display">\[32\]</span> <!---\[7.56\]--> can be
 divided into two components: the first one, i.e.
 <span class="math display">\[\ldots + \xi_{j}B^{j}+ \ldots+ \xi_{1}B + \xi_{0}\]</span>, applies to
 prior and concurrent innovations, the second one, i.e.
@@ -2460,6 +2941,225 @@ r_{it} = {\widehat{x}}_{it} - {\widehat{x}}_{it|t} = \xi_{i}(F)^{+}a_{t + 1}
 preliminary estimators are cointegrated. From expression <span class="math display">\[25\]</span> <!---\[7.49\]--> the
 relative size of the full revision and the speed of convergence can be
 obtained.</p>
+</div>
+</div>
+<div id="quality-assesment-of-the-seasonal-adjustement-process" class="section level3 hasAnchor" number="4.7.3">
+<h3><span class="header-section-number">4.7.3</span> Quality assesment of the seasonal adjustement process<a href="seasonal-adjustment-1.html#quality-assesment-of-the-seasonal-adjustement-process" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="diagnostics-reading" class="section level4 hasAnchor" number="4.7.3.1">
+<h4><span class="header-section-number">4.7.3.1</span> Diagnostics reading<a href="seasonal-adjustment-1.html#diagnostics-reading" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+</div>
+<div id="residual-seasonality" class="section level4 hasAnchor" number="4.7.3.2">
+<h4><span class="header-section-number">4.7.3.2</span> Residual seasonality<a href="seasonal-adjustment-1.html#residual-seasonality" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>We consider below tests on the seasonally adjusted series (<span class="math inline">\(sa_t\)</span>) or on the irregular component (<span class="math inline">\(irr_t\)</span>).
+When the reasoning applies on both components, we will use <span class="math inline">\(y_t\)</span>.
+The functions <span class="math inline">\(stdev\)</span> stands for “standard deviation” and <span class="math inline">\(rms\)</span> for “root mean squares”</p>
+<p>The tests are computed on the log-transformed components in the case of multiplicative decomposition.</p>
+</div>
+</div>
+<div id="non-significant-irregular-1" class="section level3 hasAnchor" number="4.7.4">
+<h3><span class="header-section-number">4.7.4</span> Non significant irregular<a href="seasonal-adjustment-1.html#non-significant-irregular-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When <span class="math inline">\(ir_t\)</span> is not significant, we don’t compute the tests on it, to avoid irrelevant results.
+We consider that <span class="math inline">\(ir_t\)</span> is significant if <span class="math inline">\(stdev( ir_t)&gt;0.01\)</span> (multiplicative case) or if <span class="math inline">\(stdev(ir_t)/rms(sa_t) &gt;0.01\)</span> (additive case).</p>
+</div>
+<div id="qs-test" class="section level3 hasAnchor" number="4.7.5">
+<h3><span class="header-section-number">4.7.5</span> QS test<a href="seasonal-adjustment-1.html#qs-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The QS test is similar to the Ljung-Box test computed on the first two seasonal lags, except that negative auto-correlations are set to 0.
+The tests are computed on <span class="math inline">\(\tilde \Delta sa_t\)</span> and on <span class="math inline">\(\tilde \Delta irr_t\)</span>. The operator <span class="math inline">\(\tilde \Delta\)</span> applies as much differencing as needed on the (log-transformed) series and corrects the result for mean effect.</p>
+<p>The tests are not computed if the differences are not “significant”. <span class="math inline">\(\tilde \Delta y_t\)</span> is significant if <span class="math inline">\(stdev(\tilde \Delta y_t)/rms(y_t) &gt;0.005\)</span>.</p>
+</div>
+<div id="f-test-1" class="section level3 hasAnchor" number="4.7.6">
+<h3><span class="header-section-number">4.7.6</span> F test<a href="seasonal-adjustment-1.html#f-test-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We compute by OLS the following model (SD = contrasts of seasonal dummies, freq-1 variables):</p>
+<p><span class="math display">\[y_t=\mu + \alpha y_{t-1} + \beta SD_t + \epsilon_t \]</span></p>
+<p>The tests are the usual joint F-tests on <span class="math inline">\(\beta \quad (H_0:\beta=0)\)</span>.
+By default, we compute the tests on the 8 last years of the components, so that they might highlight moving seasonal effects.</p>
+<p>We could consider various modelling of the series. For instance, <span class="math inline">\(y_t\)</span> could follow an ARIMA model, pre-specified or automatically identified. The solution used in JD+ 2.2 has the advantage of being fast and robust. It is rather similar to what is used, for instance, in the Canova-Hansen test.</p>
+<div id="revision-history" class="section level4 hasAnchor" number="4.7.6.1">
+<h4><span class="header-section-number">4.7.6.1</span> Revision history<a href="seasonal-adjustment-1.html#revision-history" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>link to implementation in GUI</li>
+<li>add implemenation in R ?</li>
+<li>add illustrations ? (gui graphs ? estp training)</li>
+</ul>
+<p>Revisions are calculated as differences between the first (earliest)
+adjustment of an observation at time <span class="math inline">\(t\)</span>, computed when this observation
+is the last observation of the time series (<em>concurrent adjustment,</em>
+denoted as <span class="math inline">\(A_{t|t}\)</span>) and a later adjustment based on all future data
+available at the time of the diagnostic analysis (<em>the</em> <em>most recent</em>
+<em>adjustment,</em> denoted as <span class="math inline">\(A_{t|N}\)</span>).</p>
+<p>In the case of the multiplicative decomposition the revision history of
+the seasonal adjustment from time <span class="math inline">\(N_{0}\ \)</span>to <span class="math inline">\(N_{1}\)</span> is a sequence of
+<span class="math inline">\(R_{t|N}^{A}\)</span> calculated in the following way :</p>
+<p><span class="math display">\[
+  R_{t|N}^{A} = 100 \times \frac{A_{t|N} - A_{t|t}}{A_{t|t}}
+  \]</span></p>
+<p>The revision history of the trend is computed in the same manner.</p>
+<p>With an additive decomposition <span class="math inline">\(R_{t|N}^{A}\)</span> is calculated in the same
+way if all values <span class="math inline">\(A_{t|t}\)</span> have the same sign. Otherwise differences
+are calculated as:</p>
+<p><span class="math display">\[
+  R_{t|N}^{A} = A_{t|N} - A_{t|t}
+  \]</span></p>
+<p>The analogous expression for the trend component is:</p>
+<p><span class="math display">\[
+  R_{t|N}^{T} = T_{t|N} - T_{t|t}
+  \]</span></p>
+<p>Revision in the period-to-period (month-on-month or quarter-to-quarter)
+change in the seasonally adjusted series at time <span class="math inline">\(t\)</span> calculated from the
+series <span class="math inline">\(y_{1},y_{2},\ldots y_{n}\)</span> is defined as:</p>
+<p><span class="math display">\[
+  R_{t}^{A} = C_{t|N} - C_{t|t}
+  \]</span></p>
+<p>where <span class="math display">\[
+\text{C}_{t|n}^{A} = \frac{A_{t|n} - A_{t - 1|n}}{A_{t - 1|n}}
+\]</span>.</p>
+<p>Revisions for the period-to-period changes in the trend component are
+computed in the same manner.</p>
+</div>
+</div>
+<div id="sliding-spans" class="section level3 hasAnchor" number="4.7.7">
+<h3><span class="header-section-number">4.7.7</span> Sliding spans<a href="seasonal-adjustment-1.html#sliding-spans" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The sliding spans technique involves the comparison of the correlated
+seasonal adjustments of a given period obtained by applying the
+adjustment procedure to a sequence of two, three or four overlapping
+spans of data, all of which contain this period (month or quarter)<a href="#fn47" class="footnote-ref" id="fnref47"><sup>47</sup></a>.</p>
+<p>Each period that belongs to more than one span is examined to see if its
+seasonal adjustments vary more than a specified amount across the
+spans<a href="#fn48" class="footnote-ref" id="fnref48"><sup>48</sup></a>. For the multiplicative decomposition a seasonal factor is
+regarded to be unreliable if the following condition is fulfilled:</p>
+<p><span class="math display">\[
+  S_{t}^{\max} = \frac{\max_{k \in N_{t}}S_{t}\left( k \right) - \min_{k \in N_{t}}S_{t}(k)}{\min_{k \in N_{t}}S_{t}(k)} &gt; 0.03
+  \]</span></p>
+<p>where:</p>
+<p><span class="math inline">\(S_{t}(k)\)</span> – the seasonal factor estimated from span <span class="math inline">\(k\)</span> for month
+(quarter) <span class="math inline">\(t\)</span>;</p>
+<p><span class="math inline">\(N_{t}\)</span> – {<span class="math inline">\(\text{k}\)</span>: month (quarter) <span class="math inline">\(\text{t}\)</span> is in the <span class="math inline">\(k\)</span>-th
+span}.</p>
+<p>For the additive decomposition JDemetra+ uses the rule in equation [2]
+for checking for the reliability of the seasonal factor.</p>
+<p><span class="math display">\[
+  S_{t}^{\max} = \frac{\max_{k \in N_{t}}S_{t}\left( k \right) - \min_{k \in N_{t}}S_{t}(k)}{\sqrt{\frac{\sum_{i}^{n}y_{i}^{2}}{n}}} &gt; 0.03
+  \]</span></p>
+<p>where:</p>
+<p><span class="math inline">\(n\)</span> – number of observations of the orginal time series <span class="math inline">\(y_{i}\)</span>.</p>
+<p>The month-to-month percentage change in the seasonally adjusted value
+from span <span class="math inline">\(k\)</span> for month <span class="math inline">\(t\)</span> is calculated as:</p>
+<p><span class="math display">\[
+\text{MM}_{m}\left(k\right) = \frac{A_{m}\left(k\right) - A_{m - 1}\left(k\right)}{A_{m - 1}\left(k\right)}
+\]</span></p>
+<p>where:</p>
+<p><span class="math inline">\(A_{m}\left( k \right)\)</span> – the seasonally (and trading day) adjusted
+value from span <span class="math inline">\(k\)</span> for month <span class="math inline">\(t\)</span>;</p>
+<p><span class="math inline">\(\text{MM}_{m}\left( k \right)\)</span> is considered unreliable if the
+statistics below is higher than 0.03.</p>
+<p><span class="math display">\[
+\text{MM}_{m}^{\max} = \max_{k \in {N1}_{m}}\text{MM}_{m}\left( k \right) - \min_{k \in {N1}_{m}}\text{MM}_{m}\left( k \right) &gt; 0.03
+\]</span></p>
+<p>where:</p>
+<p><span class="math inline">\({N1}_{t}\)</span> – {<span class="math inline">\(\text{k}\)</span>: month <span class="math inline">\(\text{t}\)</span> and <span class="math inline">\(t\)</span>-1 are in the
+<span class="math inline">\(k\)</span>-th span}.</p>
+<p>The respective formula for the quarter-to-quarter percentage change in
+the seasonally adjusted value from span <span class="math inline">\(k\)</span> for quarter <span class="math inline">\(t\)</span> is
+calculated as:</p>
+<p><span class="math display">\[
+\text{QQ}_{q}\left( k \right) = \frac{A_{q}\left( k \right) - A_{q - 1}\left( k \right)}{A_{q - 1}\left( k \right)}
+\]</span></p>
+<p>where:</p>
+<p><span class="math inline">\(A_{q}\left( k \right)\)</span> – the seasonally (and trading day) adjusted
+value from span <span class="math inline">\(k\)</span> for quarter <span class="math inline">\(q\)</span>.</p>
+<p><span class="math inline">\(\text{QQ}_{q}\left( k \right)\)</span> is considered unreliable if the
+statistics below is higher than 0.03.</p>
+<p><span class="math display">\[
+\text{QQ}_{q}^{\max} = \max_{k \in {N1}_{q}}\text{QQ}_{q}\left( k \right) - \min_{k \in {N1}_{t}}\text{QQ}_{q}\left( k \right) &gt; 0.03
+\]</span></p>
+<p>where:</p>
+<p><span class="math inline">\({N1}_{q}\)</span> – {<span class="math inline">\(\text{k}\)</span>: quarter <span class="math inline">\(\text{t}\)</span> and <span class="math inline">\(t\)</span>-1 are in the
+<span class="math inline">\(k\)</span>-th span}.</p>
+<p>The respective diagnostic can be also performed for the trading
+days/working days component.</p>
+</div>
+<div id="revision-policies" class="section level3 hasAnchor" number="4.7.8">
+<h3><span class="header-section-number">4.7.8</span> Revision policies<a href="seasonal-adjustment-1.html#revision-policies" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>harmonize voc (cf. cruncher vignette) and guidelines pb</li>
+<li>add controlled current</li>
+<li>add bbk plugin</li>
+<li>replace descp by my pdf ? (how to allow modif in the project ?)
+(auxiliary file)</li>
+</ul>
+<p>A description of the options is presented in the following
+table.</p>
+<table>
+<colgroup>
+<col width="22%" />
+<col width="77%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Option</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Partial concurrent adjustment → Fixed model</td>
+<td>The ARIMA model, outliers and other regression parameters are not re-identified and the values of all parameters are fixed. The transformation type remains unchanged.</td>
+</tr>
+<tr class="even">
+<td>Partial concurrent adjustment → Estimate regression coefficients</td>
+<td>The ARIMA model, outliers and other regression parameters are not re-identified. The coefficients of the ARIMA model are fixed, other coefficients are re-estimated. The transformation type remains unchanged.</td>
+</tr>
+<tr class="odd">
+<td>Partial concurrent adjustment → Estimate regression coefficients + Arima parameters</td>
+<td>The ARIMA model, outliers and other regression parameters are not re-identified. All parameters of the RegARIMA model are re-estimated. The transformation type remains unchanged.</td>
+</tr>
+<tr class="even">
+<td>Partial concurrent adjustment → Estimate regression coefficients + Last outliers</td>
+<td>The ARIMA model, outliers (except from the outliers in the last year of the sample) and other regression parameters are not re-identified. All parameters of the RegARIMA model are re-estimated. The outliers in the last year of the sample are re-identified. The transformation type remains unchanged.</td>
+</tr>
+<tr class="odd">
+<td>Partial concurrent adjustment → Estimate regression coefficients + all outliers</td>
+<td>The ARIMA model and regression parameters, except from outliers) are not re-identified. All parameters of the RegARIMA model are re-estimated. All outliers are re-identified. The transformation type remains unchanged.</td>
+</tr>
+<tr class="even">
+<td>Partial concurrent adjustment → Estimate regression coefficients + Arima model</td>
+<td>Re-identification of the ARIMA model, outliers and regression variables, except from the calendar variables. The transformation type remains unchanged.</td>
+</tr>
+<tr class="odd">
+<td>Concurrent</td>
+<td>Re-identification of the whole RegARIMA model.</td>
+</tr>
+</tbody>
+</table>
+<div id="partial-concurrent-adjustment" class="section level5 hasAnchor" number="4.7.8.0.1">
+<h5><span class="header-section-number">4.7.8.0.1</span> <strong>Partial concurrent adjustment</strong><a href="seasonal-adjustment-1.html#partial-concurrent-adjustment" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>According to the <em>ESS Guidelines on Seasonal Adjustment</em> (2015), partial
+concurrent adjustment is the strategy in which the model, filters,
+outliers and calendar regressors are re-identified once a year and the
+respective parameters and factors re-estimated every time new or
+revised data become available. JDemetra+ offers several types of partial
+concurrent adjustment.</p>
+</div>
+</div>
+<div id="practical-steps" class="section level3 hasAnchor" number="4.7.9">
+<h3><span class="header-section-number">4.7.9</span> Practical steps<a href="seasonal-adjustment-1.html#practical-steps" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="graphical-analysis-recommendations" class="section level4 hasAnchor" number="4.7.9.1">
+<h4><span class="header-section-number">4.7.9.1</span> Graphical analysis recommendations<a href="seasonal-adjustment-1.html#graphical-analysis-recommendations" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>(edit)
+(link to GUI graphical capabilities, graphs with rjd)
+The Tools menu includes, among other functionalities, tools that are helpful for the graphical analysis of a time series. The <a href="https://www.census.gov/ts/x13as/docX13ASHTML.pdf"><em>‘X-13ARIMA-SEATS Reference Manual’ (2015)</em></a>
+strongly recommends studying a high resolution plot of the time series as it is helpful to gain insight on issues, such as,
+seasonal patterns, potential outliers and stochastic non-stationarity.
+Also the <em>‘ESS Guidelines on Seasonal Adjustment’ (2015)</em> recommends carrying out a graphical analysis on both unadjusted data and
+the initial run of the seasonal adjustment. Graphical analysis should consider:
+* The length of the series and the model span;<br />
+* The presence of zeros, outliers or problems in the data;<br />
+* The structure of the series: presence of; long term and cyclical movements, seasonal components, volatility etc.;<br />
+* The presence of possible breaks in the seasonal behaviour;<br />
+* The decomposition scheme (additive, multiplicative).</p>
+<p>The <a href="https://ec.europa.eu/eurostat/documents/3859598/6830795/KS-GQ-15-001-EN-N.pdf/d8f1e5f5-251b-4a69-93e3-079031b74bd3"><em>‘ESS Guidelines on Seasonal Adjustment’ (2015)</em></a>,
+recommend that this exercise should be performed and documented for the most important series to be adjusted at least once a year.
+The following functionalities are available from the <em>Tools</em> menu:</p>
 
 </div>
 </div>
@@ -2468,67 +3168,84 @@ obtained.</p>
 <div class="footnotes">
 <hr />
 <ol start="1">
-<li id="fn1"><p>When the series are non-stationary differentiation is performed
-before the seasonality tests.<a href="seasonal-adjustment-1.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p>DAGUM, E.B. (1980).<a href="seasonal-adjustment-1.html#fnref1" class="footnote-back">↩︎</a></p></li>
 <li id="fn2"><p>The unmodified Seasonal-Irregular component corresponds to the
 Seasonal-Irregular factors with the extreme values.<a href="seasonal-adjustment-1.html#fnref2" class="footnote-back">↩︎</a></p></li>
 <li id="fn3"><p>DAGUM, E.B. (1987).<a href="seasonal-adjustment-1.html#fnref3" class="footnote-back">↩︎</a></p></li>
 <li id="fn4"><p>For definition of the periodogram and Fourier frequencies see section <a href="..\theory\spectral.html">Spectral Analysis</a><a href="seasonal-adjustment-1.html#fnref4" class="footnote-back">↩︎</a></p></li>
 <li id="fn5"><p>For definition of the periodogram and Fourier frequencies see section <a href="..\theory\spectral.html">Spectral Analysis</a><a href="seasonal-adjustment-1.html#fnref5" class="footnote-back">↩︎</a></p></li>
-<li id="fn6"><p>When the series are non-stationary differentiation is performed
-before the seasonality tests.<a href="seasonal-adjustment-1.html#fnref6" class="footnote-back">↩︎</a></p></li>
-<li id="fn7"><p>When the series are non-stationary differentiation is performed
-before the seasonality tests.<a href="seasonal-adjustment-1.html#fnref7" class="footnote-back">↩︎</a></p></li>
-<li id="fn8"><p>In the original software SEATS can be used either with TRAMO,
+<li id="fn6"><p>DAGUM, E.B. (1980).<a href="seasonal-adjustment-1.html#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>The notation used by TRAMO for the polynomials is different from the one commonly used in the literature, for example in HAMILTON, J.D. (1994) the AR polynomial is denoted as .<a href="seasonal-adjustment-1.html#fnref7" class="footnote-back">↩︎</a></p></li>
+<li id="fn8"><p>BOX G.E.P., JENKINS, G.M., and REINSEL, G.C. (2007).<a href="seasonal-adjustment-1.html#fnref8" class="footnote-back">↩︎</a></p></li>
+<li id="fn9"><p>KAISER, R., and MARAVALL, A. (1999).<a href="seasonal-adjustment-1.html#fnref9" class="footnote-back">↩︎</a></p></li>
+<li id="fn10"><p>‘X-13ARIMA-SEATS Reference Manual’ (2015).<a href="seasonal-adjustment-1.html#fnref10" class="footnote-back">↩︎</a></p></li>
+<li id="fn11"><p>The likelihood function is the joint probability (density)
+function of observable random variables. It is viewed as the
+function of the parameters given the realized random variables.
+Therefore, this function measures the probability of observing the
+particular set of dependent variable values that occur in the
+sample.<a href="seasonal-adjustment-1.html#fnref11" class="footnote-back">↩︎</a></p></li>
+<li id="fn12"><p>HAMILTON, J.D. (1994).<a href="seasonal-adjustment-1.html#fnref12" class="footnote-back">↩︎</a></p></li>
+<li id="fn13"><p>Maximum Likelihood Estimation is a statistical method for
+estimating the coefficients of a model. This method determines the
+parameters that maximize the probability (likelihood) of the sample
+data.<a href="seasonal-adjustment-1.html#fnref13" class="footnote-back">↩︎</a></p></li>
+<li id="fn14"><p>CHATFIELD, C. (2004).<a href="seasonal-adjustment-1.html#fnref14" class="footnote-back">↩︎</a></p></li>
+<li id="fn15"><p>BROCKWELL, P.J., and DAVIS, R.A. (2002).<a href="seasonal-adjustment-1.html#fnref15" class="footnote-back">↩︎</a></p></li>
+<li id="fn16"><p>DAGUM, E.B. (1980).<a href="seasonal-adjustment-1.html#fnref16" class="footnote-back">↩︎</a></p></li>
+<li id="fn17"><p>In the original software SEATS can be used either with TRAMO,
 operating on the input received from the latter, or alone, fitting
-an ARIMA model to the series.<a href="seasonal-adjustment-1.html#fnref8" class="footnote-back">↩︎</a></p></li>
-<li id="fn9"><p>GÓMEZ, V., and MARAVALL, A. (1998).<a href="seasonal-adjustment-1.html#fnref9" class="footnote-back">↩︎</a></p></li>
-<li id="fn10"><p>GÓMEZ, V., and MARAVALL, A. (1997).<a href="seasonal-adjustment-1.html#fnref10" class="footnote-back">↩︎</a></p></li>
-<li id="fn11"><p>GÓMEZ, V., and MARAVALL, A. (2001a).<a href="seasonal-adjustment-1.html#fnref11" class="footnote-back">↩︎</a></p></li>
-<li id="fn12"><p>For description of the spectrum see section <a href="..\theory\spectral.html">Spectral Analysis</a>.<a href="seasonal-adjustment-1.html#fnref12" class="footnote-back">↩︎</a></p></li>
-<li id="fn13"><p>MARAVALL, A. (1995).<a href="seasonal-adjustment-1.html#fnref13" class="footnote-back">↩︎</a></p></li>
-<li id="fn14"><p>Description based on KAISER, R., and MARAVALL, A. (2000) and
-MARAVALL, A. (2008c).<a href="seasonal-adjustment-1.html#fnref14" class="footnote-back">↩︎</a></p></li>
-<li id="fn15"><p>For details see MARAVALL, A., CAPORELLO, G., PÉREZ, D., and
-LÓPEZ, R. (2014).<a href="seasonal-adjustment-1.html#fnref15" class="footnote-back">↩︎</a></p></li>
-<li id="fn16"><p>In JDemetra+ this argument is called <em>Trend boundary</em>.<a href="seasonal-adjustment-1.html#fnref16" class="footnote-back">↩︎</a></p></li>
-<li id="fn17"><p>The AR roots close to or at the trading day frequency generates a
+an ARIMA model to the series.<a href="seasonal-adjustment-1.html#fnref17" class="footnote-back">↩︎</a></p></li>
+<li id="fn18"><p>GÓMEZ, V., and MARAVALL, A. (1998).<a href="seasonal-adjustment-1.html#fnref18" class="footnote-back">↩︎</a></p></li>
+<li id="fn19"><p>GÓMEZ, V., and MARAVALL, A. (1997).<a href="seasonal-adjustment-1.html#fnref19" class="footnote-back">↩︎</a></p></li>
+<li id="fn20"><p>GÓMEZ, V., and MARAVALL, A. (2001a).<a href="seasonal-adjustment-1.html#fnref20" class="footnote-back">↩︎</a></p></li>
+<li id="fn21"><p>For description of the spectrum see section <a href="..\theory\spectral.html">Spectral Analysis</a>.<a href="seasonal-adjustment-1.html#fnref21" class="footnote-back">↩︎</a></p></li>
+<li id="fn22"><p>MARAVALL, A. (1995).<a href="seasonal-adjustment-1.html#fnref22" class="footnote-back">↩︎</a></p></li>
+<li id="fn23"><p>Description based on KAISER, R., and MARAVALL, A. (2000) and
+MARAVALL, A. (2008c).<a href="seasonal-adjustment-1.html#fnref23" class="footnote-back">↩︎</a></p></li>
+<li id="fn24"><p>For details see MARAVALL, A., CAPORELLO, G., PÉREZ, D., and
+LÓPEZ, R. (2014).<a href="seasonal-adjustment-1.html#fnref24" class="footnote-back">↩︎</a></p></li>
+<li id="fn25"><p>In JDemetra+ this argument is called <em>Trend boundary</em>.<a href="seasonal-adjustment-1.html#fnref25" class="footnote-back">↩︎</a></p></li>
+<li id="fn26"><p>The AR roots close to or at the trading day frequency generates a
 stochastic trading day component. A stochastic trading day component
 is always modelled as a stationary ARMA(2,2), where the AR part
 contains the roots close to the TD frequency, and the MA(2) is
 obtained from the model decomposition (MARAVALL, A., and PÉREZ, D.
 (2011)). This component, estimated by SEATS, is not implemented by
-the current version of JDemetra+.<a href="seasonal-adjustment-1.html#fnref17" class="footnote-back">↩︎</a></p></li>
-<li id="fn18"><p>The term pseudo-spectrum is used for a non-stationary time
+the current version of JDemetra+.<a href="seasonal-adjustment-1.html#fnref26" class="footnote-back">↩︎</a></p></li>
+<li id="fn27"><p>The term pseudo-spectrum is used for a non-stationary time
 series, while the term spectrum is used for a stationary time
-series.<a href="seasonal-adjustment-1.html#fnref18" class="footnote-back">↩︎</a></p></li>
-<li id="fn19"><p>If the ARIMA model estimated in TRAMO does not accept an
+series.<a href="seasonal-adjustment-1.html#fnref27" class="footnote-back">↩︎</a></p></li>
+<li id="fn28"><p>If the ARIMA model estimated in TRAMO does not accept an
 admissible decomposition, SEATS replaces it with a decomposable
 approximation. The modified model is therefore used to decompose the
 series. There are also other rare situations when the ARIMA model
 chosen by TRAMO is changed by SEATS. It happens when, for example,
 the ARIMA models generate unstable seasonality or produce a
 senseless decomposition. Such examples are discussed by MARAVALL, A.
-(2009).<a href="seasonal-adjustment-1.html#fnref19" class="footnote-back">↩︎</a></p></li>
-<li id="fn20"><p>HILLMER, S.C., and TIAO, G.C. (1982).<a href="seasonal-adjustment-1.html#fnref20" class="footnote-back">↩︎</a></p></li>
-<li id="fn21"><p>GÓMEZ, V., and MARAVALL, A. (2001a).<a href="seasonal-adjustment-1.html#fnref21" class="footnote-back">↩︎</a></p></li>
-<li id="fn22"><p>HILLMER, S.C., and TIAO, G.C. (1982).<a href="seasonal-adjustment-1.html#fnref22" class="footnote-back">↩︎</a></p></li>
-<li id="fn23"><p>MARAVALL, A. (1986).<a href="seasonal-adjustment-1.html#fnref23" class="footnote-back">↩︎</a></p></li>
-<li id="fn24"><p>Ibid.<a href="seasonal-adjustment-1.html#fnref24" class="footnote-back">↩︎</a></p></li>
-<li id="fn25"><p>KAISER, R., and MARAVALL, A. (2000).<a href="seasonal-adjustment-1.html#fnref25" class="footnote-back">↩︎</a></p></li>
-<li id="fn26"><p>The choice of the estimation method is controlled by the <em>Method</em>
-parameter, explained in the <a href="../reference-manual/sa-spec-tramo.html">SEATS specification</a> section.<a href="seasonal-adjustment-1.html#fnref26" class="footnote-back">↩︎</a></p></li>
-<li id="fn27"><p>MARAVALL, A. (2008c).<a href="seasonal-adjustment-1.html#fnref27" class="footnote-back">↩︎</a></p></li>
-<li id="fn28"><p>MARAVALL, A. (1995).<a href="seasonal-adjustment-1.html#fnref28" class="footnote-back">↩︎</a></p></li>
-<li id="fn29"><p>MARAVALL, A., and PLANAS, C. (1999).<a href="seasonal-adjustment-1.html#fnref29" class="footnote-back">↩︎</a></p></li>
-<li id="fn30"><p>MARAVALL, A. (1998).<a href="seasonal-adjustment-1.html#fnref30" class="footnote-back">↩︎</a></p></li>
-<li id="fn31"><p>GÓMEZ, V., and MARAVALL, A. (2001a).<a href="seasonal-adjustment-1.html#fnref31" class="footnote-back">↩︎</a></p></li>
-<li id="fn32"><p>Ibid.<a href="seasonal-adjustment-1.html#fnref32" class="footnote-back">↩︎</a></p></li>
-<li id="fn33"><p>KAISER, R., and MARAVALL, A. (2000).<a href="seasonal-adjustment-1.html#fnref33" class="footnote-back">↩︎</a></p></li>
-<li id="fn34"><p>MARAVALL, A. (1995).<a href="seasonal-adjustment-1.html#fnref34" class="footnote-back">↩︎</a></p></li>
-<li id="fn35"><p>MARAVALL, A. (2009).<a href="seasonal-adjustment-1.html#fnref35" class="footnote-back">↩︎</a></p></li>
-<li id="fn36"><p>The section is based on KAISER, R., and MARAVALL, A. (2000).<a href="seasonal-adjustment-1.html#fnref36" class="footnote-back">↩︎</a></p></li>
-<li id="fn37"><p>See section PsiE-weights. For further details see MARAVALL, A. (2008).<a href="seasonal-adjustment-1.html#fnref37" class="footnote-back">↩︎</a></p></li>
+(2009).<a href="seasonal-adjustment-1.html#fnref28" class="footnote-back">↩︎</a></p></li>
+<li id="fn29"><p>HILLMER, S.C., and TIAO, G.C. (1982).<a href="seasonal-adjustment-1.html#fnref29" class="footnote-back">↩︎</a></p></li>
+<li id="fn30"><p>GÓMEZ, V., and MARAVALL, A. (2001a).<a href="seasonal-adjustment-1.html#fnref30" class="footnote-back">↩︎</a></p></li>
+<li id="fn31"><p>HILLMER, S.C., and TIAO, G.C. (1982).<a href="seasonal-adjustment-1.html#fnref31" class="footnote-back">↩︎</a></p></li>
+<li id="fn32"><p>MARAVALL, A. (1986).<a href="seasonal-adjustment-1.html#fnref32" class="footnote-back">↩︎</a></p></li>
+<li id="fn33"><p>Ibid.<a href="seasonal-adjustment-1.html#fnref33" class="footnote-back">↩︎</a></p></li>
+<li id="fn34"><p>KAISER, R., and MARAVALL, A. (2000).<a href="seasonal-adjustment-1.html#fnref34" class="footnote-back">↩︎</a></p></li>
+<li id="fn35"><p>The choice of the estimation method is controlled by the <em>Method</em>
+parameter, explained in the <a href="../reference-manual/sa-spec-tramo.html">SEATS specification</a> section.<a href="seasonal-adjustment-1.html#fnref35" class="footnote-back">↩︎</a></p></li>
+<li id="fn36"><p>MARAVALL, A. (2008c).<a href="seasonal-adjustment-1.html#fnref36" class="footnote-back">↩︎</a></p></li>
+<li id="fn37"><p>MARAVALL, A. (1995).<a href="seasonal-adjustment-1.html#fnref37" class="footnote-back">↩︎</a></p></li>
+<li id="fn38"><p>MARAVALL, A., and PLANAS, C. (1999).<a href="seasonal-adjustment-1.html#fnref38" class="footnote-back">↩︎</a></p></li>
+<li id="fn39"><p>MARAVALL, A. (1998).<a href="seasonal-adjustment-1.html#fnref39" class="footnote-back">↩︎</a></p></li>
+<li id="fn40"><p>GÓMEZ, V., and MARAVALL, A. (2001a).<a href="seasonal-adjustment-1.html#fnref40" class="footnote-back">↩︎</a></p></li>
+<li id="fn41"><p>Ibid.<a href="seasonal-adjustment-1.html#fnref41" class="footnote-back">↩︎</a></p></li>
+<li id="fn42"><p>KAISER, R., and MARAVALL, A. (2000).<a href="seasonal-adjustment-1.html#fnref42" class="footnote-back">↩︎</a></p></li>
+<li id="fn43"><p>MARAVALL, A. (1995).<a href="seasonal-adjustment-1.html#fnref43" class="footnote-back">↩︎</a></p></li>
+<li id="fn44"><p>MARAVALL, A. (2009).<a href="seasonal-adjustment-1.html#fnref44" class="footnote-back">↩︎</a></p></li>
+<li id="fn45"><p>The section is based on KAISER, R., and MARAVALL, A. (2000).<a href="seasonal-adjustment-1.html#fnref45" class="footnote-back">↩︎</a></p></li>
+<li id="fn46"><p>See section PsiE-weights. For further details see MARAVALL, A. (2008).<a href="seasonal-adjustment-1.html#fnref46" class="footnote-back">↩︎</a></p></li>
+<li id="fn47"><p>FINDLEY, D., MONSELL, B.C., SHULMAN, H.B., and PUGH, M.G. (1990).<a href="seasonal-adjustment-1.html#fnref47" class="footnote-back">↩︎</a></p></li>
+<li id="fn48"><p>FINDLEY, D., MONSELL, B.C., BELL, W., OTTO, M., and CHEN, B.-C.
+(1990).<a href="seasonal-adjustment-1.html#fnref48" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

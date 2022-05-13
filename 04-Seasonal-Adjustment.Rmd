@@ -1107,7 +1107,7 @@ The formulas that describe outliers are given [here](../theory/SA_lin.html).
 
 ### Overview
 (edit)
-
+#### Modeliing part to adapt  
 The algorithms implemented in JDemetra+ enable a modelling of the original time series with the RegARIMA model, 
 including estimation of the regression effects such as outliers and calendar effects. These procedures can be 
 used just for modelling and forecasting of the original time series but also as a  pre-treatment before performing a seasonal adjustement of the series. Hence, this pre-treatement will allow for a more reliable estimation of the time series components performed by the seasonal adjustment procedures.
