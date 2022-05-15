@@ -1,38 +1,1677 @@
-# Graphical User Interface 
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
 
-## Structure and assets
+# Graphical User Interface
 
-## Main functions
+## Overview
 
-solve the double "documents" in SA and in modelling
-describe difference doc vs ws (non output in doc ?)
-see if the same in version 3
+why use the graphical user interface ? what is not directly available in
+R yet?
 
-### Seasonality tests 
-without adjusting 
+obj here: make parts shorter and steps more obvious SA will be detailed
+as the most used (the common pars just linked )
 
-*Statistical Methods >> Seasonal Adjustment >> Tools >> Seasonality Tests*
+### Chapter oragnisation remarks
 
-#### Graphical Test based on AR spectrum
+#### Modelling vs Pre-adjustment
 
-The test can be applied directly to any series by selecting the 
-option *Statistical Methods >> Seasonal Adjustment >> Tools >> Seasonality Tests*. This is
-an example of how results are displayed for the case of a monthly series:
+for linearization via Reg-Arima (or tramo) 2 functions : modelling and
+SA, where it is the pre-adjustment part : we'll describe everything in
+sa and just ref modelleing (indem rjd) \#### Single series vs multiple
+series
 
+## List of Available Algorithms and features
 
-![artest](All_images/spectrum.png)
-### Reg arima linearization 
+solve the double "documents" in SA and in modelling describe difference
+doc vs ws (non output in doc ?) see if the same in version 3
 
-mixed old page 
-* in chap 4 on SA : infos on algos 
-* here cut out infos on gui only 
+in fine Table (same in R packages and in 03 Main-features ?)
+
+| Algorithm         | Graphical User interface | R packages  |
+|-------------------|--------------------------|-------------|
+| Seasonality tests | Menu Statistical Methods | rjd3toolkit |
+
+-   direct-indirect
+
+| Col1 | Col2 | Col3 |
+|------|------|------|
+|      |      |      |
+|      |      |      |
+|      |      |      |
+|      |      |      |
+|      |      |      |
+|      |      |      |
+|      |      |      |
+|      |      |      |
+|      |      |      |
+|      |      |      |
+
+## Installation Procedure
+
+JDemetra+ is a stand-alone application packed in a zip package. To run
+JDemetra+ the Java RE 8 or higher is needed. Java RE can be downloaded
+from [Oracle
+website](https://www.oracle.com/technetwork/java/javase/downloads/index.html).
+
+The official release of JDemetra+ is accessible at [a dedicated Github
+page](https://github.com/jdemetra/jdemetra-app/releases). The site
+presents all available releases - both official releases (labelled in
+green as latest releases) and pre-releases (labelled in red) - packed in
+zip packages. From the *Latest release* section either choose the
+installer appropriate for your operating system (Windows, Linux, Mac OS,
+Solaris) or take the portable zip-file. The installation process is
+straightforward and intuitive. For example, when the zip-file is chosen
+and downloaded, then under Windows OS the application can be found in
+the "bin"-folder of the installation/unpacked zip. To open an
+application, double click on nbdemetra.exe or nbdemetra64.exe depending
+on the system version (nbdemetra.exe for the 32-bit system version and
+nbdemetra64.exe for the 64-bit system version).
+
+![Text](All_images/RunningJDemetra.jpg)
+
+**Launching JDemetra+**
+
+If the launching of JDemetra+ fails, you can try the following
+operations:
+
+-   Check if Java SE Runtime Environment (JRE) is properly installed by
+    typing in the following command in a terminal: *java --version*
+
+-   Check the logs in your home directory:
+
+    -   %appdata%/.nbdemetra/dev/var/log/ for Windows;
+
+    -   \~/.nbdemetra/dev/var/log/ for Linux and Solaris;
+
+    -   \~/Library/Application Support/.nbdemetra/dev/var/log/ for Mac
+        OS X.
+
+In order to remove a previously installed JDemetra+ version, the user
+should delete an appropriate JDemetra+ folder.
+
+### Running JDemetra+ {#running-jdemetra}
+
+To open an application, navigate to the destination folder and double
+click on *nbdemetra.exe* or *nbdemetra64.exe* depending on the system
+version (*nbdemetra.exe* for the 32-bit system version and
+*nbdemetra64.exe* for the 64-bit system version).
+
+![Text](All_images/A_Ref1.jpg)
+
+**Running JDemetra+**
+
+### Closing JDemetra+ {#closing-jdemetra}
+
+To close the application, select *File → Exit* from the [File
+menu](http://localhost:4000/pages/reference-manual/file.html).
+
+![Text](All_images/A_Ref2.jpg)
+
+**Closing JDemetra+**
+
+The other way is to click on the close box in the upper right-hand
+corner of the JDemetra+ window. If there is any unsaved work, JDemetra+
+will display a warning and provide the user with the opportunity to save
+it. The message box is shown below.
+
+![Text](All_images/A_Ref3.jpg)
+
+**The warning from leaving JDemetra+ without saving the workspace**
+
+## Global structure
+
+here menus and functions common to all the algos
+
+### Interface Starting Winwow
+
+The default view of the JDemetra+ window, which is displayed after
+launching the program, is shown below.
+
+![Text](All_images/Jd+mainwindow.jpg)
+
+**JDemetra+ default window**
+
+By default, on the left hand side of the window two panels are visible:
+the [*Workspace* panel](../reference-manual/workspace.html) and the
+[*Providers* panel](../reference-manual/data-providers.html). The
+*Workspace* panel stores the work performed by the user in a coherent
+and structured way. The *Providers* panel presents the list of the [data
+sources](../quick-start/datasources.html) and organizes the imported
+series within each data provider. By default, JDemetra+ supports the
+following data sources: \* JDBC; \* ODBC; \* SDMX; \* Excel
+spreadsheets; \* TSW (input files for the [Tramo-Seats-Windows
+application](https://www.bde.es/bde/en/secciones/servicios/Profesionales/Programas_estadi/Programas.html)
+by the Bank of Spain); \* TXT; \* USCB (input files for the
+[X-13-ARIMA-SEATS application](https://www.census.gov/srd/www/winx13/)
+by the U.S. Census Bureau); \* XML.
+
+All standard databases (Oracle, SQLServer, DB2, MySQL) are supported by
+JDemetra+ via JDBC, which is a generic interface to many relational
+databases. Other providers can be added by users by creating plugins. We
+will now focus on the Spreadsheets data source, which corresponds to the
+series prepared in an Excel file. The file should have dates in Excel
+date format. Dates should be placed in the first column (or in the first
+row) and titles of the series in the corresponding cell of the first row
+(or in the first column). The top-left cell [A1] can include text or it
+can be left empty. The empty cells are interpreted by JDemetra+ as
+missing values and they can appear at the beginning, in the middle and
+at the end of the time series. The example is shown below.
+
+![Text](All_images/Spreadsheet.jpg)
+
+**Example of an Excel spreadsheet that can be imported to JDemetra+**
+
+Once the spreadsheet is prepared and saved, it can be imported to
+JDemetra+ as it is shown by the tutorial below.
+
+![Alt](All_images/Import_spreadsheet.gif)
+
+**An example of importing process for the Excel file**
+
+The default JDemetra+ window, which is displayed after launching the
+program, is clearly divided into several panels.
+
+![Text](All_images/A_Ref_d28.jpg)
+
+**JDemetra+ default view**
+
+The key parts of the user interface are: \* The [application
+menu](#application-menu). \* The [Providers](data-providers.html)
+window, which organises time series; \* The [Workspace](workspace.html)
+window, which stores results generated by the software as well as
+settings used to create them; \* A central empty zone for presenting the
+actual analyses further called the [Results](#results-panel) panel.
+
+### Application menu {#application-menu}
+
+The majority of functionalities are available from the main application
+menu, which is situated at the very top of the main window. If the user
+moves the cursor to an entry in the main menu and clicks on the left
+mouse button, a drop-down menu will appear. Clicking on an entry in the
+drop-down menu selects the highlighted item.
+
+![Text](All_images/A_Ref10.jpg)
+
+**The main menu with selected drop-down menu**
+
+The functions available in the main application menu are: \*
+[File](file.html) \* [Statistical methods](Statistical-methods.html) \*
+[X-13Doc](x-13doc.html) \* [RegArimaDoc](regarimadoc.html) \*
+[TramoDoc](tramodoc.html) \* [TramoSeatsDoc](tramoseatsdoc.html) \*
+[View](view.html) \* [Tools](tools.html) \* [Window](window.html) \*
+[Help](help.html)
+
+### Results panel {#results-panel}
+
+The blank zone in the figure above (on the right of the view) is the
+location where JDemetra+ displays various windows. More than one window
+can be displayed at the same time. Windows can overlap with each other
+with the foremost window being the one in focus or active. The active
+window has a darkened title bar. [The windows in the results panel can
+be arranged in many different ways](../reference-manual/window.html),
+depending on the user's needs. The example below shows one of the
+possible views of this panel. The results of the user's analysis are
+displayed in an accompanying window. The picture below shows two panels
+-- a window containing seasonal adjustment results (upper panel) and
+another one containing an autoregressive spectrum (lower panel).
+
+![Text](All_images/A_Ref9.jpg)
+
+**The *Results* panel filled with two windows**
+
+### Menus
+
+#### File Menu
+
+The *File* menu is intended for working with
+[workspaces](workspace.html) and [data
+sources](../reference-manual/data-providers.html). It offers the
+following functions:\
+\* **New Workspace** -- creates a new workspace and displays it in the
+*Workspace* window with a default name (*Workspace\_#number*); \* **Open
+Workspace** -- opens a dialog window, which enables the user to select
+and open an existing workspace; \* **Open Recent Workspace** -- presents
+a list of workspaces recently created by the user and enables the user
+to open one of them; \* **Save Workspace** -- saves the project file
+named by the system under the default name (*Workspace\_#number*) and in
+a default location. The workspace can be re-opened at a later time; \*
+**Save Workspace As...** -- saves the current workspace under the name
+chosen by the user in the chosen location. The workspace can be
+re-opened at a later time; \* **Open Recent** -- presents a list of
+datasets recently used and enables the user to open one of them; \*
+**Exit** -- closes an application.
+
+![Text](All_images/File%20menu.jpg)
+
+**The content of the *File* menu**
+
+#### View Menu
+
+The View menu contains functionalities that enable the user to modify
+how JDemetra+ is viewed. It offers the following items: \* **Split** --
+the function is not operational in the current version of the software.
+\* **Toolbars** -- displays selected toolbars under the main menu. The
+*File* toolbar contains the *Save all* icon. The *Performance* toolbar
+includes two icons: one to show the performance of the application, the
+other to stop the application profiling and taking a snapshot. The
+*Other* toolbar determines the default behaviour of the program when the
+user double clicks on the data. It may be useful to plot the data,
+visualise it on a grid, or to perform any pre-specified action, e.g.
+execute a seasonal adjustment procedure. \* **Show Only Editor** --
+displays only the *Results* panel and hides other windows (e.g.
+*Workspace* and *Providers*). \* **Full Screen** -- displays the current
+JDemetra+ view in full screen.
+
+![Text](All_images/View%20menu.jpg)
+
+**The *View* menu**
+
+#### Window menu
+
+The *Window* menu offers several functions that facilitate the analysis
+of data and enables the user to adjust the interface view to the user's
+needs.
+
+![Text](All_images/A_Ref51.jpg)
+
+**The *Window* menu**
+
+-   **Preview Time Series** -- opens a window that plots any of the
+    series the user selects from *Providers*.
+
+-   **Debug** -- opens a *Preview Time Series* window that enables a
+    fast display of the graphs for time series from a large dataset. To
+    display the graph click on the series in the *Providers* window.
+
+-   [**Providers**](../reference-manual/data-providers.html) -- opens
+    (if closed) and activates the *Providers* window.
+
+-   [**Variables**](../reference-manual/user-defined-variables.html) --
+    opens (if closed) and activates the *Variable* window.
+
+-   [**Workspace**](../reference-manual/workspace.html) -- opens (if
+    closed) and activates the *Workspace* window.
+
+-   **Output** -- a generic window to display outputs in the form of
+    text; useful with certain plug-ins (e.g. tutorial descriptive
+    statistics).
+
+-   **Editor** -- activates the editor panel (and update the main menu
+    consequently).
+
+-   **Configure Window** -- enables the user to change the way that the
+    window is displayed (maximise, float, float group, minimise,
+    minimise group). This option is active when some window is displayed
+    in the JD+ interface.
+
+-   **Properties** -- opens the *Properties* window and displays the
+    properties of the marked item (e.g. time series, data source).
+
+-   **Reset Windows** -- restores the default JDemetra+ view.
+
+-   **Close Window** -- closes all windows that are open.
+
+-   **Close All Documents** -- closes all documents that are open.
+
+-   **Close Other Documents** -- closes all documents that are open
+    except for the one that is active (which is the last activated one).
+
+-   **Document Groups** -- enables the user to create and manage the
+    document groups.
+
+-   **Documents** -- lists all documents that are active.
+
+#### Workspace Menu
+
+Workspace is a JDemetra+ functionality that stores the work performed by
+the user in a coherent and structured way. By default, each workspace
+contains the pre-defined modelling and seasonal adjustment
+specifications and a basic calendar. A specification is a set of
+modelling and/or seasonal adjustment parameters. Within the workspace
+the following items can be saved: \* [User-defined modelling
+specifications](../reference-manual/modelling-specifications.html#user-definedSpec)
+and [seasonal adjustment
+specifications](../reference-manual/sa-specifications.html); \*
+Documents that contain [results from time series
+modelling](../reference-manual/output-modelling.html) and [output from
+the seasonal adjustment process](../reference-manual/output.html); \*
+[User-defined calendars](../reference-manual/calendars.html); \*
+[User-defined regression
+variables](../reference-manual/user-defined-variables.html).
+
+Together with the results from modelling and seasonal adjustment, the
+original data, paths to the input files and parameters of processes are
+all saved. These results can then be re-opened, updated, investigated
+and modified in further JDemetra+ sessions.
+
+The workspace saved by JDemetra+ includes: \* Main folder containing
+several folders that correspond to the different types of items created
+by the user and; \* The xml file that enables the user to import the
+workspace to the application and to display its content.
+
+An example of the workspace is shown in the figure below.
+
+![Text](All_images/A_Ref7.jpg)
+
+**A workspace saved on PC**
+
+The workspace can be shared with other users, which eases the burden of
+work with defining specifications, modelling and seasonal adjustment
+processes.
+
+The content of the workspace is presented in the *Workspace* window. It
+is divided into three sections: \*
+[Modelling](../reference-manual/modelling.html) (contains the default
+and user-defined specifications for modelling; and the output from the
+modelling process) \* [Seasonal adjustment](../reference-manual/sa.html)
+(contains the default and user-defined specifications for seasonal
+adjustment and the output from the seasonal adjustment process), \*
+Utilities ([calendars](calendars.html) and [user defined
+variables](user-defined-variables.html)).
+
+![Text](All_images/A_Ref8.jpg)
+
+**The *Workspace* window**
+
+#### Statistical Methods Menu
+
+The Statistical methods menu includes functionalities for modelling,
+analysis and the seasonal adjustment of a time series. They are divided
+into three groups: \* [Anomaly Detection](#anomaly-detection) -- allows
+for a purely automatic identification of regression effects; \*
+[Modelling](#modelling) -- enables time series modelling using the TRAMO
+and RegARIMA models; \* [Seasonal adjustment](#seasonal-adjustment) --
+intended for the seasonal adjustment of a time series with the
+TRAMO-SEATS and X-13ARIMA-SEATS methods.
+
+![Text](All_images/Statistical%20methods%20menu.jpg)
+
+**The *Statistical methods* menu.**
+
+### Anomaly Detection {#anomaly-detection}
+
+The primary goal of the functionalities that are available in the
+*Anomaly Detection* section is the identification of atypical values
+called outliers. According to the ['*ESS Guidelines on Seasonal
+Adjustment*'](https://ec.europa.eu/eurostat/documents/3859598/6830795/KS-GQ-15-001-EN-N.pdf/d8f1e5f5-251b-4a69-93e3-079031b74bd3)
+(2015), seasonal adjustment methods are likely to be severely affected
+by the presence of such values; therefore they should be detected and
+replaced simultaneously or before estimating the seasonal and calendar
+components in order to avoid a distorted or biased estimation.
+
+The use of the RegARIMA models is recommended by the '*ESS Guidelines on
+Seasonal Adjustment*' (2015) to estimate and remove outliers before
+estimating the seasonal effect. As the presence of outliers could
+greatly affect the quality of the decomposition, the various types of
+outlier (i.e. additive outliers, transitory changes, level shifts, etc.)
+should be detected and corrected for.
+
+This element of quality control should be performed each time new or
+revised data become available. Manual inspection of the data is
+problematic, especially in the case of large datasets. Also, it usually
+relies on some simple measures, which do not consider the full
+information contained in the series, but just a few values. Therefore
+the results of the manual inspection can be severaly affected by
+seasonality, noise, or special events.
+
+JDemetra+ includes two tools dedicated to the automatic identification
+of outliers: *Check Last* and *Outliers Detection*. Both are based on
+the TERROR program, which is an application from TRAMO. TERROR is
+executed by both tools to automatically (with several available options)
+detect outliers.
+
+![Text](All_images/A_Ref13.jpg)
+
+**The *Anomaly detection* menu.**
+
+#### Check Last {#check-last}
+
+The *Check Last* tool automatically detects using the TRAMO model
+forecasts up to three last observations and marks the observations that
+are too different from their forecasted values. The *Check Last* *Batch*
+window is divided into three panels. The panel on the left presents the
+list of the analysed series. The results are dispalyed in the panels on
+the right.
+
+To launch the analysis, drag and drop a series from the *Providers*
+window into the left hand side panel of the *Check Last Batch* window
+and click the *Start* button (denoted with the green arrow) from the
+menu in the top part of the window. The analysis will be performed using
+the TRAMO specification selected from the list. By default, TR4 is used.
+
+![Text](All_images/A_Ref14.jpg)
+
+**The *Check Last* initial window with series to be processed and the
+list of available specifications expanded.**
+
+JDemetra+ removes the last observations from the series and calculates a
+one-period-ahead out-of-sample forecast of the series. The forercasted
+values are then compared with the actual values. The user may decide how
+many of the last observations will be considered (one, two, or three) in
+this procedure (click on the **123** button and specify the number). The
+number of columns visible in the panel on the left will be adjusted
+accordingly to the user's choice.
+
+![Text](All_images/A_Ref15.jpg)
+
+**The options for number of observations to be examined.**
+
+The default settings can be changed in the *Properties* dialog box (the
+number of last observations that will be compared to the forecasted
+values, specification used for modelling and the threshold values used
+to decide if observations are abnormal). To open it, click on the button
+marked with the working tools.
+
+![Text](All_images/A_Ref16.jpg)
+
+**The properties for the *Check Last* functionality.**
+
+Once the process is executed, click on the series on the list to display
+the results. For each series the program automatically identifies an
+ARIMA model, detects several types of outliers, interpolates missing
+values and estimates the calendar effects, if appropriate. Study the
+detailed results section using the vertical scrollbar.
+
+![Text](All_images/A_Ref17.jpg)
+
+**The results of the outlier's detection process.**
+
+The last observations (one, two or three, depending of the user's
+choice) are compared with the forecasted values. If, for a given
+observation, the forecast error divided by a standard deviation of
+residuals is greater than the first threshold value and lower than the
+second threshold value, then this observation is classified as
+containing a "possible error" and marked in orange. If this value is
+greater than the second threshold value, then the new observation is
+classified as containing a "likely error" and marked in red. Otherwise,
+the observation is accepted as "without an
+error"[^graphical-user-interface-1].
+
+[^graphical-user-interface-1]: Description of the idea of benchmarking
+    is based on Dagum, B.E., Cholette, P.A. 1994), and Quenneville, B.
+    et all (2003). Detailed information can be found in: Dagum, B.E.,
+    Cholette, P.A. (2006).
+
+![Text](All_images/A_Ref18.jpg)
+
+**Investigation of the outliers' detection results.**
+
+JDemetra+ enables the user to save the results of this analysis in the
+compact form of a report. To generate it, click on the **Generate
+Report** button and specify the sorting options.
+
+![Text](All_images/A_Ref19.jpg)
+
+**The *Generate Report* functionality.**
+
+To save the report click **OK** and select a destination folder.
+
+![Text](All_images/A_Ref20.jpg)
+
+**Report from the outliers' detection process.**
+
+#### Outlier detection {#outlier-detection}
+
+The *Outlier Detection* tool allows for the identification of an ARIMA
+model, including the detection of outliers, interpolation of missing
+values and the estimation of any calendar effects. A step-by-step
+demonstration of the *Outlier Detection* tool capabilities and options
+can be found [here](../case-studies/modelling-basic.html).
+
+### Modelling {#modelling}
+
+The aim of the *Modelling* section is to provide tools for time series
+modelling and forecasting without performing the estimation of its
+components and decomposition. The estimated results can be useful for
+time series analysis and in the prediction of short-term developments.
+
+The *Modelling* section includes all capabilities from the TRAMO and
+RegARIMA models. It is flexible in [specifying model
+parameters](../reference-manual/modelling-specifications.html). The
+results can be saved and refreshed with updated series. Instructions on
+how to use this functionality is given in [the step-by-step
+demonstration on advanced time series
+analysis](../case-studies/modelling-advanced.html).
+
+![Text](All_images/A_Ref21.jpg)
+
+**The *Modelling* menu.**
+
+### Seasonal Adjustment {#seasonal-adjustment}
+
+The *Seasonal Adjustment* section provides tools to perform seasonal
+adjustment for a single time series as well as for multiple time series
+using the TRAMO-SEATS or X-13ARIMA-SEATS methods. It also offers several
+seasonality tests that can be used to scrutinize the presence and the
+nature of seasonal movements in a time series independently from the
+seasonal adjustment. Finally, the *Direct-Indirect Seasonal Adjustment*
+tool enables a comparison of the results from direct and indirect
+seasonal adjustment performed on the aggregated series.
+
+The guidance for using these functionalities is given in the [Case
+studies](../case-studies) section: - [basic scenario detailing the use
+of automatic modelling in seasonal
+adjustment](../case-studies/simplesa.html); - [different types of user
+interventions](../case-studies/detailedsa.html); - [*Seasonality
+Tests*](../case-studies/seasonalitytests.html); - [*Direct-Indirect
+Seasonal Adjustment*](../case-studies/detailedsa-direct.html).
+
+![Text](All_images/A_Ref22.jpg)
+
+**The *Seasonal Adjustment* menu.**
+
+### Importing data : the *providers* window
+
+The *Providers* window presents the list of the data sources and
+organises the imported series within each data provider.
+
+![Text](All_images/A_Ref5.jpg)
+
+**The *Providers* window**
+
+The allowed data sources include: \* JDBC; \* ODBC; \* SDMX; \*
+Spreadsheets; \* TSW; \* TXT; \* USCB; \* XML.
+
+All standard databases (Oracle, SQLServer, DB2, MySQL) are supported by
+JDemetra+ via JDBC, which is a generic interface to many relational
+databases. Other providers can be added by users by creating plugins
+(see *Plugins* section in the [Tools](tools.html) menu). To import data,
+right-click on the appropriate provider from the *Providers* panel and
+specify the required parameters. For all providers the procedure follows
+the same logic. An example is provided [here](#import-data).
+
+The *Providers* window organises data in a tree structure reflecting the
+manner in which data are presented in the original source. The picture
+below presents how JDemetra+ visualises the imported spreadsheet file.
+If the user expands all the pluses under the spreadsheet all the series
+within each sheet that has been loaded are visible. Here two time series
+are visible: *Japan* (under the *Asia* branch) and *United States*
+(under the *North America* branch) while the *Europe* branch is still
+folded. The names of the time series have been taken from the column
+headings of the spreadsheet while the names of the branches come from
+sheets' names.
+
+![Text](All_images/A_Ref6.jpg)
+
+**A structure of a dataset**
+
+Series uploaded to the *Providers* window can be
+[displayed](../reference-manual/data-visualization.html), modified and
+[tested for seasonality](../case-studies/seasonalitytests.html) and used
+in estimation routines (see [Modelling](modelling.html) and [Seasonal
+adjustment](sa.html)). The data sources can be restored after
+re-starting the application so that there is no need to get them again.
+This functionality can be set in the *Behaviour* tab available at the
+[*Option*](../reference-manual/tools.html#options) item from the
+[*Tools*](../reference-manual/tools.html) menu.
+
+#### Spreadsheets {#spreadsheets}
+
+The Spreadsheets data source corresponds to the series prepared in the
+Excel file. The file should have true dates in the first column (or in
+the first row) and titles of the series in the corresponding cell of the
+first row (or in the first column). The top-left cell $$A1$$ can include
+a text or it can be left empty. The empty cells are interpreted by
+JDemetra+ as missing values and they can appear in the beginning, in the
+middle and in the end of time series.
+
+An example is presented below:
+
+![Text](All_images/Aimage5.jpg)
+
+**Example of an Excel spreadsheet that can be imported to JDemetra+**
+
+Time series are identified by their names. JDemetra+ derives some
+information (like data periodicity, starting and ending period) directly
+from the first column (or from the first row, depending on the chosen
+data orientation (vertical or horizontal)).
+
+#### Import data {#import-data}
+
+To import data from a given data source, click on this data source in
+the *Providers* window shown below, choose *Open* option and specify the
+import details, such as a path to a data file. These details vary
+according to data providers. The example below show how to import the
+data from an Excel file.
+
+1.  From the *Providers* window right-click on the *Spreadsheets* branch
+    and choose *Open* option.
+
+    ![Text](All_images/Aimage6.jpeg)
+
+    **Data provider available by default**
+
+2.  The *Open data source* window contains the following options:
+
+    -   **Spreadsheet file** -- a path to access the Excel file.
+
+    -   **Data format** -- the data format used to read dates and
+        values. It includes three fields: *locale* (country), *date
+        pattern* (data format, e.g. *yyyy-mm-dd*), *number pattern* (a
+        metaformat of numeric value, e.g. 0.## represents two digit
+        number).
+
+    -   **Frequency** -- time series frequency. This can be undefined,
+        yearly, half-yearly, four-monthly, quarterly, bi-monthly, or
+        monthly. When the frequency is set to undefined, JDemetra+
+        determines the time series frequency by analysing the sequence
+        of dates in the file.
+
+    -   **Aggregation type** -- the type of aggregation (over time for
+        each time series in the dataset) for the imported time series.
+        This can be *None*, *Sum*, *Average*, *First*, *Last*, *Min* or
+        *Max*. The aggregation can be performed only if the *frequency*
+        parameter is specified. For example, when frequency is set to
+        *Quarterly* and aggregation type is set to *Average*, a monthly
+        time series is transformed to quarterly one with values that are
+        equal to the one third of the sum of the monthly values that
+        belong to the corresponding calendar quarter.
+
+    -   **Clean missing** -- erases the missing values of the series.
+
+    Next, in the *Source* section click the grey "...." button (see
+    below) to open the file.
+
+    ![Text](All_images/Aimage7.jpeg)
+
+    **Data source window**
+
+3.  Choose a file and click *OK*.
+
+    ![Text](All_images/Aimage8.jpeg)
+
+    **Choice of an Excel spreadsheet**
+
+4.  The user may specify *Data format*, *Frequency* and *Aggregation
+    type*, however this step is not compulsory. When these options are
+    specified JDemetra+ is able to convert the time series frequency.
+    Otherwise, the functionality that enables the time series frequency
+    to be converted will not be available.
+
+    ![Text](All_images/Aimage9.jpeg)
+
+    **Options for importing data**
+
+5.  The data are organized in a tree structure.
+
+    ![Text](All_images/Aimage10.jpeg)
+
+    **Dataset structure**
+
+    Once the data has been successfully imported, it is available to the
+    user for various analyses (e.g. visualization, modelling, seasonal
+    adjustment, etc.)
+
+### Charts
+
+#### Data visualization
+
+1.  To display a given series, right click on it and choose the *Chart &
+    grid* option from the local menu. The graph is displayed in the
+    panel on the right.
+
+    ![Text](All_images/Aimage11.jpeg)
+
+    **Time series graph**
+
+2.  Using the local menu that is available for the chart the user may
+    adjust the view of the picture, save it and/or save it in a given
+    location.
+
+    ![Text](All_images/Aimage12.jpeg)
+
+    **Local menu basic options for the time series graph**
+
+3.  Once the time series is marked by clicking on it with the left mouse
+    button, more sophisticated options are available, in addition to the
+    standard ones shown above.
+
+    ![Text](All_images/Aimage13.jpeg)
+
+    **Full local menu options**
+
+4.  These additional options include the *Open with* option, which opens
+    time series in a separate window according to the user choice (chart
+    & grid or only chart). *All ts views* option is not available at the
+    moment. The picture below shows the view displayed once *Chart &
+    grid* option was chosen. By clicking on the marked buttons the user
+    can switch between chart and grid view. For both views (chart and
+    grid) the local menu is available.
+
+    ![Text](All_images/Aimage14.jpeg)
+
+    ***Chart & grid*** **view**
+
+5.  *Rename* option (see below) enables the user to change the time
+    series name.
+
+    ![Text](All_images/Aimage15.jpeg)
+
+    **Renaming a time series**
+
+6.  The option *Split into the yearly components* opens an additional
+    window that presents the analysed series data split by year. This
+    chart is useful to investigate the differences in time series values
+    caused by the seasonal factors. The graph gives some idea about the
+    existence and size of deterministic and stochastic seasonality in
+    data.
+
+    ![Text](All_images/Aimage16.jpeg)
+
+    ***Split into the yearly components*** **option's result**
+
+7.  To display more than one series on the graph, select *Tools* →
+    *Container* → *Chart* from the main menu. Next, drag a drop series
+    to the *Chart* window.
+
+    ![Text](All_images/Aimage17.jpeg)
+
+    ***Chart*** **window**
+
+#### Charts for spectral Analysis
+
+![Text](All_images/image3_342.jpeg)
+
+**Auto-regressive spectrum's properties**
+
+1.  The spectral graphs are available from: *Tools* → *Spectral
+    analysis.*
+
+    ![Text](All_images/image1_342.jpeg)
+
+    **Tools for spectral analysis**
+
+2.  When the first option is chosen JDemetra+ displays an empty
+    *Auto-regressive spectrum* window. To start an analysis drag a
+    single time series from the *Providers* window and drop it into the
+    *Drop data here* area.
+
+    ![Text](All_images/image2_342.jpeg)
+
+    **Launching an auto-regressive spectrum**
+
+3.  An auto-regressive spectrum graph available in JDemetra+ is based on
+    the relevant tool from the X-13ARIMA-SEATS program. It shows the
+    spectral density (spectrum) function, which reformulates the content
+    of the stationary time series' autocovariances in terms of
+    amplitudes at frequencies of half a cycle per month or less. The
+    number of observations, data transformations and other options such
+    as the specification of the frequency grid and the order of the
+    autoregressive polynomial (30 by default) can be specified by
+    opening the *Window* → *Properties* from the main menu.
+
+    The *Auto-regressive - Properties* window contains the following
+    options:
+
+    -   **Log** - a log transformation of a time series;
+
+    -   **Differencing** - transforms a data by calculating a regular
+        (order 1,2..) or seasonal (order 4, 12, depending on the time
+        series frequency) differences;
+
+    -   **Differencing lag** - the number of lags that the program will
+        use to take differences. For example, if *Differencing lag = 3*
+        then the differencing filter does not apply to the first lag
+        (default) but to the third lag.
+
+    -   **Last years** - a number of years at the end of the time series
+        taken to produce autoregresive spectrum. By default, it is 0,
+        which means that the whole time series is considered.
+
+    -   **Auto-regressive polynomial order** - the number of lags in the
+        AR model that is used to estimate the spectral density. By
+        default, the order of the autoregressive polynomial is set to 30
+        lags.
+
+    -   **Resolution** - the value 1 plots the spectral density estimate
+        for the frequencies $\omega_{j} = \frac{2\pi j}{n}$, where
+        $n \in ( - \pi;\pi)$ is the size of the sample used to estimate
+        the AR model. Increasing this value, which is set to 5 by
+        default, will increase the precision of this grid.
+
+4.  The seasonality test described above uses an empirical criterion to
+    check whether the series has a seasonal component that is
+    predictable (stable) enough that it can be estimated with reasonable
+    success. The peak in the [auto-regressive
+    spectrum](../theory/spectral_AR.html) has to be greater than the
+    median of the 61 spectrum ordinates and has to exceed the two
+    adjacent spectral values by more than a critical value. When such a
+    case is detected, the test results are displayed in green.
+
+    ![Text](All_images/image4_342.jpeg)
+
+    **An example of an-auto-regressive spectrum**
+
+5.  The second spectral graph is a periodogram. To perform the analysis
+    of a single time series using this tool, choose *Tools* →*Spectral
+    analysis* → *Periodogram* and drag and drop a series from the
+    *Providers* window to the empty *Periodogram* window.
+
+    ![Text](All_images/image5_342.jpeg)
+
+    **Launching a periodogram**
+
+6.  The sample size and data transformations can be specified by opening
+    the *Window* → *Properties*, in the main menu. The *Periodogram -
+    Properties* window contains the following options:
+
+    -   **Log** - a log transformation of a time series;
+
+    -   **Differencing** - transforms the data by calculating regular
+        (order 1,2..) or seasonal (order 4, 12, depending on the time
+        series frequency) differences;
+
+    -   **Differencing lag** - the number of lags that you will use to
+        take differences. For example, if *Differencing lag = 3* then
+        the differencing filter does not apply to the first lag
+        (default) but to the third lag.
+
+    -   **Last years** - the number of years at the end of the time
+        series taken to produce periodogram. By default it is 0, which
+        means that the whole time series is considered.
+
+    ![Text](All_images/image6_342.jpeg)
+
+    **Periodogram's properties**
+
+7.  The [periodogram](../theory/spectral_periodogram.html) was one of
+    the earliest tools used for the analysis of time series in the
+    frequency domain. It enables the user to identify the dominant
+    periods (or frequencies) of a time series. In general, the
+    periodogram is a wildly fluctuating estimate of the spectrum with a
+    high variance and is less stable than an auto-regressive spectrum.
+
+    ![Text](All_images/image7_342.jpeg)
+
+    **An example of a periodogram**
+
+8.  The third spectral graph is the Tukey spectrum. To perform the
+    analysis of time series using this tool, choose *Tools* → *Spectral
+    analysis* → *Tukey spectrum* and drag and drop a single series from
+    the *Providers* window to the empty *Periodogram* window*.*
+
+    ![Text](All_images//image8_342.jpeg)
+
+    **Launching a Tukey spectrum**
+
+9.  The Tukey spectrum estimates the spectral density by smoothing the
+    periodogram.
+
+    ![Text](All_images/image9_342.jpeg)
+
+    **An example of a Tukey spectrum**
+
+10. The options for the Tuckey window can be specified by opening the
+    *Window* → *Properties* from the main menu. The *Periodogram -
+    Properties* window contains the following options:
+
+    -   **Log** - a log transformation of a time series.
+
+    -   **Differencing** - transforms the data by calculating regular
+        (order 1, 2..) or seasonal (order 4, 12, depending on the time
+        series frequency) differences.
+
+    -   **Differencing lag** - the number of lags that you will use to
+        take differences. For example, if *Differencing lag = 3* then
+        the differencing filter does not apply to the first lag
+        (default) but to the third lag.
+
+    -   **Taper part** -- parameter larger than 0 and smaller or equal
+        to one that shapes the curvature of the smoothing function that
+        is applied to the auto-covariance function.
+
+    -   **Window length** -- the size of the window that is used to
+        smooth the auto-covariance function. A value of zero includes
+        the whole series.
+
+    -   **Window type** -- it refers to the weighting scheme that it is
+        used to smooth the auto-covariance function. The available
+        windows types (*Square*, *Welch*, *Tukey*, *Barlett*, *Hamming*,
+        *Parzen*) are suitable to estimate the spectral density.
+
+    ![Text](All_images/image10_342.jpeg)
+
+    **Tukey spectrum's properties**
+
+### Workspace Window : set up your work environnement
+
+#### Customize specifications
+
+eg the parameters the algo will run on, here they are globally defined
+for your whole data set and you will be able to fine tune them series by
+series
+
+### 
+
+## Seasonal adjustment
+
+Table : list of steps with links (obj : replace a lot of text with
+tables)
+
+### Run a fully automatic SA processing
+
+List of steps \* import data \* choose a pre-defined specification (link
+to list) \* create a multi document \* run SA \* generate output + from
+the GUI + link to cruncher ()
+
+In the following parts you can learn how to customize you processing
+
+doncument : one series vs muti document check output if document : no
+output check with v3
+
+#### Quick demonstration
+
+For a detailed demonstration of the seasonal adjustment process, please
+refer to the [JDemetra+
+Tutorial](https://www.youtube.com/watch?v=cYDyEqMSjZ8&t=) video
+developed by Andreea Mirica (Statistics Romania). For a step-by-step
+illustration of the key stages for seasonal adjustment, refer to the
+guidance below.
+
+The default view of the JDemetra+ window, which is displayed after
+launching the program, is shown below.
+
+![Text](All_images/Jd+mainwindow.jpg)
+
+**JDemetra+ default window**
+
+By default, on the left hand side of the window two panels are visible:
+the [*Workspace* panel](../reference-manual/workspace.html) and the
+[*Providers* panel](../reference-manual/data-providers.html). The
+*Workspace* panel stores the work performed by the user in a coherent
+and structured way. The *Providers* panel presents the list of the [data
+sources](../quick-start/datasources.html) and organizes the imported
+series within each data provider.
+
+##### Importing the series
+
+Once the spreadsheet is prepared as it is shown
+[here](../quick-start/datasources.html) and saved, it can be imported to
+JDemetra+ as it is shown in the video below.
+
+![Text](All_images/Import_spreadsheet.gif)
+
+**Importing the series**
+
+The data are organized in a tree structure. If you expand all the
+plus-signs under the spreadsheet you will see all the series within each
+sheet that has been loaded. Here all time series are visible under the
+*Production in construction* branch. The names of time series have been
+taken from the columns' headings of the spreadsheet while the names of
+the branches come from sheets' names.
+
+## An automatic seasonal adjustment
+
+To execute a seasonal adjustment process of given time series dataset go
+to the main menu and follow the path: **Statistical methods → Seasonal
+adjustment → Multi Processing → New**. This command opens an empty
+*SAProcessing* window. Next, drag and drop series in the *SAProcessing*
+window and launch the seasonal adjustment process. Explore the results
+and save them. The gif below shows the details of the actions performed
+in an automatic seasonal adjustment process.
+
+![Text](All_images/FirstSAprocess.gif)
+
+**An example of an automatic seasonal adjustment process**
+
+##### Manual interventions
+
+The specifications used for seasonal adjustment of an individual series
+can be changed as shown in the presentation below. Be aware that the
+changes introduced in a given settings' section may lead to changes in
+the output for other parts of the results. The options for the
+pre-processing of the series are explained under [modelling
+specifications](../reference-manual/modelling-specifications.html) and
+the options for the pure seasonal adjustment process are explained under
+[seasonal adjustment
+specifications](../reference-manual/sa-specifications.html).
+
+![Text](All_images/First-SA-process-specifcation.gif)
+
+**An example of manual interventions to the seasonal adjustment
+process**
+
+##### Output options
+
+To export the results of seasonal adjustment for the whole dataset,
+select the *Output* item from the *SAProcessing* menu.
+
+![Text](All_images/output.jpg)
+
+**The *SAProcessing* menu**
+
+The procedure to extract the output is explained
+[here](../case-studies/output.html) in detail. The results can be
+exported to CSV, CVS matrix, TXT and XLS formats and the list of
+available items depends on the format choice. The CVS, TXT and XLS
+formats are used to save the results in a form of the time series. The
+CVS matrix is a format for saving various diagnostics and statistics.
+The list of available items is available [here](../theory/output.html).
+
+### Simple seasonal adjustment of a single time series
+
+This scenario guides the user through all the steps of the process
+required to seasonally adjust a single time series. Links to the
+appropriate parts of the [*Reference
+Manual*](../pages/reference-manual/) for detailed explanations are
+provided when necessary.
+
+1.  Go to the main menu and follow the path: *Statistical methods* →
+    *Seasonal adjustment* → *Single analysis*. Select a seasonal
+    adjustment method (*TramoSeats* (i.e. the TRAMO-SEATS method will be
+    used) or *X13* (i.e. the X13ARIMA-SEATS will be used).
+
+    ![Text](All_images/UG_SSA_image1.jpg)
+
+    **Launching seasonal adjustment for a single time series**
+
+2.  An empty panel will be opened. The picture below shows the view when
+    the X-13ARIMA-SEATS method is chosen.
+
+    ![Text](All_images/UG_SSA_image2.jpg)
+
+    **Single analysis window**
+
+3.  Select a data provider and unfold an already imported dataset. Drag
+    and drop one time series from the *Providers* window to the *Drop
+    data here* box as shown below. The window contains two panels. The
+    one on the left presents the structure of the output in the form of
+    an output tree. The other one is empty. Once the seasonal adjustment
+    has been performed, this panel will show detailed results for any
+    item chosen by the user from the output tree.
+
+    ![Text](All_images/UG_SSA_image3.jpg)
+
+    **Starting a seasonal adjustment process**
+
+4.  When the user drops a series into the document window (X13Doc in the
+    example presented in this scenario) JDemetra+ starts the seasonal
+    adjustment process automatically. By default, a summary of results
+    is displayed. It is accompanied by two graphs: an overlay graph on
+    the left with the original unadjusted series, the
+    seasonally-adjusted series and the trend-cycle and the *SI ratio*
+    graph on the right. The diagnostics and graphs for the modelling
+    part are discussed
+    [here](../reference-manual/output-modelling.html). The user can find
+    also find some explanations of the [results of seasonal adjustment
+    for X-13ARIMA-SEATS](../reference-manual/sa-output-X13.html) and for
+    [TRAMO-SEATS](../reference-manual/sa-output-tramo.html)). The *Main
+    results* panel provides a quick summary of the quality of the
+    adjustment. Study the diagnostics section using the vertical
+    scrollbar.
+
+    ![Text](All_images/UG_SSA_image4.jpg)
+
+    **Simple seasonal adjustment, single time series: main results
+    panel**
+
+5.  The results are highlighted in green, yellow or red, depending on
+    the result of the statistical test used. Green indicates that
+    problematic characteristics have not been detected (e.g. lack of
+    normality of residuals, autocorrelation in residuals). Yellow
+    indicates that the test outcome is uncertain. Those in red indicate
+    that there are issues that should be addressed. The user is expected
+    to investigate the problematic test statistics and try to improve
+    the model, so that no uncertain or rejected test results are
+    present.
+
+    ![Text](All_images/UG_SSA_image5.jpg)
+
+    **Diagnostic results - simple seasonal adjustment of single time
+    series**
+
+6.  To explore the results, expand the tree in the left panel and click
+    on the desired node. Here [*Out-of-sample
+    test*](../reference-manual/forecasts.html) was chosen.
+
+    ![Text](All_images/UG_SSA_image6.jpg)
+
+    **Exploring the results**
+
+7.  The default specification used for a seasonal adjustment can be
+    modified by clicking on the *Specifications* button.
+
+    ![Text](All_images/UG_SSA_image7.jpg)
+
+    **Changing a default specification**
+
+8.  The *Specifications* panel presents settings that have been used to
+    generate the current output.
+
+    ![Text](All_images/UG_SSA_image8.jpg)
+
+    **Specification panel**
+
+9.  To change a given setting, click on it and choose an option from the
+    list and/or enter a value. In the picture below the series span was
+    shortened by the first 12 observations. Inputs in green indicate
+    that the entered values are acceptable (appropriate format, data
+    within the allowed range and so on). To apply the changes click on
+    the *Apply* button in the bottom part of the window.
+
+    ![Text](All_images/UG_SSA_image9.jpg)
+
+    **Modifying settings**
+
+10. Be aware that the changes introduced may lead to changes in the
+    output for other parts of the results. The example below illustrates
+    that omitting the first 12 observations results in automatic
+    detection of trading day effects and the Easter effect, which were
+    not present in the previous model.
+
+    ![Text](All_images/UG_SSA_image10.jpg)
+
+    **The effect of applying modified settings**
+
+11. To copy the estimated series (seasonally adjusted, trend, seasonal
+    and irregular) to another file go to the *Table* item in the *Main
+    results* section of the output tree. Then click on the upper-left
+    cell in the table.
+
+    ![Text](All_images/UG_SSA_image11.jpg)
+
+    **Highlighting the output series**
+
+12. Copy the series by clicking the *Copy* item from the context menu or
+    use the standard *Ctrl+C* keys. Other options from this menu are
+    explained [here](../reference-manual/input.html).
+
+    ![Text](All_images/UG_SSA_image12.jpg)
+
+    **Copying the series**
+
+13. Paste the series to the destination file (e.g. TXT, Excel).
+
+    ![Text](All_images/UG_SSA_image13.jpg)
+
+    **Easy exporting data to an Excel file**
+
+14. To save the document created in JDemetra+ (named *X13Doc-1* in our
+    example) select *Save Workspace As...* item from the *File* menu.
+
+    ![Text](All_images/UG_SSA_image14.jpg)
+
+    **Saving a workspace**
+
+15. Enter the location, workspace name and click *Save.*
+
+    ![Text](All_images/UG_SSA_image15.jpg)
+
+    **Choosing a destination folder**
+
+16. The document is visible in the *Workspace* window under the
+    appropriate section (*x13* in the case presented in the picture).
+    The document can be opened, deleted or renamed from the context
+    menu.
+
+    ![Text](All_images/UG_SSA_image16.jpg)
+
+    **The content of the context menu for a single document**
+
+17. The user can also add comments to the document. To display the
+    comments and modify them, click on *Edit comments* from the context
+    menu.
+
+    ![Text](All_images/UG_SSA_image17.jpg)
+
+    **An example of an *Edit comments* window**
+
+18. At the end of this process, the user is presented with the results
+    already saved in the workspace. The option *Refresh data* becomes
+    active when the given workspace is opened again. This option can be
+    activated either from a local menu or from the main menu. Once it is
+    activated, JDemetra+ refers to the data source defined in the
+    workspace and uses this current version of data to perform seasonal
+    adjustment with the settings saved in the document.
+
+    ![Text](All_images/UG_SSA_image18.jpg)
+
+    **Refreshing the data**
+
+### Specifications, documents, multi-documents
+
+![Text](All_images/A_Ref_d2.jpg)
+
+\*\*The *Workspace* window with the nodes for the seasonal adjustment
+procedure marked
+
+Seasonal adjustment can be performed with pre-defined or user-defined
+specifications. In general, these specifications include also a
+modelling part, which is descibed under the [Modelling
+section](../reference-manual/modelling-specifications.html).
+Specifications are sets of parameters and values assigned to them that
+contain all information necessary for seasonal adjustment. The
+specifications for seasonal adjustment can be used for processing of a
+single time series as well as a large dataset. The default critical
+values used by the tests included in the specifications can be changed
+by the user in the [*Tools* \\(\rightarrow\\) *Options*
+menu](../reference-manual/tools.html#options).
+
+#### Pre-defined specifications
+
+The *Seasonal adjustment* section of the *Workspace* window contains a
+set of pre-defined specifications that enables the user to seasonally
+adjust the time series using two methods: TRAMO-SEATS and
+X-13ARIMA-SEATS.
+
+![Text](All_images/RM_C_pic19.jpg)
+
+**A set of pre-defined seasonal adjustment specifications**
+
+The set of pre-defined specifications for seasonal adjustment
+encompasses the most commonly used sets of seasonal adjustment
+parameters. The names of these pre-defined specifications correspond to
+the terminology used in TSW+. The users are strongly recommended to
+start their analysis with one of those specifications (usually *RSA4c*
+or *RSA5c* for X-13ARIMA-SEATS and *RSA4*, *RSA5* or *RSAfull* for
+TRAMO-SEATS). The user is expected to adjust the specification to the
+specific needs the using the [*Specification*
+button](../case-studies/modelling-advanced.html). The default
+specification for TRAMO-SEATS and multi-documents is *RSAfull*, while
+for X-13ARIMA-SEATS it is RSA4c.
+
+**Pre-defined seasonal adjustment specifications**
+
++-------+-------+-------+-------+-------+-------+-------+-------+
+| **    | **T   | *     | **Wo  | **Tr  | **E   | **    | **    |
+| Speci | ransf | *Pre- | rking | ading | aster | Outli | ARIMA |
+| ficat | ormat | adjus | d     | d     | eff   | ers** | mo    |
+| ion** | ion** | tment | ays** | ays** | ect** |       | del** |
+|       |       | \     |       |       |       |       |       |
+|       |       | for   |       |       |       |       |       |
+|       |       | l     |       |       |       |       |       |
+|       |       | eap-y |       |       |       |       |       |
+|       |       | ear** |       |       |       |       |       |
++=======+=======+=======+=======+=======+=======+=======+=======+
+| RSA0  | no    | no    | no    | no    | no    | no    | (0,1  |
+|       |       |       |       |       |       |       | ,1)(0 |
+|       |       |       |       |       |       |       | ,1,1) |
++-------+-------+-------+-------+-------+-------+-------+-------+
+| RSA1  | test  | no    | no    | no    | no    | test  | (0,1  |
+|       |       |       |       |       |       |       | ,1)(0 |
+|       |       |       |       |       |       |       | ,1,1) |
++-------+-------+-------+-------+-------+-------+-------+-------+
+| RSA2  | test  | no    | test  | no    | test  | test  | (0,1  |
+|       |       |       |       |       |       |       | ,1)(0 |
+|       |       |       |       |       |       |       | ,1,1) |
++-------+-------+-------+-------+-------+-------+-------+-------+
+| RSA3  | test  | no    | no    | no    | no    | test  | AMI   |
++-------+-------+-------+-------+-------+-------+-------+-------+
+| RSA4  | test  | no    | test  | no    | test  | test  | AMI   |
++-------+-------+-------+-------+-------+-------+-------+-------+
+| RSA5  | test  | no    | no    | yes   | test  | test  | AMI   |
+|       |       |       |       |       | (Stan |       |       |
+|       |       |       |       |       | dard) |       |       |
++-------+-------+-------+-------+-------+-------+-------+-------+
+| RS    | test  | yes   | no    | test  | test  | test  | AMI   |
+| Afull |       |       |       |       | (In   |       |       |
+|       |       |       |       |       | clude |       |       |
+|       |       |       |       |       | Ea    |       |       |
+|       |       |       |       |       | ster) |       |       |
++-------+-------+-------+-------+-------+-------+-------+-------+
+| X11   | no    | no    | no    | no    | no    | no    | (0,1  |
+|       |       |       |       |       |       |       | ,1)(0 |
+|       |       |       |       |       |       |       | ,1,1) |
++-------+-------+-------+-------+-------+-------+-------+-------+
+| RSA1  | test  | no    | no    | no    | no    | test  | (0,1  |
+|       |       |       |       |       |       |       | ,1)(0 |
+|       |       |       |       |       |       |       | ,1,1) |
++-------+-------+-------+-------+-------+-------+-------+-------+
+| RSA2c | test  | test  | test  | no    | test  | test  | (0,1  |
+|       |       |       |       |       |       |       | ,1)(0 |
+|       |       |       |       |       |       |       | ,1,1) |
++-------+-------+-------+-------+-------+-------+-------+-------+
+| RSA3  | test  | no    | no    | no    | no    | test  | AMI   |
++-------+-------+-------+-------+-------+-------+-------+-------+
+| RSA4c | test  | test  | test  | no    | test  | test  | AMI   |
++-------+-------+-------+-------+-------+-------+-------+-------+
+| RSA5  | test  | test  | no    | test  | test  | test  | AMI   |
++-------+-------+-------+-------+-------+-------+-------+-------+
+
+**Explanations for settings:**
+
+-   **Transformation test** -- a test is performed to choose between an
+    additive decomposition (no transformation) and a multiplicative
+    decomposition (logarithmic transformation).
+
+-   **Pre-adjustment for leap-year** -- a correction of the February
+    values, which is applied to the original series before the
+    logarithmic transformation. The original values in February are
+    multiplied by \\(\frac{28.25}{29}\\) for leap years and by
+    \\(\frac{28.25}{28}\\) for non-leap years. Values for other months
+    are not modified.
+
+-   **Working days** -- a pre-test is made for a presence of a working
+    day effect.
+
+-   **Trading days** -- a pre-test is made for a presence of a trading
+    day effect.
+
+-   **Easter** -- a pre-test for a presence of the Easter effect. The
+    default length of the Easter effect is 6 days (for TRAMO-SEATS
+    specifications) and 8 days (for X-13ARIMA-SEATS specifications).
+
+-   **Outliers** -- an automatic identification of three types of
+    outliers: AO (additive outliers), LS (level shifts) and TC
+    (transitory changes), using a default critical value.
+
+-   **ARIMA model** -- the choice between fixing the ARIMA model
+    structure to (0,1,1)(0,1,1) or searching for the ARIMA model using
+    an automatic model identification procedure (AMI). The
+    (0,1,1)(0,1,1) model (called the Airline model) is used as a default
+    model in several TRAMO-SEATS and X-13ARIMA-SEATS specifications
+    because it has been shown in many studies that this model is
+    appropriate for many real seasonal monthly or a quarterly time
+    series. Moreover, the Airline model approximates well many other
+    models and provides an excellent "benchmark"
+    model[^graphical-user-interface-2].
+
+[^graphical-user-interface-2]: [MARAVALL, A. (2009), 'Identification of
+    Reg-ARIMA Models and of Problematic Series in Large Scale
+    Applications: Program TSW (TRAMO-SEATS for
+    Windows)](http://www.bde.es/webbde/es/secciones/servicio/software/tramo/Large_Scale_TSW.pdf),
+    Banco de España
+
+#### User-defined specifications
+
+The user may add new seasonal adjustment specifications to the
+*Workspace* window. To do it, go to the *Seasonal adjustment* section,
+right click on the *tramoseats* or *x13* item in the *specifications*
+node and select *New* from the local menu.
+
+![Text](All_images/RM_C_pic20.jpg)
+
+**Creating a new specification in the *Seasonal adjustment* section**
+
+Next, double click on the newly created specification, change the
+settings accordingly and confirm with the **OK** button.
+
+![Text](All_images/RM_C_pic21.jpg)
+
+**Changing settings of seasonal adjustment specification**
+
+### Defining and modifying a specification
+
+In general, the user can choose the parameters of the seasonal
+adjustment process by creating a specification with given settings or by
+changing some settings in the specification currently in use.
+
+1.  To create a new specification go to the *Workspace* window and
+    choose a node, to which you wish to add a specification (*Modelling*
+    or *Seasonal adjustment*). Then choose a method (*tramo* or
+    *regarima* for *Modelling*, *tramoseats* or *x13* for *Seasonal
+    adjustment*). Click on the left mouse button and choose a *New*
+    option. The user can also import the specification from the external
+    file with the *Import from* option.
+
+    ![Text](All_images/UG_SA_image1.jpg)
+
+    **Creating a new specification**
+
+2.  Next, unfold the node (the *tramoseats* node in the case presented
+    here) and right click on the newly created specification
+    (*TramoSeatsSpec-1* in the case presented below) to open the local
+    menu. The local menu offers the following options:
+
+    -   **Open** -- displays the specification's settings
+
+    -   **Export to** -- enables the user to save the specification in a
+        config file.
+
+    -   **Delete** -- removes the specification from the workspace.
+
+    -   **Rename** -- enables the user to change the name of the
+        user-defined specification.
+
+    -   **Edit comments** -- a functionality for monitoring how a
+        seasonal adjustment process is implemented. The user can add and
+        modify short notes concerning a given time series. These notes
+        are visible in the *Comments* column in the *Processing* window.
+        The notes are displayed when the user hovers the mouse on the
+        given cell.
+
+    -   **Create document** -- adds a new document to the relevant place
+        in the *Seasonal adjustment → documents* section and assigns the
+        specification selected by the user to it.
+
+    -   **Clone** -- creates the copy of the specification and adds it
+        to the list.
+
+    Chose **Open** from the menu.
+
+    ![Text](All_images/UG_SA_image2.jpg)
+
+    **Opening a new specification**
+
+3.  The *Specification* window is divided into several sections. The
+    actual content depends on the choice made by the user in step 1 of
+    this scenario. To introduce changes unfold the sections, modify the
+    current settings (choose from the list or insert the value by hand)
+    and confirm the changes with the *OK* button.
+
+    ![Text](All_images/UG_SA_image3.jpg)
+
+    **Modifying a new specification**
+
+4.  User-defined specifications are usually used for seasonal adjustment
+    of many time series (*Statistical methods* → *Seasonal adjustment* →
+    *Multi Processing* → *New*). The user can also make changes to the
+    specification after the modelling/seasonal adjustment process. In
+    such a case, to introduce changes click on the *Specification*
+    button. JDemetra+ opens the *Specifications* panel on the right.
+    Unfold the sections, modify the current settings (choose from the
+    list or type a new value) and confirm the changes with the *Apply*
+    button. JDemetra+ automatically applies the new settings and
+    displays the outcome resulting from the modified specification.
+
+    ![Text](All_images/UG_SA_image4.jpg)
+
+    **Modifying a specification, which is currently in use**
+
+### Tramo-seats specification setting
+
+This section discusses the options available for the TRAMO-SEATS
+specifications, which are based on the original program developed by
+Agustin Maravall and Victor Gómez. It is divided into five parts that
+correspond to the TRAMO-SEATS specification sections and are presented
+in the order in which they are displayed in the graphical interface of
+JDemetra+.
+
+![Text](All_images/RM_C_pic22.jpg)
+
+**A list of the TRAMO-SEATS specification's sections**
+
+To avoid unnecessary repetitions, click on the respective link for a
+description of the following sections of the TRAMO/SEATS specification:
+
+-   [*Estimate*](../reference-manual/modelling-spec-tramo.html#estimate);
+-   [*Transformation*](../reference-manual/modelling-spec-tramo.html#transformation);
+-   [*Regression*](../reference-manual/modelling-spec-tramo.html#regression);
+-   [*Outliers*](../reference-manual/modelling-spec-tramo.html#outliers);
+-   [*Arima*](../reference-manual/modelling-spec-tramo.html#arima).
+
+This section focuses on the decomposition part of the seasonal
+adjustment process and the options for benchmarking.
+
+To facilitate the comparison between JDemetra+ specifications and
+specifications used in TSW+, under each option the name of the
+corresponding parameter from the original software is given, if any. For
+an exact description of the different parameters originating from TSW+,
+the user should refer to the documentation of TSW+. For each parameter
+the default parameter value, which is displayed for a template created
+in the *Workspace* window, is reported.
+
+For the pre-defined specifications the items are fixed, while in the
+case of the user-defined specifications the user can set them
+individually. However, in some cases the choice of a given value results
+in a limitation of the possible alternatives for other parameters.
+Therefore, the user is not entirely free to set the parameters values.
+
+#### Series
+
+In the context of seasonal adjustment it is usually assumed that long
+time series are those exceeding twenty years of length. Performing
+seasonal adjustment of long time series can be difficult. Over such a
+long period the underlying data generating process can change,
+determining changes also in the components and in the components
+structure. In this case the adjustment over the whole series may produce
+sub-optimal results mainly in the most recent period and in the initial
+parts of the series. Therefore it is reasonable to limit long time
+series to the most recent observations. The *Series* section allows the
+user to limit the span (data interval) of the data to be modelled or
+seasonally adjusted.
+
+###### **Series span → type**<br> *--; --*
+
+Specifies the span (data interval) of the time series to be used in the
+seasonal adjustment process. When the user limits the original time
+series to a given span, only this span will be used in the computations.
+The available parameters for this option are: \* *All* -- full time
+series span is considered in the seasonal adjustment; \* *From* -- date
+of the first time series observation is included in the seasonal
+adjustment; \* *To* -- date of the last time series observation is
+included in the seasonal adjustment; \* *Between* -- dates of the first
+and the last time series observations are included in the seasonal
+adjustment; \* *Last* -- a specific number of observations from the end
+of the time series is included in the seasonal adjustment; \* *First* --
+a specific number of observations from the beginning of the time series
+is included in the seasonal adjustment; \* *Excluding* -- a specific
+number of observations is excluded from the beginning (*First*) and/or
+end (*Last*) of the time series in the seasonal adjustment. With the
+options *Last*, *First* and *Excluding* the span can be computed
+dynamically on the series. The default setting is *All*.
+
+###### **Series span → Preliminary check**<br> *--; --*
+
+When marked, it checks the quality of the input series and excludes from
+a processing the highly problematic ones: e.g. these with a high number
+of outliers, identical observations and/or missing values above the
+respective threshold values. When unmarked, the thresholds are ignored
+and process is performed, when possible. By default, the checkbox is
+marked.
+
+#### Seats
+
+This section includes the settings relevant for the decomposition step,
+performed by the [SEATS algorithm](../theory/SA_SEATS.html).
+
+###### **Prediction length**<br> *Seats parameters; npred*
+
+Number of forecasts used in the decomposition. Positive values
+correspond to the number of months while negative values correspond to
+the numbers of years.
+
+###### **Approximation mode**<br> *Seats parameters; noadmiss*
+
+In general, SEATS decomposes the ARIMA model received from TRAMO. On
+some occasions, the ARIMA model identified by TRAMO results in a so
+called non-admissible decomposition i.e. a decomposition for which the
+condition that all components have a non-negative spectrum for all
+frequencies has failed. In such cases an approximation might be used to
+choose an acceptable ARIMA model. The available actions that can be
+performed in the case of a non-admissible decomposition are:
+
+-   *None* -- when the model does not accept an admissible
+    decomposition, no approximation is made, which means that no
+    decomposition is performed by SEATS.
+-   *Legacy* -- when the model does not accept an admissible
+    decomposition, it is automatically replaced with a decomposable one.
+    The forecasts of the components obtained from SEATS with a new ARIMA
+    model (sum of the components forecasts) will not add to the series
+    forecast of the model passed by TRAMO.
+-   *Noisy* -- a new ARIMA model is obtained by adding a white noise to
+    the non-admissible model estimated by TRAMO. In this case, the
+    forecasts of the series from TRAMO and from SEATS are the same; also
+    the sum of the components forecasts is the same as the forecast of
+    the series with the TRAMO model.
+
+The default setting is *Legacy*.
+
+###### **MA unit root boundary**<br> *Seats parameters; xl*
+
+A parameter to control the estimation of the AR and MA roots of the
+model. When the modulus of a root converges within an interval around 1,
+the program automatically fixes the root. More specifically, when the
+modulus of an estimated root falls in the range
+(<em>xl</em><strong>,</strong> 1), it is set to 1 if it is a root in the
+AR polynomial. If a root is in the MA polynomial, it is set to *xl*. The
+default value is 0.95.
+
+###### **Trend boundary**<br> *Seats parameters; rmod*
+
+The trend boundary is defined for the modulus of the inverse of the real
+AR roots. If the modulus of the inverse of the real root is greater than
+the <strong>Trend boundary</strong>, the AR root is integrated into the
+trend component. Otherwise the root is integrated into the seasonal
+component or transitory component (see <strong>Seasonal
+boundary</strong>). The default parameter value is 0.5.
+
+###### **Seasonal tolerance**<br> *Seats parameters; epsphi*
+
+The tolerance (measured in degrees) to allocate the AR non-real roots to
+the seasonal component (if the modulus of the inverse complex AR root is
+greater than the <strong>Trend boundary</strong> and the frequency of
+this root differs from one of the seasonal frequencies by less than
+<strong>Seasonal tolerance</strong>) or the transitory component
+(otherwise). The default parameter value is [$\frac{\pi}{90}$]{.math
+.inline} rad (2 degrees).
+
+###### **Seasonal boundary**<br> *Seats parameters; smod*
+
+The seasonal boundary is defined for the modulus of the inverse of the
+real negative AR roots. If the modulus of the inverse negative real root
+is greater (or equal) than <strong>Seasonal boundary</strong>, the AR
+root is integrated into the seasonal component. Otherwise the root is
+integrated into the trend or transitory component (see <strong>Trend
+boundary</strong>). The default parameter value is 0.8.
+
+###### **Seasonal boundary (unique)**<br> *Seats parameters; smod*
+
+A boundary, from which a negative AR root is integrated in the seasonal
+component when the root is the unique seasonal root. The default
+parameter value is 0.8.
+
+###### **Method**<br> *--; --*
+
+The estimation method of the unobserved components.
+
+Options: - *Burman* -- the algorithm, which is used by the original
+TRAMO/SEATS method. Although it is the most efficient one, it cannot
+handle MA unit roots and it may become numerically unstable when some
+roots of the MA polynomial are near 1. In such cases the
+Wiener-Kolmogorov approach may lead to a significant underestimation of
+the standard deviations of the components. - *KalmanSmoother* -- the
+most robust algorithm. It is not disturbed by (quasi-) unit roots in MA.
+It is slightly slower than the Burman's
+algorithm[^graphical-user-interface-3]. It should also be noted that it
+provides exact measures of the standard errors of the estimates
+(identical to the McElroy's results). - *McElroyMatrix* -- the
+algorithm, which is much slower than the two other options and presents
+the same stability issues as the Burman's algorithm. However, it
+provides additional results (full covariance matrix of the estimates)
+that may be useful.
+
+[^graphical-user-interface-3]: Description of the idea of benchmarking
+    is based on Dagum, B.E., Cholette, P.A. 1994), and Quenneville, B.
+    et all (2003). Detailed information can be found in: Dagum, B.E.,
+    Cholette, P.A. (2006).
+
+The default setting is *Burman*.
+
+### Reg arima linearization
+
+mixed old page \* in chap 4 on SA : infos on algos \* here cut out infos
+on gui only
 
 The *Model* node includes basic information about the outcome of the
 model identification procedure and checking the goodness of fit. The
 summary information about the final model is available directly from the
-main *Model* node. The content of this panel depends on the [settings](../reference-manual/modelling-specifications.html) applied to the modelling procedure.
-
-
+main *Model* node. The content of this panel depends on the
+[settings](../reference-manual/modelling-specifications.html) applied to
+the modelling procedure.
 
 ![Text](All_images/image22_RMSB.jpg)
 
@@ -40,32 +1679,31 @@ main *Model* node. The content of this panel depends on the [settings](../refere
 
 The first part contains fundamental information about the model.
 
-
-
 ![Text](All_images/image23_RMSB.jpg)
 
 **The *Summary* section of the *Model* node**
 
 *Estimation span* informs about the first and the last observation used
 for modelling. The notation of the estimation span varies according to
-the frequencies (for example, the span \[2-1993 : 10-2006\] represents a
-monthly time series and the span \[II-1994 : I-2011\] represents a
+the frequencies (for example, the span $$2-1993 : 10-2006$$ represents a
+monthly time series and the span $$II-1994 : I-2011$$ represents a
 quarterly time series). The message *Series has been log-transformed* is
 only displayed if a logarithmic transformation has been applied.
 
-In the case of [the pre-defined specifications](../reference-manual/modelling-specifications.html): TR0, TR1, TR3, RG0, RG1
-and RG3 no trading day effect is estimated. For TR2, RG2c, TR4 and RG4c
-pre-defined specifications, working day effects and the leap year effect
-are pre-tested and estimated if present. If the working day effect is
-significant, the pre-processing part includes the message *Working days
-effect (1 regressor)*. The message *Working days effect (2 regressors)*
-means that the leap year effect has also been estimated. For TR5 and
-RG5c the trading day effect and the leap year effect are pre-tested. If
-the trading day effect has been detected, either of the messages
-*Trading days effect (6 regressors)* or *Trading days effect (7
-regressors)* are displayed, depending whether the leap year effect has
-been detected or not. If the Easter effect is statistically significant,
-*Easter effect detected* is displayed.
+In the case of [the pre-defined
+specifications](../reference-manual/modelling-specifications.html): TR0,
+TR1, TR3, RG0, RG1 and RG3 no trading day effect is estimated. For TR2,
+RG2c, TR4 and RG4c pre-defined specifications, working day effects and
+the leap year effect are pre-tested and estimated if present. If the
+working day effect is significant, the pre-processing part includes the
+message *Working days effect (1 regressor)*. The message *Working days
+effect (2 regressors)* means that the leap year effect has also been
+estimated. For TR5 and RG5c the trading day effect and the leap year
+effect are pre-tested. If the trading day effect has been detected,
+either of the messages *Trading days effect (6 regressors)* or *Trading
+days effect (7 regressors)* are displayed, depending whether the leap
+year effect has been detected or not. If the Easter effect is
+statistically significant, *Easter effect detected* is displayed.
 
 In this section the total number of detected outliers is displayed. The
 additional information on detected outliers, i.e. type, location and
@@ -81,13 +1719,33 @@ regular and seasonal parameters for both autoregressive and moving
 average processes, mean effect, trading/working day effect, outliers,
 regressors and one.
 
-*Likelihood* is a maximized value of a Likelihood[^64] function after
-the iterations processed in Exact Maximum Likelihood Estimation, which
-is a method used to estimate the model. This value is used by the model
-selection criteria: *AIC*, *AICC*, *BIC (corrected by length)* and
-*Hannan-Quinn*[^65]. *Standard error of the regression (ML estimate)* is
-the standard error of the regression from Maximum Likelihood
-Estimation[^66].
+*Likelihood* is a maximized value of a
+Likelihood[^graphical-user-interface-4] function after the iterations
+processed in Exact Maximum Likelihood Estimation, which is a method used
+to estimate the model. This value is used by the model selection
+criteria: *AIC*, *AICC*, *BIC (corrected by length)* and
+*Hannan-Quinn*[^graphical-user-interface-5]. *Standard error of the
+regression (ML estimate)* is the standard error of the regression from
+Maximum Likelihood Estimation[^graphical-user-interface-6].
+
+[^graphical-user-interface-4]: The likelihood function is the joint
+    probability (density) function of observable random variables. It is
+    viewed as the function of the parameters given the realized random
+    variables. Therefore, this function measures the probability of
+    observing the particular set of dependent variable values that occur
+    in the sample.
+
+[^graphical-user-interface-5]: [AIC, AICC, BIC and Hannan-Quinn criteria
+    are used by X-13ARIMA-SEATS while BIC (TRAMO
+    definition)](../theory/SA_lin.html#model-selection-criteria) by
+    TRAMO/SEATS. These criteria are used in seasonal adjustment
+    procedures for the selection of the optimum ARIMA model. The model
+    with the smaller value of the model selection criteria is preferred.
+
+[^graphical-user-interface-6]: Maximum Likelihood Estimation is a
+    statistical method for estimating the coefficients of a model. This
+    method determines the parameters that maximize the probability
+    (likelihood) of the sample data.
 
 The *scores at the solution* section presents the gradient of the
 loglikelihood. The different items of the scores are related to the
@@ -97,29 +1755,28 @@ the likelihood, it should be 0. However, it is never exactly the case,
 due to numerical approximations. Usually, the scores can be improved by
 using a higher precision (smaller tolerance). This precision is
 controlled by the **Tolerance** parameter in the **Estimate** section of
-the *Specifications* window (see how to use this parameter [for Tramo](../reference-manual/modelling-spec-tramo.html#estimate) and [for
+the *Specifications* window (see how to use this parameter [for
+Tramo](../reference-manual/modelling-spec-tramo.html#estimate) and [for
 Arima](../reference-manual/modelling-spec-arima.html#estimate)).
 
 An example of the output is presented in the chart below.
-
-
 
 ![Text](All_images/image24_RMSB.jpg)
 
 **The content of the *Final model* section**
 
 Next, the estimated values of model parameters (*Coefficients*),
-t-statistics (*T-Stat*) and corresponding p-values (*P\[\|T\|\>t\]*) are
+t-statistics (*T-Stat*) and corresponding p-values (*P*$$\|T\|\>t$$) are
 displayed. JDemetra+ uses the following notation:
 
--   *Phi(p)* -- the \\(p^{\text{th}}\\) term in the non-seasonal
+-   *Phi(p)* -- the \\(p\^{\text{th}}\\) term in the non-seasonal
     autoregressive polynomial;
 
 -   *Theta(q)* -- the $q^{\text{th}}$ term in the non-seasonal moving
     average polynomial;
 
--   *BPhi(P)* -- the $P^{\text{th}}$ term in the seasonal
-    autoregressive polynomial;
+-   *BPhi(P)* -- the $P^{\text{th}}$ term in the seasonal autoregressive
+    polynomial;
 
 -   *BTheta(Q)* -- the $Q^{\text{th}}$ term in the seasonal moving
     average polynomial.
@@ -128,31 +1785,34 @@ In the example below, the ARIMA model (0,1,1)(0,1,1) was chosen, which
 means that one regular and one seasonal moving average parameter were
 identified and estimated. The p-values indicate that *BTheta(1)*
 parameter is significant in contrast to the *Theta(1)*, which is not
-significant [^67].
+significant [^graphical-user-interface-7].
 
-
+[^graphical-user-interface-7]: The variable is called statistically
+    significant if it is so extreme that such a result would be expected
+    to arise simply by chance only in rare circumstances (with the
+    probability equal to p-value). Generally, the regressor is thought
+    to be significant if p-value is lower than 5%.
 
 ![Text](All_images/image25_RMSB.jpg)
 
 **The estimation's results of the ARIMA model**
 
-For the [fixed ARIMA parameters](../reference-manual/modelling-spec-tramo.html#tramo-specification--options-for-manual-identification-of-the-arima-model), JDemetra+ shows
-only the values of the parameters. Figure below presents the output from
-the manually chosen ARIMA model (2,0,0)(0,1,1) with a fixed parameter
-*BTheta(1).* For the fixed parameter the *T-Stat* and *(P\|T\|\>t)* are
-not displayed as no estimation is done for this parameter.
-
-
+For the [fixed ARIMA
+parameters](../reference-manual/modelling-spec-tramo.html#tramo-specification--options-for-manual-identification-of-the-arima-model),
+JDemetra+ shows only the values of the parameters. Figure below presents
+the output from the manually chosen ARIMA model (2,0,0)(0,1,1) with a
+fixed parameter *BTheta(1).* For the fixed parameter the *T-Stat* and
+*(P\|T\|\>t)* are not displayed as no estimation is done for this
+parameter.
 
 ![Text](All_images/image26_RMSB.jpg)
 
-**The results of the estimation of the ARIMA model with a fixed coefficient**
+**The results of the estimation of the ARIMA model with a fixed
+coefficient**
 
 If the ARIMA model contains a constant term (detected automatically or
 introduced by the user), the estimated value and related statistics are
 reported.
-
-
 
 ![Text](All_images/image27_RMSB.jpg)
 
@@ -161,8 +1821,6 @@ reported.
 JDemetra+ presents estimated values of the coefficients of one or six
 regressors depending on the type of a calendar effect specification. For
 a working days effect one regressor is estimated.
-
-
 
 ![Text](All_images/image28_RMSB.jpg)
 
@@ -173,11 +1831,10 @@ reported under the table that presents estimated values. When the result
 of *Joint F-test* indicates that the trading day variables are jointly
 not significant the test result is displayed in red.
 
-
-
 ![Text](All_images/image29_RMSB.jpg)
 
-**The results of the estimation of a trading day effect: the case of jointly not significant variables**
+**The results of the estimation of a trading day effect: the case of
+jointly not significant variables**
 
 In the example below the RSA5c specification has been used and a trading
 day effect has been detected. In spite of the fact that some trading day
@@ -185,11 +1842,10 @@ regressors are not significant at the 5% significance level, the outcome
 of the joint F-test indicates that the trading day regressors are
 jointly significant (the F-test statistic is lower than 5%).
 
-
-
 ![Text](All_images/image30_RMSB.jpg)
 
-**The results of the estimation of a trading day effect: the case of jointly significant variables**
+**The results of the estimation of a trading day effect: the case of
+jointly significant variables**
 
 If a leap year regressor has been used in the model specification, the
 value of the estimated leap year coefficient is also reported with the
@@ -197,20 +1853,17 @@ corresponding t-statistics and p-value. As the p-value presented on the
 picture below is greater than 0.05, it indicates that the leap year
 effect is not significant.
 
-
-
 ![Text](All_images/image31_RMSB.jpg)
 
 **The results of the estimation of a leap year effect**
 
-When the option [*UserDefined*](../reference-manual/modelling-spec-tramo.html#regression) is used,
-JDemetra+ displays the *User-defined calendar variables* section with
-variables and corresponding estimation results (the values of the
-parameters, corresponding t-statistics and p-values). The outcome of the
-joint F-test is displayed when more than one user-defined calendar
-variable is used.
-
-
+When the option
+[*UserDefined*](../reference-manual/modelling-spec-tramo.html#regression)
+is used, JDemetra+ displays the *User-defined calendar variables*
+section with variables and corresponding estimation results (the values
+of the parameters, corresponding t-statistics and p-values). The outcome
+of the joint F-test is displayed when more than one user-defined
+calendar variable is used.
 
 ![Text](All_images/image32_RMSB.jpg)
 
@@ -220,8 +1873,6 @@ When the Easter effect is estimated, the following table is displayed in
 the output. In the case presented below Easter has a negative,
 significant effect on the time series.
 
-
-
 ![Text](All_images/image33_RMSB.jpg)
 
 **The results of the estimation of the Easter effect**
@@ -229,8 +1880,6 @@ significant effect on the time series.
 JDemetra+ also presents the results of an outlier detection procedure.
 The table includes the type of outlier, its date, the value of the
 coefficient and corresponding t-statistics and p-values.
-
-
 
 ![Text](All_images/image34_RMSB.jpg)
 
@@ -241,16 +1890,14 @@ outliers, temporary changes and level shifts are considered in the
 automatic outlier identification procedure. When seasonal outliers are
 also enabled, they appear in the same table as other outliers.
 
-
-
 ![Text](All_images/image35_RMSB.jpg)
 
-**The results of the outlier identification procedure that enables seasonal outliers**
+**The results of the outlier identification procedure that enables
+seasonal outliers**
 
-Results for [pre-specified outliers](../reference-manual/modelling-spec-tramo.html#regression) are
+Results for [pre-specified
+outliers](../reference-manual/modelling-spec-tramo.html#regression) are
 displayed in a separate table.
-
-
 
 ![Text](All_images/image36_RMSB.jpg)
 
@@ -263,8 +1910,6 @@ regression variables are displayed in a separate table. All information
 concerning ramps, including spans, estimated coefficients and related
 statistics, is shown in a separate table.
 
-
-
 ![Text](All_images/image37_RMSB.jpg)
 
 **The results of the estimation of the ramp effect**
@@ -272,16 +1917,12 @@ statistics, is shown in a separate table.
 All other intervention variables with corresponding statistics are shown
 under the *Intervention variable(s)* table.
 
-
-
 ![Text](All_images/image38_RMSB.jpg)
 
 **The results of the estimation of the intervention variable**
 
-User-defined variables are marked as *Vars-1.x\_1, Vars-1.x\_2*, ...,
-*Vars-1.x\_n* and displayed in the separate tables.
-
-
+User-defined variables are marked as *Vars-1.x_1, Vars-1.x_2*, ...,
+*Vars-1.x_n* and displayed in the separate tables.
 
 ![Text](All_images/image39_RMSB.jpg)
 
@@ -289,79 +1930,741 @@ User-defined variables are marked as *Vars-1.x\_1, Vars-1.x\_2*, ...,
 
 JDemetra+ also reports a list of missing observations, if any. JDemetra+
 applies the AO approach to the estimation of the missing
-observations[^68].
+observations[^graphical-user-interface-8].
 
-
+[^graphical-user-interface-8]: Missing observations are treated as
+    additive outliers and interpolated accordingly.
 
 ![Text](All_images/image40_RMSB.jpg)
 
 **The results of the estimation of the missing observations**
 
 Detailed results are divided into several sections and are investigated
-in the following sections:
-- [Forecasts](../reference-manual/forecasts.html)
-- [Regressors](../reference-manual/regressors.html)
-- [ARIMA](../reference-manual/arima.html)
-- [Pre-adjustment series](../reference-manual/pre-adjustment-series.html)
-- [Residuals](../reference-manual/residuals.html)
-- [Likelihood](../reference-manual/likelihood.html)
+in the following sections: -
+[Forecasts](../reference-manual/forecasts.html) -
+[Regressors](../reference-manual/regressors.html) -
+[ARIMA](../reference-manual/arima.html) - [Pre-adjustment
+series](../reference-manual/pre-adjustment-series.html) -
+[Residuals](../reference-manual/residuals.html) -
+[Likelihood](../reference-manual/likelihood.html)
 
+#### Theoretical spectrum of the Arima model
 
-
-
-[^64]: The likelihood function is the joint probability (density)
-    function of observable random variables. It is viewed as the
-    function of the parameters given the realized random variables.
-    Therefore, this function measures the probability of observing the
-    particular set of dependent variable values that occur in the
-    sample.
-
-[^65]: [AIC, AICC, BIC and Hannan-Quinn criteria are used by
-    X-13ARIMA-SEATS while BIC (TRAMO definition)](../theory/SA_lin.html#model-selection-criteria) by TRAMO/SEATS. These criteria
-    are used in seasonal adjustment procedures for the selection of the
-    optimum ARIMA model. The model with the smaller value of the model
-    selection criteria is preferred.
-
-[^66]: Maximum Likelihood Estimation is a statistical method for
-    estimating the coefficients of a model. This method determines the
-    parameters that maximize the probability (likelihood) of the sample
-    data.
-
-[^67]: The variable is called statistically significant if it is so
-    extreme that such a result would be expected to arise simply by
-    chance only in rare circumstances (with the probability equal to
-    p-value). Generally, the regressor is thought to be significant if
-    p-value is lower than 5%.
-
-[^68]: Missing observations are treated as additive outliers and
-    interpolated accordingly.
-
-### Seasonal adjustment 
-
-### Theoretical spectrum of the Arima model
-
-The *Arima* section demonstrates [a theoretical spectrum](../theory/spectral.html) of the
-stationary and non-stationary models. The local menu, which is available
-for the graph, offers the copy and export options, including sending the
-graph to the printer and saving the graph as clipboard or as a file in
-the PNG format. The *Copy all visible* option enables the user to export
-time series data to the another application.
-
-
+The *Arima* section demonstrates [a theoretical
+spectrum](../theory/spectral.html) of the stationary and non-stationary
+models. The local menu, which is available for the graph, offers the
+copy and export options, including sending the graph to the printer and
+saving the graph as clipboard or as a file in the PNG format. The *Copy
+all visible* option enables the user to export time series data to the
+another application.
 
 ![Text](All_images/RM_C_pic02.jpg)
 
+### X-11 Specification setting
 
+#### Customised seasonal filters
 
+JDemetra+ offers the options to assign a different seasonal filter
+length to each period (month or quarter). The program offers these
+options in the *single spec* mode as well as in the *multispec* mode,
+albeit they are available only in the *Specifications* window, after a
+document is created.
 
-#### specifications, documents, multi-documents
+1.  Go to the X11-part of the *Specification* window (see step 8 from
+    the [Simple seasonal adjustment of a single time
+    series](../case-studies/simplesa-single.html) scenario). By default
+    a single pre-defined filter length (*Msr*) is used for all months or
+    quarters.
 
-![Text](All_images/A_Ref_d2.jpg)
+    ![Text](All_images/UG_SF_image1.jpg)
 
-**The *Workspace* window with the nodes for the seasonal adjustment procedure marked
+    **Default seasonal filter options**
 
+2.  To change the seasonal filter for all months/quarters, use a drop
+    down menu, which is displayed after clicking on the cell next to the
+    *Seasonal filter* option.
 
+    ![Text](All_images/UG_SF_image2.jpg)
 
+    **Choosing a seasonal filter for all periods**
 
-### Benchmarking
+3.  To change the filter length for a single month, click on the empty
+    cell next to *Details* on seasonal filters. A new window appears in
+    which the filter lengths for each month is given. Click on the cell
+    next to the month in which the filter length is to be changed. Again
+    a drop down menu appears where the filter length can be selected.
+    Once the changes are introduced close this window.
 
+    ![Text](All_images/UG_SF_image3.jpg)
+
+    **Seasonal filters' choice**
+
+4.  To apply new settings click the *Apply* button.
+
+    ![Text](All_images/UG_SF_image4.jpg)
+
+    **Launching a seasonal adjustment process with modified set of
+    seasonal filters**
+
+## Adding User-defined variables
+
+User defined variables are simply time series used as explanatory
+regressors in the RegARIMA and the TRAMO models. Although JDemetra+
+allows the user to indicate any time series as a variable to avoid
+misleading or erroneous results, the following rules should be kept: \*
+User-defined regression variables are used for measuring abnormalities
+and therefore they should not contain a seasonal pattern. \* JDemetra+
+assumes that user-defined regressors are already in an appropriately
+centred form. Therefore the mean of each user-defined regressor needs to
+be subtracted from the regressor or means for each calendar period
+(month or quarter) need to be subtracted from each of the user-defined
+regressors.
+
+JDemetra+ considers two kinds of user-defined regression variables: \*
+**Static variables**, usually imported directly from external software
+(by drag/drop or copy/paste). The observations for static variables
+cannot be changed. The only way to update static series is to remove
+them from the list and to re-import them with the same names. \*
+**Dynamic variables** that are imported into the *Variables* panel by
+dragging and dropping series from a browser of the application,
+available in the *Providers* window. Dynamic variables are automatically
+updated each time the application is re-opened. Therefore, it is a
+convenient solution for creating user-defined variables.
+
+To create a dynamic variable first right-click on the *Variables* node
+in the *Workspace* window and chose the option **New**.
+
+![Text](All_images/A_Ref_d3.jpg)
+
+**Creating an empty dataset for the user-defined variables**
+
+Next, double click on the newly created *Vars-1* item to display it in
+the *Results* panel. By default, JDemetra+ uses the conventions
+Vars\_#number to name the tabs under the *Variables* node.
+
+![Text](All_images/A_Ref_d4.jpg)
+
+**Activation of an empty dataset for the user-defined variables**
+
+Then, go to *Providers* window and open your file that contains external
+variables following the instructions provided
+[here](../quick-start/datasources.html). Drag and drop your external
+regressors from the *Providers* window to the *Vars-1* window.
+
+![Text](All_images/A_Ref_d5.jpg)
+
+**Importing the user-defined variables to JDemetra+**
+
+The original name of the series is recorded in the *Description* column
+of the *Variables* window.
+
+![Text](All_images/A_Ref_d6.jpg)
+
+**Assigning regressors from the *Providers* window to the user-defined
+variables**
+
+In order to rename the series in the *Variables* window, right click on
+the series and chose **Rename**.
+
+![Text](All_images/A_Ref_d7.jpg)
+
+**A local menu for the user-defined variables**
+
+Once the variables are imported they can be used for further analysis
+(e.g. as regressors in the [specifications for RegArima and
+TRAMO](../reference-manual/modelling-specifications.html#user-definedSpec)).
+
+## Seasonality tests
+
+without adjusting (can be done in or out of SA)
+
+*Statistical Methods \>\> Seasonal Adjustment \>\> Tools \>\>
+Seasonality Tests*
+
+#### Graphical Test based on AR spectrum
+
+The test can be applied directly to any series by selecting the option
+*Statistical Methods \>\> Seasonal Adjustment \>\> Tools \>\>
+Seasonality Tests*. This is an example of how results are displayed for
+the case of a monthly series:
+
+![artest](All_images/spectrum.png)\
+
+## Series Modelling
+
+why use this out of SA ?
+
+## Outlier detection (TERROR)
+
+## Benchmarking
+
+in fact inside sa (which has to be run!)
+
+The *Benchmarking* section allows for a
+[benchmarking](../theory/benchmarking.html), i.e. forcing the annual
+sums of the seasonally adjusted data to be equal to the annual sums of
+the raw or calendar adjusted data.
+
+The Benchmark algorithm is not run stand-alone but inside an
+SA-Processig, using a multi document.
+
+1.  With the [pre-defined
+    specifcations](../reference-manual/sa-specifications.html) the
+    benchmarking functionality is not applied by default following the
+    *ESS Guidelines on Seasonal Adjustment* (2015) recommendations. It
+    means that once the user has seasonally adjustd the series with a
+    pre-defined specifcation the *Benchmarking* node is empty. To
+    execute benchmarking click on the *Specifications* button and
+    activate the checkbox in the *Benchmarking* section.
+
+    ![Text](All_images/UDimage1.jpg)
+
+    **Benchmarking option -- a default view**
+
+2.  Three parameters can be set here. *Target* specifies the target
+    variable for the benchmarking procedure. It can be either the
+    *Original* (the raw time series) or the *Calendar Adjusted* (the
+    time series adjusted for calendar effects). *Rho* is a value of the
+    AR(1) parameter (set between 0 and 1). By default it is set to 1.
+    Finally, *Lambda* is a parameter that relates to the weights in the
+    regression equation. It is typically equal to 0 (for an additive
+    decomposition), 0.5 (for a proportional decomposition) or 1 (for a
+    multiplicative decomposition). The default value is 1.
+
+3.  To launch the benchmarking procedure click on the **Apply** button.
+    The results are displayed in four panels. The top-left one compares
+    the original output from the seasonal adjustment procedure with the
+    result from applying a benchmarking to the seasonal adjustment. The
+    bottom-left panel highlights the differences between these two
+    results. The outcomes are also presented in a table in the top-right
+    panel. The relevant statistics concerning relative differences are
+    presented in the bottom-right panel.
+
+    ![Text](All_images/UDimage2.jpg)
+
+    **The results of the benchmarking procedure**
+
+4.  Both pictures and the table can be copied the usual way (see the
+    [*Simple seasonal adjustment of a single time
+    series*](../case-studies/simplesa-single.html) scenario).
+
+    ![Text](All_images/UDimage3.jpg)
+
+    **Options for benchmarking results**
+
+5.  To export the result of the benchmarking procedure
+    (*benchmarking.result*) and the target data (*benchmarking.target*)
+    one needs to once execute the seasonal adjustment with benchmarking
+    using the muli-processing option (see the [*Simple seasonal
+    adjustment of multiple time
+    series*](../case-studies/simplesa-muliple.html) scenario. Once the
+    muli-processing is executed, select the *Output* item from the
+    *SAProcessing* menu.
+
+    ![Text](All_images/UG_SSA_image28.jpg)
+
+    **The *SAProcessing* menu**
+
+6.  Expand the "+" menu and choose an appropriate data format (here
+    Excel has been chosen). It is possible to save the results in TXT,
+    XLS, CSV, and CSV matrix formats. Note that the [available content
+    of the output depends on the output type](../theory/output.html).
+
+    ![Text](All_images/UG_SSA_image29.jpg)
+
+    **Exporting data to an Excel file**
+
+7.  Chose the output items that refer to the results from the
+    benchmarking procedure, move them to the window on the right and
+    click **OK**.
+
+    ![Text](All_images/UDimage4.jpg)
+
+    **Exporting the results of the benchmarking procedure**
+
+### Specification setting
+
+###### **Is enabled**<br> *--; --*
+
+Enables the user to perform a benchmarking. By default, the checkbox is
+unmarked.
+
+###### **Target**<br> *--; --*
+
+Specifies the target variable for the benchmarking procedure.
+
+-   *Original* -- the raw time series are considered as a target data;
+-   *Calendar Adjusted* -- the time series adjusted for calendar effects
+    are considered as a target data.
+
+The default setting is *Original*.
+
+###### **Use forecast**<br> *--; --*
+
+The forecasts of the seasonally adjusted series and of the target
+variable (<strong>Target</strong>) are used in the benchmarking
+computation so the benchmarking constraint is applied also to the
+forecasting period. By default, the checkbox in unmarked (forecasts are
+not used).
+
+###### **Rho**<br> *--; --*
+
+The value of the AR(1) parameter (set between 0 and 1). The default
+value of 1 is equivalent to the Denton benchmarking.
+
+###### **Lambda**<br> *--; --*
+
+A parameter that relates to the weights in the regression equation; it
+is typically equal to 0, 1/2 or 1. A parameter equal to 1 (default
+value) makes the method equivalent to the multiplicative benchmarking,
+while a parameter equal to 0 makes the method equivalent to the additive
+benchmarking.
+
+## Direct-Indirect comparison
+
+Economic time series are often computed and reported according to a
+certain classification or a breakdown. For example, in National Accounts
+total consumption expenditures are a sum of individual consumption
+expenditures and General Government & NPISHs consumption expenditures.
+Therefore, the seasonally adjusted aggregates can be computed either by
+aggregating the seasonally adjusted components (indirect adjustment) or
+adjusting the aggregate and the components independently (direct
+adjustment). The point is that these two strategies result in different
+seasonally adjusted aggregates. As neither theoretical nor empirical
+evidence uniformly favours one approach over the other, the choice of
+the seasonal adjustment strategy concerning aggregated series depends on
+the user[^graphical-user-interface-9]. Guidance in this field is given
+in the [ESS Guidelines on Seasonal Adjustment
+(2015)](https://ec.europa.eu/eurostat/documents/3859598/6830795/KS-GQ-15-001-EN-N.pdf/d8f1e5f5-251b-4a69-93e3-079031b74bd3)
+
+[^graphical-user-interface-9]: Description based on the *ESS Guidelines
+    on Seasonal Adjustment* (2015).
+
+1.  JDemetra+ offers a *Direct--Indirect Seasonal Adjustment*
+    functionality that facilitates the comparison of the results from
+    these two strategies, which is launched from the main menu.
+
+    ![Text](All_images/UG_SF_image5.jpg)
+
+    **The *Direct-Indirect Seasonal Adjustment* tool**
+
+2.  To start the analysis drag and drop time series to the top-left
+    panel. The panel on the right presents the sum of selected series.
+
+    ![Text](All_images/UG_SF_image6.jpg)
+
+    **Choosing series for an analysis**
+
+3.  By going to the main menu and clicking on *Window* → *Properties*,
+    one can specify benchmarking options for direct-indirect comparison.
+    Be aware that the properties window displays the properties of an
+    active item. Therefore, first click on the time series graph in the
+    picture below and then activate the *Properties* window.
+
+    ![Text](All_images/UG_SF_image7.jpg)
+
+    **The properties of the *Direct - Indirect seasonal adjustment*
+    functionality**
+
+4.  By default, the [pre-defined TRAMO-SEATS
+    specification](../reference-manual/sa-specifications.html#pre-defined-specifications)
+    is used (RSAfull) for seasonal adjustment of a dataset. To change
+    it, click on the button marked in the picture below. This will
+    provide you with the alternative specifications. Here the user
+    defined specification named *My spec* is chosen.
+
+    ![Text](All_images/UG_SF_image8.jpg)
+
+    **Choosing a specification for the analysis**
+
+5.  Next, run the process by clicking the button with the green arrow.
+
+    ![Text](All_images/UG_SF_image9.jpg)
+
+    **Running a process**
+
+6.  The bottom panel presents the detailed results. The seasonality test
+    node presents the outcome of the [seasonality
+    tests](../theory/Tests_seas.html) performed for the aggregated
+    series adjusted directly (*Direct sa*) and indirectly (*Indirect
+    sa*). The reason for presenting these tests here is that the
+    presence of residual seasonality and calendar effects should be
+    monitored, especially in the indirectly adjusted
+    series[^graphical-user-interface-10]. It might happen that the
+    seasonality is successfully removed from the components but it is
+    still present in the aggregated series.
+
+    ![Text](All_images/UG_SF_image10.jpg)
+
+    **Seasonality tests' results for a direct seasonal adjustment**
+
+7.  The *Differences* node presents selected different results between
+    the direct and the indirect seasonal adjustment approaches. The
+    *Statistics* section shows basic statistics (average, standard
+    deviation, minimum and maximum) for the relative differences (%)
+    between the direct and the indirect SA series. *Chart* contains the
+    graph of the differences, while *Table* includes the actual values.
+    The *Periodogram* section presents graphs for two spectral
+    estimators -- [the periodogram](../theory/spectral_periodogram.html)
+    and [the auto-regressive spectrum](../theory/spectral_AR.html).
+
+    ![Text](All_images/UG_SF_image11.jpg)
+
+    **Graph presenting the differences between direct and indirect
+    seasonal adjustment results**
+
+8.  The *Details* node include the basic statistics for the relative
+    differences between the benchmarked and original series as well as
+    the actual time series adjusted directly (*Sa series*) and
+    indirectly (*Benchmarked Sa series*).
+
+    ![Text](All_images/UG_SF_image12.jpg)
+
+    **Details of the differences between direct and indirect seasonal
+    adjustment results**
+
+[^graphical-user-interface-10]: *ESS Guidelines on Seasonal Adjustment*
+    (2015).
+
+## Generatiing Output
+
+add : some explanations + link to cruncher (production chapter)
+
+### Steps
+
+1.  Once a seasonal adjustment process for the dataset is performed (see
+    the [*Simple seasonal adjustment of a single time
+    series*](../case-studies/simplesa-single.html) scenario) the results
+    can be exported to the external file. Go to the main menu and follow
+    the path: *SAProcessing* → *Output...*
+
+2.  In the *Batch output* window the user can specify which output items
+    will be saved and the folder in which JDemetra+ saves the results.
+    It is possible to save the results in the *TXT*, *XLS*, *CSV*, and
+    *CSV matrix* formats. In the first step the user should choose the
+    output format from the list.
+
+    ![Text](All_images/UDimage6.jpg)
+
+    **Default output formats**
+
+3.  The user may choose more than one format as the output can be
+    generated in different formats at the same time.
+
+    ![Text](All_images/UDimage7.jpg)
+
+    **Adding an output format to the list**
+
+4.  To display and modify the settings click on the given output format
+    on the list. The available options depend on the output format.
+
+5.  For *Csv* format the following options are available: *folder*
+    (location of the file), *file prefix* (name of the file),
+    *presentation* (controls how the output is divided into separate
+    files) and *series* (series included in the file). These options are
+    presented in the next points of this case study.
+
+    ![Text](All_images/UDimage8.jpg)
+
+    **Options for a *Csv* format**
+
+6.  The user can define the folder in which the selected results and
+    components will be saved (click the *folder* item and choose the
+    final destination).
+
+    ![Text](All_images/UDimage9.jpg)
+
+    **Specifying a destination folder**
+
+7.  With the option *File Prefix* the user can modify the default name
+    of the output saved in the CSV file.
+
+    ![Text](All_images/UDimage10.jpg)
+
+    **Setting a *File Prefix* option**
+
+8.  *Layout* controls how the output is divided into separate files.
+    Expand the list to display available options:
+
+    -   *HTable* -- the output series will be presented in the form of
+        horizontal tables (time series in rows).
+
+    -   *VTable* -- the output series will be presented in the form of
+        vertical tables (time series in columns).
+
+    -   *List* -- the output series will be presented in the form of
+        vertical tables (time series in rows). Apart from that, for each
+        time series each file contains in separate columns: the data
+        frequency, the first year and of estimation span, the first
+        period (month or quarter) of observation span and the number of
+        observations. The files do not include dates.
+
+    ![Text](All_images/UDimage11.jpg)
+
+    **Layout options for a *Csv* format**
+
+9.  The *Content* section presents [a list of series that will be
+    included into a set of output files](../theory/output.html). To
+    modify the initial settings click on the grey button in the
+    *Content* section. The *CVS-series* window presents two panels: the
+    panel on the left includes a list of all valuable output items. The
+    panel on the right presents the selected output items. Mark the
+    series and use the arrows to change the settings. Confirm your
+    choice with the *OK* button.
+
+    ![Text](All_images/UDimage12.jpg)
+
+    **Specifying a content of the output file**
+
+10. Options available for the *XLS* format are the same as for the *TXT*
+    format with an exception of the *Layout* section. The list of
+    available codes in the *Content* section is given
+    [here](../theory/output.html).
+
+    -   *BySeries* -- all results for a given time series are placed in
+        one sheet;
+
+    -   *ByComponent* -- results are grouped by components. Each
+        component type is saved in a separate sheet.
+
+    -   *OneSheet* -- all results are saved in one sheet.
+
+    ![Text](All_images/UDimage13.jpg)
+
+    **Layout options for an *Excel* format**
+
+11. If the user sets the option layout to *ByComponent*, the output will
+    be generated as follows:
+
+    ![Text](All_images/UDimage14.jpg)
+
+    **An Excel file view for the *ByComponent* option**
+
+12. The option *OneSheet* will produce the following *XLS* file:
+
+    ![Text](All_images/UDimage15.jpg)
+
+    **An Excel file view for the *OneSheet* option**
+
+13. By default, the series in the Excel output files are organised
+    vertically. When the user unmarks the check box the horizontal
+    orientation is used.
+
+    ![Text](All_images/UDimage16.jpg)
+
+    **The *VerticalOrientatio*n option**
+
+14. In the case of the *TXT* format the only available options are
+    *folder* (location of the file) and *series* (results included in
+    the output file). The list of available codes in the *Content*
+    section is given [here](../theory/output.html).
+
+    ![Text](All_images/UDimage17.jpg)
+
+    **Options for the *Txt* output**
+
+15. The *CSV matrix* produces the CSV file containing information about
+    the model and quality diagnostics of the seasonal adjustment. The
+    user may generate the list of default items or create their own
+    quality report. By default, all the available items are included in
+    the output. The list of the items is given
+    [here](../theory/output.html).
+
+    ![Text](All_images/UDimage18.jpg)
+
+    **List of items available for the *Csv matrix* output type**
+
+16. Once the output settings are selected, click the *OK* button.
+
+    ![Text](All_images/UDimage19.jpg)
+
+    **Options for the *Csv matrix* output**
+
+17. For each output JDemetra+ provides information on the status of the
+    operation. An example is presented below.
+
+    ![Text](All_images/UDimage20.jpg)
+
+    **Generating output - status information**
+
+### Output items
+
+intro add : outputs common with R packages
+
+The CSV, TXT and XLS outputs of JDemetra+ may contain the items shown in
+table below.
+
+A list of output items of JDemetra+ CSV, TXT and XLS formats.
+
+{: .table .table-style} \|**Code** \| **Meaning**\| \|
+--------------------------------\|
+--------------------------------------------\| \|$$y$$ \| Original
+series\| \|$$y\_ f$$ \| Forecasts of the original series\| \|$$y\_ ef$$
+\| Standard errors of the forecasts of the original series\| \|$$y\_ c$$
+\| Interpolated series\| \|$$yc\_ f$$ \| Forecasts of the interpolated
+series\| \|$$yc\_ ef$$ \| Standard errors of the forecasts of the
+interpolated series\| \|$$y\_ lin$$ \| Linearised series (not
+transformed)\| \|$$l$$ \| Linearised series (transformed)\| \|$${ycal}$$
+\| Series corrected for calendar effects\| \|$$ycal\_ f$$ \|Forecasts of
+the series corrected for calendar effects\| \|$$l\_ f$$ \|Forecasts of
+the linearised series\| \|$$l\_ b$$ \|Backcasts of the linearised
+series\| \|$$t$$ \|Trend (including deterministic effects)\| \|$$t\_ f$$
+\|Forecasts of the trend\| \|$${sa}$$ \|Seasonally adjusted series
+(including deterministic effects)\| \|$$sa\_ f$$ \|Forecasts of the
+seasonally adjusted series\| \|$$s$$ \|Seasonal component (including
+deterministic effects)\| \|$$s\_ f$$ \|Forecasts of the seasonal
+component\| \|$$i$$ \|Irregular component (including deterministic
+effects)\| \|$$i\_ f$$ \|Forecasts of the irregular component\|
+\|$${det}$$ \|All deterministic effects\| \|$$det\_ f$$ \|Forecasts of
+the deterministic effects\| \|$${cal}$$ \|Calendar effects\|
+\|$$cal\_ f$$ \|Forecasts of the calendar effects\| \|$${tde}$$
+\|Trading day effect\| \|$$tde\_ f$$ \|Forecasts of the trading day
+effect\| \|$${mhe}$$ \|Moving holidays effects\| \|$$mhe\_ f$$
+\|Forecasts of the moving holidays effects\| \|$${ee}$$ \|Easter
+effect\| \|$$ee\_ f$$ \|Forecasts of the Easter effect\| \|$${omhe}$$
+\|Other moving holidays effects\| \|$$omhe\_ f$$ \|Forecasts of the
+other moving holidays effects\| \|$${out}$$ \|All outliers effects\|
+\|$$out\_ f$$ \|Forecasts of all outliers effects\| \|$$out\_ i$$
+\|Outliers effects related to irregular (AO, TC)\| \|$$out\_ i\_ f$$
+\|Forecasts of outliers effects related to irregular (TC)\|
+\|$$out\_ t$$ \|Outliers effects related to trend (LS)\|
+\|$$out\_ t\_ f$$ \|Forecasts of outliers effects related to trend
+(LS)\| \|$$out\_ s$$ \|Outliers effects related to seasonal (SO)\|
+\|$$out\_ s\_ f$$ \|Forecasts of outliers effects related to seasonal
+(SO)\| \|$${reg}$$ \|All other regression effects\| \|$$reg\_ f$$
+\|Forecasts of all other regression effects\| \|$$reg\_ i$$ \|Regression
+effects related to irregular\| \|$$reg\_ i\_ f$$ \|Forecasts of
+regression effects related to irregular\| \|$$reg\_ t$$ \|Regression
+effects related to trend\| \|$$reg\_ t\_ f$$ \|Forecasts of regression
+effects related to trend\| \|$$reg\_ s$$ \|Regression effects related to
+seasonal\| \|$$reg\_ s\_ f$$ \|Forecasts of regression effects related
+to seasonal\| \|$$reg\_ sa$$ \|Regression effects related to seasonally
+adjusted series\| \|$$reg\_ sa\_ f$$ \|Forecasts of regression effects
+related to seasonally adjusted series\| \|$$reg\_ y$$ \|Separate
+regression effects\| \|$$reg\_ y\_ f$$ \|Forecasts of separate
+regression effects\| \|$${fullresiduals}$$ \|Full residuals of the
+RegARIMA model\| \|$$decomposition.y\_ lin$$ \|Linearised series used as
+input in the decomposition\| \|$$decomposition.y\_ lin\_ f$$ \|Forecast
+of the linearised series used as input in the decomposition\|
+\|$$decomposition.t\_ lin$$ \|Trend produced by the decomposition\|
+\|$$decomposition.t\_ lin\_ f$$ \|Forecasts of the trend produced by the
+decomposition\| \|$$decomposition.s\_ lin$$ \|Seasonal component
+produced by the decomposition\| \|$$decomposition.s\_ lin\_ f$$
+\|Forecasts of the Seasonal component produced by the decomposition\|
+\|$$decomposition.i\_ lin$$ \|Irregular produced by the decomposition\|
+\|$$decomposition.i\_ lin\_ f$$ \|Forecasts of the irregular produced by
+the decomposition\| \|$$decomposition.sa\_ lin$$ \|Seasonally adjusted
+series produced by the decomposition\| \|$$decomposition.sa\_ lin\_ f$$
+\|Forecasts of the seasonally adjusted series produced by the
+decomposition\| \|$$decomposition.si\_ lin$$ \|Seasonal-Irregular
+produced by the decomposition\| \|$$decomposition.x - tables.y$$ \|For
+X-13ARIMA-SEATS only. Series from the X-11 decomposition (x = a, b, c,
+d, e; y=a1...)\| \|$${benchmarking.result}$$ \|Benchmarked seasonally
+adjusted series\| \|$${benchmarking.target}$$ \|Target for the
+benchmarking\|
+
+The CSV matrix of JDemetra+ may contain:
+
+{: .table .table-style} \| **Code** \| **Meaning** \| \|
+$${span.start}\ $$ \| Start of the series span \| \| $${span.end}$$ \|
+End of the series span \| \| $${span.n}$$ \| Length of the series span
+\| \| $${espan.start}$$ \| Start of the estimation span \| \|
+$${espan.end}$$ \| End of the estimation span \| \| $${espan.n}$$ \|
+Length of the estimation span \| \| $${likelihood.neffectiveobs}$$ \|
+Number of effective observations in the likelihood function \| \|
+$${likelihood.np}$$ \| Number of parameters in the likelihood \| \|
+$${likelihood.logvalue}$$ \| Log likelihood \| \|
+$${likelihood.adjustedlogvalue}$$ \| Adjusted log likelihood \| \|
+$${likelihood.ssqerr}$$ \| Sum of the squared errors in the likelihood
+\| \| $${likelihood.aic}$$ \| AIC statistics \| \| $${likelihood.aicc}$$
+\| Corrected AIC statistics \| \| $${likelihood.bic}$$ \| BIC statistics
+\| \| $${likelihood.bicc}$$ \| BIC corrected for length \| \|
+$${residuals.ser}$$ \| Standard error of the residuals (unbiased,
+TRAMO-like) \| \| $$residuals.ser - ml$$ \| Standard error of the
+residuals (ML, X-13ARIMA-SEATS-like) \| \| $${residuals.mean}$$ \| Test
+on the mean of the residuals \| \| $${residuals.skewness}$$ \| Test on
+the skewness of the residuals \| \| $${residuals.kurtos}$$ \| Test on
+the kurtosis of the residuals \| \| $${residuals.dh}$$ \| Test on the
+normality of the residuals (Doornik-Hansen tests) \| \|
+$${residuals.lb}$$ \| The Ljung-Box test on the residuals \| \|
+$${residuals.lb2}$$ \| The Ljung-Box test on the squared residuals \| \|
+$${residuals.seaslb}$$ \| The Ljung-Box test on the residuals at
+seasonal lags \| \| $${residuals.bp}$$ \| The Box-Pierce test on the
+residuals \| \| $${residuals.bp2}$$ \| The Box-Pierce test on the
+squared residuals \| \| $${residuals.seasbp}$$ \| The Box-Pierce test on
+the residuals at seasonal lags \| \| $${residuals.nruns}$$ \| Test on
+the number of runs of the residuals \| \| $${residuals.lruns}$$ \| Test
+on the length of runs of the residuals \| \| $$mstatistics.m1$$ \| The
+relative contribution of the irregular over three months span \| \|
+$$mstatistics.m2$$ \| The relative contribution of the irregular
+component to the stationary portion of the variance \| \|
+$$mstatistics.m3$$ \| The amount of period to period change in the
+irregular component as compared to the amount of period to period change
+in the trend-cycle \| \| $$mstatistics.m4$$ \| The amount of
+autocorrelation in the irregular as described by the average duration of
+run \| \| $$mstatistics.m5$$ \| The number of periods it takes the
+change in the trend-cycle to surpass the amount of change in the
+irregular \| \| $$mstatistics.m6$$ \| The amount of year to year change
+in the irregular as compared to the amount of year to year change in the
+seasonal \| \| $$mstatistics.m7$$ \| The amount of moving seasonality
+present relative to the amount of stable seasonality \| \|
+$$mstatistics.m8$$ \| The size of the fluctuations in the seasonal
+component throughout the whole series \| \| $$mstatistics.m9$$ \| The
+average linear movement in the seasonal component throughout the whole
+series \| \| $$mstatistics.m10$$ \| The size of the fluctuations in the
+seasonal component in the recent years \| \| $$mstatistics.m11$$ \| The
+average linear movement in the seasonal component in the recent years \|
+\| $${mstatistics.q}$$ \| Summary of the M-Statistics \| \|
+$$mstatistics.q - m2$$ \| Summary of the M-Statistics without M2 \| \|
+$${diagnostics.quality}$$ \| Summary of the diagnostics \| \|
+$${diagnostics.basic\ checks.definition:2}$$ \| Definition test \|\
+\| $${diagnostics.basic\ checks.annual\ totals:2}$$ \| Annual totals
+test \| \|
+$${diagnostics.visual\ spectral\ analysis.spectral\ seas\ peaks}$$ \|
+Test of the presence of the visual seasonal peaks in SA and/or irregular
+\| \| $${diagnostics.visual\ spectral\ analysis.spectral\ td\ peaks}$$
+\| Test of the presence of the visual trading day peaks in SA and/or
+irregular \| \| $${diagnostics.regarima\ residuals.normality:2}$$ \|
+Test of the normality of the residuals \| \|
+$${diagnostics.regarima\ residuals.independence:2}$$ \| Test of the
+independence of the residuals \| \|
+$${diagnostics.regarima\ residuals.spectral\ td\ peaks:2}$$ \| Test of
+the presence of trading day peaks in the residuals \| \|
+$${diagnostics.regarima\ residuals.spectral\ seas\ peaks:2}$$ \| Test of
+the presence of seasonal peaks in the residuals \| \|
+$${diagnostics.residual\ seasonality.on\ sa:2}$$ \| Test of the presence
+of residual seasonality in the SA series \| \|
+$${diagnostics.residual\ seasonality.on\ sa\ (last\ 3\ years):2}$$ \|
+Test of the presence of residual seasonality
+on sa (last 3 years):2$$    |
+| $${diagnostics.residual seasonality.on irregular:2}$$ | Test of the presence of residual seasonality in the irregular series (last periods) |
+| $$diagnostics.seats.seas variance:2$$ | Test on the variance of the seasonal component       |
+| $$diagnostics.seats.irregular variance:2$$   | Test on the variance of the irregular component      |
+| $$diagnostics.seats.seas/irr cross -
+correlation:2$$  | Test on the cross-correlation between the seasonal and the irregular component    |
+| $${log}$$                          | Log transformation                |
+| $${adjust}$$                 | Pre-adjustment of the series for  leap year |
+| $${arima.mean}$$             | Mean correction                   |
+| $${arima.p}$$                | The regular autoregressive order of the ARIMA model    |
+| $${arima.d}$$                | The regular differencing order of the ARIMA model |
+| $${arima.q}$$                | Regular moving average order of the ARIMA model   |
+| $${arima.bp}$$               | The seasonal autoregressive order of the ARIMA model |
+| $${arima.bd}$$               | The seasonal differencing order of the ARIMA model    |
+| $${arima.bq}$$               | The seasonal moving average order of the ARIMA model  |
+| $$arima.phi(i)$$                  | Regular autoregressive parameter (lag=$i$, max $i$=3) of the ARIMA model |
+| $$arima.th(i)$$                   | Regular moving average parameter (lag=$i$, max $i$=3) of the ARIMA model |
+| $$arima.bphi(i)$$                 | Seasonal autoregressive parameter  (lag=$i$, max $i$=1) of the ARIMA model |
+| $$arima.bth(i)$$                  | Seasonal moving average parameter (lag=$i$ max $i$=1) of the ARIMA model |
+| $$regression.lp:3$$               | Coefficient and test on the leap year |
+| $${regression.ntd}$$         | Number of trading day variables   |
+| $${regression.td}\left( i
+\right):3$$  | Coefficient and test on the $i^{{th}}\ $trading day variable  |
+| $${regression.nmh}$$         | Number of moving holidays         |
+| $$regression.easter:3$$           | Coefficient and test on the Easter variable      |
+| $${regression.nout}$$        | Number of outliers                |
+| $${regression.out}\left( i
+\right):3$$   | Coefficient and test on  $i^{{th}}\ $the outlier (max $i$=16)           |
+| $${decomposition.seasonality}$$ | Presence of a seasonal component (1 -- present, 0 -- not present)  |
+| $${decomposition.trendfilter}$$ | The order of the trend filter     |
+| $${decomoposition.seasfilter}\$\$ \| The order of the seasonal filter
+\|
