@@ -5,15 +5,20 @@ date: '2022-05-13'
 ---
 
 ## questions (alain ?)
-*
 * when they say to launch code : where to write it ? index ? indep script ?
 * knit one file, without building the book
-* miktek story and pdf book desactivation
+* miktek story and pdf book deactivation
 * preview chapter 
+* parts in book 
+* menu de droite
+* harmonization police et formulas 
+* images in r chunk to adjust size 
+* gestion des tableaux
+
 
 ## how to 
-* nice table
+* nice table (ok insert)
 
 ## infos 
-* utilitR code explo (yc direct git via mac)
+* utilitR code explo 
 

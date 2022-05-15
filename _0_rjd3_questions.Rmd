@@ -2,16 +2,17 @@
 title: "_0_Rjd3_questions"
 output: html_document
 date: '2022-05-13'
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
-here the goal is to collect questions for JP (30/06) 
-while wrinting doc 
+here the goal is to collect questions for JP (30/06) while writing doc
 
-explo rjd3 suite
-* what 
+explo rjd3 suite \* what
 
-addtionnal functions (cf carto excel à maj)
-* direct indirect 
-* cutting long time series (linking + ?)
-* sliding spans 
-* revision
+## what is not directy available in R yet?
+
+
+addtionnal functions (cf carto excel à maj) \* direct indirect \*
+cutting long time series (linking + ?) \* sliding spans \* revision

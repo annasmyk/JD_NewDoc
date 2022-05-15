@@ -1,0 +1,106 @@
+---
+title: "Comments on building process"
+output: html_document
+date: '2022-05-15'
+---
+
+capture config of infos is key : zero paper at the end of the session 
+(unless exceptional draw)
+
+## Added Value
+If I had to sell and pitch the product
+
+* Hub for good links, but put into context
+
+* shorter texte plus aéré : how to make this happen 
+
+* how do user cases appear = worked examples 
+
+* embeded R code  and "exercises"
+
+*  example : plug-ins bbk, rjd 
+
+
+## Steps
+
+## Heuristics
+type of work, mental stat, slot (W or H or OTG)\\
+
+#### Type 1: Technical improvements
+Doesn't require a deep technical dive in  
+Editing
+
+
+#### Writing of "new" content
+
+including heavy restructuring, 
+and mostly uncovered parts 
+
+
+
+Workflow principles
+
+OKRs
+
+Aux Info to consult 
+overleaf JD+ q&A (à re config)
+JD+ explo interface 
+
+Global improvements 
+(outsourcing possibe)
+- gather all references
+- clean up Tables 
+- formulas
+
+Ubiquitous modifs
+itemize
+     references ? on refera un biblio .bib
+     cross ref appear : modif mater 
+     more lear tables
+
+
+Chapter Templates
+Tools
+itemize
+     obj : 
+
+
+Current steps
+Info 
+itemize
+     read Bookdown guide (mostly home, not only, pull out)
+     check carto with JP 
+     UtilitR code
+
+
+Moi : core work 
+itemize
+     recycle
+     add spectral analysis chapter in "Methods part"
+     create X
+     separate GUI, from theory from R
+
+
+why is methods part here: to allow a two-step approach
+
+
+Outsourcing
+Tanguy(first) + Tsace or Tsaug members (post next reu stace)
+GUI part : 
+
+replace descriptiowth : 1 tableau 1 picture (highlighted commented)
++ video tutos (attetion surcharge, juste souris, pas zoom, sort og GIF ?)
+     harmonize police 
+     tables
+     tutos videos for GUI ?
+     
+    
+
+
+Cat 1: brand new pages
+HF pages
+
+
+Cat 2: 
+
+Cat 3: fully recycle first, clean up second
